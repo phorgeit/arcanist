@@ -181,7 +181,6 @@ final class PhutilErrorHandler extends Phobject {
    * @task internal
    */
   public static function handleError($num, $str, $file, $line, $ctx = null) {
-
     foreach (self::$traps as $trap) {
       $trap->addError($num, $str, $file, $line);
     }
@@ -378,7 +377,7 @@ final class PhutilErrorHandler extends Phobject {
    * @task internal
    */
   public static function dispatchErrorMessage($event, $value, $metadata) {
-    $timestamp = strftime('%Y-%m-%d %H:%M:%S');
+    $timestamp = date('Y-m-d H:i:s');
 
     switch ($event) {
       case self::ERROR:
@@ -428,16 +427,6 @@ final class PhutilErrorHandler extends Phobject {
         $metadata['default_message'] = $default_message;
         error_log($default_message);
         break;
-      case self::DEPRECATED:
-        $default_message = sprintf(
-          '[%s] DEPRECATED: %s is deprecated; %s',
-          $timestamp,
-          $value,
-          $metadata['why']);
-
-        $metadata['default_message'] = $default_message;
-        error_log($default_message);
-        break;
       default:
         error_log(pht('Unknown event %s', $event));
         break;
@@ -471,6 +460,7 @@ final class PhutilErrorHandler extends Phobject {
       // For these libraries, the effective root is one level up.
       switch ($library) {
         case 'arcanist':
+        case 'phorge':
         case 'phabricator':
           $root = dirname($root);
           break;
