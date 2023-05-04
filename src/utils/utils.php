@@ -1888,6 +1888,9 @@ function phutil_is_natural_list(array $list) {
  * @return  string  URI encoded string, except for '/'.
  */
 function phutil_escape_uri($string) {
+  if ($string === null) {
+    return '';
+  }
   return str_replace('%2F', '/', rawurlencode($string));
 }
 
