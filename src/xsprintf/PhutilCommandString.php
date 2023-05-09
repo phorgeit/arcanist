@@ -56,6 +56,13 @@ final class PhutilCommandString extends Phobject {
       }
     }
 
+    // Be generous about what we accept
+    // but normalize to a value that makes sense for a command line
+    // premising that CLIs only accept strings since that is how computers work
+    if ($value === null) {
+      $value = '';
+    }
+
     switch ($mode) {
       case self::MODE_LINUX:
         return self::escapeLinux($value);
