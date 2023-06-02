@@ -94,7 +94,7 @@ class JsonLintLexer
     public function getUpcomingInput()
     {
         $next = $this->match;
-        if (strlen($next) < 20) {
+        if ($this->input !== null && strlen($next) < 20) {
             $next .= substr($this->input, 0, 20 - strlen($next));
         }
 
@@ -128,6 +128,9 @@ class JsonLintLexer
         $rules = $this->getCurrentRules();
         $rulesLen = count($rules);
 
+        if (!isset($this->input)) {
+          $this->input = '';
+        }
         for ($i=0; $i < $rulesLen; $i++) {
             if (preg_match($this->rules[$rules[$i]], $this->input, $match)) {
                 preg_match_all('/\n.*/', $match[0], $lines);
