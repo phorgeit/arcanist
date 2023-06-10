@@ -194,7 +194,7 @@ abstract class PhutilLock extends Phobject {
     if (!$this->locked) {
       $name = $this->getName();
       throw new Exception(
-        pht("Lock '%s is not locked by this process!", $name));
+        pht("Lock '%s' is not locked by this process!", $name));
     }
 
     $this->doUnlock();

@@ -954,7 +954,7 @@ function phutil_split_lines($corpus, $retain_endings = true) {
  * @param   list  List of scalars.
  * @return  dict  Dictionary with inputs mapped to themselves.
  */
-function array_fuse(array $list) {
+function array_fuse(array $list = null) {
   if ($list) {
     return array_combine($list, $list);
   }
@@ -1888,6 +1888,9 @@ function phutil_is_natural_list(array $list) {
  * @return  string  URI encoded string, except for '/'.
  */
 function phutil_escape_uri($string) {
+  if ($string === null) {
+    return '';
+  }
   return str_replace('%2F', '/', rawurlencode($string));
 }
 

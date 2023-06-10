@@ -481,7 +481,7 @@ class JsonLintJsonParser
         // UTF-8 ByteOrderMark sequence
         $bom = "\xEF\xBB\xBF";
 
-        if (substr($input, 0, 3) === $bom) {
+        if ($input && (substr($input, 0, 3) === $bom)) {
             $this->parseError("BOM detected, make sure your input does not include a Unicode Byte-Order-Mark", array());
         }
     }

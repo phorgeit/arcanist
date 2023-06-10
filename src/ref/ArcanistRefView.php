@@ -72,6 +72,11 @@ final class ArcanistRefView
     $object_name = $this->getObjectName();
     $title = $this->getTitle();
 
+    // Our goal here is to work with strings, defaults or not
+    if ($title === null) {
+      $title = '';
+    }
+
     if ($object_name !== null) {
       $reserve_width = phutil_utf8_console_strlen($object_name) + 1;
     } else {

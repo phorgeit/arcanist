@@ -789,6 +789,9 @@ function phutil_utf8_ucwords($str) {
  * @phutil-external-symbol function mb_convert_case
  */
 function phutil_utf8_strtolower($str) {
+  if ($str === null) {
+    return '';
+  }
   if (function_exists('mb_convert_case')) {
     return mb_convert_case($str, MB_CASE_LOWER, 'UTF-8');
   }
