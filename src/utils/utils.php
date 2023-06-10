@@ -900,7 +900,7 @@ function array_mergev(array $arrayv) {
  * NOTE: This function does not treat "\r" on its own as a newline because none
  * of SVN, Git or Mercurial do on any OS.
  *
- * @param string Block of text to be split into lines.
+ * @param string|PhutilSafeHTML $corpus Block of text to be split into lines.
  * @param bool If true, retain line endings in result strings.
  * @return list List of lines.
  *
@@ -908,7 +908,7 @@ function array_mergev(array $arrayv) {
  * @phutil-external-symbol function phutil_safe_html
  */
 function phutil_split_lines($corpus, $retain_endings = true) {
-  if (!strlen($corpus)) {
+  if (!phutil_nonempty_stringlike($corpus)) {
     return array('');
   }
 
