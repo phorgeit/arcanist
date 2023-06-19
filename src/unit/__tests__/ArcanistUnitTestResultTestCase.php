@@ -40,4 +40,17 @@ final class ArcanistUnitTestResultTestCase extends PhutilTestCase {
     }
   }
 
+  public function testRenderer() {
+    $result = new ArcanistUnitTestResult();
+    $result->setName('RendererTest');
+    $result->setResult('pass');
+    $result->setDuration(0.001);
+    $result->setUserData('');
+
+    $renderer = new ArcanistUnitConsoleRenderer();
+    $output = $renderer->renderUnitResult($result);
+    $test_dscr = 'Renderer copes with null namespace';
+    $this->assertTrue((bool)preg_match('/PASS/', $output), $test_dscr);
+  }
+
 }
