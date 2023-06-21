@@ -34,11 +34,11 @@ If "custom.pem" is present, that file will be used instead of "default.pem".
 If you receive errors using your "custom.pem" file, you can test it directly
 with `curl` by running a command like this:
 
-  curl -v --cacert path/to/your/custom.pem https://phabricator.example.com/
+  curl -v --cacert arcanist/resources/ssl/custom.pem https://phorge.example.com/
 
-Replace "path/to/your/custom.pem" with the path to your "custom.pem" file,
-and replace "https://phabricator.example.com" with the real URL of your
-Phabricator install.
+Replace "arcanist/resources/ssl/custom.pem" with the path to your "custom.pem"
+file, and replace "https://phorge.example.com" with the real URL of your Phorge
+install.
 
 The initial lines of output from `curl` should give you information about the
 SSL handshake and certificate verification, which may be helpful in resolving

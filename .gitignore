@@ -11,6 +11,7 @@
 # User extensions
 /externals/includes/*
 /src/extensions/*
+/resources/ssl/custom.pem
 
 # XHPAST
 /support/xhpast/*.a
