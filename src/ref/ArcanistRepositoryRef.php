@@ -66,7 +66,7 @@ final class ArcanistRepositoryRef
       ));
 
     foreach ($params as $key => $value) {
-      if (!strlen($value)) {
+      if ($value === null || !strlen($value)) {
         unset($params[$key]);
       }
     }
