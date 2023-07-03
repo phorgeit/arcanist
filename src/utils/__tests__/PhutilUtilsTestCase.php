@@ -1070,4 +1070,50 @@ final class PhutilUtilsTestCase extends PhutilTestCase {
     }
   }
 
+
+  public function testStringCasting() {
+    $cases = array(
+      array(123, '123', 'number'),
+      array(null, '', 'null to empty string'),
+      array('text', 'text', 'string'),
+      array(17.4, '17.4', 'float'),
+      array(true, '1', 'boolean true (well done php?)'),
+      array(false, '', 'boolean false (to empty string)'),
+      array(0, '0', 'zero (int)'),
+      array(0.0, '0', 'zero (float'),
+      array(
+        new PhutilURI('http://www.example.com'),
+        'http://www.example.com',
+        'Object with toString()',
+      ),
+    );
+
+    $exception_cases = array(
+      array(array(), 'array'),
+    );
+
+    foreach ($cases as $test_case) {
+      list($input, $expected_output, $test_name) = $test_case;
+
+      $actual = phutil_string_cast($input);
+
+      $this->assertEqual($expected_output, $actual, $test_name);
+    }
+
+
+    $expect_exceptions = array('Exception');
+    foreach ($exception_cases as $test_case) {
+      list($input, $test_name) = $test_case;
+
+      try {
+        phutil_string_cast($input);
+      } catch (Exception $ex) {
+        $caught = $ex;
+      } catch (Throwable $ex) {
+        $caught = $ex;
+      }
+
+      $this->assertCaught($expect_exceptions, $caught, $test_name);
+    }
+  }
 }
