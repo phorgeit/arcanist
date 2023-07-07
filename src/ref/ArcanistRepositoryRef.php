@@ -79,7 +79,7 @@ final class ArcanistRepositoryRef
 
     $params = $params + $defaults;
 
-    $uri_base = $this->browseURI;
+    $uri_base = coalesce($this->browseURI, '');
     $uri_base = rtrim($uri_base, '/');
 
     $uri_branch = phutil_escape_uri_path_component($params['branch']);
