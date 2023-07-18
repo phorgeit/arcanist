@@ -1004,11 +1004,18 @@ final class PhutilUtilsTestCase extends PhutilTestCase {
 
     $uri = new PhutilURI('http://example.org/');
 
+    // Each test is defined in this way:
+    //   0: subject $value
+    //   1: expected result from phutil_nonempty_string($value)
+    //   2: expected result from phutil_nonempty_stringlike($value)
+    //   3: expected result from phutil_nonempty_scalar($value)
+    //   4: human test name
     $map = array(
       array(null, false, false, false, 'literal null'),
       array('', false, false, false, 'empty string'),
       array('x', true, true, true, 'nonempty string'),
-      array(false, null, null, null, 'bool'),
+      array(false, null, null, false, 'false bool'),
+      array(true, null, null, true, 'true bool'),
       array(1, null, null, true, 'integer'),
       array($uri, null, true, true, 'uri object'),
       array(2.5, null, null, true, 'float'),
