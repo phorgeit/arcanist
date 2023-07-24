@@ -561,4 +561,32 @@ final class PhutilURI extends Phobject {
     return false;
   }
 
+  /**
+   * This is just a complicated type-check - we'll eventually replace it with a
+   * native type-hint of `PhutilURI | string | null`, when this type-hint is
+   * available (php 8.0).
+   *
+   * Before php 8, and after we suspect there aren't many more cases where this
+   * fails, we'll replace the log with an exception.
+   */
+  public static function checkHrefType($value) {
+    if ($value === null || is_string($value)) {
+      return;
+    }
+
+    if ($value instanceof PhutilURI) {
+      return;
+    }
+
+    $report_type = is_object($value) ? get_class($value) : gettype($value);
+
+    // We log stuff with a kind stack trace
+    phlog(
+      pht(
+        'Unexpected value type provided for an HREF field - %s. '.
+        'Please share this stack trace as comment in Task %s',
+        $report_type,
+        'https://we.phorge.it/T15316'));
+  }
+
 }
