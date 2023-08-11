@@ -15,7 +15,7 @@ final class ArcanistBrowseObjectNameURIHardpointQuery
     $token_set = array();
     foreach ($refs as $key => $ref) {
       $token = $ref->getToken();
-      if (!strlen($token)) {
+      if (!phutil_nonempty_string($token)) {
         continue;
       }
 
@@ -41,7 +41,7 @@ final class ArcanistBrowseObjectNameURIHardpointQuery
         continue;
       }
 
-      $uri = idx($object, 'uri');
+      $uri = idx($object, 'uri', '');
       if (!strlen($uri)) {
         continue;
       }

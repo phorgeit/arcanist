@@ -142,7 +142,7 @@ EOTEXT
     if ($many_hits) {
       foreach ($many_hits as $ref) {
         $token = $ref->getToken();
-        if (strlen($token)) {
+        if (phutil_nonempty_string($token)) {
           $message = pht('Argument "%s" is ambiguous.', $token);
         } else {
           $message = pht('Default behavior is ambiguous.');
@@ -167,7 +167,7 @@ EOTEXT
 
       foreach ($many_hits as $ref) {
         $token_display = $ref->getToken();
-        if (!strlen($token)) {
+        if (!phutil_nonempty_string($token)) {
           $token_display = pht('<default>');
         }
 

@@ -718,13 +718,10 @@ function phutil_utf8_convert($string, $to_encoding, $from_encoding) {
         'mbstring'));
   }
 
-  $result = @mb_convert_encoding($string, $to_encoding, $from_encoding);
-
-  if ($result === false) {
-    $message = error_get_last();
-    if ($message) {
-      $message = idx($message, 'message', pht('Unknown error.'));
-    }
+  try {
+    $result = mb_convert_encoding($string, $to_encoding, $from_encoding);
+  } catch (Throwable $ex) {
+    $message = $ex->getMessage();
     throw new Exception(
       pht(
         "String conversion from encoding '%s' to encoding '%s' failed: %s",

@@ -900,7 +900,7 @@ function array_mergev(array $arrayv) {
  * NOTE: This function does not treat "\r" on its own as a newline because none
  * of SVN, Git or Mercurial do on any OS.
  *
- * @param string Block of text to be split into lines.
+ * @param string|PhutilSafeHTML $corpus Block of text to be split into lines.
  * @param bool If true, retain line endings in result strings.
  * @return list List of lines.
  *
@@ -908,7 +908,7 @@ function array_mergev(array $arrayv) {
  * @phutil-external-symbol function phutil_safe_html
  */
 function phutil_split_lines($corpus, $retain_endings = true) {
-  if (!strlen($corpus)) {
+  if (!phutil_nonempty_stringlike($corpus)) {
     return array('');
   }
 
@@ -2187,6 +2187,9 @@ function phutil_nonempty_stringlike($value) {
  * string other than the empty string, integers, and floats are considered
  * scalar.
  *
+ * Note that booleans are also valid scalars, where false is considered empty,
+ * and true is non-empty since if you cast true to string, it's non-empty.
+ *
  * This method raises an exception if passed any other value.
  *
  * @param Value to test.
@@ -2203,6 +2206,14 @@ function phutil_nonempty_scalar($value) {
 
   if (is_string($value) || is_int($value) || is_float($value)) {
     return true;
+  }
+
+  // Booleans are also valid scalars by PHP. Inventing the opposite can be
+  // too much esoteric and problematic.
+  //   false: empty,     because casted to string becomes ''  (empty)
+  //   true:  non-empty, because casted to string becomes '1' (non-empty)
+  if ($value === false || $value === true) {
+    return $value;
   }
 
   if (is_object($value)) {

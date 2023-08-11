@@ -92,7 +92,7 @@ EOTEXT
     $argv = $this->getArgument('argv');
 
     $is_generate = $this->getArgument('generate');
-    $is_shell = (bool)strlen($this->getArgument('shell'));
+    $is_shell = phutil_nonempty_string($this->getArgument('shell'));
     $is_current = $this->getArgument('current');
 
     if ($argv) {

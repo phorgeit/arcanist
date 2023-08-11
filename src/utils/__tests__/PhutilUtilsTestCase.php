@@ -1004,11 +1004,18 @@ final class PhutilUtilsTestCase extends PhutilTestCase {
 
     $uri = new PhutilURI('http://example.org/');
 
+    // Each test is defined in this way:
+    //   0: subject $value
+    //   1: expected result from phutil_nonempty_string($value)
+    //   2: expected result from phutil_nonempty_stringlike($value)
+    //   3: expected result from phutil_nonempty_scalar($value)
+    //   4: human test name
     $map = array(
       array(null, false, false, false, 'literal null'),
       array('', false, false, false, 'empty string'),
       array('x', true, true, true, 'nonempty string'),
-      array(false, null, null, null, 'bool'),
+      array(false, null, null, false, 'false bool'),
+      array(true, null, null, true, 'true bool'),
       array(1, null, null, true, 'integer'),
       array($uri, null, true, true, 'uri object'),
       array(2.5, null, null, true, 'float'),
@@ -1070,4 +1077,50 @@ final class PhutilUtilsTestCase extends PhutilTestCase {
     }
   }
 
+
+  public function testStringCasting() {
+    $cases = array(
+      array(123, '123', 'number'),
+      array(null, '', 'null to empty string'),
+      array('text', 'text', 'string'),
+      array(17.4, '17.4', 'float'),
+      array(true, '1', 'boolean true (well done php?)'),
+      array(false, '', 'boolean false (to empty string)'),
+      array(0, '0', 'zero (int)'),
+      array(0.0, '0', 'zero (float'),
+      array(
+        new PhutilURI('http://www.example.com'),
+        'http://www.example.com',
+        'Object with toString()',
+      ),
+    );
+
+    $exception_cases = array(
+      array(array(), 'array'),
+    );
+
+    foreach ($cases as $test_case) {
+      list($input, $expected_output, $test_name) = $test_case;
+
+      $actual = phutil_string_cast($input);
+
+      $this->assertEqual($expected_output, $actual, $test_name);
+    }
+
+
+    $expect_exceptions = array('Exception');
+    foreach ($exception_cases as $test_case) {
+      list($input, $test_name) = $test_case;
+
+      try {
+        phutil_string_cast($input);
+      } catch (Exception $ex) {
+        $caught = $ex;
+      } catch (Throwable $ex) {
+        $caught = $ex;
+      }
+
+      $this->assertCaught($expect_exceptions, $caught, $test_name);
+    }
+  }
 }
