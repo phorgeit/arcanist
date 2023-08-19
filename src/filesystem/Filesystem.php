@@ -1103,12 +1103,23 @@ final class Filesystem extends Phobject {
         }
         return null;
       }
-      $stdout = head($stdout);
+
+      // These are the only file extensions that can be executed directly
+      // when using proc_open() with 'bypass_shell'.
+      $executable_extensions = ['exe', 'bat', 'cmd', 'com'];
+
+      foreach ($stdout as $line) {
+        $path = trim($line);
+        $ext = pathinfo($path, PATHINFO_EXTENSION);
+        if (in_array($ext, $executable_extensions)) {
+          return $path;
+        }
+      }
+      return null;
     } else {
       list($err, $stdout) = exec_manual('which %s', $binary);
+      return $err === 0 ? trim($stdout) : null;
     }
-
-    return $err === 0 ? trim($stdout) : null;
   }
 
 
