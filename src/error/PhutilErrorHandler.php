@@ -203,12 +203,17 @@ final class PhutilErrorHandler extends Phobject {
 
     if (($num === E_USER_ERROR) ||
         ($num === E_USER_WARNING) ||
-        ($num === E_USER_NOTICE)) {
+        ($num === E_USER_NOTICE) ||
+        ($num === E_DEPRECATED)) {
+
+      // See T15554 - we special-case E_DEPRECATED because we don't want them
+      // to kill the process.
+      $level = ($num === E_DEPRECATED) ? self::DEPRECATED : self::ERROR;
 
       $trace = debug_backtrace();
       array_shift($trace);
       self::dispatchErrorMessage(
-        self::ERROR,
+        $level,
         $str,
         array(
           'file'       => $file,
@@ -380,6 +385,7 @@ final class PhutilErrorHandler extends Phobject {
     $timestamp = date('Y-m-d H:i:s');
 
     switch ($event) {
+      case self::DEPRECATED:
       case self::ERROR:
         $default_message = sprintf(
           '[%s] ERROR %d: %s at [%s:%d]',
