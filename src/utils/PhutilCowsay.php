@@ -71,14 +71,19 @@ final class PhutilCowsay extends Phobject {
         $template);
     }
 
-    $template = preg_replace_callback(
+    $token_patterns = array(
       '/\\$([a-z]+)/',
-      array($this, 'replaceTemplateVariable'),
-      $template);
-    if ($template === false) {
-      throw new Exception(
-        pht(
-          'Failed to replace template variables while rendering cow!'));
+      '/\\${([a-z]+)}/',
+    );
+    foreach ($token_patterns as $token_pattern) {
+      $template = preg_replace_callback(
+        $token_pattern,
+        array($this, 'replaceTemplateVariable'),
+        $template);
+      if ($template === false) {
+        throw new Exception(
+          pht('Failed to replace template variables while rendering cow!'));
+      }
     }
 
     $lines = $this->text;
