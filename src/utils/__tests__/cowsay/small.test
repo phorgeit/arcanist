@@ -1,0 +1,12 @@
+$eyes = ".." unless ($eyes);
+$the_cow = <<EOC;
+       $thoughts   ,__,
+        $thoughts  ($eyes)____
+           (__)    )\\
+            $tongue||--|| *
+EOC
+~~~~~~~~~~
+{
+  "text": "How are my eyes?",
+  "eyes": "oo"
+}

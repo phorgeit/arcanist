@@ -41,34 +41,29 @@ final class PhutilCowsay extends Phobject {
     $template = $this->template;
 
     // Real ".cow" files are Perl scripts which define a variable called
-    // "$the_cow". We aren't going to interpret Perl, so strip all this stuff
-    // (and any comments in the file) away.
-    $template = phutil_split_lines($template, true);
-    $keep = array();
-    $is_perl_cowfile = false;
-    foreach ($template as $key => $line) {
-      if (preg_match('/^#/', $line)) {
-        continue;
-      }
-      if (preg_match('/^\s*\\$the_cow/', $line)) {
-        $is_perl_cowfile = true;
-        continue;
-      }
-      if (preg_match('/^\s*EOC\s*$/', $line)) {
-        continue;
-      }
-      $keep[] = $line;
-    }
-    $template = implode('', $keep);
+    // "$the_cow". We aren't going to interpret Perl, so just get everything
+    // between the EOC (End Of Cow) tokens. The initial EOC might be in
+    // quotes, and might have a semicolon.
+    // We apply regexp modifiers
+    // * 's' to make . match newlines within the EOC ... EOC block
+    // * 'm' so we can use ^ to match start of line within the multiline string
+    $matches = null;
+    if (
+      preg_match('/\$the_cow/', $template) &&
+      preg_match('/EOC[\'"]?;?.*?^(.*?)^EOC/sm', $template, $matches)
+    ) {
+      $template = $matches[1];
 
-    // Original .cow files are perl scripts which contain escaped sequences.
-    // We attempt to unescape here by replacing any character preceded by a
-    // backslash/escape with just that character.
-    if ($is_perl_cowfile) {
+      // Original .cow files are perl scripts which contain escaped sequences.
+      // We attempt to unescape here by replacing any character preceded by a
+      // backslash/escape with just that character.
       $template = preg_replace(
         '/\\\\(.)/',
         '$1',
         $template);
+    } else {
+      // Text template. Just strip away comments.
+      $template = preg_replace('/^#.*$/', '', $template);
     }
 
     $token_patterns = array(
