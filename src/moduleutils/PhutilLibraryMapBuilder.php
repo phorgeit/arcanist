@@ -469,10 +469,12 @@ EOPHP;
 
     $this->fileSymbolMap = $symbol_map;
 
-    // We're done building the cache, so write it out immediately. Note that
-    // we've only retained entries for files we found, so this implicitly cleans
-    // out old cache entries.
-    $this->writeSymbolCache($symbol_map, $source_map);
+    if ($futures) {
+      // We're done building/updating the cache, so write it out immediately.
+      // Note that we've only retained entries for files we found, so this
+      // implicitly cleans out old cache entries.
+      $this->writeSymbolCache($symbol_map, $source_map);
+    }
 
     // Our map is up to date, so either show it on stdout or write it to disk.
     $this->librarySymbolMap = $this->buildLibraryMap($symbol_map);
