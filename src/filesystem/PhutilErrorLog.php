@@ -83,7 +83,7 @@ final class PhutilErrorLog
   }
 
   public function onError($event, $value, array $metadata) {
-    // If we've set "error_log" to a real file, so messages won't be output to
+    // If we've set "error_log" to a real file, messages won't be output to
     // stderr by default. Copy them to stderr.
 
     if ($this->logPath === null) {
