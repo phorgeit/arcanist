@@ -6,7 +6,7 @@
  *
  * This class takes over the PHP error and exception handlers when you call
  * ##PhutilErrorHandler::initialize()## and forwards all debugging information
- * to a listener you install with ##PhutilErrorHandler::setErrorListener()##.
+ * to a listener you install with ##PhutilErrorHandler::addErrorListener()##.
  *
  * To use PhutilErrorHandler, which will enhance the messages printed to the
  * PHP error log, just initialize it:
@@ -16,7 +16,7 @@
  * To additionally install a custom listener which can print error information
  * to some other file or console, register a listener:
  *
- *    PhutilErrorHandler::setErrorListener($some_callback);
+ *    PhutilErrorHandler::addErrorListener($some_callback);
  *
  * For information on writing an error listener, see
  * @{function:phutil_error_listener_example}. Providing a listener is optional,
@@ -31,7 +31,7 @@
  */
 final class PhutilErrorHandler extends Phobject {
 
-  private static $errorListener = null;
+  private static $errorListeners = array();
   private static $initialized = false;
   private static $traps = array();
 
@@ -68,8 +68,15 @@ final class PhutilErrorHandler extends Phobject {
    * @return void
    * @task config
    */
+  public static function addErrorListener($listener) {
+    self::$errorListeners[] = $listener;
+  }
+
+  /**
+   * Deprecated - use `addErrorListener`.
+   */
   public static function setErrorListener($listener) {
-    self::$errorListener = $listener;
+    self::addErrorListener($listener);
   }
 
 
@@ -203,12 +210,17 @@ final class PhutilErrorHandler extends Phobject {
 
     if (($num === E_USER_ERROR) ||
         ($num === E_USER_WARNING) ||
-        ($num === E_USER_NOTICE)) {
+        ($num === E_USER_NOTICE) ||
+        ($num === E_DEPRECATED)) {
+
+      // See T15554 - we special-case E_DEPRECATED because we don't want them
+      // to kill the process.
+      $level = ($num === E_DEPRECATED) ? self::DEPRECATED : self::ERROR;
 
       $trace = debug_backtrace();
       array_shift($trace);
       self::dispatchErrorMessage(
-        self::ERROR,
+        $level,
         $str,
         array(
           'file'       => $file,
@@ -380,6 +392,7 @@ final class PhutilErrorHandler extends Phobject {
     $timestamp = date('Y-m-d H:i:s');
 
     switch ($event) {
+      case self::DEPRECATED:
       case self::ERROR:
         $default_message = sprintf(
           '[%s] ERROR %d: %s at [%s:%d]',
@@ -432,7 +445,7 @@ final class PhutilErrorHandler extends Phobject {
         break;
     }
 
-    if (self::$errorListener) {
+    if (self::$errorListeners) {
       static $handling_error;
       if ($handling_error) {
         error_log(
@@ -441,7 +454,9 @@ final class PhutilErrorHandler extends Phobject {
         return;
       }
       $handling_error = true;
-      call_user_func(self::$errorListener, $event, $value, $metadata);
+      foreach (self::$errorListeners as $error_listener) {
+        call_user_func($error_listener, $event, $value, $metadata);
+      }
       $handling_error = false;
     }
   }

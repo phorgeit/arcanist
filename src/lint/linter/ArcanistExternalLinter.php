@@ -133,7 +133,19 @@ abstract class ArcanistExternalLinter extends ArcanistFutureLinter {
    * @task bin
    */
   final public function getBinary() {
-    return coalesce($this->bin, $this->getDefaultBinary());
+    $bin = coalesce($this->bin, $this->getDefaultBinary());
+    if (phutil_is_windows()) {
+      // On Windows, we use proc_open with 'bypass_shell' option, which will
+      // resolve %PATH%, but not %PATHEXT% (unless the extension is .exe).
+      // Therefore find the right binary ourselves.
+      // If we can't find it, leave it unresolved, as this string will be
+      // used in some error messages elsewhere.
+      $resolved = Filesystem::resolveBinary($bin);
+      if ($resolved) {
+        return $resolved;
+      }
+    }
+    return $bin;
   }
 
   /**

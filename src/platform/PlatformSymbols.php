@@ -11,6 +11,14 @@ final class PlatformSymbols
     return 'Phorge';
   }
 
+  public static function getPlatformClientPath() {
+    return 'arcanist/';
+  }
+
+  public static function getPlatformServerPath() {
+    return 'phorge/';
+  }
+
   public static function getProductNames() {
     return array(
       self::getPlatformClientName(),

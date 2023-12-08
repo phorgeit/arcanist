@@ -41,7 +41,7 @@ function phlog($value/* , ... */) {
 
 /**
  * Example @{class:PhutilErrorHandler} error listener callback. When you call
- * `PhutilErrorHandler::setErrorListener()`, you must pass a callback function
+ * `PhutilErrorHandler::addErrorListener()`, you must pass a callback function
  * with the same signature as this one.
  *
  * NOTE: @{class:PhutilErrorHandler} handles writing messages to the error
