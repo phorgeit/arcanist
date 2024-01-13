@@ -187,6 +187,11 @@ final class ArcanistDiffParser extends Phobject {
   }
 
   public function parseDiff($diff) {
+    // Remove leading UTF-8 Byte Order Mark (BOM)
+    if (substr($diff, 0, 3) == pack('CCC', 0xEF, 0xBB, 0xBF)) {
+      $diff = substr($diff, 3);
+    }
+
     if (!strlen(trim($diff))) {
       throw new Exception(pht("Can't parse an empty diff!"));
     }
