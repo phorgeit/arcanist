@@ -398,6 +398,12 @@ final class PhutilSymbolLoader {
   }
 
 
+  private static function classLikeExists($name) {
+    return class_exists($name, false) ||
+           interface_exists($name, false) ||
+           trait_exists($name, false);
+  }
+
   /**
    * @task internal
    */
@@ -411,7 +417,7 @@ final class PhutilSymbolLoader {
         return;
       }
     } else {
-      if (class_exists($name, false) || interface_exists($name, false)) {
+      if (self::classLikeExists($name)) {
         return;
       }
     }
@@ -431,7 +437,7 @@ final class PhutilSymbolLoader {
         $load_failed = pht('function');
       }
     } else {
-      if (!class_exists($name, false) && !interface_exists($name, false)) {
+      if (!self::classLikeExists($name)) {
         $load_failed = pht('class or interface');
       }
     }

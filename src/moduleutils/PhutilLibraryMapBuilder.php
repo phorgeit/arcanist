@@ -332,11 +332,16 @@ final class PhutilLibraryMapBuilder extends Phobject {
       'xmap'      => array(),
     );
 
+    $type_translation = array(
+      'interface' => 'class',
+      'trait' => 'class',
+    );
+
     // Detect duplicate symbols within the library.
     foreach ($symbol_map as $file => $info) {
       foreach ($info['have'] as $type => $symbols) {
         foreach ($symbols as $symbol => $declaration) {
-          $lib_type = ($type == 'interface') ? 'class' : $type;
+          $lib_type = idx($type_translation, $type, $type);
           if (!empty($library_map[$lib_type][$symbol])) {
             $prior = $library_map[$lib_type][$symbol];
             throw new Exception(
