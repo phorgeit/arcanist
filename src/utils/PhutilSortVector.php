@@ -30,7 +30,7 @@ final class PhutilSortVector
   }
 
   public function addString($value) {
-    if (strlen($value) && (strpos("\0", $value) !== false)) {
+    if (strlen($value) && (strpos($value, "\0") !== false)) {
       throw new Exception(
         pht(
           'String components of a sort vector must not contain NULL bytes.'));
