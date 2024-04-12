@@ -13,8 +13,9 @@
  *
  *    id(new Thing())->doStuff();
  *
- * @param   wild Anything.
- * @return  wild Unmodified argument.
+ * @template T
+ * @param   T $x Anything
+ * @return  T Unmodified argument.
  */
 function id($x) {
   return $x;
