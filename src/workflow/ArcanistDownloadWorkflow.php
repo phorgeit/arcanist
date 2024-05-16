@@ -156,7 +156,7 @@ EOTEXT
     try {
       list($data) = $future->resolvex();
     } catch (Exception $ex) {
-      Filesystem::removePath($path);
+      Filesystem::remove($path);
       throw $ex;
     }
 
