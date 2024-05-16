@@ -67,7 +67,8 @@ final class ArcanistAliasEngine
       // This alias is not defined properly, so we're going to ignore it.
       unset($aliases[$key]);
 
-      $results[] = $this->newEffect(ArcanistAliasEffect::EFFECT_CONFIGURATION)
+      $results[] =
+        $this->newEffect(ArcanistAliasEffect::EFFECT_MISCONFIGURATION)
         ->setMessage(
           pht(
             'Configuration source ("%s") defines an invalid alias, which '.
