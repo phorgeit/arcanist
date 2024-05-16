@@ -51,7 +51,7 @@ $lock = PhutilFileLock::newForPath($file);
 
 try {
   $lock->lock($args->getArg('wait'));
-} catch (PhutilFileLockException $ex) {
+} catch (PhutilLockException $ex) {
   $console->writeOut(
     "**%s** %s\n",
     pht('UNABLE TO ACQUIRE LOCK:'),
