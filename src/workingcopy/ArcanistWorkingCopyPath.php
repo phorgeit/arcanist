@@ -30,7 +30,7 @@ final class ArcanistWorkingCopyPath
       throw new Exception(
         pht(
           'No data provided for path "%s".',
-          $this->getDescription()));
+          $this->getPath()));
     }
 
     return $this->data;
@@ -55,7 +55,7 @@ final class ArcanistWorkingCopyPath
       throw new Exception(
         pht(
           'No mode provided for path "%s".',
-          $this->getDescription()));
+          $this->getPath()));
     }
 
     return $this->mode;
