@@ -13,4 +13,10 @@ final class PhutilUSEnglishLocale extends PhutilLocale {
     return pht('English (US)');
   }
 
+  public function getFallbackLocaleCode() {
+    // The default fallback is en_US, explicitly return null here
+    // to avoid a fallback loop
+    return null;
+  }
+
 }

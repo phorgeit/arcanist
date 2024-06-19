@@ -30,11 +30,14 @@ abstract class PhutilLocale extends Phobject {
    * For locales like "English (Great Britain)", missing translations can be
    * sourced from "English (US)".
    *
+   * Languages with no other fallback use en_US because that's better
+   * than proto-English for untranslated strings.
+   *
    * @return string|null Locale code of fallback locale, or null if there is
    *                     no fallback locale.
    */
   public function getFallbackLocaleCode() {
-    return null;
+    return 'en_US';
   }
 
 
