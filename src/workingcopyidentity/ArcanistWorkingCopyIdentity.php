@@ -289,7 +289,7 @@ final class ArcanistWorkingCopyIdentity extends Phobject {
   }
 
   public function readLocalArcConfig() {
-    if (strlen($this->localMetaDir)) {
+    if ($this->localMetaDir !== null && strlen($this->localMetaDir)) {
       $local_path = Filesystem::resolvePath('arc/config', $this->localMetaDir);
 
       $console = PhutilConsole::getConsole();

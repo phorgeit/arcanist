@@ -275,7 +275,7 @@ final class Filesystem extends Phobject {
       $trap->destroy();
 
       if (!$ok) {
-        if (strlen($err)) {
+        if ($err !== null && strlen($err)) {
           throw new FilesystemException(
             $to,
             pht(
@@ -307,7 +307,7 @@ final class Filesystem extends Phobject {
    * @task   file
    */
   public static function remove($path) {
-    if (!strlen($path)) {
+    if ($path == null || !strlen($path)) {
       // Avoid removing PWD.
       throw new Exception(
         pht(
@@ -673,7 +673,7 @@ final class Filesystem extends Phobject {
     }
 
     // If we come back with an encoding, strip it off.
-    if (strpos($mime_type, ';') !== false) {
+    if ($mime_type !== null && strpos($mime_type, ';') !== false) {
       list($type, $encoding) = explode(';', $mime_type, 2);
       $mime_type = $type;
     }

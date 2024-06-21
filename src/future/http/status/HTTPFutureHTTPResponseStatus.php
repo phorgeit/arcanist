@@ -21,7 +21,8 @@ final class HTTPFutureHTTPResponseStatus extends HTTPFutureResponseStatus {
 
     $content_type = BaseHTTPFuture::getHeader($headers, 'Content-Type');
     $match = null;
-    if (preg_match('/;\s*charset=([^;]+)/', $content_type, $match)) {
+    if (phutil_nonempty_string($content_type) &&
+      preg_match('/;\s*charset=([^;]+)/', $content_type, $match)) {
       $encoding = trim($match[1], "\"'");
       try {
         $excerpt = phutil_utf8_convert($excerpt, 'UTF-8', $encoding);

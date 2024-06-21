@@ -112,18 +112,6 @@ foreach ($namespaces as $namespace) {
     $namespace, $path, pht('namespace `%s` statements', 'use'));
 }
 
-$possible_traits = $root->selectDescendantsOfType('n_CLASS_DECLARATION');
-foreach ($possible_traits as $possible_trait) {
-  $attributes = $possible_trait->getChildByIndex(0);
-  // Can't use getChildByIndex here because not all classes have attributes
-  foreach ($attributes->getChildren() as $attribute) {
-    if (strtolower($attribute->getConcreteString()) === 'trait') {
-      phutil_fail_on_unsupported_feature($possible_trait, $path, pht('traits'));
-    }
-  }
-}
-
-
 // -(  Marked Externals  )------------------------------------------------------
 
 
@@ -256,15 +244,27 @@ foreach ($calls as $call) {
 
 // Find classes declared by this file.
 
-
 // This is "class X ... { ... }".
-$classes = $root->selectDescendantsOfType('n_CLASS_DECLARATION');
-foreach ($classes as $class) {
-  $class_name = $class->getChildByIndex(1);
-  $have[] = array(
-    'type'    => 'class',
+function build_have_element_for_class_declaration(XHPASTNode $class_node) {
+  $class_name = $class_node->getChildByIndex(1);
+
+  $type = 'class';
+  $attributes = $class_node->getChildByIndex(0);
+  foreach ($attributes->getChildren() as $attribute) {
+    if (strtolower($attribute->getConcreteString()) === 'trait') {
+      $type = 'trait';
+    }
+  }
+
+  return array(
+    'type'    => $type,
     'symbol'  => $class_name,
   );
+}
+
+$classes = $root->selectDescendantsOfType('n_CLASS_DECLARATION');
+foreach ($classes as $class) {
+  $have[] = build_have_element_for_class_declaration($class);
 }
 
 

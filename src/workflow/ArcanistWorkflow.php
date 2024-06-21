@@ -1516,7 +1516,14 @@ abstract class ArcanistWorkflow extends Phobject {
     }
   }
 
+  /**
+   * @param string|null $revision_id
+   * @return string
+   */
   final protected function normalizeRevisionID($revision_id) {
+    if ($revision_id === null) {
+      return '';
+    }
     return preg_replace('/^D/i', '', $revision_id);
   }
 
