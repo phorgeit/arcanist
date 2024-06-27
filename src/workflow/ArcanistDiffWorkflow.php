@@ -1938,6 +1938,10 @@ EOTEXT
           continue;
         }
 
+        if ($value === null) {
+          continue;
+        }
+
         if (is_array($value)) {
           // For array values, merge the arrays, appending the new values.
           // Examples are "Reviewers" and "Cc", where this produces a list of
