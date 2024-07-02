@@ -3,6 +3,10 @@
 final class ArcanistDownloadWorkflow
   extends ArcanistArcWorkflow {
 
+  private $id;
+  private $saveAs;
+  private $show;
+
   public function getWorkflowName() {
     return 'download';
   }
