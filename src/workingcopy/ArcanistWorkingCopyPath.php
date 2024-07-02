@@ -7,6 +7,7 @@ final class ArcanistWorkingCopyPath
   private $mode;
   private $data;
   private $binary;
+  private $mimeType;
   private $dataAsLines;
   private $charMap;
   private $lineMap;

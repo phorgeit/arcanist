@@ -3,6 +3,7 @@
 final class PhutilPostmarkFuture extends FutureProxy {
 
   private $future;
+  private $clientID;
   private $accessToken;
   private $method;
   private $parameters;
