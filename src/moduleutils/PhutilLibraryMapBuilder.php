@@ -212,7 +212,7 @@ final class PhutilLibraryMapBuilder extends Phobject {
   /**
    * Drop the symbol cache, forcing a clean rebuild.
    *
-   * @return this
+   * @return void
    *
    * @task symbol
    */
