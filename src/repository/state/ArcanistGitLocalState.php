@@ -159,8 +159,4 @@ final class ArcanistGitLocalState
     $api->execxLocal('stash drop');
   }
 
-  private function getDisplayStashRef($stash_ref) {
-    return substr($stash_ref, 0, 12);
-  }
-
 }
