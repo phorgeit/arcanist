@@ -445,7 +445,7 @@ abstract class PhutilTestCase extends Phobject {
     $callable,
     $exception_class = 'Exception') {
 
-    return $this->tryTestCases(
+    $this->tryTestCases(
       array_fuse(array_keys($map)),
       array_values($map),
       $callable,
