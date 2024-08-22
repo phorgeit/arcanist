@@ -27,11 +27,13 @@ final class TempFile extends Phobject {
   /**
    * Create a new temporary file.
    *
-   * @param string? Filename hint. This is useful if you intend to edit the
-   *                file with an interactive editor, so the user's editor shows
-   *                "commit-message" instead of "p3810hf-1z9b89bas".
-   * @param string? Root directory to hold the file. If omitted, the system
-   *                temporary directory (often "/tmp") will be used by default.
+   * @param string  (optional) Filename hint. This is useful if you intend to
+   *                edit the file with an interactive editor, so the user's
+   *                editor shows "commit-message" instead of
+   *                "p3810hf-1z9b89bas".
+   * @param string  (optional) Root directory to hold the file. If omitted, the
+   *                system temporary directory (often "/tmp") will be used by
+   *                default.
    * @task create
    */
   public function __construct($filename = null, $root_directory = null) {
