@@ -29,7 +29,7 @@ final class PhutilLibraryMapBuilder extends Phobject {
   /**
    * Create a new map builder for a library.
    *
-   * @param string Path to the library root.
+   * @param string $root Path to the library root.
    *
    * @task map
    */
@@ -40,7 +40,7 @@ final class PhutilLibraryMapBuilder extends Phobject {
   /**
    * Control subprocess parallelism limit. Use `--limit` to set this.
    *
-   * @param  int   Maximum number of subprocesses to run in parallel.
+   * @param  int   $limit Maximum number of subprocesses to run in parallel.
    * @return this
    *
    * @task map
@@ -103,8 +103,8 @@ final class PhutilLibraryMapBuilder extends Phobject {
   /**
    * Get the path to some file in the library.
    *
-   * @param  string  A library-relative path. If omitted, returns the library
-   *                 root path.
+   * @param  string  $path (optional) A library-relative path. If omitted,
+   *                 returns the library root path.
    * @return string  An absolute path.
    *
    * @task path
@@ -188,8 +188,8 @@ final class PhutilLibraryMapBuilder extends Phobject {
   /**
    * Write a symbol map to disk cache.
    *
-   * @param  dict  Symbol map of relative paths to symbols.
-   * @param  dict  Source map (like @{method:loadSourceFileMap}).
+   * @param  dict  $symbol_map Symbol map of relative paths to symbols.
+   * @param  dict  $source_map Source map (like @{method:loadSourceFileMap}).
    * @return void
    *
    * @task symbol
@@ -224,7 +224,7 @@ final class PhutilLibraryMapBuilder extends Phobject {
    * Build a future which returns a `extract-symbols.php` analysis of a source
    * file.
    *
-   * @param  string  Relative path to the source file to analyze.
+   * @param  string  $file Relative path to the source file to analyze.
    * @return Future  Analysis future.
    *
    * @task symbol
@@ -321,7 +321,7 @@ final class PhutilLibraryMapBuilder extends Phobject {
    * Convert the symbol analysis of all the source files in the library into
    * a library map.
    *
-   * @param   dict  Symbol analysis of all source files.
+   * @param   dict  $symbol_map Symbol analysis of all source files.
    * @return  dict  Library map.
    * @task source
    */
@@ -381,7 +381,7 @@ final class PhutilLibraryMapBuilder extends Phobject {
   /**
    * Write a finalized library map.
    *
-   * @param  dict Library map structure to write.
+   * @param  dict $library_map Library map structure to write.
    * @return void
    *
    * @task source

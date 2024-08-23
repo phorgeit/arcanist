@@ -292,7 +292,6 @@ final class XHPASTNode extends AASTNode {
    * To prevent any possible ambiguity, the returned namespace will always be
    * prefixed with the namespace separator.
    *
-   * @param  XHPASTNode   The input node.
    * @return string|null  The namespace which contains the input node, or
    *                      `null` if no such node exists.
    */

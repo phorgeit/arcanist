@@ -9,7 +9,7 @@ final class PhutilLanguageGuesser extends Phobject {
   /**
    * Guess which computer programming language a file is written in.
    *
-   * @param string Source text of the file.
+   * @param string $source Source text of the file.
    * @return mixed Language string, or null if unable to guess.
    */
   public static function guessLanguage($source) {

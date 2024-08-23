@@ -27,13 +27,13 @@ final class TempFile extends Phobject {
   /**
    * Create a new temporary file.
    *
-   * @param string  (optional) Filename hint. This is useful if you intend to
-   *                edit the file with an interactive editor, so the user's
-   *                editor shows "commit-message" instead of
+   * @param string  $filename (optional) Filename hint. This is useful if you
+   *                intend to edit the file with an interactive editor, so the
+   *                user's editor shows "commit-message" instead of
    *                "p3810hf-1z9b89bas".
-   * @param string  (optional) Root directory to hold the file. If omitted, the
-   *                system temporary directory (often "/tmp") will be used by
-   *                default.
+   * @param string  $root_directory (optional) Root directory to hold the file.
+   *                If omitted, the system temporary directory (often "/tmp")
+   *                will be used by default.
    * @task create
    */
   public function __construct($filename = null, $root_directory = null) {
@@ -62,7 +62,7 @@ final class TempFile extends Phobject {
    * Normally, the file is deleted when this object passes out of scope. You
    * can set it to be preserved instead.
    *
-   * @param bool True to preserve the file after object destruction.
+   * @param bool $preserve True to preserve the file after object destruction.
    * @return this
    * @task config
    */

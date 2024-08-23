@@ -50,7 +50,7 @@ final class CaseInsensitiveArray extends PhutilArray {
   /**
    * Construct a new array object.
    *
-   * @param array  The input array.
+   * @param array $data (optional) The input array.
    */
   public function __construct(array $data = array()) {
     foreach ($data as $key => $value) {
@@ -111,7 +111,7 @@ final class CaseInsensitiveArray extends PhutilArray {
    *   [[http://php.net/manual/en/book.strings.php | string transformation]]
    *   functions.
    *
-   * @param  string  The input key.
+   * @param  string  $key The input key.
    * @return string  The transformed key.
    */
   private function transformKey($key) {

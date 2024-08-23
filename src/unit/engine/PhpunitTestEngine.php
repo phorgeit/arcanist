@@ -118,7 +118,7 @@ final class PhpunitTestEngine extends ArcanistUnitTestEngine {
    * TODO: Add support for finding tests in testsuite folders from
    * phpunit.xml configuration.
    *
-   * @param   string      PHP file to locate test cases for.
+   * @param   string      $path PHP file to locate test cases for.
    * @return  string|null Path to test cases, or null.
    */
   private function findTestFile($path) {
@@ -192,7 +192,7 @@ final class PhpunitTestEngine extends ArcanistUnitTestEngine {
    * ...or similar. This list will be further pruned by the caller; it is
    * intentionally filesystem-agnostic to be unit testable.
    *
-   * @param   string        PHP file to locate test cases for.
+   * @param   string        $path PHP file to locate test cases for.
    * @return  list<string>  List of directories to search for tests in.
    */
   public static function getSearchLocationsForTests($path) {

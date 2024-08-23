@@ -352,8 +352,8 @@ EOTEXT
    * Raise a tailored error when a unit test engine returns results in an
    * invalid format.
    *
-   * @param ArcanistUnitTestEngine The engine.
-   * @param wild Results from the engine.
+   * @param ArcanistUnitTestEngine $engine The engine.
+   * @param wild $results Results from the engine.
    */
   private function validateUnitEngineResults(
     ArcanistUnitTestEngine $engine,

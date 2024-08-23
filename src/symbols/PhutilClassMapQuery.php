@@ -60,7 +60,7 @@ final class PhutilClassMapQuery extends Phobject {
    * Set the ancestor class or interface name to load the concrete descendants
    * of.
    *
-   * @param string Ancestor class or interface name.
+   * @param string $class Ancestor class or interface name.
    * @return this
    * @task config
    */
@@ -79,9 +79,9 @@ final class PhutilClassMapQuery extends Phobject {
    *
    * You must provide a method here to use @{method:setExpandMethod}.
    *
-   * @param string  Name of the unique key method.
-   * @param bool    If true, then classes which return `null` will be filtered
-   *                from the results.
+   * @param string  $unique_method Name of the unique key method.
+   * @param bool    $filter_null (optional) If true, then classes which return
+   *                `null` will be filtered from the results.
    * @return this
    * @task config
    */
@@ -125,7 +125,7 @@ final class PhutilClassMapQuery extends Phobject {
    * If a class map uses this pattern, it must also provide a unique key for
    * each instance with @{method:setUniqueMethod}.
    *
-   * @param string Name of the expansion method.
+   * @param string $expand_method Name of the expansion method.
    * @return this
    * @task config
    */
@@ -141,7 +141,7 @@ final class PhutilClassMapQuery extends Phobject {
    * The map will be sorted using @{function:msort} and passing this method
    * name.
    *
-   * @param string Name of the sorting method.
+   * @param string $sort_method Name of the sorting method.
    * @return this
    * @task config
    */
@@ -154,7 +154,7 @@ final class PhutilClassMapQuery extends Phobject {
   /**
    * Provide a method to filter the map.
    *
-   * @param string Name of the filtering method.
+   * @param string $filter_method Name of the filtering method.
    * @return this
    * @task config
    */

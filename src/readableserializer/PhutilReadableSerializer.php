@@ -19,7 +19,7 @@ final class PhutilReadableSerializer extends Phobject {
    * representation of the value; use @{method:printShort} or
    * @{method:printShallow} to summarize values.
    *
-   * @param wild Any value.
+   * @param wild $value Any value.
    * @return string Human-readable representation of the value.
    * @task print
    */
@@ -43,7 +43,7 @@ final class PhutilReadableSerializer extends Phobject {
   /**
    * Print a concise, human readable representation of a value.
    *
-   * @param wild Any value.
+   * @param wild $value Any value.
    * @return string Human-readable short representation of the value.
    * @task print
    */
@@ -86,9 +86,11 @@ final class PhutilReadableSerializer extends Phobject {
    *
    * To print any number of member variables, pass null for `$max_members`.
    *
-   * @param wild Any value.
-   * @param int Maximum depth to print for nested arrays and objects.
-   * @param int Maximum number of values to print at each level.
+   * @param wild $value Any value.
+   * @param int $max_depth (optional) Maximum depth to print for nested arrays
+   *   and objects. Defaults to 2.
+   * @param int $max_members (optional) Maximum number of values to print at
+   *   each level. Defaults to 25.
    * @return string Human-readable shallow representation of the value.
    * @task print
    */
@@ -107,11 +109,12 @@ final class PhutilReadableSerializer extends Phobject {
   /**
    * Implementation for @{method:printShallow}.
    *
-   * @param wild Any value.
-   * @param int Maximum depth to print for nested arrays and objects.
-   * @param int Maximum number of values to print at each level.
-   * @param int Current depth.
-   * @param string Indentation string.
+   * @param wild $value Any value.
+   * @param int $max_depth Maximum depth to print for nested arrays and
+   *   objects.
+   * @param int $max_members Maximum number of values to print at each level.
+   * @param int $depth Current depth.
+   * @param string $indent Indentation string.
    * @return string Human-readable shallow representation of the value.
    * @task internal
    */
@@ -170,9 +173,9 @@ final class PhutilReadableSerializer extends Phobject {
    * Adds indentation to the beginning of every line starting from
    * `$first_line`.
    *
-   * @param string Printed value.
-   * @param string String to indent with.
-   * @param int Index of first line to indent.
+   * @param string $value Printed value.
+   * @param string $indent String to indent with.
+   * @param int $first_line Index of first line to indent.
    * @return string
    * @task internal
    */

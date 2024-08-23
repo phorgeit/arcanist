@@ -26,7 +26,7 @@ final class FileList extends Phobject {
   /**
    * Build a new FileList from an array of paths, e.g. from $argv.
    *
-   * @param  list  List of relative or absolute file paths.
+   * @param  list $paths List of relative or absolute file paths.
    * @return this
    * @task create
    */
@@ -46,10 +46,11 @@ final class FileList extends Phobject {
    * Determine if a path is one of the paths in the list. Note that an empty
    * file list is considered to contain every file.
    *
-   * @param  string  Relative or absolute system file path.
-   * @param  bool    If true, consider the path to be contained in the list if
-   *                 the list contains a parent directory. If false, require
-   *                 that the path be part of the list explicitly.
+   * @param  string  $path Relative or absolute system file path.
+   * @param  bool    $allow_parent_directory (optional) If true, consider the
+   *                 path to be contained in the list if the list contains a
+   *                 parent directory. If false, require that the path be part
+   *                 of the list explicitly.
    * @return bool    If true, the file is in the list.
    * @task test
    */

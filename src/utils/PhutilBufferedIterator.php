@@ -61,7 +61,7 @@ abstract class PhutilBufferedIterator extends Phobject implements Iterator {
   /**
    * Configure the page size. Note that implementations may ignore this.
    *
-   * @param int Page size.
+   * @param int $size Page size.
    * @return this
    * @task config
    */

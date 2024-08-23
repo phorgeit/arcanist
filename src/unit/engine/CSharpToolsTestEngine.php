@@ -81,7 +81,7 @@ final class CSharpToolsTestEngine extends XUnitTestEngine {
    * Overridden version of `buildTestFuture` so that the unit test can be run
    * via `cscover`, which instruments assemblies and reports on code coverage.
    *
-   * @param  string  Name of the test assembly.
+   * @param  string  $test_assembly Name of the test assembly.
    * @return array   The future, output filename and coverage filename
    *                 stored in an array.
    */
@@ -145,8 +145,8 @@ final class CSharpToolsTestEngine extends XUnitTestEngine {
   /**
    * Returns coverage results for the unit tests.
    *
-   * @param  string  The name of the coverage file if one was provided by
-   *                 `buildTestFuture`.
+   * @param  string  $cover_file The name of the coverage file if one was
+   *                 provided by `buildTestFuture`.
    * @return array   Code coverage results, or null.
    */
   protected function parseCoverageResult($cover_file) {
@@ -161,7 +161,7 @@ final class CSharpToolsTestEngine extends XUnitTestEngine {
    * result file is XML and can be large depending on what has been instrumented
    * so we cache it in case it's requested again.
    *
-   * @param  string  The name of the coverage file.
+   * @param  string  $cover_file The name of the coverage file.
    * @return array   Code coverage results, or null if not cached.
    */
   private function getCachedResultsIfPossible($cover_file) {
@@ -177,8 +177,8 @@ final class CSharpToolsTestEngine extends XUnitTestEngine {
   /**
    * Stores the code coverage results in the cache.
    *
-   * @param  string  The name of the coverage file.
-   * @param  array   The results to cache.
+   * @param  string  $cover_file The name of the coverage file.
+   * @param  array   $results The results to cache.
    */
   private function addCachedResults($cover_file, array $results) {
     if ($this->cachedResults == null) {
@@ -192,7 +192,7 @@ final class CSharpToolsTestEngine extends XUnitTestEngine {
    * the `instrumented` and `executed` tags with this method so that
    * we can access the data multiple times without a performance hit.
    *
-   * @param  array  The array of XML tags to parse.
+   * @param  array  $tags The array of XML tags to parse.
    * @return array  A PHP array containing the data.
    */
   private function processTags($tags) {
@@ -210,7 +210,7 @@ final class CSharpToolsTestEngine extends XUnitTestEngine {
   /**
    * Reads the code coverage results from the cscover results file.
    *
-   * @param  string  The path to the code coverage file.
+   * @param  string  $cover_file The path to the code coverage file.
    * @return array   The code coverage results.
    */
   public function readCoverage($cover_file) {

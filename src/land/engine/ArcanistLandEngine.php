@@ -1420,7 +1420,8 @@ abstract class ArcanistLandEngine
    * and min is the earliest ancestor. This is done so that non-landing commits
    * that are descendants of the latest revision will only be rebased once.
    *
-   * @param ArcanistLandCommitSet  The current commit set to cascade.
+   * @param ArcanistLandCommitSet $set The current commit set to cascade.
+   * @param string $into_commit The commit hash that was landed into.
    */
   abstract protected function cascadeState(
     ArcanistLandCommitSet $set,
@@ -1434,7 +1435,7 @@ abstract class ArcanistLandEngine
    * Prunes the given sets of commits. This should be called after the sets
    * have been merged.
    *
-   * @param array  The list of ArcanistLandCommitSet to prune, in order of
+   * @param array $sets The list of ArcanistLandCommitSet to prune, in order of
    *   min to max commit set, where min is the earliest ancestor and max
    *   is the latest descendant.
    */
@@ -1445,9 +1446,10 @@ abstract class ArcanistLandEngine
    * should only be called after all changes have been merged, pruned, and
    * pushed.
    *
-   * @param string  The commit hash that was landed into.
-   * @param ArcanistRepositoryLocalState  The local state that was captured
-   *   at the beginning of the land process. This may include stashed changes.
+   * @param string $into_commit The commit hash that was landed into.
+   * @param ArcanistRepositoryLocalState $state The local state that was
+   *   captured at the beginning of the land process. This may include stashed
+   *   changes.
    */
   abstract protected function reconcileLocalState(
     $into_commit,
@@ -1457,7 +1459,7 @@ abstract class ArcanistLandEngine
    * Display information to the user about how to proceed since the land
    * process was not fully completed. The merged branch has not been pushed.
    *
-   * @param string  The commit hash that was landed into.
+   * @param string $into_commit The commit hash that was landed into.
    */
   abstract protected function didHoldChanges($into_commit);
 

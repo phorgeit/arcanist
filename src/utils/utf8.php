@@ -8,7 +8,7 @@
  *
  * This function treats overlong encodings as invalid.
  *
- * @param   string  String to convert to valid UTF-8.
+ * @param   string  $string String to convert to valid UTF-8.
  * @return  string  String with invalid UTF-8 byte subsequences replaced with
  *                  U+FFFD.
  */
@@ -78,8 +78,8 @@ function phutil_utf8ize($string) {
  * types silently truncate strings which contain characters outside of this
  * set.
  *
- * @param string  String to test for being valid UTF-8 with only characters in
- *                the basic multilingual plane.
+ * @param string  $string String to test for being valid UTF-8 with only
+ *                characters in the basic multilingual plane.
  * @return bool   True if the string is valid UTF-8 with only BMP characters.
  */
 function phutil_is_utf8_with_only_bmp_characters($string) {
@@ -90,7 +90,7 @@ function phutil_is_utf8_with_only_bmp_characters($string) {
 /**
  * Determine if a string is valid UTF-8.
  *
- * @param string  Some string which may or may not be valid UTF-8.
+ * @param string   $string Some string which may or may not be valid UTF-8.
  * @return bool    True if the string is valid UTF-8.
  */
 function phutil_is_utf8($string) {
@@ -116,9 +116,9 @@ function phutil_is_utf8($string) {
  * that function can use more performant mechanisms if they are available on
  * the system.
  *
- * @param string  Some string which may or may not be valid UTF-8.
- * @param bool    True to require all characters be part of the basic
- *                multilingual plane (no more than 3-bytes long).
+ * @param string  $string Some string which may or may not be valid UTF-8.
+ * @param bool    $only_bmp (optional) True to require all characters be part
+ *                of the basic multilingual plane (no more than 3-bytes long).
  * @return bool   True if the string is valid UTF-8.
  */
 function phutil_is_utf8_slowly($string, $only_bmp = false) {
@@ -284,7 +284,7 @@ function phutil_is_utf8_slowly($string, $only_bmp = false) {
 /**
  * Find the character length of a UTF-8 string.
  *
- * @param string A valid utf-8 string.
+ * @param string $string A valid utf-8 string.
  * @return int   The character length of the string.
  */
 function phutil_utf8_strlen($string) {
@@ -314,7 +314,7 @@ function phutil_utf8_strlen($string) {
  *
  * NOTE: This function is VERY slow.
  *
- * @param   string  A valid UTF-8 string.
+ * @param   string  $string A valid UTF-8 string.
  * @return  int     The console display length of the string.
  */
 function phutil_utf8_console_strlen($string) {
@@ -370,7 +370,7 @@ function phutil_utf8_console_strlen($string) {
  *
  * Most languages use spaces to separate words, but these languages do not.
  *
- * @param string String to examine, in UTF8.
+ * @param string $string String to examine, in UTF8.
  * @return bool True if the string contains Chinese, Japanese, or Korean
  *   characters.
  */
@@ -427,8 +427,9 @@ function phutil_utf8_is_cjk($string) {
  * Split a UTF-8 string into an array of characters. Combining characters are
  * also split.
  *
- * @param string A valid utf-8 string.
- * @param int|null Stop processing after examining this many bytes.
+ * @param string $string A valid utf-8 string.
+ * @param int|null $byte_limit (optional) Stop processing after examining this
+ *   many bytes.
  * @return list  A list of characters in the string.
  */
 function phutil_utf8v($string, $byte_limit = null) {
@@ -492,7 +493,7 @@ function phutil_utf8v($string, $byte_limit = null) {
 /**
  * Split a UTF-8 string into an array of codepoints (as integers).
  *
- * @param   string  A valid UTF-8 string.
+ * @param   string  $string A valid UTF-8 string.
  * @return  list    A list of codepoints, as integers.
  */
 function phutil_utf8v_codepoints($string) {
@@ -541,7 +542,7 @@ function phutil_utf8v_codepoints($string) {
 /**
  * Convert a Unicode codepoint into a UTF8-encoded string.
  *
- * @param int Unicode codepoint.
+ * @param int $codepoint Unicode codepoint.
  * @return string UTF8 encoding.
  */
 function phutil_utf8_encode_codepoint($codepoint) {
@@ -573,7 +574,8 @@ function phutil_utf8_encode_codepoint($codepoint) {
 /**
  * Hard-wrap a block of UTF-8 text with embedded HTML tags and entities.
  *
- * @param   string An HTML string with tags and entities.
+ * @param   string $string An HTML string with tags and entities.
+ * @param   int    $width Width of the hard-wrapped lines
  * @return  list   List of hard-wrapped lines.
  */
 function phutil_utf8_hard_wrap_html($string, $width) {
@@ -628,8 +630,8 @@ function phutil_utf8_hard_wrap_html($string, $width) {
 /**
   * Hard-wrap a block of UTF-8 text with no embedded HTML tags and entities.
   *
-  * @param string A non HTML string
-  * @param int Width of the hard-wrapped lines
+  * @param string $string A non HTML string
+  * @param int $width Width of the hard-wrapped lines
   * @return list List of hard-wrapped lines.
   */
 function phutil_utf8_hard_wrap($string, $width) {
@@ -677,9 +679,9 @@ function phutil_utf8_hard_wrap($string, $width) {
  * encoding name identifies a real encoding but the string is not actually
  * encoded with that encoding.
  *
- * @param string String to re-encode.
- * @param string Target encoding name, like "UTF-8".
- * @param string Source encoding name, like "ISO-8859-1".
+ * @param string $string String to re-encode.
+ * @param string $to_encoding Target encoding name, like "UTF-8".
+ * @param string $from_encoding Source encoding name, like "ISO-8859-1".
  * @return string Input string, with converted character encoding.
  *
  * @phutil-external-symbol function mb_convert_encoding
@@ -740,7 +742,7 @@ function phutil_utf8_convert($string, $to_encoding, $from_encoding) {
  * completely destroy inputs, so it just has to be better than that. Similar to
  * @{function:ucwords}.
  *
- * @param   string  UTF-8 input string.
+ * @param   string  $str UTF-8 input string.
  * @return  string  Input, in some semblance of title case.
  */
 function phutil_utf8_ucwords($str) {
@@ -780,7 +782,7 @@ function phutil_utf8_ucwords($str) {
  * Convert a string to lower case in a UTF8-aware way. Similar to
  * @{function:strtolower}.
  *
- * @param   string  UTF-8 input string.
+ * @param   string  $str UTF-8 input string.
  * @return  string  Input, in some semblance of lower case.
  *
  * @phutil-external-symbol function mb_convert_case
@@ -808,7 +810,7 @@ function phutil_utf8_strtolower($str) {
  * Convert a string to upper case in a UTF8-aware way. Similar to
  * @{function:strtoupper}.
  *
- * @param   string  UTF-8 input string.
+ * @param   string  $str UTF-8 input string.
  * @return  string  Input, in some semblance of upper case.
  *
  * @phutil-external-symbol function mb_convert_case
@@ -833,8 +835,8 @@ function phutil_utf8_strtoupper($str) {
  * Replace characters in a string in a UTF-aware way. Similar to
  * @{function:strtr}.
  *
- * @param   string              UTF-8 input string.
- * @param   map<string, string> Map of characters to replace.
+ * @param   string              $str UTF-8 input string.
+ * @param   map<string, string> $map Map of characters to replace.
  * @return  string              Input with translated characters.
  */
 function phutil_utf8_strtr($str, array $map) {
@@ -854,7 +856,7 @@ function phutil_utf8_strtr($str, array $map) {
 /**
  * Determine if a given unicode character is a combining character or not.
  *
- * @param   string              A single unicode character.
+ * @param   string              $character A single unicode character.
  * @return  boolean             True or false.
  */
 function phutil_utf8_is_combining_character($character) {
@@ -882,7 +884,7 @@ function phutil_utf8_is_combining_character($character) {
  * Split a UTF-8 string into an array of characters. Combining characters
  * are not split.
  *
- * @param string A valid utf-8 string.
+ * @param string $string A valid utf-8 string.
  * @return list  A list of characters in the string.
  */
 function phutil_utf8v_combined($string) {
@@ -897,7 +899,7 @@ function phutil_utf8v_combined($string) {
  * This is a low-level method which can allow other operations to do less work.
  * If you have a string, call @{method:phutil_utf8v_combined} instead.
  *
- * @param list List of UTF-8 characters.
+ * @param list $characters List of UTF-8 characters.
  * @return list List of UTF-8 strings with combining characters merged.
  */
 function phutil_utf8v_combine_characters(array $characters) {
@@ -961,7 +963,7 @@ function phutil_get_system_locale() {
 /**
  * Test if a system locale (LC_ALL) is available on the system.
  *
- * @param string Locale name like "en_US.UTF-8".
+ * @param string $locale Locale name like "en_US.UTF-8".
  * @return bool True if the locale is available.
  */
 function phutil_is_system_locale_available($locale) {
@@ -976,7 +978,7 @@ function phutil_is_system_locale_available($locale) {
 /**
  * Set the system locale (LC_ALL) to a particular value.
  *
- * @param string New locale setting.
+ * @param string $locale New locale setting.
  * @return void
  */
 function phutil_set_system_locale($locale) {

@@ -35,7 +35,7 @@ abstract class ArcanistLinterStandard extends Phobject {
   /**
    * Checks whether the linter standard supports a specified linter.
    *
-   * @param  ArcanistLinter  The linter which is being configured.
+   * @param  ArcanistLinter  $linter The linter which is being configured.
    * @return bool            True if the linter standard supports the specified
    *                         linter, otherwise false.
    */
@@ -68,8 +68,8 @@ abstract class ArcanistLinterStandard extends Phobject {
   /**
    * Load a linter standard by key.
    *
-   * @param  string
-   * @param  ArcanistLinter
+   * @param  string $key
+   * @param  ArcanistLinter $linter
    * @return ArcanistLinterStandard
    */
   final public static function getStandard($key, ArcanistLinter $linter) {
@@ -100,7 +100,7 @@ abstract class ArcanistLinterStandard extends Phobject {
   /**
    * Load all linter standards which support a specified linter.
    *
-   * @param  ArcanistLinter
+   * @param  ArcanistLinter $linter
    * @return list<ArcanistLinterStandard>
    */
   final public static function loadAllStandardsForLinter(

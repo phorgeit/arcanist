@@ -56,7 +56,7 @@ final class PhutilSymbolLoader {
    * Select the type of symbol to load, either `class`, `function` or
    * `interface`.
    *
-   * @param string  Type of symbol to load.
+   * @param string $type Type of symbol to load.
    * @return this
    *
    * @task config
@@ -71,7 +71,7 @@ final class PhutilSymbolLoader {
    * Restrict the symbol query to a specific library; only symbols from this
    * library will be loaded.
    *
-   * @param string Library name.
+   * @param string $library Library name.
    * @return this
    *
    * @task config
@@ -90,7 +90,7 @@ final class PhutilSymbolLoader {
    * Restrict the symbol query to a specific path prefix; only symbols defined
    * in files below that path will be selected.
    *
-   * @param string Path relative to library root, like "apps/cheese/".
+   * @param string $path Path relative to library root, like "apps/cheese/".
    * @return this
    *
    * @task config
@@ -105,7 +105,7 @@ final class PhutilSymbolLoader {
    * Restrict the symbol query to a single symbol name, e.g. a specific class
    * or function name.
    *
-   * @param string Symbol name.
+   * @param string $name Symbol name.
    * @return this
    *
    * @task config
@@ -121,7 +121,7 @@ final class PhutilSymbolLoader {
    * strictly select descendants, the base class will not be selected. This
    * implies loading only classes.
    *
-   * @param string Base class name.
+   * @param string $base Base class name.
    * @return this
    *
    * @task config
@@ -139,7 +139,7 @@ final class PhutilSymbolLoader {
    * NOTE: This currently causes class symbols to load, even if you run
    * @{method:selectSymbolsWithoutLoading}.
    *
-   * @param bool True if the query should load only concrete symbols.
+   * @param bool $concrete True if the query should load only concrete symbols.
    * @return this
    *
    * @task config
@@ -356,7 +356,7 @@ final class PhutilSymbolLoader {
    * This method implicitly restricts the query to match only concrete
    * classes.
    *
-   * @param  list<wild>           List of constructor arguments.
+   * @param  list<wild>           $argv List of constructor arguments.
    * @return map<string, object>  Map of class names to constructed objects.
    */
   public function loadObjects(array $argv = array()) {

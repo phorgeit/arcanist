@@ -429,7 +429,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
   /**
    * Try to read a scratch file, if it exists and is readable.
    *
-   * @param string Scratch file name.
+   * @param string $path Scratch file name.
    * @return mixed String for file contents, or false for failure.
    * @task scratch
    */
@@ -457,8 +457,8 @@ abstract class ArcanistRepositoryAPI extends Phobject {
    * Try to write a scratch file, if there's somewhere to put it and we can
    * write there.
    *
-   * @param  string Scratch file name to write.
-   * @param  string Data to write.
+   * @param  string $path Scratch file name to write.
+   * @param  string $data Data to write.
    * @return bool   True on success, false on failure.
    * @task scratch
    */
@@ -489,7 +489,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
   /**
    * Try to remove a scratch file.
    *
-   * @param   string  Scratch file name to remove.
+   * @param   string  $path Scratch file name to remove.
    * @return  bool    True if the file was removed successfully.
    * @task scratch
    */
@@ -512,7 +512,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
   /**
    * Get a human-readable description of the scratch file location.
    *
-   * @param string  Scratch file name.
+   * @param string  $path Scratch file name.
    * @return mixed  String, or false on failure.
    * @task scratch
    */
@@ -531,7 +531,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
   /**
    * Get the path to a scratch file, if possible.
    *
-   * @param string  Scratch file name.
+   * @param string  $path Scratch file name.
    * @return mixed  File path, or false on failure.
    * @task scratch
    */

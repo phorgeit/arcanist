@@ -46,7 +46,7 @@ abstract class PhutilProtocolChannel extends PhutilChannelChannel {
   /**
    * Write a message to the channel.
    *
-   * @param wild    Some message.
+   * @param wild   $message Some message.
    * @return this
    *
    * @task io
@@ -61,7 +61,7 @@ abstract class PhutilProtocolChannel extends PhutilChannelChannel {
    * Add a message to the queue. While you normally do not need to do this,
    * you can use it to inject out-of-band messages.
    *
-   * @param wild    Some message.
+   * @param wild   $message Some message.
    * @return this
    *
    * @task io
@@ -78,7 +78,7 @@ abstract class PhutilProtocolChannel extends PhutilChannelChannel {
   /**
    * Encode a message for transmission.
    *
-   * @param   wild    Some message.
+   * @param   wild    $message Some message.
    * @return  string  The message serialized into a wire format for
    *                  transmission.
    *
@@ -100,7 +100,7 @@ abstract class PhutilProtocolChannel extends PhutilChannelChannel {
    * a parser in this method, and store parser state on the object to be able
    * to process incoming data in small chunks.
    *
-   * @param   string      One or more bytes from the underlying channel.
+   * @param   string      $data One or more bytes from the underlying channel.
    * @return  list<wild>  Zero or more parsed messages.
    *
    * @task protocol

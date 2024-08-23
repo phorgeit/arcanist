@@ -52,7 +52,7 @@ final class ArcanistHgProxyServer extends Phobject {
    * Build a new server. This server is bound to a working copy. The server
    * is inactive until you @{method:start} it.
    *
-   * @param string Path to a Mercurial working copy.
+   * @param string $working_copy Path to a Mercurial working copy.
    *
    * @task construct
    */
@@ -67,7 +67,7 @@ final class ArcanistHgProxyServer extends Phobject {
   /**
    * Disable status messages to stdout. Controlled with `--quiet`.
    *
-   * @param bool  True to disable status messages.
+   * @param bool $quiet True to disable status messages.
    * @return this
    *
    * @task config
@@ -85,7 +85,7 @@ final class ArcanistHgProxyServer extends Phobject {
    * You can use `--client-limit 1` with `--xprofile` and `--do-not-daemonize`
    * to profile the server.
    *
-   * @param int Client limit, or 0 to disable limit.
+   * @param int $limit Client limit, or 0 to disable limit.
    * @return this
    *
    * @task config
@@ -100,7 +100,7 @@ final class ArcanistHgProxyServer extends Phobject {
    * Configure an idle time limit. After this many seconds idle, the server
    * will exit. Controlled with `--idle-limit`.
    *
-   * @param int Idle limit, or 0 to disable limit.
+   * @param int $limit Idle limit, or 0 to disable limit.
    * @return this
    *
    * @task config
@@ -117,7 +117,7 @@ final class ArcanistHgProxyServer extends Phobject {
    * if the clients are also configured not to expect the message, but slightly
    * improves performance. Controlled with --skip-hello.
    *
-   * @param bool True to skip the "capabilities" message.
+   * @param bool $skip True to skip the "capabilities" message.
    * @return this
    *
    * @task config
@@ -132,7 +132,7 @@ final class ArcanistHgProxyServer extends Phobject {
    * Configure whether the server runs in the foreground or daemonizes.
    * Controlled by --do-not-daemonize. Primarily useful for debugging.
    *
-   * @param bool True to run in the foreground.
+   * @param bool $do_not_daemonize True to run in the foreground.
    * @return this
    *
    * @task config
@@ -252,8 +252,8 @@ final class ArcanistHgProxyServer extends Phobject {
    * process all commands we've received here before returning to the main
    * server loop.
    *
-   * @param ArcanistHgClientChannel The client to update.
-   * @param ArcanistHgServerChannel The Mercurial server.
+   * @param ArcanistHgClientChannel $client The client to update.
+   * @param ArcanistHgServerChannel $hg The Mercurial server.
    *
    * @task server
    */

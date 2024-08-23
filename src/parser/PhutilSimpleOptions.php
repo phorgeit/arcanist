@@ -31,7 +31,7 @@ final class PhutilSimpleOptions extends Phobject {
    *      'eyes' => '2',
    *    );
    *
-   * @param   string  Input option list.
+   * @param   string  $input Input option list.
    * @return  dict    Parsed dictionary.
    * @task parse
    */
@@ -130,8 +130,8 @@ final class PhutilSimpleOptions extends Phobject {
    *
    *    legs=4, eyes=2
    *
-   * @param   dict    Input dictionary.
-   * @param   string  Additional characters to escape.
+   * @param   dict    $options Input dictionary.
+   * @param   string  $escape (optional) Additional characters to escape.
    * @return  string  Unparsed option list.
    */
   public function unparse(array $options, $escape = '') {
@@ -161,8 +161,8 @@ final class PhutilSimpleOptions extends Phobject {
    * case insensitive, so "legs=4" has the same meaning as "LEGS=4". If you
    * set it to be case sensitive, the keys have different meanings.
    *
-   * @param bool  True to make the parser case sensitive, false (default) to
-   *              make it case-insensitive.
+   * @param bool  $case_sensitive True to make the parser case sensitive, false
+   *              to make it case-insensitive.
    * @return this
    * @task config
    */

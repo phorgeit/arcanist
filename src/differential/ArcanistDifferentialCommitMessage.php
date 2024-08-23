@@ -111,7 +111,7 @@ final class ArcanistDifferentialCommitMessage extends Phobject {
   /**
    * Extract the revision ID from a commit message.
    *
-   * @param string Raw commit message.
+   * @param string $corpus Raw commit message.
    * @return int|null Revision ID, if the commit message contains one.
    */
   private function parseRevisionIDFromRawCorpus($corpus) {

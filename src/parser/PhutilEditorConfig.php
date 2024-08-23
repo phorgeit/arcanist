@@ -41,7 +41,7 @@ final class PhutilEditorConfig extends Phobject {
   /**
    * Constructor.
    *
-   * @param string  The root directory.
+   * @param string $root The root directory.
    */
   public function __construct($root) {
     $this->root = $root;
@@ -50,8 +50,8 @@ final class PhutilEditorConfig extends Phobject {
   /**
    * Get the specified EditorConfig property for the specified path.
    *
-   * @param  string
-   * @param  string
+   * @param  string $path
+   * @param  string $key
    * @return wild
    */
   public function getProperty($path, $key) {
@@ -100,7 +100,7 @@ final class PhutilEditorConfig extends Phobject {
    *   the future).
    * - Invalid glob patterns will be silently ignored.
    *
-   * @param  string
+   * @param  string $path
    * @return map<string, wild>
    */
   public function getProperties($path) {

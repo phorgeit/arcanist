@@ -34,7 +34,7 @@ final class LinesOfALargeExecFuture extends LinesOfALarge {
   /**
    * To construct, pass an @{class:ExecFuture}.
    *
-   * @param ExecFuture Future to wrap.
+   * @param ExecFuture $future Future to wrap.
    * @return void
    * @task construct
    */

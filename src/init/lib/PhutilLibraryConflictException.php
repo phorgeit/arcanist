@@ -30,10 +30,10 @@ final class PhutilLibraryConflictException extends Exception {
   /**
    * Create a new library conflict exception.
    *
-   * @param string The name of the library which conflicts with an existing
-   *               library.
-   * @param string The path of the already-loaded library.
-   * @param string The path of the attempting-to-load library.
+   * @param string $library The name of the library which conflicts with an
+   *               existing library.
+   * @param string $old_path The path of the already-loaded library.
+   * @param string $new_path The path of the attempting-to-load library.
    *
    * @task construct
    */

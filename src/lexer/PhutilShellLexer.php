@@ -21,7 +21,7 @@ final class PhutilShellLexer extends PhutilLexer {
    *     "\"",
    *   );
    *
-   * @param   string  Shell command string.
+   * @param   string  $string Shell command string.
    * @return  array   Parsed argument vector.
    */
   public function splitArguments($string) {

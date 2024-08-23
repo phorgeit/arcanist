@@ -12,8 +12,8 @@ final class PhutilChunkedIterator extends Phobject implements Iterator {
   private $current;
 
   /**
-   * @param Iterator
-   * @param int
+   * @param Iterator $iterator
+   * @param int $size
    */
   public function __construct(Iterator $iterator, $size) {
     $this->iterator = $iterator;

@@ -46,8 +46,8 @@ final class ArcanistFileUploader extends Phobject {
    * You can optionally provide an explicit key which will be used to identify
    * the file. After adding files, upload them with @{method:uploadFiles}.
    *
-   * @param ArcanistFileDataRef File data to upload.
-   * @param null|string Optional key to use to identify this file.
+   * @param ArcanistFileDataRef $file File data to upload.
+   * @param null|string $key (optional) Key to use to identify this file.
    * @return this
    * @task add
    */

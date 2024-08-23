@@ -94,9 +94,9 @@ function phutil_console_prompt($prompt, $history = '') {
  * Soft wrap text for display on a console, respecting UTF8 character boundaries
  * and ANSI color escape sequences.
  *
- * @param   string  Text to wrap.
- * @param   int     Optional indent level.
- * @param   bool    True to also indent the first line.
+ * @param   string  $text Text to wrap.
+ * @param   int     $indent (optional) Indent level. Defaults to 0.
+ * @param   bool    $with_prefix (Optional) True to also indent the first line.
  * @return  string  Wrapped text.
  */
 function phutil_console_wrap($text, $indent = 0, $with_prefix = true) {

@@ -24,9 +24,9 @@ function phutil_format_relative_time($duration) {
  * seconds, but unlike phabricator_format_relative_time, does so for more than
  * just the largest unit.
  *
- * @param int Duration in seconds.
- * @param int Levels to render - will render the three highest levels, ie:
- *            5 h, 37 m, 1 s
+ * @param int $duration Duration in seconds.
+ * @param int $levels (optional) Levels to render. By default, renders the
+ *            three highest levels, ie: 5 h, 37 m, 1 s
  * @return string Human-readable description.
  */
 function phutil_format_relative_time_detailed($duration, $levels = 2) {
@@ -73,7 +73,7 @@ function phutil_format_relative_time_detailed($duration, $levels = 2) {
  * Format a byte count for human consumption, e.g. "10MB" instead of
  * "10485760".
  *
- * @param int Number of bytes.
+ * @param int $bytes Number of bytes.
  * @return string Human-readable description.
  */
 function phutil_format_bytes($bytes) {
@@ -88,7 +88,7 @@ function phutil_format_bytes($bytes) {
 /**
  * Parse a human-readable byte description (like "6MB") into an integer.
  *
- * @param string  Human-readable description.
+ * @param string  $input Human-readable description.
  * @return int    Number of represented bytes.
  */
 function phutil_parse_bytes($input) {
