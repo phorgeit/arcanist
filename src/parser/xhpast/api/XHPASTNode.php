@@ -235,7 +235,7 @@ final class XHPASTNode extends AASTNode {
         switch ($c) {
           case 'x':
             $u = isset($value[$ii + 1]) ? $value[$ii + 1] : null;
-            if (!preg_match('/^[a-f0-9]/i', $u)) {
+            if ($u === null || !preg_match('/^[a-f0-9]/i', $u)) {
               // PHP treats \x followed by anything which is not a hex digit
               // as a literal \x.
               $out .= '\\\\'.$c;
