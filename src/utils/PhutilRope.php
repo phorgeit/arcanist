@@ -55,7 +55,7 @@ final class PhutilRope extends Phobject {
   /**
    * Get an arbitrary, nonempty prefix of the rope.
    *
-   * @return string Some rope prefix.
+   * @return string|null Some rope prefix.
    */
   public function getAnyPrefix() {
     $result = reset($this->buffers);

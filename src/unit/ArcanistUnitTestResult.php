@@ -133,7 +133,8 @@ final class ArcanistUnitTestResult extends Phobject {
    * Merge several coverage reports into a comprehensive coverage report.
    *
    * @param list $coverage List of coverage report strings.
-   * @return string Cumulative coverage report.
+   * @return string|null Cumulative coverage report, or null if $coverage is
+   *   null.
    */
   public static function mergeCoverage(array $coverage) {
     if (empty($coverage)) {

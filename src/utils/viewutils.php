@@ -89,7 +89,7 @@ function phutil_format_bytes($bytes) {
  * Parse a human-readable byte description (like "6MB") into an integer.
  *
  * @param string  $input Human-readable description.
- * @return int    Number of represented bytes.
+ * @return int|null  Number of represented bytes.
  */
 function phutil_parse_bytes($input) {
   $bytes = trim($input);

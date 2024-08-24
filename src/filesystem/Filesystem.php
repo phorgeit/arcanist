@@ -1091,7 +1091,7 @@ final class Filesystem extends Phobject {
    * the configured `$PATH`.
    *
    * @param   string  $binary Binary name, like `'git'` or `'svn'`.
-   * @return  string  The full binary path if it is present, or null.
+   * @return  string|null  The full binary path if it is present, or null.
    * @task    exec
    */
   public static function resolveBinary($binary) {

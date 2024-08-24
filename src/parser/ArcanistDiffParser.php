@@ -1330,7 +1330,7 @@ final class ArcanistDiffParser extends Phobject {
    * recovered by later rename detection codepaths.
    *
    * @param string $paths Text from a diff line after "diff --git ".
-   * @return string Filename being altered, or null for a rename.
+   * @return string|null Filename being altered, or null for a rename.
    */
   public static function extractGitCommonFilename($paths) {
     $matches = null;

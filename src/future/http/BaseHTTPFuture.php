@@ -425,7 +425,7 @@ abstract class BaseHTTPFuture extends Future {
    *
    * @param list $headers List of headers from `resolve()`.
    * @param string $search Case insensitive header name.
-   * @return string Value of the header or null if not found.
+   * @return string|null Value of the header or null if not found.
    * @task resolve
    */
   public static function getHeader(array $headers, $search) {
