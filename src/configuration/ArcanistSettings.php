@@ -236,7 +236,6 @@ final class ArcanistSettings extends Phobject {
         throw new Exception(
           pht(
             'Use "arc alias" to configure aliases, not "arc set-config".'));
-        break;
 
     }
 

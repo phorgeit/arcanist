@@ -610,7 +610,6 @@ EOTEXT
         break;
       default:
         throw new Exception(pht('No test block for diff file %s.', $diff_file));
-        break;
     }
   }
 
