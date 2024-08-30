@@ -960,7 +960,7 @@ function phutil_split_lines($corpus, $retain_endings = true) {
  * @param   list  $list (optional) List of scalars.
  * @return  dict  Dictionary with inputs mapped to themselves.
  */
-function array_fuse(array $list = null) {
+function array_fuse(?array $list = null) {
   if ($list) {
     return array_combine($list, $list);
   }
