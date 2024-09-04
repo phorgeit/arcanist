@@ -5,7 +5,6 @@ final class PhutilConsoleProgressSink
 
   private $lastUpdate;
   private $isTTY;
-  private $width;
   private $lineWidth;
 
   protected function publishProgress() {
@@ -80,16 +79,6 @@ final class PhutilConsoleProgressSink
       $this->isTTY = (function_exists('posix_isatty') && posix_isatty(STDERR));
     }
     return $this->isTTY;
-  }
-
-  private function getWidth() {
-    if ($this->width === null) {
-      $width = phutil_console_get_terminal_width();
-      $width = min(nonempty($width, 78), 78);
-      $this->width = $width;
-    }
-
-    return $this->width;
   }
 
   private function overwriteLine($line) {
