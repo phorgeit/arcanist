@@ -81,7 +81,7 @@ final class ArcanistUnitTestResult extends Phobject {
    * 3 seconds, or `0.125` for 125 milliseconds.
    *
    * @param int|float $duration Duration, in seconds.
-   * @return this
+   * @return $this
    */
   public function setDuration($duration) {
     if (!is_int($duration) && !is_float($duration)) {

@@ -105,7 +105,7 @@ abstract class ArcanistExternalLinter extends ArcanistFutureLinter {
    * by @{method:getDefaultFlags} are used.
    *
    * @param list<string> $flags New flags.
-   * @return this
+   * @return $this
    * @task bin
    */
   final public function setFlags(array $flags) {
@@ -117,7 +117,7 @@ abstract class ArcanistExternalLinter extends ArcanistFutureLinter {
    * Set the binary's version requirement.
    *
    * @param string $version Version requirement.
-   * @return this
+   * @return $this
    * @task bin
    */
   final public function setVersionRequirement($version) {
@@ -152,7 +152,7 @@ abstract class ArcanistExternalLinter extends ArcanistFutureLinter {
    * Override the default binary with a new one.
    *
    * @param string $bin New binary.
-   * @return this
+   * @return $this
    * @task bin
    */
   final public function setBinary($bin) {
@@ -201,7 +201,7 @@ abstract class ArcanistExternalLinter extends ArcanistFutureLinter {
    * Set the interpreter, overriding any default.
    *
    * @param string $interpreter New interpreter.
-   * @return this
+   * @return $this
    * @task bin
    */
   final public function setInterpreter($interpreter) {

@@ -17,7 +17,7 @@ abstract class ArcanistXHPASTLintNamingHook extends Phobject {
    * The constructor is final because @{class:ArcanistXHPASTLinter} is
    * responsible for hook instantiation.
    *
-   * @return this
+   * @return $this
    * @task internals
    */
   final public function __construct() {

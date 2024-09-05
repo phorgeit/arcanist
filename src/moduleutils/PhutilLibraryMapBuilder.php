@@ -41,7 +41,7 @@ final class PhutilLibraryMapBuilder extends Phobject {
    * Control subprocess parallelism limit. Use `--limit` to set this.
    *
    * @param  int   $limit Maximum number of subprocesses to run in parallel.
-   * @return this
+   * @return $this
    *
    * @task map
    */

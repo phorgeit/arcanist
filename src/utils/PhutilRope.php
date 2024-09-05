@@ -20,7 +20,7 @@ final class PhutilRope extends Phobject {
    * Append a string to the rope.
    *
    * @param string $string String to append.
-   * @return this
+   * @return $this
    */
   public function append($string) {
     if (!strlen($string)) {
@@ -109,7 +109,7 @@ final class PhutilRope extends Phobject {
    * Remove a specified number of bytes from the head of the rope.
    *
    * @param int $remove Bytes to remove.
-   * @return this
+   * @return $this
    */
   public function removeBytesFromHead($remove) {
     if ($remove <= 0) {

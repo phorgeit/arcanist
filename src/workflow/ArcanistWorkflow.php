@@ -317,7 +317,7 @@ abstract class ArcanistWorkflow extends Phobject {
    *
    * @param string  $conduit_uri The URI to open a conduit to when
    *                @{method:establishConduit} is called.
-   * @return this
+   * @return $this
    * @task conduit
    */
   final public function setConduitURI($conduit_uri) {
@@ -352,7 +352,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * NOTE: You must call @{method:setConduitURI} before you can call this
    * method.
    *
-   * @return this
+   * @return $this
    * @task conduit
    */
   final public function establishConduit() {
@@ -409,7 +409,7 @@ abstract class ArcanistWorkflow extends Phobject {
    *
    * @param dict  $credentials A credential dictionary, see
    *   @{method:authenticateConduit}.
-   * @return this
+   * @return $this
    * @task conduit
    */
   final public function setConduitCredentials(array $credentials) {
@@ -458,7 +458,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * NOTE: You must call @{method:setConduitURI} and
    * @{method:setConduitCredentials} before you invoke this method.
    *
-   * @return this
+   * @return $this
    * @task conduit
    */
   final public function authenticateConduit() {

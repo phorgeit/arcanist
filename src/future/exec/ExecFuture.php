@@ -120,7 +120,7 @@ final class ExecFuture extends PhutilExecutableFuture {
    * NOTE: Setting this to 0 means "no buffer", not "unlimited buffer".
    *
    * @param int $limit Maximum size of the stdout read buffer.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setStdoutSizeLimit($limit) {
@@ -134,7 +134,7 @@ final class ExecFuture extends PhutilExecutableFuture {
    * See @{method:setStdoutSizeLimit} for discussion.
    *
    * @param int $limit Maximum size of the stderr read buffer.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setStderrSizeLimit($limit) {
@@ -155,7 +155,7 @@ final class ExecFuture extends PhutilExecutableFuture {
    *
    * @param int|null $read_buffer_size Maximum buffer size, or `null` for
    *   unlimited.
-   * @return this
+   * @return $this
    */
   public function setReadBufferSize($read_buffer_size) {
     $this->readBufferSize = $read_buffer_size;
@@ -240,7 +240,7 @@ final class ExecFuture extends PhutilExecutableFuture {
    *             that commands which listen for EOF will execute. If you want
    *             to keep the pipe open past the start of command execution, do
    *             an empty write with `$keep_pipe = true` first.
-   * @return this
+   * @return $this
    * @task interact
    */
   public function write($data, $keep_pipe = false) {
@@ -268,7 +268,7 @@ final class ExecFuture extends PhutilExecutableFuture {
    * future resolves. This is almost certainly only useful if you need the
    * buffer memory for some reason.
    *
-   * @return this
+   * @return $this
    * @task interact
    */
   public function discardBuffers() {
@@ -311,7 +311,7 @@ final class ExecFuture extends PhutilExecutableFuture {
    *
    * @param int $seconds Maximum number of seconds this command may execute for
    *  before it is signaled.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setTimeout($seconds) {

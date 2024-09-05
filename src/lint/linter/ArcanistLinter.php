@@ -132,7 +132,7 @@ abstract class ArcanistLinter extends Phobject {
    * This ID is assigned automatically by the @{class:ArcanistLintEngine}.
    *
    * @param string $id Unique linter ID.
-   * @return this
+   * @return $this
    * @task state
    */
   final public function setLinterID($id) {

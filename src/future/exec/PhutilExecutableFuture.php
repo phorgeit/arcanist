@@ -63,7 +63,7 @@ abstract class PhutilExecutableFuture extends Future {
    * @param map<string, string> $env Dictionary of environmental variables.
    * @param bool $wipe_process_env (optional) Pass `true` to replace the
    *   existing environment.
-   * @return this
+   * @return $this
    *
    * @task config
    */
@@ -89,7 +89,7 @@ abstract class PhutilExecutableFuture extends Future {
    *
    * @param string $key Environmental variable name.
    * @param string|null $value New value, or null to remove this variable.
-   * @return this
+   * @return $this
    * @task config
    */
   final public function updateEnv($key, $value) {
@@ -161,7 +161,7 @@ abstract class PhutilExecutableFuture extends Future {
    * current working directory.
    *
    * @param string $cwd Directory to execute the subprocess in.
-   * @return this
+   * @return $this
    * @task config
    */
   final public function setCWD($cwd) {

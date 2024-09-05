@@ -32,7 +32,7 @@ final class FileFinder extends Phobject {
    * Create a new FileFinder.
    *
    * @param string $root Root directory to find files beneath.
-   * @return this
+   * @return $this
    * @task create
    */
   public function __construct($root) {

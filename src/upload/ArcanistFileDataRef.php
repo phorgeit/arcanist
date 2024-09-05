@@ -41,7 +41,7 @@ final class ArcanistFileDataRef extends Phobject {
    * human consumption.
    *
    * @param string $name Filename.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setName($name) {
@@ -92,7 +92,7 @@ final class ArcanistFileDataRef extends Phobject {
    * should also call @{method:setName}.
    *
    * @param string $path Path on disk to a file containing data to upload.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setPath($path) {
@@ -134,7 +134,7 @@ final class ArcanistFileDataRef extends Phobject {
    * timestamp. The file will be deleted after this time.
    *
    * @param int $epoch Epoch timestamp to retain the file until.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setDeleteAfterEpoch($epoch) {

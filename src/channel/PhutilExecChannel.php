@@ -163,7 +163,7 @@ final class PhutilExecChannel extends PhutilChannel {
    * any output on stderr.
    *
    * @param callable $handler Handler to invoke when stderr data is received.
-   * @return this
+   * @return $this
    */
   public function setStderrHandler($handler) {
     $this->stderrHandler = $handler;

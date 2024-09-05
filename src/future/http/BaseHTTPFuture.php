@@ -59,7 +59,7 @@ abstract class BaseHTTPFuture extends Future {
    * isTimeout() on the status object.
    *
    * @param float $timeout Maximum timeout, in seconds.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setTimeout($timeout) {
@@ -84,7 +84,7 @@ abstract class BaseHTTPFuture extends Future {
    * By default, requests use "GET".
    *
    * @param string $method HTTP method name.
-   * @return this
+   * @return $this
    * @task config
    */
   final public function setMethod($method) {
@@ -125,7 +125,7 @@ abstract class BaseHTTPFuture extends Future {
    * parameter.
    *
    * @param string $uri URI to send the request to.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setURI($uri) {
@@ -152,7 +152,7 @@ abstract class BaseHTTPFuture extends Future {
    * case it will be encoded and sent as 'application/x-www-form-urlencoded').
    *
    * @param mixed $data Data to send with the request.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setData($data) {
@@ -181,7 +181,7 @@ abstract class BaseHTTPFuture extends Future {
    *
    * @param string $name Header name, like "Accept-Language".
    * @param string $value Header value, like "en-us".
-   * @return this
+   * @return $this
    * @task config
    */
   public function addHeader($name, $value) {
@@ -230,7 +230,7 @@ abstract class BaseHTTPFuture extends Future {
    *
    * @param array|null $status_codes List of expected HTTP status codes.
    *
-   * @return this
+   * @return $this
    * @task config
    */
   public function setExpectStatus($status_codes) {
@@ -253,7 +253,7 @@ abstract class BaseHTTPFuture extends Future {
    *
    * @param string                $username Username to authenticate with.
    * @param PhutilOpaqueEnvelope  $password Password to authenticate with.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setHTTPBasicAuthCredentials(

@@ -61,7 +61,7 @@ final class PhutilClassMapQuery extends Phobject {
    * of.
    *
    * @param string $class Ancestor class or interface name.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setAncestorClass($class) {
@@ -82,7 +82,7 @@ final class PhutilClassMapQuery extends Phobject {
    * @param string  $unique_method Name of the unique key method.
    * @param bool    $filter_null (optional) If true, then classes which return
    *                `null` will be filtered from the results.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setUniqueMethod($unique_method, $filter_null = false) {
@@ -126,7 +126,7 @@ final class PhutilClassMapQuery extends Phobject {
    * each instance with @{method:setUniqueMethod}.
    *
    * @param string $expand_method Name of the expansion method.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setExpandMethod($expand_method) {
@@ -142,7 +142,7 @@ final class PhutilClassMapQuery extends Phobject {
    * name.
    *
    * @param string $sort_method Name of the sorting method.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setSortMethod($sort_method) {
@@ -155,7 +155,7 @@ final class PhutilClassMapQuery extends Phobject {
    * Provide a method to filter the map.
    *
    * @param string $filter_method Name of the filtering method.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setFilterMethod($filter_method) {

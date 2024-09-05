@@ -66,7 +66,7 @@ abstract class PhutilChannel extends Phobject {
    * The default implementation accepts bytes.
    *
    * @param   wild $bytes Data to write to the channel, normally bytes.
-   * @return  this
+   * @return  $this
    *
    * @task io
    */
@@ -247,7 +247,7 @@ abstract class PhutilChannel extends Phobject {
    * channel code more easily, by naming channels something meaningful.
    *
    * @param string $name Channel name.
-   * @return this
+   * @return $this
    *
    * @task impl
    */
@@ -364,7 +364,7 @@ abstract class PhutilChannel extends Phobject {
    *
    * @param int|null $size Maximum read buffer size, or `null` for a limitless
    *   buffer.
-   * @return this
+   * @return $this
    * @task impl
    */
   public function setReadBufferSize($size) {

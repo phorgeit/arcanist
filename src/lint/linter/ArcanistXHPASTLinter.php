@@ -30,7 +30,7 @@ final class ArcanistXHPASTLinter extends ArcanistBaseXHPASTLinter {
    * linter rules in isolation. By default, all linter rules will be enabled.
    *
    * @param  list<ArcanistXHPASTLinterRule> $rules
-   * @return this
+   * @return $this
    */
   public function setRules(array $rules) {
     assert_instances_of($rules, 'ArcanistXHPASTLinterRule');
