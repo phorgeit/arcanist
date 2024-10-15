@@ -89,7 +89,7 @@ final class PhagePHPAgentBootloader extends PhageAgentBootloader {
       $boot_length = strlen($boot_sequence->toString());
       $boot_sequence->addText($main_sequence->toString());
 
-      if (strlen($boot_length) > 8192) {
+      if ($boot_length > 8192) {
         throw new Exception(pht('Stage 1 bootloader is too large!'));
       }
 

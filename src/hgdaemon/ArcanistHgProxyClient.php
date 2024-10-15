@@ -41,7 +41,7 @@ final class ArcanistHgProxyClient extends Phobject {
    * Build a new client. This client is bound to a working copy. A server
    * must already be running on this working copy for the client to work.
    *
-   * @param string Path to a Mercurial working copy.
+   * @param string $working_copy Path to a Mercurial working copy.
    *
    * @task construct
    */
@@ -56,7 +56,7 @@ final class ArcanistHgProxyClient extends Phobject {
   /**
    * When connecting, do not expect the "capabilities" message.
    *
-   * @param bool True to skip the "capabilities" message.
+   * @param bool $skip True to skip the "capabilities" message.
    * @return this
    *
    * @task config
@@ -73,7 +73,8 @@ final class ArcanistHgProxyClient extends Phobject {
   /**
    * Execute a command (given as a list of arguments) via the command server.
    *
-   * @param list<string> A list of command arguments, like "log", "-l", "5".
+   * @param list<string> $argv A list of command arguments, like "log", "-l",
+   *   "5".
    * @return tuple<int, string, string> Return code, stdout and stderr.
    *
    * @task exec

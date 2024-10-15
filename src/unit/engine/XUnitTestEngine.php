@@ -115,7 +115,7 @@ class XUnitTestEngine extends ArcanistUnitTestEngine {
   /**
    * Applies the discovery rules to the set of paths specified.
    *
-   * @param  array   Array of paths.
+   * @param  array   $paths Array of paths.
    * @return array   Array of paths to test projects and assemblies.
    */
   public function mapPathsToResults(array $paths) {
@@ -161,7 +161,7 @@ class XUnitTestEngine extends ArcanistUnitTestEngine {
   /**
    * Builds and runs the specified test assemblies.
    *
-   * @param  array   Array of paths to test project files.
+   * @param  array   $test_projects Array of paths to test project files.
    * @return array   Array of test results.
    */
   public function runAllTests(array $test_projects) {
@@ -188,7 +188,7 @@ class XUnitTestEngine extends ArcanistUnitTestEngine {
    * This is needed since we build the assemblies as part of the unit tests, but
    * we can't run any of the unit tests if the build fails.
    *
-   * @param  array   Array of results to check.
+   * @param  array   $results Array of results to check.
    * @return bool    If there are any failures in the results.
    */
   private function resultsContainFailures(array $results) {
@@ -271,7 +271,7 @@ class XUnitTestEngine extends ArcanistUnitTestEngine {
    * build itself (since the unit tester is about to run each of the tests
    * individually).
    *
-   * @param  array   Array of test assemblies.
+   * @param  array   $test_assemblies Array of test assemblies.
    * @return array   Array of test results.
    */
   private function buildProjects(array $test_assemblies) {
@@ -315,7 +315,7 @@ class XUnitTestEngine extends ArcanistUnitTestEngine {
    * Build the future for running a unit test. This can be overridden to enable
    * support for code coverage via another tool.
    *
-   * @param  string  Name of the test assembly.
+   * @param  string  $test_assembly Name of the test assembly.
    * @return array   The future, output filename and coverage filename
    *                 stored in an array.
    */
@@ -345,7 +345,7 @@ class XUnitTestEngine extends ArcanistUnitTestEngine {
    * Run the xUnit test runner on each of the assemblies and parse the
    * resulting XML.
    *
-   * @param  array   Array of test assemblies.
+   * @param  array   $test_assemblies Array of test assemblies.
    * @return array   Array of test results.
    */
   private function testAssemblies(array $test_assemblies) {
@@ -395,8 +395,8 @@ class XUnitTestEngine extends ArcanistUnitTestEngine {
    * coverage directly. Override this method in another class to provide code
    * coverage information (also see @{class:CSharpToolsUnitEngine}).
    *
-   * @param  string  The name of the coverage file if one was provided by
-   *                 `buildTestFuture`.
+   * @param  string  $coverage The name of the coverage file if one was
+   *                 provided by `buildTestFuture`.
    * @return array   Code coverage results, or null.
    */
   protected function parseCoverageResult($coverage) {
@@ -406,9 +406,9 @@ class XUnitTestEngine extends ArcanistUnitTestEngine {
   /**
    * Parses the test results from xUnit.
    *
-   * @param  string  The name of the xUnit results file.
-   * @param  string  The name of the coverage file if one was provided by
-   *                 `buildTestFuture`. This is passed through to
+   * @param  string  $xunit_tmp The name of the xUnit results file.
+   * @param  string  $coverage The name of the coverage file if one was
+   *                 provided by `buildTestFuture`. This is passed through to
    *                 `parseCoverageResult`.
    * @return array   Test results.
    */

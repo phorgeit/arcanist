@@ -315,8 +315,8 @@ abstract class ArcanistWorkflow extends Phobject {
    *
    * NOTE: You can not call this after a conduit has been established.
    *
-   * @param string  The URI to open a conduit to when @{method:establishConduit}
-   *                is called.
+   * @param string  $conduit_uri The URI to open a conduit to when
+   *                @{method:establishConduit} is called.
    * @return this
    * @task conduit
    */
@@ -407,7 +407,8 @@ abstract class ArcanistWorkflow extends Phobject {
    * NOTE: You can not call this method after calling
    * @{method:authenticateConduit}.
    *
-   * @param dict  A credential dictionary, see @{method:authenticateConduit}.
+   * @param dict  $credentials A credential dictionary, see
+   *   @{method:authenticateConduit}.
    * @return this
    * @task conduit
    */
@@ -1415,8 +1416,8 @@ abstract class ArcanistWorkflow extends Phobject {
    * change list is meaningless (for example, because the path is a directory
    * or binary file).
    *
-   * @param string      Path within the repository.
-   * @param string      Change selection mode (see ArcanistDiffHunk).
+   * @param string      $path Path within the repository.
+   * @param string      $mode Change selection mode (see ArcanistDiffHunk).
    * @return list|null  List of changed line numbers, or null to indicate that
    *                    the path is not a line-oriented text file.
    */
@@ -1568,7 +1569,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * Write a message to stderr so that '--json' flags or stdout which is meant
    * to be piped somewhere aren't disrupted.
    *
-   * @param string  Message to write to stderr.
+   * @param string $msg Message to write to stderr.
    * @return void
    */
   final protected function writeStatusMessage($msg) {
@@ -1620,9 +1621,10 @@ abstract class ArcanistWorkflow extends Phobject {
    * This method takes the user's selections and returns the paths that the
    * workflow should act upon.
    *
-   * @param   list          List of explicitly provided paths.
-   * @param   string|null   Revision name, if provided.
-   * @param   mask          Mask of ArcanistRepositoryAPI flags to exclude.
+   * @param   list          $paths List of explicitly provided paths.
+   * @param   string|null   $rev Revision name, if provided.
+   * @param   mask          $omit_mask (optional) Mask of ArcanistRepositoryAPI
+   *                        flags to exclude.
    *                        Defaults to ArcanistRepositoryAPI::FLAG_UNTRACKED.
    * @return  list          List of paths the workflow should act on.
    */
@@ -1684,7 +1686,7 @@ abstract class ArcanistWorkflow extends Phobject {
   /**
    * Try to read a scratch file, if it exists and is readable.
    *
-   * @param string Scratch file name.
+   * @param string $path Scratch file name.
    * @return mixed String for file contents, or false for failure.
    * @task scratch
    */
@@ -1699,7 +1701,7 @@ abstract class ArcanistWorkflow extends Phobject {
   /**
    * Try to read a scratch JSON file, if it exists and is readable.
    *
-   * @param string Scratch file name.
+   * @param string $path Scratch file name.
    * @return array Empty array for failure.
    * @task scratch
    */
@@ -1716,8 +1718,8 @@ abstract class ArcanistWorkflow extends Phobject {
    * Try to write a scratch file, if there's somewhere to put it and we can
    * write there.
    *
-   * @param  string Scratch file name to write.
-   * @param  string Data to write.
+   * @param  string $path Scratch file name to write.
+   * @param  string $data Data to write.
    * @return bool   True on success, false on failure.
    * @task scratch
    */
@@ -1733,8 +1735,8 @@ abstract class ArcanistWorkflow extends Phobject {
    * Try to write a scratch JSON file, if there's somewhere to put it and we can
    * write there.
    *
-   * @param  string Scratch file name to write.
-   * @param  array Data to write.
+   * @param  string $path Scratch file name to write.
+   * @param  array  $data Data to write.
    * @return bool   True on success, false on failure.
    * @task scratch
    */
@@ -1746,7 +1748,7 @@ abstract class ArcanistWorkflow extends Phobject {
   /**
    * Try to remove a scratch file.
    *
-   * @param   string  Scratch file name to remove.
+   * @param   string  $path Scratch file name to remove.
    * @return  bool    True if the file was removed successfully.
    * @task scratch
    */
@@ -1761,7 +1763,7 @@ abstract class ArcanistWorkflow extends Phobject {
   /**
    * Get a human-readable description of the scratch file location.
    *
-   * @param string  Scratch file name.
+   * @param string  $path Scratch file name.
    * @return mixed  String, or false on failure.
    * @task scratch
    */
@@ -1776,7 +1778,7 @@ abstract class ArcanistWorkflow extends Phobject {
   /**
    * Get the path to a scratch file, if possible.
    *
-   * @param string  Scratch file name.
+   * @param string  $path Scratch file name.
    * @return mixed  File path, or false on failure.
    * @task scratch
    */
@@ -2057,7 +2059,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * of a particular class. Normally this is used to implement an `--engine`
    * flag from the CLI.
    *
-   * @param string Optional explicit engine class name.
+   * @param string $engine_class (optional) Explicit engine class name.
    * @return ArcanistLintEngine Constructed engine.
    */
   protected function newLintEngine($engine_class = null) {
@@ -2108,7 +2110,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * of a particular class. Normally this is used to implement an `--engine`
    * flag from the CLI.
    *
-   * @param string Optional explicit engine class name.
+   * @param string $engine_class (optional) Explicit engine class name.
    * @return ArcanistUnitTestEngine Constructed engine.
    */
   protected function newUnitTestEngine($engine_class = null) {

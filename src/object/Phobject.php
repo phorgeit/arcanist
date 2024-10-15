@@ -73,8 +73,9 @@ abstract class Phobject implements Iterator {
    * useful message if the constant is not defined and allows the constant to
    * be limited to a maximum length.
    *
-   * @param string Name of the constant.
-   * @param int|null Maximum number of bytes permitted in the value.
+   * @param string $key Name of the constant.
+   * @param int|null $byte_limit (optional) Maximum number of bytes permitted
+   *   in the value.
    * @return string Value of the constant.
    */
   public function getPhobjectClassConstant($key, $byte_limit = null) {

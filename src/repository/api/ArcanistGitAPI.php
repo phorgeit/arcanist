@@ -82,8 +82,8 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
   /**
    * Tests if a child commit is descendant of a parent commit.
    * If child and parent are the same, it returns false.
-   * @param Child commit SHA.
-   * @param Parent commit SHA.
+   * @param $child Child commit SHA.
+   * @param $parent Parent commit SHA.
    * @return bool True if the child is a descendant of the parent.
    */
   private function isDescendant($child, $parent) {
@@ -404,7 +404,7 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
 
   /**
    * Translates a symbolic commit (like "HEAD^") to a commit identifier.
-   * @param string_symbol commit.
+   * @param string_symbol $symbolic_commit commit.
    * @return string the commit SHA.
    */
   private function resolveCommit($symbolic_commit) {
@@ -457,9 +457,9 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
   }
 
   /**
-   * @param the base revision
-   * @param head revision. If this is null, the generated diff will include the
-   * working copy
+   * @param $base the base revision
+   * @param $head (optional) head revision. If this is null, the generated diff
+   * will include the working copy
    */
   public function getFullGitDiff($base, $head = null) {
     $options = $this->getDiffFullOptions();
@@ -491,10 +491,10 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
   }
 
   /**
-   * @param string Path to generate a diff for.
-   * @param bool   If true, detect moves and renames. Otherwise, ignore
-   *               moves/renames; this is useful because it prompts git to
-   *               generate real diff text.
+   * @param string $path Path to generate a diff for.
+   * @param bool   $detect_moves_and_renames (optional) If true, detect moves
+   *               and renames. Otherwise, ignore moves/renames; this is useful
+   *               because it prompts git to generate real diff text.
    */
   public function getRawDiffText($path, $detect_moves_and_renames = true) {
     $options = $this->getDiffFullOptions($detect_moves_and_renames);
@@ -1452,7 +1452,7 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
    * Follow the chain of tracking branches upstream until we reach a remote
    * or cycle locally.
    *
-   * @param string Ref to start from.
+   * @param string $start Ref to start from.
    * @return ArcanistGitUpstreamPath Path to an upstream.
    */
   public function getPathToUpstream($start) {

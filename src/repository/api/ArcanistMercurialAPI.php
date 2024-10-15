@@ -732,8 +732,9 @@ final class ArcanistMercurialAPI extends ArcanistRepositoryAPI {
    *    cause a conflict but this is something the user has to address.
    * 3. Strip the original commit.
    *
-   * @param array     The list of child changesets off the original commit.
-   * @param file      The file containing the new commit message.
+   * @param array $child_nodes The list of child changesets off the original
+   *   commit.
+   * @param file  $tmp_file The file containing the new commit message.
    */
   private function amendNonHeadCommit($child_nodes, $tmp_file) {
     list($current) = $this->execxLocal(
@@ -1053,7 +1054,7 @@ final class ArcanistMercurialAPI extends ArcanistRepositoryAPI {
    * included with Arcanist. This will not enable other extensions, e.g.
    * "evolve".
    *
-   * @param string  The name of the extension to enable.
+   * @param string  $extension The name of the extension to enable.
    * @return string  A new command pattern that includes the necessary flags to
    *                 enable the specified extension.
    */
@@ -1086,10 +1087,10 @@ final class ArcanistMercurialAPI extends ArcanistRepositoryAPI {
    * Produces the arguments that should be passed to Mercurial command
    * execution that enables a desired extension.
    *
-   * @param string  The name of the extension to enable.
-   * @param string  The command pattern that will be run with the extension
-   *                enabled.
-   * @param array   Parameters for the command pattern argument.
+   * @param string  $extension The name of the extension to enable.
+   * @param string  $pattern The command pattern that will be run with the
+   *                extension enabled.
+   * @param array   ... Parameters for the command pattern argument.
    * @return array  An array where the first item is a Mercurial command
    *                pattern that includes the necessary flag for enabling the
    *                desired extension, and all remaining items are parameters

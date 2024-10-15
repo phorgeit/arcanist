@@ -7,6 +7,7 @@ final class ArcanistWorkingCopyPath
   private $mode;
   private $data;
   private $binary;
+  private $mimeType;
   private $dataAsLines;
   private $charMap;
   private $lineMap;
@@ -30,7 +31,7 @@ final class ArcanistWorkingCopyPath
       throw new Exception(
         pht(
           'No data provided for path "%s".',
-          $this->getDescription()));
+          $this->getPath()));
     }
 
     return $this->data;
@@ -55,7 +56,7 @@ final class ArcanistWorkingCopyPath
       throw new Exception(
         pht(
           'No mode provided for path "%s".',
-          $this->getDescription()));
+          $this->getPath()));
     }
 
     return $this->mode;

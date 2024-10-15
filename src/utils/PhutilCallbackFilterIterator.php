@@ -7,8 +7,8 @@ final class PhutilCallbackFilterIterator extends FilterIterator {
   private $callback;
 
   /**
-   * @param Iterator
-   * @param callable Signature: (mixed $current): bool.
+   * @param Iterator $iterator
+   * @param callable $callback Signature: (mixed $current): bool.
    */
   public function __construct(Iterator $iterator, $callback) {
     parent::__construct($iterator);

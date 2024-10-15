@@ -33,9 +33,10 @@ final class PhutilSocketChannel extends PhutilChannel {
    * `stream_socket_server()` or similar, not a //plain// socket from
    * `socket_create()` or similar.
    *
-   * @param socket  Socket (stream socket, not plain socket). If only one
-   *                socket is provided, it is used for reading and writing.
-   * @param socket? Optional write socket.
+   * @param socket  $read_socket Socket (stream socket, not plain socket). If
+   *                only one socket is provided, it is used for reading and
+   *                writing.
+   * @param socket  $write_socket (optional) Write socket.
    *
    * @task construct
    */

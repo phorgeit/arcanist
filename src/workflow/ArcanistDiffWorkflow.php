@@ -1803,7 +1803,7 @@ EOTEXT
    * errors (e.g., if the user typed a reviewer name incorrectly) and a
    * summary of the commits themselves.
    *
-   * @param dict  Local commit information.
+   * @param dict  $local Local commit information.
    * @return list Complex output, see summary.
    * @task message
    */
@@ -1935,6 +1935,10 @@ EOTEXT
         if ($key == 'title') {
           // This has been handled above, and either assigned directly or
           // merged into the summary.
+          continue;
+        }
+
+        if ($value === null) {
           continue;
         }
 
@@ -2394,8 +2398,8 @@ EOTEXT
   /**
    * Update an arbitrary diff property.
    *
-   * @param string Diff property name.
-   * @param string Diff property value.
+   * @param string $name Diff property name.
+   * @param string $data Diff property value.
    * @return void
    *
    * @task diffprop

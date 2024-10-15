@@ -13,4 +13,8 @@ final class PhutilTraditionalChineseLocale extends PhutilLocale {
     return pht('Chinese (Traditional)');
   }
 
+  public function getFallbackLocaleCode() {
+    return 'zh_Hans';
+  }
+
 }

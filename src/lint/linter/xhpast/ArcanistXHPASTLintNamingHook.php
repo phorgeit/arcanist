@@ -45,12 +45,13 @@ abstract class ArcanistXHPASTLintNamingHook extends Phobject {
    *   }
    *   return $default;
    *
-   * @param   string      The symbol type.
-   * @param   string      The symbol name.
-   * @param   string|null The default result from the main rule engine.
+   * @param   string      $type The symbol type.
+   * @param   string      $name The symbol name.
+   * @param   string|null $default The default result from the main rule
+   *                      engine.
    * @return  string|null Null to accept the name, or a message to reject it
-   *                      with. You should return the default value if you don't
-   *                      want to specifically provide an override.
+   *                      with. You should return the default value if you
+   *                      don't want to specifically provide an override.
    * @task override
    */
   abstract public function lintSymbolName($type, $name, $default);
@@ -61,7 +62,7 @@ abstract class ArcanistXHPASTLintNamingHook extends Phobject {
   /**
    * Returns true if a symbol name is UpperCamelCase.
    *
-   * @param string Symbol name.
+   * @param string $symbol Symbol name.
    * @return bool True if the symbol is UpperCamelCase.
    * @task util
    */
@@ -72,7 +73,7 @@ abstract class ArcanistXHPASTLintNamingHook extends Phobject {
   /**
    * Returns true if a symbol name is lowerCamelCase.
    *
-   * @param string Symbol name.
+   * @param string $symbol Symbol name.
    * @return bool True if the symbol is lowerCamelCase.
    * @task util
    */
@@ -83,7 +84,7 @@ abstract class ArcanistXHPASTLintNamingHook extends Phobject {
   /**
    * Returns true if a symbol name is UPPERCASE_WITH_UNDERSCORES.
    *
-   * @param string Symbol name.
+   * @param string $symbol Symbol name.
    * @return bool True if the symbol is UPPERCASE_WITH_UNDERSCORES.
    * @task util
    */
@@ -94,7 +95,7 @@ abstract class ArcanistXHPASTLintNamingHook extends Phobject {
   /**
    * Returns true if a symbol name is lowercase_with_underscores.
    *
-   * @param string Symbol name.
+   * @param string $symbol Symbol name.
    * @return bool True if the symbol is lowercase_with_underscores.
    * @task util
    */
@@ -107,7 +108,7 @@ abstract class ArcanistXHPASTLintNamingHook extends Phobject {
    * the "__" magic-method signifier, to make a symbol appropriate for testing
    * with methods like @{method:isLowerCamelCase}.
    *
-   * @param   string Symbol name.
+   * @param   string $symbol Symbol name.
    * @return  string Stripped symbol.
    * @task util
    */
@@ -142,7 +143,7 @@ abstract class ArcanistXHPASTLintNamingHook extends Phobject {
    * the "$", to make a symbol appropriate for testing with methods like
    * @{method:isLowercaseWithUnderscores}.
    *
-   * @param string Symbol name.
+   * @param string $symbol Symbol name.
    * @return string Stripped symbol.
    * @task util
    */

@@ -16,7 +16,7 @@ final class PhutilJSON extends Phobject {
    * Encode an object in JSON and pretty-print it. This generates a valid JSON
    * object with human-readable whitespace and indentation.
    *
-   * @param   dict    An object to encode in JSON.
+   * @param   dict    $object An object to encode in JSON.
    * @return  string  Pretty-printed object representation.
    */
   public function encodeFormatted($object) {
@@ -27,7 +27,7 @@ final class PhutilJSON extends Phobject {
   /**
    * Encode a list in JSON and pretty-print it, discarding keys.
    *
-   * @param list<wild> List to encode in JSON.
+   * @param list<wild> $list List to encode in JSON.
    * @return string Pretty-printed list representation.
    */
   public function encodeAsList(array $list) {
@@ -41,8 +41,8 @@ final class PhutilJSON extends Phobject {
   /**
    * Pretty-print a JSON object.
    *
-   * @param   dict    Object to format.
-   * @param   int     Current depth, for indentation.
+   * @param   dict    $object Object to format.
+   * @param   int     $depth Current depth, for indentation.
    * @return  string  Pretty-printed value.
    * @task internal
    */
@@ -84,8 +84,8 @@ final class PhutilJSON extends Phobject {
   /**
    * Pretty-print a JSON list.
    *
-   * @param   list    List to format.
-   * @param   int     Current depth, for indentation.
+   * @param   list    $array List to format.
+   * @param   int     $depth Current depth, for indentation.
    * @return  string  Pretty-printed value.
    * @task internal
    */
@@ -115,8 +115,8 @@ final class PhutilJSON extends Phobject {
   /**
    * Pretty-print a JSON value.
    *
-   * @param   dict    Value to format.
-   * @param   int     Current depth, for indentation.
+   * @param   dict    $value Value to format.
+   * @param   int     $depth Current depth, for indentation.
    * @return  string  Pretty-printed value.
    * @task internal
    */
@@ -146,7 +146,7 @@ final class PhutilJSON extends Phobject {
   /**
    * Render a string corresponding to the current indent depth.
    *
-   * @param   int     Current depth.
+   * @param   int     $depth Current depth.
    * @return  string  Indentation.
    * @task internal
    */

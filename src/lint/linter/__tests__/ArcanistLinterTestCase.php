@@ -305,8 +305,8 @@ abstract class ArcanistLinterTestCase extends PhutilTestCase {
   /**
    * Compare properties of @{class:ArcanistLintMessage} instances.
    *
-   * @param  wild
-   * @param  wild
+   * @param  wild $x
+   * @param  wild $y
    * @return bool
    */
   private static function compareLintMessageProperty($x, $y) {

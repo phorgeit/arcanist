@@ -9,9 +9,9 @@
  *  %R Raw
  *    Inserts a raw regular expression.
  *
- * @param  string  sprintf()-style format string.
- * @param  string  Flags to use with the regular expression.
- * @param  ...     Zero or more arguments.
+ * @param  string  $pattern sprintf()-style format string.
+ * @param  string  (optional) Flags to use with the regular expression.
+ * @param  ...     (optional) Zero or more arguments.
  * @return string  Formatted string.
  */
 function pregsprintf($pattern /* , ... */) {

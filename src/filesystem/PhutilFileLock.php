@@ -29,7 +29,7 @@ final class PhutilFileLock extends PhutilLock {
   /**
    * Create a new lock on a lockfile. The file need not exist yet.
    *
-   * @param   string          The lockfile to use.
+   * @param   string          $lockfile The lockfile to use.
    * @return  PhutilFileLock  New lock object.
    *
    * @task construct
@@ -59,7 +59,7 @@ final class PhutilFileLock extends PhutilLock {
    * If the lock is already held, this method throws. You can test the lock
    * status with @{method:isLocked}.
    *
-   * @param  float  Seconds to block waiting for the lock.
+   * @param  float $wait Seconds to block waiting for the lock.
    * @return void
    *
    * @task lock

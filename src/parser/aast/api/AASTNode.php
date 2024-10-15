@@ -363,7 +363,7 @@ abstract class AASTNode extends Phobject {
    * Determines whether the current node appears //after// a specified node in
    * the tree.
    *
-   * @param  AASTNode
+   * @param  AASTNode $node
    * @return bool
    */
   final public function isAfter(AASTNode $node) {
@@ -375,7 +375,7 @@ abstract class AASTNode extends Phobject {
    * Determines whether the current node appears //before// a specified node in
    * the tree.
    *
-   * @param  AASTNode
+   * @param  AASTNode $node
    * @return bool
    */
   final public function isBefore(AASTNode $node) {
@@ -386,7 +386,7 @@ abstract class AASTNode extends Phobject {
   /**
    * Determines whether a specified node is a descendant of the current node.
    *
-   * @param  AASTNode
+   * @param  AASTNode $node
    * @return bool
    */
   final public function containsDescendant(AASTNode $node) {

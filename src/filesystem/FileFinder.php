@@ -31,7 +31,7 @@ final class FileFinder extends Phobject {
   /**
    * Create a new FileFinder.
    *
-   * @param string Root directory to find files beneath.
+   * @param string $root Root directory to find files beneath.
    * @return this
    * @task create
    */
@@ -106,7 +106,7 @@ final class FileFinder extends Phobject {
 
   /**
    * @task config
-   * @param string Either "php", "shell", or the empty string.
+   * @param string $mode Either "php", "shell", or the empty string.
    */
   public function setForceMode($mode) {
     $this->forceMode = $mode;

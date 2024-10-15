@@ -6,8 +6,9 @@
  * `PhutilTranslator::getInstance()->setTranslations()` and language rules set
  * by `PhutilTranslator::getInstance()->setLocale()`.
  *
- * @param string Translation identifier with `sprintf()` placeholders.
- * @param mixed Value to select the variant from (e.g. singular or plural).
+ * @param string $text Translation identifier with `sprintf()` placeholders.
+ * @param mixed $variant (optional) Value to select the variant from (e.g.
+ *    singular or plural). Defaults to null.
  * @param ... Next values referenced from $text.
  * @return string Translated string with substituted values.
  */
@@ -20,7 +21,7 @@ function pht($text, $variant = null /* , ... */) {
 /**
  * Count all elements in an array, or something in an object.
  *
- * @param  array|Countable  A countable object.
+ * @param  array|Countable  $countable A countable object.
  * @return PhutilNumber     Returns the number of elements in the input
  *                          parameter.
  */
@@ -38,7 +39,8 @@ function phutil_count($countable) {
  * This function does nothing and only serves as a marker for the static
  * extractor so it knows particular arguments may vary on gender.
  *
- * @param PhutilPerson Something implementing @{interface:PhutilPerson}.
+ * @param PhutilPerson $person Something implementing
+ *   @{interface:PhutilPerson}.
  * @return PhutilPerson The argument, unmodified.
  */
 function phutil_person(PhutilPerson $person) {

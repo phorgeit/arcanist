@@ -30,11 +30,14 @@ abstract class PhutilLocale extends Phobject {
    * For locales like "English (Great Britain)", missing translations can be
    * sourced from "English (US)".
    *
+   * Languages with no other fallback use en_US because that's better
+   * than proto-English for untranslated strings.
+   *
    * @return string|null Locale code of fallback locale, or null if there is
    *                     no fallback locale.
    */
   public function getFallbackLocaleCode() {
-    return null;
+    return 'en_US';
   }
 
 
@@ -42,8 +45,8 @@ abstract class PhutilLocale extends Phobject {
    * Select a gender variant for this locale. By default, locales use a simple
    * rule with two gender variants, listed in "<male, female>" order.
    *
-   * @param const `PhutilPerson` gender constant.
-   * @param list<wild> List of variants.
+   * @param const $variant `PhutilPerson` gender constant.
+   * @param list<wild> $translations List of variants.
    * @return string Variant for use.
    */
   public function selectGenderVariant($variant, array $translations) {
@@ -59,8 +62,8 @@ abstract class PhutilLocale extends Phobject {
    * Select a plural variant for this locale. By default, locales use a simple
    * rule with two plural variants, listed in "<singular, plural>" order.
    *
-   * @param int Plurality of the value.
-   * @param list<wild> List of variants.
+   * @param int $variant Plurality of the value.
+   * @param list<wild> $translations List of variants.
    * @return string Variant for use.
    */
   public function selectPluralVariant($variant, array $translations) {
@@ -118,10 +121,10 @@ abstract class PhutilLocale extends Phobject {
    * from @{method:shouldPostProcessTranslations}. Activating this callback
    * incurs a performance penalty.
    *
-   * @param string The raw input pattern.
-   * @param string The selected translation pattern.
-   * @param list<wild> The raw input arguments.
-   * @param string The translated string.
+   * @param string $raw_pattern The raw input pattern.
+   * @param string $translated_pattern The selected translation pattern.
+   * @param list<wild> $args The raw input arguments.
+   * @param string $result_text The translated string.
    * @return string Post-processed translation string.
    */
   public function didTranslateString(
@@ -192,7 +195,7 @@ abstract class PhutilLocale extends Phobject {
   /**
    * Load a specific locale using a locale code.
    *
-   * @param string Locale code.
+   * @param string $locale_code Locale code.
    * @return PhutilLocale Locale object.
    */
   public static function loadLocale($locale_code) {
@@ -213,9 +216,9 @@ abstract class PhutilLocale extends Phobject {
   /**
    * Recursively check locale fallbacks for cycles.
    *
-   * @param map<string, PhutilLocale> Map of locales.
-   * @param PhutilLocale Current locale.
-   * @param map<string, string> Map of visited locales.
+   * @param map<string, PhutilLocale> $map Map of locales.
+   * @param PhutilLocale $locale Current locale.
+   * @param map<string, string> $seen Map of visited locales.
    * @return void
    */
   private static function checkLocaleFallback(

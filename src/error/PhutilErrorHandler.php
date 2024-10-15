@@ -88,7 +88,7 @@ final class PhutilErrorHandler extends Phobject {
    * can use @{class:PhutilProxyException} to nest exceptions; after PHP 5.3
    * all exceptions are nestable.
    *
-   * @param   Exception|Throwable       Exception to unnest.
+   * @param   Exception|Throwable       $ex Exception to unnest.
    * @return  Exception|Throwable|null  Previous exception, if one exists.
    * @task    exutil
    */
@@ -106,7 +106,7 @@ final class PhutilErrorHandler extends Phobject {
   /**
    * Find the most deeply nested exception from a possibly-nested exception.
    *
-   * @param   Exception|Throwable     A possibly-nested exception.
+   * @param   Exception|Throwable     $ex A possibly-nested exception.
    * @return  Exception|Throwable     Deepest exception in the nest.
    * @task    exutil
    */
@@ -126,7 +126,7 @@ final class PhutilErrorHandler extends Phobject {
    * Adds an error trap. Normally you should not invoke this directly;
    * @{class:PhutilErrorTrap} registers itself on construction.
    *
-   * @param PhutilErrorTrap Trap to add.
+   * @param PhutilErrorTrap $trap Trap to add.
    * @return void
    * @task trap
    */
@@ -140,7 +140,7 @@ final class PhutilErrorHandler extends Phobject {
    * Removes an error trap. Normally you should not invoke this directly;
    * @{class:PhutilErrorTrap} deregisters itself on destruction.
    *
-   * @param PhutilErrorTrap Trap to remove.
+   * @param PhutilErrorTrap $trap Trap to remove.
    * @return void
    * @task trap
    */
@@ -179,11 +179,11 @@ final class PhutilErrorHandler extends Phobject {
    * This handler converts E_NOTICE messages from uses of undefined variables
    * into @{class:RuntimeException}s.
    *
-   * @param int Error code.
-   * @param string Error message.
-   * @param string File where the error occurred.
-   * @param int Line on which the error occurred.
-   * @param wild Error context information.
+   * @param int $num Error code.
+   * @param string $str Error message.
+   * @param string $file File where the error occurred.
+   * @param int $line Line on which the error occurred.
+   * @param wild $ctx (optional) Error context information.
    * @return void
    * @task internal
    */
@@ -278,7 +278,7 @@ final class PhutilErrorHandler extends Phobject {
    * ##set_exception_handler()##. You should not call this function directly;
    * to print exceptions, pass the exception object to @{function:phlog}.
    *
-   * @param Exception|Throwable Uncaught exception object.
+   * @param Exception|Throwable $ex Uncaught exception object.
    * @return void
    * @task internal
    */
@@ -304,7 +304,7 @@ final class PhutilErrorHandler extends Phobject {
   /**
    * Output a stacktrace to the PHP error log.
    *
-   * @param trace A stacktrace, e.g. from debug_backtrace();
+   * @param trace $trace A stacktrace, e.g. from debug_backtrace();
    * @return void
    * @task internal
    */
@@ -319,7 +319,7 @@ final class PhutilErrorHandler extends Phobject {
   /**
    * Format a stacktrace for output.
    *
-   * @param trace A stacktrace, e.g. from debug_backtrace();
+   * @param trace $trace A stacktrace, e.g. from debug_backtrace();
    * @return string Human-readable trace.
    * @task internal
    */
@@ -382,9 +382,9 @@ final class PhutilErrorHandler extends Phobject {
    * dispatched to the listener; this method also prints them to the PHP error
    * log.
    *
-   * @param const Event type constant.
-   * @param wild Event value.
-   * @param dict Event metadata.
+   * @param const $event Event type constant.
+   * @param wild $value Event value.
+   * @param dict $metadata Event metadata.
    * @return void
    * @task internal
    */
@@ -560,7 +560,7 @@ final class PhutilErrorHandler extends Phobject {
    * all of the places an exception came from, even if it came from multiple
    * origins and has been aggregated or proxied.
    *
-   * @param Exception|Throwable Exception to retrieve a trace for.
+   * @param Exception|Throwable $ex Exception to retrieve a trace for.
    * @return list<wild> List of stack frames.
    */
   public static function getExceptionTrace($ex) {

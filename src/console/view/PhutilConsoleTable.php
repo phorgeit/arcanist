@@ -219,7 +219,7 @@ final class PhutilConsoleTable extends PhutilConsoleView {
   /**
    * Get the width of a specific column, including padding.
    *
-   * @param  string
+   * @param  string $key
    * @return int
    */
   protected function getWidth($key) {
@@ -265,7 +265,7 @@ final class PhutilConsoleTable extends PhutilConsoleView {
   /**
    * Format cells into an entire row.
    *
-   * @param  list<string>
+   * @param  list<string> $columns
    * @return string
    */
   protected function formatRow(array $columns) {

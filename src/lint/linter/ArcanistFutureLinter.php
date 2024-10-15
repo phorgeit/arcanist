@@ -47,7 +47,7 @@ abstract class ArcanistFutureLinter extends ArcanistLinter {
    * This is invoked after a block of futures resolve, and allows linters to
    * discard or clean up any shared resources they no longer need.
    *
-   * @param map<string, Future> Map of paths to resolved futures.
+   * @param map<string, Future> $futures Map of paths to resolved futures.
    * @return void
    */
   protected function didResolveLinterFutures(array $futures) {

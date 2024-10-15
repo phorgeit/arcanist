@@ -27,7 +27,7 @@
  * Generally, you should invoke shell commands via @{function:execx} rather
  * than by calling @{function:csprintf} directly.
  *
- * @param  string  sprintf()-style format string.
+ * @param  string  $pattern sprintf()-style format string.
  * @param  ...     Zero or more arguments.
  * @return PhutilCommandString  Formatted string, escaped appropriately for
  *   shell contexts.
@@ -40,8 +40,8 @@ function csprintf($pattern /* , ... */) {
 /**
  * Version of @{function:csprintf} that takes a vector of arguments.
  *
- * @param  string  sprintf()-style format string.
- * @param  list    List of zero or more arguments to csprintf().
+ * @param  string  $pattern sprintf()-style format string.
+ * @param  list    $argv List of zero or more arguments to csprintf().
  * @return PhutilCommandString  Formatted string, escaped appropriately for
  *   shell contexts.
  */

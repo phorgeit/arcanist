@@ -106,7 +106,7 @@ final class PhutilSystem extends Phobject {
    * See @{method:getSystemMemoryInformation}. This method is used to get memory
    * information on Linux.
    *
-   * @param string Raw `/proc/meminfo`.
+   * @param string $data Raw `/proc/meminfo`.
    * @return map<string, wild> Parsed memory information.
    * @task memory
    */
@@ -159,7 +159,7 @@ final class PhutilSystem extends Phobject {
    * See @{method:getSystemMemoryInformation}. This method is used to get memory
    * information on Mac OS X.
    *
-   * @param string Raw `vm_stat` output.
+   * @param string $data Raw `vm_stat` output.
    * @return map<string, wild> Parsed memory information.
    * @task memory
    */

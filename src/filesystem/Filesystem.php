@@ -25,8 +25,8 @@ final class Filesystem extends Phobject {
    * Read a file in a manner similar to file_get_contents(), but throw detailed
    * exceptions on failure.
    *
-   * @param  string  File path to read. This file must exist and be readable,
-   *                 or an exception will be thrown.
+   * @param  string  $path File path to read. This file must exist and be
+   *                 readable, or an exception will be thrown.
    * @return string  Contents of the specified file.
    *
    * @task   file
@@ -79,9 +79,9 @@ final class Filesystem extends Phobject {
    * detailed exceptions on failure. If the file already exists, it will be
    * overwritten.
    *
-   * @param  string  File path to write. This file must be writable and its
-   *                 parent directory must exist.
-   * @param  string  Data to write.
+   * @param  string  $path File path to write. This file must be writable and
+   *                 its parent directory must exist.
+   * @param  string  $data Data to write.
    *
    * @task   file
    */
@@ -106,8 +106,8 @@ final class Filesystem extends Phobject {
    * file without needing locking; any given read of the file is guaranteed to
    * be self-consistent and not see partial file contents.
    *
-   * @param string file path to write
-   * @param string data to write
+   * @param string $path file path to write
+   * @param string $data data to write
    *
    * @return boolean indicating whether the file was changed by this function.
    */
@@ -159,10 +159,10 @@ final class Filesystem extends Phobject {
    * exists, e.g. "example.bak", "example.bak.1", "example.bak.2", etc. (Don't
    * rely on this exact behavior, of course.)
    *
-   * @param   string  Suggested filename, like "example.bak". This name will
-   *                  be used if it does not exist, or some similar name will
-   *                  be chosen if it does.
-   * @param   string  Data to write to the file.
+   * @param   string  $base Suggested filename, like "example.bak". This name
+   *                  will be used if it does not exist, or some similar name
+   *                  will be chosen if it does.
+   * @param   string  $data Data to write to the file.
    * @return  string  Path to a newly created and written file which did not
    *                  previously exist, like "example.bak.3".
    * @task file
@@ -207,9 +207,9 @@ final class Filesystem extends Phobject {
    * Append to a file without having to deal with file handles, with
    * detailed exceptions on failure.
    *
-   * @param  string  File path to write. This file must be writable or its
-   *                 parent directory must exist and be writable.
-   * @param  string  Data to write.
+   * @param  string  $path File path to write. This file must be writable or
+   *                 its parent directory must exist and be writable.
+   * @param  string  $data Data to write.
    *
    * @task   file
    */
@@ -253,9 +253,9 @@ final class Filesystem extends Phobject {
   /**
    * Copy a file, preserving file attributes (if relevant for the OS).
    *
-   * @param string  File path to copy from.  This file must exist and be
+   * @param string  $from File path to copy from.  This file must exist and be
    *                readable, or an exception will be thrown.
-   * @param string  File path to copy to.  If a file exists at this path
+   * @param string  $to File path to copy to.  If a file exists at this path
    *                already, it wll be overwritten.
    *
    * @task  file
@@ -301,7 +301,7 @@ final class Filesystem extends Phobject {
   /**
    * Remove a file or directory.
    *
-   * @param  string    File to a path or directory to remove.
+   * @param  string $path File to a path or directory to remove.
    * @return void
    *
    * @task   file
@@ -327,8 +327,8 @@ final class Filesystem extends Phobject {
   /**
    * Rename a file or directory.
    *
-   * @param string    Old path.
-   * @param string    New path.
+   * @param string $old Old path.
+   * @param string $new New path.
    *
    * @task file
    */
@@ -351,7 +351,7 @@ final class Filesystem extends Phobject {
    * Internal. Recursively remove a file or an entire directory. Implements
    * the core function of @{method:remove} in a way that works on Windows.
    *
-   * @param  string    File to a path or directory to remove.
+   * @param  string $path File to a path or directory to remove.
    * @return void
    *
    * @task file
@@ -381,9 +381,9 @@ final class Filesystem extends Phobject {
   /**
    * Change the permissions of a file or directory.
    *
-   * @param  string    Path to the file or directory.
-   * @param  int       Permission umask. Note that umask is in octal, so you
-   *                   should specify it as, e.g., `0777', not `777'.
+   * @param  string $path  Path to the file or directory.
+   * @param  int    $umask Permission umask. Note that umask is in octal, so
+   *                   you should specify it as, e.g., `0777', not `777'.
    * @return void
    *
    * @task   file
@@ -405,7 +405,7 @@ final class Filesystem extends Phobject {
   /**
    * Get the last modified time of a file
    *
-   * @param string Path to file
+   * @param string $path Path to file
    * @return int Time last modified
    *
    * @task file
@@ -432,7 +432,7 @@ final class Filesystem extends Phobject {
    * Read random bytes from /dev/urandom or equivalent. See also
    * @{method:readRandomCharacters}.
    *
-   * @param   int     Number of bytes to read.
+   * @param   int     $number_of_bytes Number of bytes to read.
    * @return  string  Random bytestring of the provided length.
    *
    * @task file
@@ -530,7 +530,7 @@ final class Filesystem extends Phobject {
    * output (a-z, 0-9) so it's appropriate for use in URIs and other contexts
    * where it needs to be human readable.
    *
-   * @param   int     Number of characters to read.
+   * @param   int     $number_of_characters Number of characters to read.
    * @return  string  Random character string of the provided length.
    *
    * @task file
@@ -563,8 +563,8 @@ final class Filesystem extends Phobject {
    *
    * This method uses less-entropic random sources under older versions of PHP.
    *
-   * @param int Minimum value, inclusive.
-   * @param int Maximum value, inclusive.
+   * @param int $min Minimum value, inclusive.
+   * @param int $max Maximum value, inclusive.
    */
   public static function readRandomInteger($min, $max) {
     if (!is_int($min)) {
@@ -612,9 +612,9 @@ final class Filesystem extends Phobject {
    * Identify the MIME type of a file. This returns only the MIME type (like
    * text/plain), not the encoding (like charset=utf-8).
    *
-   * @param string Path to the file to examine.
-   * @param string Optional default mime type to return if the file's mime
-   *               type can not be identified.
+   * @param string $path Path to the file to examine.
+   * @param string $default (optional) default mime type to return if the
+   *               file's mime type can not be identified.
    * @return string File mime type.
    *
    * @task file
@@ -693,11 +693,12 @@ final class Filesystem extends Phobject {
    * Create a directory in a manner similar to mkdir(), but throw detailed
    * exceptions on failure.
    *
-   * @param  string    Path to directory. The parent directory must exist and
-   *                   be writable.
-   * @param  int       Permission umask. Note that umask is in octal, so you
-   *                   should specify it as, e.g., `0777', not `777'.
-   * @param  boolean   Recursively create directories. Default to false.
+   * @param  string    $path Path to directory. The parent directory must exist
+   *                   and be writable.
+   * @param  int       $umask Permission umask. Note that umask is in octal, so
+   *                   you should specify it as, e.g., `0777', not `777'.
+   * @param  boolean   $recursive (optional) Recursively create directories.
+   *                   Defaults to false.
    * @return string    Path to the created directory.
    *
    * @task   directory
@@ -752,11 +753,13 @@ final class Filesystem extends Phobject {
    * responsible for removing it (e.g., with Filesystem::remove())
    * when you are done with it.
    *
-   * @param  string    Optional directory prefix.
-   * @param  int       Permissions to create the directory with. By default,
-   *                   these permissions are very restrictive (0700).
-   * @param  string    Optional root directory. If not provided, the system
-   *                   temporary directory (often "/tmp") will be used.
+   * @param  string    $prefix (optional) directory prefix.
+   * @param  int       $umask (optional) Permissions to create the directory
+   *                   with. By default, these permissions are very restrictive
+   *                   (0700).
+   * @param  string    $root_directory (optional) Root directory. If not
+   *                   provided, the system temporary directory (often "/tmp")
+   *                   will be used.
    * @return string    Path to newly created temporary directory.
    *
    * @task   directory
@@ -814,8 +817,9 @@ final class Filesystem extends Phobject {
   /**
    * List files in a directory.
    *
-   * @param  string    Path, absolute or relative to PWD.
-   * @param  bool      If false, exclude files beginning with a ".".
+   * @param  string    $path Path, absolute or relative to PWD.
+   * @param  bool      $include_hidden If false, exclude files beginning with
+   *                   a ".".
    *
    * @return array     List of files and directories in the specified
    *                   directory, excluding `.' and `..'.
@@ -850,8 +854,8 @@ final class Filesystem extends Phobject {
    * Return all directories between a path and the specified root directory
    * (defaulting to "/"). Iterating over them walks from the path to the root.
    *
-   * @param  string        Path, absolute or relative to PWD.
-   * @param  string        The root directory.
+   * @param  string        $path Path, absolute or relative to PWD.
+   * @param  string        $root (optional) The root directory.
    * @return list<string>  List of parent paths, including the provided path.
    * @task   directory
    */
@@ -924,7 +928,7 @@ final class Filesystem extends Phobject {
   /**
    * Checks if a path is specified as an absolute path.
    *
-   * @param  string
+   * @param  string $path
    * @return bool
    */
   public static function isAbsolutePath($path) {
@@ -940,8 +944,8 @@ final class Filesystem extends Phobject {
    * default PWD), following parent symlinks and removing artifacts. If the
    * path is itself a symlink it is left unresolved.
    *
-   * @param  string    Path, absolute or relative to PWD.
-   * @return string    Canonical, absolute path.
+   * @param  string    $path Path, absolute or relative to PWD.
+   * @return string    $relative_to (optional) Canonical, absolute path.
    *
    * @task   path
    */
@@ -1009,8 +1013,8 @@ final class Filesystem extends Phobject {
    * symlinks and removing artifacts. Both paths must exists for the relation
    * to obtain. A path is always a descendant of itself as long as it exists.
    *
-   * @param  string   Child path, absolute or relative to PWD.
-   * @param  string   Root path, absolute or relative to PWD.
+   * @param  string   $path Child path, absolute or relative to PWD.
+   * @param  string   $root Root path, absolute or relative to PWD.
    * @return bool     True if resolved child path is in fact a descendant of
    *                  resolved root path and both exist.
    * @task   path
@@ -1031,8 +1035,8 @@ final class Filesystem extends Phobject {
    * guaranteed that you can use resolvePath() to restore a path to its
    * canonical format.
    *
-   * @param  string    Path, absolute or relative to PWD.
-   * @param  string    Optionally, working directory to make files readable
+   * @param  string    $path Path, absolute or relative to PWD.
+   * @param  string    $pwd (optional) Working directory to make files readable
    *                   relative to.
    * @return string    Human-readable path.
    *
@@ -1060,7 +1064,7 @@ final class Filesystem extends Phobject {
    * file_exists() in that it returns true for symlinks. This method does not
    * attempt to resolve paths before testing them.
    *
-   * @param   string  Test for the existence of this path.
+   * @param   string  $path Test for the existence of this path.
    * @return  bool    True if the path exists in the filesystem.
    * @task    path
    */
@@ -1073,7 +1077,7 @@ final class Filesystem extends Phobject {
    * Determine if an executable binary (like `git` or `svn`) exists within
    * the configured `$PATH`.
    *
-   * @param   string  Binary name, like `'git'` or `'svn'`.
+   * @param   string  $binary Binary name, like `'git'` or `'svn'`.
    * @return  bool    True if the binary exists and is executable.
    * @task    exec
    */
@@ -1086,7 +1090,7 @@ final class Filesystem extends Phobject {
    * Locates the full path that an executable binary (like `git` or `svn`) is at
    * the configured `$PATH`.
    *
-   * @param   string  Binary name, like `'git'` or `'svn'`.
+   * @param   string  $binary Binary name, like `'git'` or `'svn'`.
    * @return  string  The full binary path if it is present, or null.
    * @task    exec
    */
@@ -1129,8 +1133,8 @@ final class Filesystem extends Phobject {
    * resolvePath() only resolves symlinks in parent directories, not the
    * path itself.
    *
-   * @param string First path to test for equivalence.
-   * @param string Second path to test for equivalence.
+   * @param string $u First path to test for equivalence.
+   * @param string $v Second path to test for equivalence.
    * @return bool  True if both paths are equivalent, i.e. reference the same
    *               entity in the filesystem.
    * @task path
@@ -1171,7 +1175,7 @@ final class Filesystem extends Phobject {
    * Assert that something (e.g., a file, directory, or symlink) exists at a
    * specified location.
    *
-   * @param  string    Assert that this path exists.
+   * @param  string $path Assert that this path exists.
    * @return void
    *
    * @task   assert
@@ -1223,7 +1227,7 @@ final class Filesystem extends Phobject {
   /**
    * Assert that nothing exists at a specified location.
    *
-   * @param  string    Assert that this path does not exist.
+   * @param  string $path Assert that this path does not exist.
    * @return void
    *
    * @task   assert
@@ -1240,7 +1244,7 @@ final class Filesystem extends Phobject {
   /**
    * Assert that a path represents a file, strictly (i.e., not a directory).
    *
-   * @param  string    Assert that this path is a file.
+   * @param  string $path Assert that this path is a file.
    * @return void
    *
    * @task   assert
@@ -1257,7 +1261,7 @@ final class Filesystem extends Phobject {
   /**
    * Assert that a path represents a directory, strictly (i.e., not a file).
    *
-   * @param  string    Assert that this path is a directory.
+   * @param  string $path Assert that this path is a directory.
    * @return void
    *
    * @task   assert
@@ -1274,7 +1278,7 @@ final class Filesystem extends Phobject {
   /**
    * Assert that a file or directory exists and is writable.
    *
-   * @param  string    Assert that this path is writable.
+   * @param  string $path Assert that this path is writable.
    * @return void
    *
    * @task   assert
@@ -1291,7 +1295,7 @@ final class Filesystem extends Phobject {
   /**
    * Assert that a file or directory exists and is readable.
    *
-   * @param  string    Assert that this path is readable.
+   * @param  string $path Assert that this path is readable.
    * @return void
    *
    * @task   assert

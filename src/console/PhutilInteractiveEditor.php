@@ -31,7 +31,7 @@ final class PhutilInteractiveEditor extends Phobject {
   /**
    * Constructs an interactive editor, using the text of a document.
    *
-   * @param  string  Document text.
+   * @param  string $content Document text.
    * @return $this
    *
    * @task   create
@@ -171,7 +171,7 @@ final class PhutilInteractiveEditor extends Phobject {
    * opens. By default, the cursor will be positioned at the start of the
    * content.
    *
-   * @param  int   Line number where the cursor should be positioned.
+   * @param  int   $offset Line number where the cursor should be positioned.
    * @return $this
    *
    * @task config
@@ -198,7 +198,7 @@ final class PhutilInteractiveEditor extends Phobject {
    * Set the document name. Depending on the editor, this may be exposed to
    * the user and can give them a sense of what they're editing.
    *
-   * @param  string  Document name.
+   * @param  string $name Document name.
    * @return $this
    *
    * @task config
@@ -228,7 +228,7 @@ final class PhutilInteractiveEditor extends Phobject {
   /**
    * Set the text content to be edited.
    *
-   * @param  string  New content.
+   * @param  string $content New content.
    * @return $this
    *
    * @task config
@@ -255,7 +255,7 @@ final class PhutilInteractiveEditor extends Phobject {
    * Set the fallback editor program to be used if the env variable $EDITOR
    * is not available and there is no `editor` binary in PATH.
    *
-   * @param  string  Command-line editing program (e.g. 'emacs', 'vi')
+   * @param  string $editor Command-line editing program (e.g. 'emacs', 'vi')
    * @return $this
    *
    * @task config
@@ -270,7 +270,7 @@ final class PhutilInteractiveEditor extends Phobject {
    * Set the preferred editor program. If set, this will override all other
    * sources of editor configuration, like $EDITOR.
    *
-   * @param  string  Command-line editing program (e.g. 'emacs', 'vi')
+   * @param  string $editor Command-line editing program (e.g. 'emacs', 'vi')
    * @return $this
    *
    * @task config
@@ -284,7 +284,7 @@ final class PhutilInteractiveEditor extends Phobject {
    * Set the message that identifies the task for which the editor is being
    * launched, displayed to the user prior to it being launched.
    *
-   * @param  string  The message to display to the user.
+   * @param  string $task_message The message to display to the user.
    * @return $this
    *
    * @task config

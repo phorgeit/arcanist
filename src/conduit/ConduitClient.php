@@ -206,7 +206,7 @@ final class ConduitClient extends Phobject {
    * This implicit port behavior is similar to what browsers do, so it is less
    * likely to get us into trouble with webserver configurations.
    *
-   * @param bool True to include the port explicitly.
+   * @param bool $with_explicit_port True to include the port explicitly.
    * @return string String describing the host for the request.
    */
   private function newHostString($with_explicit_port) {

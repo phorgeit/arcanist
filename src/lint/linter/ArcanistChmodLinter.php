@@ -117,7 +117,7 @@ final class ArcanistChmodLinter extends ArcanistLinter {
   /**
    * Returns the path's shebang.
    *
-   * @param  string
+   * @param  string $path
    * @return string|null
    */
   private function getShebang($path) {

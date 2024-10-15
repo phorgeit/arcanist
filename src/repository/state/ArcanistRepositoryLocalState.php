@@ -211,7 +211,7 @@ abstract class ArcanistRepositoryLocalState
   /**
    * Restores changes that were previously stashed by {@method:saveStash()}.
    *
-   * @param wild  A reference object referring to which previously stashed
+   * @param wild  $ref A reference object referring to which previously stashed
    *              changes to restore, from invoking {@method:saveStash()}.
    */
   protected function restoreStash($ref) {

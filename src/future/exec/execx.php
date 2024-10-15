@@ -7,7 +7,7 @@
  *
  *   list ($stdout, $stderr) = execx('ls %s', $file);
  *
- * @param  string  sprintf()-style command pattern to execute.
+ * @param  string  $cmd sprintf()-style command pattern to execute.
  * @param  ...     Arguments to sprintf pattern.
  * @return array   List of stdout and stderr.
  */
@@ -27,7 +27,7 @@ function execx($cmd /* , ... */) {
  * Error flows can often be simplified by using @{function:execx} instead,
  * which throws an exception when it encounters an error.
  *
- * @param  string  sprintf()-style command pattern to execute.
+ * @param  string  $cmd sprintf()-style command pattern to execute.
  * @param  ...     Arguments to sprintf pattern.
  * @return array   List of return code, stdout, and stderr.
  */
@@ -41,7 +41,7 @@ function exec_manual($cmd /* , ... */) {
 /**
  * Wrapper for @{class:PhutilExecPassthru}.
  *
- * @param  string  sprintf()-style command pattern to execute.
+ * @param  string  $cmd sprintf()-style command pattern to execute.
  * @param  ...     Arguments to sprintf pattern.
  * @return int     Return code.
  */
@@ -55,7 +55,7 @@ function phutil_passthru($cmd /* , ... */) {
  * Return a human-readable signal name (like "SIGINT" or "SIGKILL") for a given
  * signal number.
  *
- * @param   int     Signal number.
+ * @param   int     $signo Signal number.
  * @return  string  Human-readable signal name.
  */
 function phutil_get_signal_name($signo) {

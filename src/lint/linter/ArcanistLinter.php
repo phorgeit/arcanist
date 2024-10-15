@@ -131,7 +131,7 @@ abstract class ArcanistLinter extends Phobject {
    *
    * This ID is assigned automatically by the @{class:ArcanistLintEngine}.
    *
-   * @param string Unique linter ID.
+   * @param string $id Unique linter ID.
    * @return this
    * @task state
    */
@@ -168,7 +168,7 @@ abstract class ArcanistLinter extends Phobject {
    * Linters which are not parallelizable should normally ignore this callback
    * and implement @{method:lintPath} instead.
    *
-   * @param list<string> A list of paths to be linted
+   * @param list<string> $paths A list of paths to be linted
    * @return void
    * @task exec
    */
@@ -185,7 +185,7 @@ abstract class ArcanistLinter extends Phobject {
    * Linters which are parallelizable may want to ignore this callback and
    * implement @{method:willLintPaths} and @{method:didLintPaths} instead.
    *
-   * @param string Path to lint.
+   * @param string $path Path to lint.
    * @return void
    * @task exec
    */
@@ -202,7 +202,7 @@ abstract class ArcanistLinter extends Phobject {
    * Linters which are not paralleizable should normally ignore this callback
    * and implement @{method:lintPath} instead.
    *
-   * @param list<string> A list of paths which were linted.
+   * @param list<string> $paths A list of paths which were linted.
    * @return void
    * @task exec
    */
@@ -288,7 +288,7 @@ abstract class ArcanistLinter extends Phobject {
    * Filter out paths which this linter doesn't act on (for example, because
    * they are binaries and the linter doesn't apply to binaries).
    *
-   * @param  list<string>
+   * @param  list<string> $paths
    * @return list<string>
    */
   private function filterPaths(array $paths) {
@@ -617,7 +617,7 @@ abstract class ArcanistLinter extends Phobject {
    *
    * If the code is not recognized, you should throw an exception.
    *
-   * @param string  Code specified in configuration.
+   * @param string   $code Code specified in configuration.
    * @return string  Normalized code to use in severity map.
    */
   protected function getLintCodeFromLinterConfigurationKey($code) {

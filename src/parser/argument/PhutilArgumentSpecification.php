@@ -34,7 +34,7 @@ final class PhutilArgumentSpecification extends Phobject {
    *    wildcard    setWildcard()
    *    repeat      setRepeatable()
    *
-   * @param dict Dictionary of quick parameter definitions.
+   * @param dict $spec Dictionary of quick parameter definitions.
    * @return PhutilArgumentSpecification Constructed argument specification.
    */
   public static function newQuickSpec(array $spec) {

@@ -29,7 +29,7 @@ final class LinesOfALargeFile extends LinesOfALarge {
   /**
    * To construct, pass the path to a file.
    *
-   * @param string File path to read.
+   * @param string $file_name File path to read.
    * @return void
    * @task construct
    */

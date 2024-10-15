@@ -233,8 +233,8 @@ abstract class PhutilLexer extends Phobject {
   /**
    * Lex an input string into tokens.
    *
-   * @param string Input string.
-   * @param string Initial lexer state.
+   * @param string $input Input string.
+   * @param string $initial_state (optional) Initial lexer state.
    * @return list List of lexer tokens.
    * @task tokens
    */

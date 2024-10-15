@@ -19,7 +19,7 @@ final class PhutilRope extends Phobject {
   /**
    * Append a string to the rope.
    *
-   * @param string String to append.
+   * @param string $string String to append.
    * @return this
    */
   public function append($string) {
@@ -70,7 +70,7 @@ final class PhutilRope extends Phobject {
   /**
    * Get prefix bytes of the rope, up to some maximum size.
    *
-   * @param int Maximum number of bytes to read.
+   * @param int $length Maximum number of bytes to read.
    * @return string Bytes.
    */
   public function getPrefixBytes($length) {
@@ -108,7 +108,7 @@ final class PhutilRope extends Phobject {
   /**
    * Remove a specified number of bytes from the head of the rope.
    *
-   * @param int Bytes to remove.
+   * @param int $remove Bytes to remove.
    * @return this
    */
   public function removeBytesFromHead($remove) {

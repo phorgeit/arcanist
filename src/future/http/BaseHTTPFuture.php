@@ -37,10 +37,10 @@ abstract class BaseHTTPFuture extends Future {
    * instantiate it; instead, build a new @{class:HTTPFuture} or
    * @{class:HTTPSFuture}.
    *
-   * @param string Fully-qualified URI to send a request to.
-   * @param mixed  String or array to include in the request. Strings will be
-   *               transmitted raw; arrays will be encoded and sent as
-   *               'application/x-www-form-urlencoded'.
+   * @param string $uri Fully-qualified URI to send a request to.
+   * @param mixed  $data (optional) String or array to include in the request.
+   *               Strings will be transmitted raw; arrays will be encoded and
+   *               sent as 'application/x-www-form-urlencoded'.
    * @task create
    */
   final public function __construct($uri, $data = array()) {
@@ -58,7 +58,7 @@ abstract class BaseHTTPFuture extends Future {
    * out. You can determine if a status is a timeout status by calling
    * isTimeout() on the status object.
    *
-   * @param float Maximum timeout, in seconds.
+   * @param float $timeout Maximum timeout, in seconds.
    * @return this
    * @task config
    */
@@ -83,7 +83,7 @@ abstract class BaseHTTPFuture extends Future {
    * Select the HTTP method (e.g., "GET", "POST", "PUT") to use for the request.
    * By default, requests use "GET".
    *
-   * @param string HTTP method name.
+   * @param string $method HTTP method name.
    * @return this
    * @task config
    */
@@ -124,7 +124,7 @@ abstract class BaseHTTPFuture extends Future {
    * Set the URI to send the request to. Note that this is also a constructor
    * parameter.
    *
-   * @param string URI to send the request to.
+   * @param string $uri URI to send the request to.
    * @return this
    * @task config
    */
@@ -151,7 +151,7 @@ abstract class BaseHTTPFuture extends Future {
    * must be a string (in which case it will be sent raw) or an array (in which
    * case it will be encoded and sent as 'application/x-www-form-urlencoded').
    *
-   * @param mixed Data to send with the request.
+   * @param mixed $data Data to send with the request.
    * @return this
    * @task config
    */
@@ -179,8 +179,8 @@ abstract class BaseHTTPFuture extends Future {
    * Add an HTTP header to the request. The same header name can be specified
    * more than once, which will cause multiple headers to be sent.
    *
-   * @param string Header name, like "Accept-Language".
-   * @param string Header value, like "en-us".
+   * @param string $name Header name, like "Accept-Language".
+   * @param string $value Header value, like "en-us".
    * @return this
    * @task config
    */
@@ -200,8 +200,8 @@ abstract class BaseHTTPFuture extends Future {
    *
    * In either case, an array with all (or all matching) headers is returned.
    *
-   * @param string|null Optional filter, which selects only headers with that
-   *                    name if provided.
+   * @param string|null $filter (optional) Filter, which selects only headers
+   *                    with that name if provided.
    * @return array      List of all (or all matching) headers.
    * @task config
    */
@@ -228,7 +228,7 @@ abstract class BaseHTTPFuture extends Future {
    * HTTP status code outside the 2xx range (notwithstanding other errors such
    * as connection or transport issues).
    *
-   * @param array|null List of expected HTTP status codes.
+   * @param array|null $status_codes List of expected HTTP status codes.
    *
    * @return this
    * @task config
@@ -251,8 +251,8 @@ abstract class BaseHTTPFuture extends Future {
   /**
    * Add a HTTP basic authentication header to the request.
    *
-   * @param string                Username to authenticate with.
-   * @param PhutilOpaqueEnvelope  Password to authenticate with.
+   * @param string                $username Username to authenticate with.
+   * @param PhutilOpaqueEnvelope  $password Password to authenticate with.
    * @return this
    * @task config
    */
@@ -316,7 +316,7 @@ abstract class BaseHTTPFuture extends Future {
   /**
    * Parse a raw HTTP response into a <status, body, headers> tuple.
    *
-   * @param string Raw HTTP response.
+   * @param string $raw_response Raw HTTP response.
    * @return tuple Valid resolution tuple.
    * @task internal
    */
@@ -393,7 +393,7 @@ abstract class BaseHTTPFuture extends Future {
   /**
    * Parse an HTTP header block.
    *
-   * @param string Raw HTTP headers.
+   * @param string $head_raw Raw HTTP headers.
    * @return list List of HTTP header tuples.
    * @task internal
    */
@@ -423,8 +423,8 @@ abstract class BaseHTTPFuture extends Future {
   /**
    * Find value of the first header with given name.
    *
-   * @param list List of headers from `resolve()`.
-   * @param string Case insensitive header name.
+   * @param list $headers List of headers from `resolve()`.
+   * @param string $search Case insensitive header name.
    * @return string Value of the header or null if not found.
    * @task resolve
    */

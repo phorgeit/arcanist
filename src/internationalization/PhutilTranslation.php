@@ -59,7 +59,7 @@ abstract class PhutilTranslation extends Phobject {
    * This will compile primary and fallback translations into a single
    * translation map.
    *
-   * @param string Locale code, like "en_US".
+   * @param string $locale_code Locale code, like "en_US".
    * @return map<string, wild> Map of all avialable translations.
    */
   public static function getTranslationMapForLocale($locale_code) {

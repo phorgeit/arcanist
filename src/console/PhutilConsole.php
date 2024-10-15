@@ -56,7 +56,7 @@ final class PhutilConsole extends Phobject {
   /**
    * Set the active console.
    *
-   * @param PhutilConsole
+   * @param PhutilConsole $console
    * @return void
    * @task construct
    */

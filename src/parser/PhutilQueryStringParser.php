@@ -33,7 +33,7 @@ final class PhutilQueryStringParser extends Phobject {
    *
    * For a more basic parse, see @{method:parseQueryStringToPairList}.
    *
-   * @param   string              Query string.
+   * @param   string              $query_string Query string.
    * @return  map<string, wild>   Parsed dictionary.
    */
   public function parseQueryString($query_string) {
@@ -68,7 +68,7 @@ final class PhutilQueryStringParser extends Phobject {
    * Use @{method:parseQueryString} to produce a more sophisticated parse which
    * applies array rules and returns a dictionary.
    *
-   * @param   string                      Query string.
+   * @param   string                      $query_string Query string.
    * @return  list<pair<string, string>>  List of parsed parameters.
    */
   public function parseQueryStringToPairList($query_string) {
@@ -110,7 +110,7 @@ final class PhutilQueryStringParser extends Phobject {
    *
    * @param string $key
    * @param string $val
-   * @param array  $input_arr
+   * @param array  &$input_arr
    */
   private function parseQueryKeyToArr($key, $val, array &$input_arr) {
     if (preg_match('/^[^\[\]]+(?:\[[^\[\]]*\])+$/', $key)) {

@@ -39,7 +39,8 @@ final class HTTPSFuture extends BaseHTTPFuture {
    * cURL needs this to be a file, it doesn't seem to be able to handle a string
    * which contains the cert. So we make a temporary file and store it there.
    *
-   * @param string The multi-line, possibly lengthy, SSL certificate to use.
+   * @param string $certificate The multi-line, possibly lengthy, SSL
+   *   certificate to use.
    * @return this
    */
   public function setCABundleFromString($certificate) {
@@ -52,7 +53,7 @@ final class HTTPSFuture extends BaseHTTPFuture {
   /**
    * Set the SSL certificate to use for this session, given a path.
    *
-   * @param string The path to a valid SSL certificate for this session
+   * @param string $path The path to a valid SSL certificate for this session
    * @return this
    */
   public function setCABundleFromPath($path) {
@@ -73,8 +74,8 @@ final class HTTPSFuture extends BaseHTTPFuture {
    * Set whether Location headers in the response will be respected.
    * The default is true.
    *
-   * @param boolean true to follow any Location header present in the response,
-   *                false to return the request directly
+   * @param boolean $follow true to follow any Location header present in the
+   *                response, false to return the request directly
    * @return this
    */
   public function setFollowLocation($follow) {
@@ -95,7 +96,7 @@ final class HTTPSFuture extends BaseHTTPFuture {
    * Set the fallback CA certificate if one is not specified
    * for the session, given a path.
    *
-   * @param string The path to a valid SSL certificate
+   * @param string $path The path to a valid SSL certificate
    * @return void
    */
   public static function setGlobalCABundleFromPath($path) {
@@ -105,7 +106,7 @@ final class HTTPSFuture extends BaseHTTPFuture {
    * Set the fallback CA certificate if one is not specified
    * for the session, given a string.
    *
-   * @param string The certificate
+   * @param string $certificate The certificate
    * @return void
    */
   public static function setGlobalCABundleFromString($certificate) {
@@ -127,8 +128,8 @@ final class HTTPSFuture extends BaseHTTPFuture {
    * Load contents of remote URI. Behaves pretty much like
    * `@file_get_contents($uri)` but doesn't require `allow_url_fopen`.
    *
-   * @param string
-   * @param float
+   * @param string $uri
+   * @param float $timeout (optional)
    * @return string|false
    */
   public static function loadContent($uri, $timeout = null) {
@@ -186,10 +187,10 @@ final class HTTPSFuture extends BaseHTTPFuture {
   /**
    * Attach a file to the request.
    *
-   * @param string  HTTP parameter name.
-   * @param string  File content.
-   * @param string  File name.
-   * @param string  File mime type.
+   * @param string  $key HTTP parameter name.
+   * @param string  $data File content.
+   * @param string  $name File name.
+   * @param string  $mime_type File mime type.
    * @return this
    */
   public function attachFileData($key, $data, $name, $mime_type) {
@@ -770,8 +771,9 @@ final class HTTPSFuture extends BaseHTTPFuture {
   /**
    * Detect strings which will cause cURL to do horrible, insecure things.
    *
-   * @param string  Possibly dangerous string.
-   * @param bool    True if this string is being used as part of a query string.
+   * @param string  $string Possibly dangerous string.
+   * @param bool    $is_query_string True if this string is being used as part
+   *   of a query string.
    * @return void
    */
   private function checkForDangerousCURLMagic($string, $is_query_string) {
@@ -828,7 +830,7 @@ final class HTTPSFuture extends BaseHTTPFuture {
    *
    * You must write the entire body before starting the request.
    *
-   * @param string Raw body.
+   * @param string $raw_body Raw body.
    * @return this
    */
   public function write($raw_body) {

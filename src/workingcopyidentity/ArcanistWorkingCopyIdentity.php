@@ -51,10 +51,11 @@ final class ArcanistWorkingCopyIdentity extends Phobject {
    * This method attempts to be robust against all sorts of possible
    * misconfiguration.
    *
-   * @param string    Path to load information for, usually the current working
-   *                  directory (unless running unit tests).
-   * @param map|null  Pass `null` to locate and load a `.arcconfig` file if one
-   *                  exists. Pass a map to use it to set configuration.
+   * @param string    $path Path to load information for, usually the current
+   *                  working directory (unless running unit tests).
+   * @param map|null  $config Pass `null` to locate and load a `.arcconfig`
+   *                  file if one exists. Pass a map to use it to set
+   *                  configuration.
    * @return ArcanistWorkingCopyIdentity Constructed working copy identity.
    */
   private static function newFromPathWithConfig($path, $config) {
@@ -245,8 +246,8 @@ final class ArcanistWorkingCopyIdentity extends Phobject {
    * configuration sources. See @{method:getConfigFromAnySource} to read from
    * user configuration.
    *
-   * @param key   Key to read.
-   * @param wild  Default value if key is not found.
+   * @param key   $key Key to read.
+   * @param wild  $default (Optional) Default value if key is not found.
    * @return wild Value, or default value if not found.
    *
    * @task config

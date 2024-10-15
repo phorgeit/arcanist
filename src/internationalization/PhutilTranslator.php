@@ -64,7 +64,7 @@ final class PhutilTranslator extends Phobject {
    *     '%s owns %s.' => '%2$s is owned by %1$s.',
    *   );
    *
-   * @param array Identifier in key, translation in value.
+   * @param array $translations Identifier in key, translation in value.
    * @return PhutilTranslator Provides fluent interface.
    */
   public function setTranslations(array $translations) {
@@ -212,8 +212,8 @@ final class PhutilTranslator extends Phobject {
   /**
    * Translate date formatted by `$date->format()`.
    *
-   * @param string Format accepted by `DateTime::format()`.
-   * @param DateTime
+   * @param string $format Format accepted by `DateTime::format()`.
+   * @param DateTime $date
    * @return string Formatted and translated date.
    */
   public function translateDate($format, DateTime $date) {
@@ -243,8 +243,8 @@ final class PhutilTranslator extends Phobject {
    * translations of '.' (decimal point) and ',' (thousands separator). Both
    * these translations must be 1 byte long with PHP < 5.4.0.
    *
-   * @param float
-   * @param int
+   * @param float $number
+   * @param int $decimals (optional)
    * @return string
    */
   public function formatNumber($number, $decimals = 0) {

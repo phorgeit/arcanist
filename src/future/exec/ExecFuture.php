@@ -119,7 +119,7 @@ final class ExecFuture extends PhutilExecutableFuture {
    *
    * NOTE: Setting this to 0 means "no buffer", not "unlimited buffer".
    *
-   * @param int Maximum size of the stdout read buffer.
+   * @param int $limit Maximum size of the stdout read buffer.
    * @return this
    * @task config
    */
@@ -133,7 +133,7 @@ final class ExecFuture extends PhutilExecutableFuture {
    * Set a maximum size for the stderr read buffer.
    * See @{method:setStdoutSizeLimit} for discussion.
    *
-   * @param int Maximum size of the stderr read buffer.
+   * @param int $limit Maximum size of the stderr read buffer.
    * @return this
    * @task config
    */
@@ -153,7 +153,8 @@ final class ExecFuture extends PhutilExecutableFuture {
    * TODO: We should probably release the read buffer limit during
    * @{method:resolve}, or otherwise detect this. For now, be careful.
    *
-   * @param int|null Maximum buffer size, or `null` for unlimited.
+   * @param int|null $read_buffer_size Maximum buffer size, or `null` for
+   *   unlimited.
    * @return this
    */
   public function setReadBufferSize($read_buffer_size) {
@@ -233,12 +234,12 @@ final class ExecFuture extends PhutilExecutableFuture {
   /**
    * Write data to stdin of the command.
    *
-   * @param string Data to write.
-   * @param bool If true, keep the pipe open for writing. By default, the pipe
-   *             will be closed as soon as possible so that commands which
-   *             listen for EOF will execute. If you want to keep the pipe open
-   *             past the start of command execution, do an empty write with
-   *             `$keep_pipe = true` first.
+   * @param string $data Data to write.
+   * @param bool $keep_pipe (optional) If true, keep the pipe open for writing.
+   *             By default, the pipe will be closed as soon as possible so
+   *             that commands which listen for EOF will execute. If you want
+   *             to keep the pipe open past the start of command execution, do
+   *             an empty write with `$keep_pipe = true` first.
    * @return this
    * @task interact
    */
@@ -308,8 +309,8 @@ final class ExecFuture extends PhutilExecutableFuture {
    * The subprocess will be sent a `TERM` signal, and then a `KILL` signal a
    * short while later if it fails to exit.
    *
-   * @param int Maximum number of seconds this command may execute for before
-   *  it is signaled.
+   * @param int $seconds Maximum number of seconds this command may execute for
+   *  before it is signaled.
    * @return this
    * @task config
    */
@@ -523,13 +524,13 @@ final class ExecFuture extends PhutilExecutableFuture {
    * Reads some bytes from a stream, discarding output once a certain amount
    * has been accumulated.
    *
-   * @param resource  Stream to read from.
-   * @param int       Maximum number of bytes to return from $stream. If
+   * @param resource  $stream Stream to read from.
+   * @param int       $limit Maximum number of bytes to return from $stream. If
    *                  additional bytes are available, they will be read and
    *                  discarded.
-   * @param string    Human-readable description of stream, for exception
-   *                  message.
-   * @param int       Maximum number of bytes to read.
+   * @param string    $description Human-readable description of stream, for
+   *                  exception message.
+   * @param int       $length Maximum number of bytes to read.
    * @return string   The data read from the stream.
    * @task internal
    */

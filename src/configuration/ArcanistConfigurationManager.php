@@ -50,8 +50,8 @@ final class ArcanistConfigurationManager extends Phobject {
    * arguments ("runtime").
    * The precedence is runtime > local > project > user > system
    *
-   * @param key   Key to read.
-   * @param wild  Default value if key is not found.
+   * @param key   $key Key to read.
+   * @param wild  $default (optional) Default value if key is not found.
    * @return wild Value, or default value if not found.
    *
    * @task config
@@ -71,7 +71,7 @@ final class ArcanistConfigurationManager extends Phobject {
    * The map is ordered by the canonical sources precedence, which is:
    * runtime > local > project > user > system
    *
-   * @param key   Key to read
+   * @param key    $key Key to read
    * @return array Mapping of source => value read. Sources with no value are
    *               not in the array.
    *
@@ -135,8 +135,8 @@ final class ArcanistConfigurationManager extends Phobject {
    * Sets a runtime config value that takes precedence over any static
    * config values.
    *
-   * @param key   Key to set.
-   * @param value The value of the key.
+   * @param key   $key Key to set.
+   * @param value $value The value of the key.
    *
    * @task config
    */

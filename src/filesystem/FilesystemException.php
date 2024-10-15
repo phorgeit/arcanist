@@ -11,8 +11,8 @@ final class FilesystemException extends Exception {
   /**
    * Create a new FilesystemException, providing a path and a message.
    *
-   * @param  string  Path that caused the failure.
-   * @param  string  Description of the failure.
+   * @param  string $path Path that caused the failure.
+   * @param  string $message Description of the failure.
    */
   public function __construct($path, $message) {
     $this->path = $path;

@@ -3,6 +3,10 @@
 final class ArcanistDownloadWorkflow
   extends ArcanistArcWorkflow {
 
+  private $id;
+  private $saveAs;
+  private $show;
+
   public function getWorkflowName() {
     return 'download';
   }
@@ -156,7 +160,7 @@ EOTEXT
     try {
       list($data) = $future->resolvex();
     } catch (Exception $ex) {
-      Filesystem::removePath($path);
+      Filesystem::remove($path);
       throw $ex;
     }
 

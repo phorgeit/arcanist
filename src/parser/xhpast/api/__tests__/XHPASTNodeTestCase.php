@@ -73,7 +73,7 @@ final class XHPASTNodeTestCase extends PhutilTestCase {
    * }
    * ```
    *
-   * @param  string                 The path to the test file.
+   * @param  string                 $file The path to the test file.
    * @return pair<XHPASTTree, map>  The first element of the pair is the
    *                                `XHPASTTree` contained within the test file.
    *                                The second element of the pair is the

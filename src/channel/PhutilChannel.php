@@ -65,7 +65,7 @@ abstract class PhutilChannel extends Phobject {
    *
    * The default implementation accepts bytes.
    *
-   * @param   wild  Data to write to the channel, normally bytes.
+   * @param   wild $bytes Data to write to the channel, normally bytes.
    * @return  this
    *
    * @task io
@@ -90,8 +90,8 @@ abstract class PhutilChannel extends Phobject {
    * Wait for any activity on a list of channels. Convenience wrapper around
    * @{method:waitForActivity}.
    *
-   * @param   list<PhutilChannel>   A list of channels to wait for.
-   * @param   dict                  Options, see above.
+   * @param   list<PhutilChannel>   $channels A list of channels to wait for.
+   * @param   dict                  $options (optional) Options, see above.
    * @return  void
    *
    * @task wait
@@ -119,8 +119,9 @@ abstract class PhutilChannel extends Phobject {
    * NOTE: Extra streams must be //streams//, not //sockets//, because this
    * method uses `stream_select()`, not `socket_select()`.
    *
-   * @param list<PhutilChannel> List of channels to wait for reads on.
-   * @param list<PhutilChannel> List of channels to wait for writes on.
+   * @param list<PhutilChannel> $reads List of channels to wait for reads on.
+   * @param list<PhutilChannel> $writes List of channels to wait for writes on.
+   * @param   dict              $options (optional) Options, see above.
    * @return void
    *
    * @task wait
@@ -245,7 +246,7 @@ abstract class PhutilChannel extends Phobject {
    * Set a channel name. This is primarily intended to allow you to debug
    * channel code more easily, by naming channels something meaningful.
    *
-   * @param string Channel name.
+   * @param string $name Channel name.
    * @return this
    *
    * @task impl
@@ -313,7 +314,7 @@ abstract class PhutilChannel extends Phobject {
   /**
    * Read from the channel's underlying I/O.
    *
-   * @param int Maximum number of bytes to read.
+   * @param int $length Maximum number of bytes to read.
    * @return string Bytes, if available.
    *
    * @task impl
@@ -324,7 +325,7 @@ abstract class PhutilChannel extends Phobject {
   /**
    * Write to the channel's underlying I/O.
    *
-   * @param string Bytes to write.
+   * @param string $bytes Bytes to write.
    * @return int Number of bytes written.
    *
    * @task impl
@@ -361,7 +362,8 @@ abstract class PhutilChannel extends Phobject {
    * block once the buffer reaches this size until the in-process buffer is
    * consumed.
    *
-   * @param int|null Maximum read buffer size, or `null` for a limitless buffer.
+   * @param int|null $size Maximum read buffer size, or `null` for a limitless
+   *   buffer.
    * @return this
    * @task impl
    */
