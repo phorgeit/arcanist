@@ -11,8 +11,10 @@ final class ArcanistBundleTestCase extends PhutilTestCase {
   }
 
   private function loadDiff($old, $new) {
+    // This unit test must parse 'diff' output in a language independent way,
+    // so we need LC_ALL=C.
     list($err, $stdout) = exec_manual(
-      'diff --unified=65535 --label %s --label %s -- %s %s',
+      'LC_ALL=C diff --unified=65535 --label %s --label %s -- %s %s',
       'file 9999-99-99',
       'file 9999-99-99',
       $this->getResourcePath($old),
