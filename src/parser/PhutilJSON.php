@@ -51,7 +51,7 @@ final class PhutilJSON extends Phobject {
       $object = (array)$object;
     }
 
-    if (empty($object)) {
+    if (empty($object) || !is_iterable($object)) {
       return '{}';
     }
 
