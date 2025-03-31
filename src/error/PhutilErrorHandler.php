@@ -382,7 +382,7 @@ final class PhutilErrorHandler extends Phobject {
    * dispatched to the listener; this method also prints them to the PHP error
    * log.
    *
-   * @param const $event Event type constant.
+   * @param string $event Event type constant.
    * @param wild $value Event value.
    * @param dict $metadata Event metadata.
    * @return void

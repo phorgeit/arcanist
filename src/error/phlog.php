@@ -52,7 +52,7 @@ function phlog($value/* , ... */) {
  * you don't want to display these, test for `@` being in effect by checking if
  * `error_reporting() === 0` before displaying the error.
  *
- * @param  const  $event A PhutilErrorHandler constant, like
+ * @param  string $event A PhutilErrorHandler constant, like
  *                PhutilErrorHandler::ERROR, which indicates the event type
  *                (e.g. error, exception, user message).
  * @param  wild   $value The event value, like the Exception object for an
