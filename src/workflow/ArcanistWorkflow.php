@@ -618,7 +618,7 @@ abstract class ArcanistWorkflow extends Phobject {
   /**
    * Returns the PHID for the user once they've authenticated via Conduit.
    *
-   * @return phid Authenticated user PHID.
+   * @return string Authenticated user PHID.
    * @task conduit
    */
   final public function getUserPHID() {
@@ -1877,8 +1877,8 @@ abstract class ArcanistWorkflow extends Phobject {
    * Get the PHID of the Phabricator repository this working copy corresponds
    * to. Returns `null` if no repository can be identified.
    *
-   * @return phid|null  Repository PHID, or null if no repository can be
-   *                    identified.
+   * @return string|null  Repository PHID, or null if no repository can be
+   *                      identified.
    *
    * @task phabrep
    */
