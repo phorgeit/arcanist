@@ -799,7 +799,7 @@ function nonempty(/* ... */) {
  *
  * @param  string  $class_name The name of a class.
  * @param  list    $argv Array of arguments to pass to its constructor.
- * @return obj     A new object of the specified class, constructed by passing
+ * @return object  A new object of the specified class, constructed by passing
  *                 the argument vector to its constructor.
  */
 function newv($class_name, array $argv) {
