@@ -15,7 +15,7 @@ function __arcanist_init_script__() {
     ob_end_clean();
   }
 
-  error_reporting(E_ALL | E_STRICT);
+  error_reporting(E_ALL);
 
   $config_map = array(
     // Always display script errors. Without this, they may not appear, which is
