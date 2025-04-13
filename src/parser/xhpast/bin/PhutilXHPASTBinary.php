@@ -81,7 +81,7 @@ final class PhutilXHPASTBinary extends Phobject {
         // user to build it themselves.
         self::build();
       } catch (CommandException $ex) {
-        throw new PhutilProxyException(self::getBuildInstructions(), $ex);
+        throw new Exception(self::getBuildInstructions(), 0, $ex);
       }
     }
     $future = new ExecFuture('%s', self::getPath());

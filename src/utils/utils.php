@@ -1732,8 +1732,9 @@ function phutil_http_parameter_pair($key, $value) {
   try {
     assert_stringlike($key);
   } catch (InvalidArgumentException $ex) {
-    throw new PhutilProxyException(
+    throw new Exception(
       pht('HTTP query parameter key must be a scalar.'),
+      0,
       $ex);
   }
 
@@ -1742,10 +1743,11 @@ function phutil_http_parameter_pair($key, $value) {
   try {
     assert_stringlike($value);
   } catch (InvalidArgumentException $ex) {
-    throw new PhutilProxyException(
+    throw new Exception(
       pht(
         'HTTP query parameter value (for key "%s") must be a scalar.',
         $key),
+      0,
       $ex);
   }
 

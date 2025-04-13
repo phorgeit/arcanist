@@ -88,18 +88,14 @@ final class PhutilErrorHandler extends Phobject {
    * can use @{class:PhutilProxyException} to nest exceptions; after PHP 5.3
    * all exceptions are nestable.
    *
+   * @deprecated Call Exception::getPrevious directly.
+   *
    * @param   Exception|Throwable       $ex Exception to unnest.
    * @return  Exception|Throwable|null  Previous exception, if one exists.
    * @task    exutil
    */
   public static function getPreviousException($ex) {
-    if (method_exists($ex, 'getPrevious')) {
-      return $ex->getPrevious();
-    }
-    if (method_exists($ex, 'getPreviousException')) {
-      return $ex->getPreviousException();
-    }
-    return null;
+    return $ex->getPrevious();
   }
 
 
@@ -112,8 +108,8 @@ final class PhutilErrorHandler extends Phobject {
    */
   public static function getRootException($ex) {
     $root = $ex;
-    while (self::getPreviousException($root)) {
-      $root = self::getPreviousException($root);
+    while ($root->getPrevious()) {
+      $root = $root->getPrevious();
     }
     return $root;
   }
@@ -411,7 +407,7 @@ final class PhutilErrorHandler extends Phobject {
         $current = $value;
         do {
           $messages[] = '('.get_class($current).') '.$current->getMessage();
-        } while ($current = self::getPreviousException($current));
+        } while ($current = $current->getPrevious());
         $messages = implode(' {>} ', $messages);
 
         if (strlen($messages) > 4096) {
@@ -608,7 +604,7 @@ final class PhutilErrorHandler extends Phobject {
       }
 
       // If this is a proxy exception, add the proxied exception.
-      $prev = self::getPreviousException($ex);
+      $prev = $ex->getPrevious();
       if ($prev) {
         $stack[] = array(++$id, $prev);
       }

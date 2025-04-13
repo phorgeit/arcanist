@@ -461,11 +461,7 @@ try {
     while ($ex) {
       fwrite(STDERR, $ex->getMessage()."\n");
 
-      if ($ex instanceof PhutilProxyException) {
-        $ex = $ex->getPreviousException();
-      } else {
-        $ex = null;
-      }
+      $ex = $ex->getPrevious();
     }
 
     fwrite(STDERR, phutil_console_format(

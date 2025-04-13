@@ -303,7 +303,7 @@ final class PhutilOAuth1Future extends FutureProxy {
     try {
       return phutil_json_decode($body);
     } catch (PhutilJSONParserException $ex) {
-      throw new PhutilProxyException(pht('Expected JSON.'), $ex);
+      throw new Exception(pht('Expected JSON.'), 0, $ex);
     }
   }
 

@@ -61,10 +61,11 @@ final class ArcanistAlias extends Phobject {
         $alias->toolset = idx($value, 'toolset');
         $alias->command = idx($value, 'command');
       } catch (PhutilTypeCheckException $ex) {
-        $alias->exception = new PhutilProxyException(
+        $alias->exception = new Exception(
           pht(
             'Found invalid alias definition (with key "%s").',
             $key),
+          0,
           $ex);
       }
     } else {

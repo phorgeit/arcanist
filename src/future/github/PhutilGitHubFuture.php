@@ -95,8 +95,9 @@ final class PhutilGitHubFuture extends FutureProxy {
         $data = array();
       }
     } catch (PhutilJSONParserException $ex) {
-      throw new PhutilProxyException(
+      throw new Exception(
         pht('Expected JSON response from GitHub.'),
+        0,
         $ex);
     }
 

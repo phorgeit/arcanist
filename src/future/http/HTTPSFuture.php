@@ -439,10 +439,11 @@ final class HTTPSFuture extends BaseHTTPFuture {
                 'Call to "curl_setopt(...)" returned "false".'));
           }
         } catch (Exception $ex) {
-          throw new PhutilProxyException(
+          throw new Exception(
             pht(
               'Call to "curl_setopt(...) failed for option key "%s".',
               $curl_key),
+            0,
             $ex);
         }
       }

@@ -170,10 +170,11 @@ abstract class PhutilExecutableFuture extends Future {
     try {
       Filesystem::assertExists($cwd);
     } catch (FilesystemException $ex) {
-      throw new PhutilProxyException(
+      throw new Exception(
         pht(
           'Unable to run a command in directory "%s".',
           $cwd),
+        0,
         $ex);
     }
 

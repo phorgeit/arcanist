@@ -212,8 +212,9 @@ final class ArcanistConfigurationManager extends Phobject {
         try {
           $user_config = phutil_json_decode($user_config_data);
         } catch (PhutilJSONParserException $ex) {
-          throw new PhutilProxyException(
+          throw new Exception(
             pht("Your '%s' file is not a valid JSON file.", '~/.arcrc'),
+            0,
             $ex);
         }
       } else {
@@ -313,10 +314,11 @@ final class ArcanistConfigurationManager extends Phobject {
         try {
           $system_config = phutil_json_decode($file);
         } catch (PhutilJSONParserException $ex) {
-          throw new PhutilProxyException(
+          throw new Exception(
             pht(
               "Your '%s' file is not a valid JSON file.",
               $system_config_path),
+            0,
             $ex);
         }
       } else {

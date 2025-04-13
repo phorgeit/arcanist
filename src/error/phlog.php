@@ -26,7 +26,7 @@ function phlog($value/* , ... */) {
       // If this is an exception, proxy it and generate a composite trace which
       // shows both where the phlog() was called and where the exception was
       // originally thrown from.
-      $proxy = new PhutilProxyException('', $event);
+      $proxy = new Exception('', 0, $event);
       $trace = PhutilErrorHandler::getExceptionTrace($proxy);
       $data['trace'] = $trace;
     } else {

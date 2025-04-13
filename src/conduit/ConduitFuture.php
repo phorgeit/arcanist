@@ -54,10 +54,11 @@ final class ConduitFuture extends FutureProxy {
     try {
       $data = phutil_json_decode($raw);
     } catch (PhutilJSONParserException $ex) {
-      throw new PhutilProxyException(
+      throw new Exception(
         pht(
           'Host returned HTTP/200, but invalid JSON data in response to '.
           'a Conduit method call.'),
+        0,
         $ex);
     }
 

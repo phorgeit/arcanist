@@ -90,10 +90,11 @@ final class PHPASTParserTestCase extends PhutilTestCase {
         try {
           $stdout = phutil_json_decode($stdout);
         } catch (PhutilJSONParserException $ex) {
-          throw new PhutilProxyException(
+          throw new Exception(
             pht(
               'Output for test file "%s" is not valid JSON.',
               $name),
+            0,
             $ex);
         }
 

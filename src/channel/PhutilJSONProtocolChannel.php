@@ -101,8 +101,9 @@ final class PhutilJSONProtocolChannel extends PhutilProtocolChannel {
           try {
             $objects[] = phutil_json_decode($data);
           } catch (PhutilJSONParserException $ex) {
-            throw new PhutilProxyException(
+            throw new Exception(
               pht('Failed to decode JSON object.'),
+              0,
               $ex);
           }
 
