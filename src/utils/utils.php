@@ -307,7 +307,7 @@ function ipull(array $list, $index, $key_index = null) {
  * @param   string  $by Name of a method, like 'getType', to call on each
  *                  object in order to determine which group it should be
  *                  placed into.
- * @param   ...     (optional) Zero or more additional method names, to
+ * @param   string  $methods,... Zero or more additional method names, to
  *                  subgroup the groups.
  * @return  dict    Dictionary mapping distinct method returns to lists of
  *                  all objects which returned that value.
@@ -347,7 +347,7 @@ function mgroup(array $list, $by /* , ... */) {
  * @param   list    $list List of arrays to group by some index value.
  * @param   string  $by Name of an index to select from each array in order to
  *                  determine which group it should be placed into.
- * @param   ...     (optional) Zero or more additional indexes names, to
+ * @param   string  $methods,... Zero or more additional indexes names, to
  *                  subgroup the groups.
  * @return  dict    Dictionary mapping distinct index values to lists of
  *                  all objects which had that value at the index.
@@ -729,7 +729,7 @@ function assert_stringlike($parameter) {
  * Returns the first argument which is not strictly null, or `null` if there
  * are no such arguments. Identical to the MySQL function of the same name.
  *
- * @param  ...         Zero or more arguments of any type.
+ * @param  mixed       $args,... Zero or more arguments of any type.
  * @return mixed       First non-`null` arg, or null if no such arg exists.
  */
 function coalesce(/* ... */) {
@@ -751,7 +751,7 @@ function coalesce(/* ... */) {
  *
  *   $display_name = nonempty($user_name, $full_name, "Anonymous");
  *
- * @param  ...         Zero or more arguments of any type.
+ * @param  mixed       $args,... Zero or more arguments of any type.
  * @return mixed       First non-`empty()` arg, or last arg if no such arg
  *                     exists, or null if you passed in zero args.
  */

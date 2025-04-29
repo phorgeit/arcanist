@@ -10,8 +10,8 @@
  *    Inserts a raw regular expression.
  *
  * @param  string  $pattern sprintf()-style format string.
- * @param  string  (optional) Flags to use with the regular expression.
- * @param  ...     (optional) Zero or more arguments.
+ * @param  string  $args,... (optional) Flags to use with the regular
+ *                 expression.
  * @return string  Formatted string.
  */
 function pregsprintf($pattern /* , ... */) {

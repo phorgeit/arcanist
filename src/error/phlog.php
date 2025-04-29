@@ -7,7 +7,7 @@
  *
  * @param  wild  $value Any value you want printed to the error log or other
  *               registered logs/consoles.
- * @param  ...   Other values to be logged.
+ * @param  wild  $value,... Other values to be logged.
  * @return wild  Passed $value.
  */
 function phlog($value/* , ... */) {
