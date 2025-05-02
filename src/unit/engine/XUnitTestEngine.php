@@ -397,7 +397,7 @@ class XUnitTestEngine extends ArcanistUnitTestEngine {
    *
    * @param  string  $coverage The name of the coverage file if one was
    *                 provided by `buildTestFuture`.
-   * @return array   Code coverage results, or null.
+   * @return array|null   Code coverage results, or null.
    */
   protected function parseCoverageResult($coverage) {
     return null;

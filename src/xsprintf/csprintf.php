@@ -28,7 +28,7 @@
  * than by calling @{function:csprintf} directly.
  *
  * @param  string  $pattern sprintf()-style format string.
- * @param  ...     Zero or more arguments.
+ * @param  string  $args,... Zero or more arguments.
  * @return PhutilCommandString  Formatted string, escaped appropriately for
  *   shell contexts.
  */

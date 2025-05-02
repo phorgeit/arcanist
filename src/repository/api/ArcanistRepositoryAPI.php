@@ -269,7 +269,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
    * Drops caches after changes to the working copy. By default, some queries
    * against the working copy are cached. They
    *
-   * @return this
+   * @return $this
    * @task status
    */
   final public function reloadWorkingCopy() {

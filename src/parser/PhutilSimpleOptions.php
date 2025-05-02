@@ -163,7 +163,7 @@ final class PhutilSimpleOptions extends Phobject {
    *
    * @param bool  $case_sensitive True to make the parser case sensitive, false
    *              to make it case-insensitive.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setCaseSensitive($case_sensitive) {

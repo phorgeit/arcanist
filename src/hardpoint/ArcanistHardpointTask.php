@@ -105,7 +105,8 @@ final class ArcanistHardpointTask
         $result = $generator->current();
 
         if ($result instanceof Future) {
-          $result = new ArcanistHardpointFutureList($result);
+          $result =
+            ArcanistHardpointFutureList::newFromFutures(array($result));
         }
 
         if ($result instanceof ArcanistHardpointFutureList) {

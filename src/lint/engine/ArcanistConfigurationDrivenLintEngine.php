@@ -20,12 +20,13 @@ final class ArcanistConfigurationDrivenLintEngine extends ArcanistLintEngine {
     try {
       $config = phutil_json_decode($data);
     } catch (PhutilJSONParserException $ex) {
-      throw new PhutilProxyException(
+      throw new Exception(
         pht(
           "Expected '%s' file to be a valid JSON file, but ".
           "failed to decode '%s'.",
           '.arclint',
           $config_path),
+        0,
         $ex);
     }
 
@@ -39,8 +40,9 @@ final class ArcanistConfigurationDrivenLintEngine extends ArcanistLintEngine {
           'linters' => 'map<string, map<string, wild>>',
         ));
     } catch (PhutilTypeCheckException $ex) {
-      throw new PhutilProxyException(
+      throw new Exception(
         pht("Error in parsing '%s' file.", $config_path),
+        0,
         $ex);
     }
 
@@ -89,11 +91,12 @@ final class ArcanistConfigurationDrivenLintEngine extends ArcanistLintEngine {
             'exclude' => 'optional regex | list<regex>',
           ) + $more);
       } catch (PhutilTypeCheckException $ex) {
-        throw new PhutilProxyException(
+        throw new Exception(
           pht(
             "Error in parsing '%s' file, for linter '%s'.",
             '.arclint',
             $name),
+          0,
           $ex);
       }
 
@@ -102,12 +105,13 @@ final class ArcanistConfigurationDrivenLintEngine extends ArcanistLintEngine {
           try {
             $linter->setLinterConfigurationValue($key, $spec[$key]);
           } catch (Exception $ex) {
-            throw new PhutilProxyException(
+            throw new Exception(
               pht(
                 "Error in parsing '%s' file, in key '%s' for linter '%s'.",
                 '.arclint',
                 $key,
                 $name),
+              0,
               $ex);
           }
         }

@@ -292,7 +292,7 @@ abstract class ArcanistLintEngine extends Phobject {
   /**
    * @param dict<string path, dict<string version, list<dict message>>>
    *   $results
-   * @return this
+   * @return $this
    */
   final public function setCachedResults(array $results) {
     $this->cachedResults = $results;
@@ -437,7 +437,7 @@ abstract class ArcanistLintEngine extends Phobject {
    *
    * @param string $key Resource identifier.
    * @param wild   $value Resource.
-   * @return this
+   * @return $this
    */
   public function setLinterResource($key, $value) {
     $this->linterResources[$key] = $value;

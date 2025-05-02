@@ -31,7 +31,6 @@ final class XHPASTNode extends AASTNode {
     switch ($this->getTypeName()) {
       case 'n_STATEMENT':
         return $this->getChildByIndex(0)->evalStatic();
-        break;
       case 'n_STRING_SCALAR':
         return phutil_string_cast($this->getStringLiteralValue());
       case 'n_HEREDOC':
@@ -61,22 +60,18 @@ final class XHPASTNode extends AASTNode {
           default:
             throw new Exception(pht('Unrecognized symbol name.'));
         }
-        break;
       case 'n_UNARY_PREFIX_EXPRESSION':
         $operator = $this->getChildOfType(0, 'n_OPERATOR');
         $operand = $this->getChildByIndex(1);
         switch ($operator->getSemanticString()) {
           case '-':
             return -$operand->evalStatic();
-            break;
           case '+':
             return $operand->evalStatic();
-            break;
           default:
             throw new Exception(
               pht('Unexpected operator in static expression.'));
         }
-        break;
       case 'n_ARRAY_LITERAL':
         $result = array();
         $values = $this->getChildOfType(0, 'n_ARRAY_VALUE_LIST');
@@ -240,7 +235,7 @@ final class XHPASTNode extends AASTNode {
         switch ($c) {
           case 'x':
             $u = isset($value[$ii + 1]) ? $value[$ii + 1] : null;
-            if (!preg_match('/^[a-f0-9]/i', $u)) {
+            if ($u === null || !preg_match('/^[a-f0-9]/i', $u)) {
               // PHP treats \x followed by anything which is not a hex digit
               // as a literal \x.
               $out .= '\\\\'.$c;

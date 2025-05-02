@@ -27,7 +27,7 @@ final class FileList extends Phobject {
    * Build a new FileList from an array of paths, e.g. from $argv.
    *
    * @param  list $paths List of relative or absolute file paths.
-   * @return this
+   * @return $this
    * @task create
    */
   public function __construct($paths) {

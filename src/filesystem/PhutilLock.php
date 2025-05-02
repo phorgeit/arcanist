@@ -146,7 +146,7 @@ abstract class PhutilLock extends Phobject {
    *
    * @param  float $wait (optional) Seconds to block waiting for the lock. By
    *               default, do not block.
-   * @return this
+   * @return $this
    *
    * @task lock
    */
@@ -186,7 +186,7 @@ abstract class PhutilLock extends Phobject {
    * Release the lock. Throws an exception on failure, e.g. if the lock is not
    * currently held.
    *
-   * @return this
+   * @return $this
    *
    * @task lock
    */

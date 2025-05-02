@@ -274,7 +274,7 @@ final class ArcanistLintMessage extends Phobject {
    *
    * @param mixed $value Integer or digit string.
    * @param mixed $caller
-   * @return int Integer.
+   * @return int|null Integer, or null if $value is null
    */
   private function validateInteger($value, $caller) {
     if ($value === null) {

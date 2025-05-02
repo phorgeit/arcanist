@@ -44,7 +44,7 @@ final class PhutilErrorLog
           try {
             Filesystem::createDirectory($log_dir, 0755, true);
           } catch (FilesystemException $ex) {
-            throw new PhutilProxyException(
+            throw new Exception(
               pht(
                 'Unable to write log "%s" to path "%s". The containing '.
                 'directory ("%s") does not exist or is not readable, and '.
@@ -52,6 +52,7 @@ final class PhutilErrorLog
                 $this->getLogName(),
                 $log_path,
                 $log_dir),
+              0,
               $ex);
           }
         }
@@ -68,12 +69,13 @@ final class PhutilErrorLog
 
       // If we ran into a write exception and couldn't resolve it, fail.
       if ($write_exception) {
-        throw new PhutilProxyException(
+        throw new Exception(
           pht(
             'Unable to write log "%s" to path "%s" because the path is not '.
             'writable.',
             $this->getLogName(),
             $log_path),
+          0,
           $write_exception);
       }
     }

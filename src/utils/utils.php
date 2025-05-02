@@ -307,7 +307,7 @@ function ipull(array $list, $index, $key_index = null) {
  * @param   string  $by Name of a method, like 'getType', to call on each
  *                  object in order to determine which group it should be
  *                  placed into.
- * @param   ...     (optional) Zero or more additional method names, to
+ * @param   string  $methods,... Zero or more additional method names, to
  *                  subgroup the groups.
  * @return  dict    Dictionary mapping distinct method returns to lists of
  *                  all objects which returned that value.
@@ -347,7 +347,7 @@ function mgroup(array $list, $by /* , ... */) {
  * @param   list    $list List of arrays to group by some index value.
  * @param   string  $by Name of an index to select from each array in order to
  *                  determine which group it should be placed into.
- * @param   ...     (optional) Zero or more additional indexes names, to
+ * @param   string  $methods,... Zero or more additional indexes names, to
  *                  subgroup the groups.
  * @return  dict    Dictionary mapping distinct index values to lists of
  *                  all objects which had that value at the index.
@@ -729,7 +729,7 @@ function assert_stringlike($parameter) {
  * Returns the first argument which is not strictly null, or `null` if there
  * are no such arguments. Identical to the MySQL function of the same name.
  *
- * @param  ...         Zero or more arguments of any type.
+ * @param  mixed       $args,... Zero or more arguments of any type.
  * @return mixed       First non-`null` arg, or null if no such arg exists.
  */
 function coalesce(/* ... */) {
@@ -751,7 +751,7 @@ function coalesce(/* ... */) {
  *
  *   $display_name = nonempty($user_name, $full_name, "Anonymous");
  *
- * @param  ...         Zero or more arguments of any type.
+ * @param  mixed       $args,... Zero or more arguments of any type.
  * @return mixed       First non-`empty()` arg, or last arg if no such arg
  *                     exists, or null if you passed in zero args.
  */
@@ -799,7 +799,7 @@ function nonempty(/* ... */) {
  *
  * @param  string  $class_name The name of a class.
  * @param  list    $argv Array of arguments to pass to its constructor.
- * @return obj     A new object of the specified class, constructed by passing
+ * @return object  A new object of the specified class, constructed by passing
  *                 the argument vector to its constructor.
  */
 function newv($class_name, array $argv) {
@@ -960,7 +960,7 @@ function phutil_split_lines($corpus, $retain_endings = true) {
  * @param   list  $list (optional) List of scalars.
  * @return  dict  Dictionary with inputs mapped to themselves.
  */
-function array_fuse(array $list = null) {
+function array_fuse(?array $list = null) {
   if ($list) {
     return array_combine($list, $list);
   }
@@ -1449,22 +1449,7 @@ function phutil_ini_decode($string) {
   $trap = new PhutilErrorTrap();
 
   try {
-    $have_call = false;
-    if (function_exists('parse_ini_string')) {
-      if (defined('INI_SCANNER_RAW')) {
-        $results = @parse_ini_string($string, true, INI_SCANNER_RAW);
-        $have_call = true;
-      }
-    }
-
-    if (!$have_call) {
-      throw new PhutilMethodNotImplementedException(
-        pht(
-          '%s is not compatible with your version of PHP (%s). This function '.
-          'is only supported on PHP versions newer than 5.3.0.',
-          __FUNCTION__,
-          phpversion()));
-    }
+    $results = @parse_ini_string($string, true, INI_SCANNER_RAW);
 
     if ($results === false) {
       throw new PhutilINIParserException(trim($trap->getErrorsAsString()));
@@ -1747,8 +1732,9 @@ function phutil_http_parameter_pair($key, $value) {
   try {
     assert_stringlike($key);
   } catch (InvalidArgumentException $ex) {
-    throw new PhutilProxyException(
+    throw new Exception(
       pht('HTTP query parameter key must be a scalar.'),
+      0,
       $ex);
   }
 
@@ -1757,10 +1743,11 @@ function phutil_http_parameter_pair($key, $value) {
   try {
     assert_stringlike($value);
   } catch (InvalidArgumentException $ex) {
-    throw new PhutilProxyException(
+    throw new Exception(
       pht(
         'HTTP query parameter value (for key "%s") must be a scalar.',
         $key),
+      0,
       $ex);
   }
 

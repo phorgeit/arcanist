@@ -68,7 +68,6 @@ function xsprintf_terminal($userdata, &$pattern, &$pos, &$value, &$length) {
           'Unsupported escape sequence "%s" found in pattern: %s',
           $type,
           $pattern));
-      break;
   }
 
   $pattern[$pos] = $type;

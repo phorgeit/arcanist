@@ -1090,7 +1090,7 @@ final class ArcanistMercurialAPI extends ArcanistRepositoryAPI {
    * @param string  $extension The name of the extension to enable.
    * @param string  $pattern The command pattern that will be run with the
    *                extension enabled.
-   * @param array   ... Parameters for the command pattern argument.
+   * @param array   $params,... Parameters for the command pattern argument.
    * @return array  An array where the first item is a Mercurial command
    *                pattern that includes the necessary flag for enabling the
    *                desired extension, and all remaining items are parameters

@@ -57,7 +57,7 @@ final class ArcanistHgProxyClient extends Phobject {
    * When connecting, do not expect the "capabilities" message.
    *
    * @param bool $skip True to skip the "capabilities" message.
-   * @return this
+   * @return $this
    *
    * @task config
    */

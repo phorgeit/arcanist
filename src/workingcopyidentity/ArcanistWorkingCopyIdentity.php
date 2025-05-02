@@ -206,8 +206,9 @@ final class ArcanistWorkingCopyIdentity extends Phobject {
     try {
       return phutil_json_decode($raw_config);
     } catch (PhutilJSONParserException $ex) {
-      throw new PhutilProxyException(
+      throw new Exception(
         pht("Unable to parse '%s' file '%s'.", '.arcconfig', $from_where),
+        0,
         $ex);
     }
   }
@@ -246,9 +247,9 @@ final class ArcanistWorkingCopyIdentity extends Phobject {
    * configuration sources. See @{method:getConfigFromAnySource} to read from
    * user configuration.
    *
-   * @param key   $key Key to read.
-   * @param wild  $default (Optional) Default value if key is not found.
-   * @return wild Value, or default value if not found.
+   * @param string $key Key to read.
+   * @param wild   $default (Optional) Default value if key is not found.
+   * @return wild  Value, or default value if not found.
    *
    * @task config
    */
@@ -306,8 +307,9 @@ final class ArcanistWorkingCopyIdentity extends Phobject {
           $json = Filesystem::readFile($local_path);
           return phutil_json_decode($json);
         } catch (PhutilJSONParserException $ex) {
-          throw new PhutilProxyException(
+          throw new Exception(
             pht("Failed to parse '%s' as JSON.", $local_path),
+            0,
             $ex);
         }
       } else {

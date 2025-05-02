@@ -162,7 +162,7 @@ final class CSharpToolsTestEngine extends XUnitTestEngine {
    * so we cache it in case it's requested again.
    *
    * @param  string  $cover_file The name of the coverage file.
-   * @return array   Code coverage results, or null if not cached.
+   * @return array|null   Code coverage results, or null if not cached.
    */
   private function getCachedResultsIfPossible($cover_file) {
     if ($this->cachedResults == null) {

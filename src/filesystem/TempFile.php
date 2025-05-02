@@ -63,7 +63,7 @@ final class TempFile extends Phobject {
    * can set it to be preserved instead.
    *
    * @param bool $preserve True to preserve the file after object destruction.
-   * @return this
+   * @return $this
    * @task config
    */
   public function setPreserveFile($preserve) {

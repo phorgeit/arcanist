@@ -9,7 +9,7 @@
  * @param string $text Translation identifier with `sprintf()` placeholders.
  * @param mixed $variant (optional) Value to select the variant from (e.g.
  *    singular or plural). Defaults to null.
- * @param ... Next values referenced from $text.
+ * @param mixed $variant,... Next values referenced from $text.
  * @return string Translated string with substituted values.
  */
 function pht($text, $variant = null /* , ... */) {

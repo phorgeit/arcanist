@@ -57,7 +57,7 @@ abstract class LinesOfALarge extends Phobject implements Iterator {
    * the output of a command which returns a large amount of data.
    *
    * @param string|null $character A one-byte delimiter character.
-   * @return this
+   * @return $this
    * @task config
    */
   final public function setDelimiter($character) {

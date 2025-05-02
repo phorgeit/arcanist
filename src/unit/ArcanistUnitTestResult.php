@@ -81,7 +81,7 @@ final class ArcanistUnitTestResult extends Phobject {
    * 3 seconds, or `0.125` for 125 milliseconds.
    *
    * @param int|float $duration Duration, in seconds.
-   * @return this
+   * @return $this
    */
   public function setDuration($duration) {
     if (!is_int($duration) && !is_float($duration)) {
@@ -111,7 +111,7 @@ final class ArcanistUnitTestResult extends Phobject {
    * "extra data" allows an implementation to store additional key/value
    * metadata along with the result of the test run.
    */
-  public function setExtraData(array $extra_data = null) {
+  public function setExtraData(?array $extra_data = null) {
     $this->extraData = $extra_data;
     return $this;
   }
@@ -133,7 +133,8 @@ final class ArcanistUnitTestResult extends Phobject {
    * Merge several coverage reports into a comprehensive coverage report.
    *
    * @param list $coverage List of coverage report strings.
-   * @return string Cumulative coverage report.
+   * @return string|null Cumulative coverage report, or null if $coverage is
+   *   null.
    */
   public static function mergeCoverage(array $coverage) {
     if (empty($coverage)) {

@@ -225,11 +225,12 @@ final class PhutilOAuth1Future extends FutureProxy {
 
   private function signString($string) {
     $consumer_secret = null;
+    $key = '';
     if ($this->consumerSecret) {
       $consumer_secret = $this->consumerSecret->openEnvelope();
+      $key .= urlencode($consumer_secret).'&';
     }
 
-    $key = urlencode($consumer_secret).'&';
     if ($this->tokenSecret !== null) {
       $key .= urlencode($this->tokenSecret);
     }
@@ -302,7 +303,7 @@ final class PhutilOAuth1Future extends FutureProxy {
     try {
       return phutil_json_decode($body);
     } catch (PhutilJSONParserException $ex) {
-      throw new PhutilProxyException(pht('Expected JSON.'), $ex);
+      throw new Exception(pht('Expected JSON.'), 0, $ex);
     }
   }
 

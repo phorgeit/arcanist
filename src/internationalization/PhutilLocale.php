@@ -45,7 +45,7 @@ abstract class PhutilLocale extends Phobject {
    * Select a gender variant for this locale. By default, locales use a simple
    * rule with two gender variants, listed in "<male, female>" order.
    *
-   * @param const $variant `PhutilPerson` gender constant.
+   * @param string $variant `PhutilPerson` gender constant.
    * @param list<wild> $translations List of variants.
    * @return string Variant for use.
    */

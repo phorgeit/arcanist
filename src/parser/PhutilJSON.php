@@ -51,7 +51,7 @@ final class PhutilJSON extends Phobject {
       $object = (array)$object;
     }
 
-    if (empty($object)) {
+    if (empty($object) || !is_iterable($object)) {
       return '{}';
     }
 
@@ -131,7 +131,8 @@ final class PhutilJSON extends Phobject {
       return $this->encodeFormattedObject($value, $depth);
     } else {
       if (defined('JSON_UNESCAPED_SLASHES')) {
-        // If we have a new enough version of PHP, disable escaping of slashes
+        // If we have PHP >= 5.4.0 && the JSON extension is installed (as of
+        // PHP 8.0.0, it is a core PHP extension), disable escaping of slashes
         // when pretty-printing values. Escaping slashes can defuse an attack
         // where the attacker embeds "</script>" inside a JSON string, but that
         // isn't relevant when rendering JSON for human viewers.

@@ -7,7 +7,7 @@
  *
  * @param  wild  $value Any value you want printed to the error log or other
  *               registered logs/consoles.
- * @param  ...   Other values to be logged.
+ * @param  wild  $value,... Other values to be logged.
  * @return wild  Passed $value.
  */
 function phlog($value/* , ... */) {
@@ -26,7 +26,7 @@ function phlog($value/* , ... */) {
       // If this is an exception, proxy it and generate a composite trace which
       // shows both where the phlog() was called and where the exception was
       // originally thrown from.
-      $proxy = new PhutilProxyException('', $event);
+      $proxy = new Exception('', 0, $event);
       $trace = PhutilErrorHandler::getExceptionTrace($proxy);
       $data['trace'] = $trace;
     } else {
@@ -52,7 +52,7 @@ function phlog($value/* , ... */) {
  * you don't want to display these, test for `@` being in effect by checking if
  * `error_reporting() === 0` before displaying the error.
  *
- * @param  const  $event A PhutilErrorHandler constant, like
+ * @param  string $event A PhutilErrorHandler constant, like
  *                PhutilErrorHandler::ERROR, which indicates the event type
  *                (e.g. error, exception, user message).
  * @param  wild   $value The event value, like the Exception object for an

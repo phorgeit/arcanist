@@ -22,7 +22,7 @@ abstract class PhutilConsoleView extends Phobject {
   /**
    * Draw a view to the console.
    *
-   * @return this
+   * @return $this
    * @task draw
    */
   final public function draw() {

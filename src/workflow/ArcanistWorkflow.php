@@ -317,7 +317,7 @@ abstract class ArcanistWorkflow extends Phobject {
    *
    * @param string  $conduit_uri The URI to open a conduit to when
    *                @{method:establishConduit} is called.
-   * @return this
+   * @return $this
    * @task conduit
    */
   final public function setConduitURI($conduit_uri) {
@@ -352,7 +352,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * NOTE: You must call @{method:setConduitURI} before you can call this
    * method.
    *
-   * @return this
+   * @return $this
    * @task conduit
    */
   final public function establishConduit() {
@@ -409,7 +409,7 @@ abstract class ArcanistWorkflow extends Phobject {
    *
    * @param dict  $credentials A credential dictionary, see
    *   @{method:authenticateConduit}.
-   * @return this
+   * @return $this
    * @task conduit
    */
   final public function setConduitCredentials(array $credentials) {
@@ -458,7 +458,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * NOTE: You must call @{method:setConduitURI} and
    * @{method:setConduitCredentials} before you invoke this method.
    *
-   * @return this
+   * @return $this
    * @task conduit
    */
   final public function authenticateConduit() {
@@ -618,7 +618,7 @@ abstract class ArcanistWorkflow extends Phobject {
   /**
    * Returns the PHID for the user once they've authenticated via Conduit.
    *
-   * @return phid Authenticated user PHID.
+   * @return string Authenticated user PHID.
    * @task conduit
    */
   final public function getUserPHID() {
@@ -1877,8 +1877,8 @@ abstract class ArcanistWorkflow extends Phobject {
    * Get the PHID of the Phabricator repository this working copy corresponds
    * to. Returns `null` if no repository can be identified.
    *
-   * @return phid|null  Repository PHID, or null if no repository can be
-   *                    identified.
+   * @return string|null  Repository PHID, or null if no repository can be
+   *                      identified.
    *
    * @task phabrep
    */

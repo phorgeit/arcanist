@@ -86,7 +86,7 @@ final class PhutilDeferredLog extends Phobject {
    * the values you provide.
    *
    * @param dict  $map Map of variables to values.
-   * @return this
+   * @return $this
    * @task log
    */
   public function setData(array $map) {
@@ -117,7 +117,7 @@ final class PhutilDeferredLog extends Phobject {
    *
    * @param string|null $file File where the entry should be written to, or
    *                    null to prevent writes.
-   * @return this
+   * @return $this
    * @task log
    */
   public function setFile($file) {
@@ -166,7 +166,7 @@ final class PhutilDeferredLog extends Phobject {
    * A log object will never write more than once, so it is safe to call this
    * method even if the object's destructor later runs.
    *
-   * @return this
+   * @return $this
    * @task write
    */
   public function write() {

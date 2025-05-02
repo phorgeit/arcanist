@@ -50,9 +50,9 @@ final class ArcanistConfigurationManager extends Phobject {
    * arguments ("runtime").
    * The precedence is runtime > local > project > user > system
    *
-   * @param key   $key Key to read.
-   * @param wild  $default (optional) Default value if key is not found.
-   * @return wild Value, or default value if not found.
+   * @param string $key Key to read.
+   * @param wild   $default (optional) Default value if key is not found.
+   * @return wild  Value, or default value if not found.
    *
    * @task config
    */
@@ -71,7 +71,7 @@ final class ArcanistConfigurationManager extends Phobject {
    * The map is ordered by the canonical sources precedence, which is:
    * runtime > local > project > user > system
    *
-   * @param key    $key Key to read
+   * @param string $key Key to read
    * @return array Mapping of source => value read. Sources with no value are
    *               not in the array.
    *
@@ -135,8 +135,8 @@ final class ArcanistConfigurationManager extends Phobject {
    * Sets a runtime config value that takes precedence over any static
    * config values.
    *
-   * @param key   $key Key to set.
-   * @param value $value The value of the key.
+   * @param string  $key Key to set.
+   * @param wild    $value The value of the key.
    *
    * @task config
    */
@@ -212,8 +212,9 @@ final class ArcanistConfigurationManager extends Phobject {
         try {
           $user_config = phutil_json_decode($user_config_data);
         } catch (PhutilJSONParserException $ex) {
-          throw new PhutilProxyException(
+          throw new Exception(
             pht("Your '%s' file is not a valid JSON file.", '~/.arcrc'),
+            0,
             $ex);
         }
       } else {
@@ -313,10 +314,11 @@ final class ArcanistConfigurationManager extends Phobject {
         try {
           $system_config = phutil_json_decode($file);
         } catch (PhutilJSONParserException $ex) {
-          throw new PhutilProxyException(
+          throw new Exception(
             pht(
               "Your '%s' file is not a valid JSON file.",
               $system_config_path),
+            0,
             $ex);
         }
       } else {

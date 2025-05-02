@@ -48,7 +48,7 @@ final class ArcanistFileUploader extends Phobject {
    *
    * @param ArcanistFileDataRef $file File data to upload.
    * @param null|string $key (optional) Key to use to identify this file.
-   * @return this
+   * @return $this
    * @task add
    */
   public function addFile(ArcanistFileDataRef $file, $key = null) {

@@ -336,7 +336,6 @@ final class PhutilTypeSpec extends Phobject {
           $obj->subtypes[] = $r;
           return $obj;
         }
-        break;
       case 'map_type':
         $obj = new PhutilTypeSpec();
         $obj->type = 'map';
@@ -355,7 +354,6 @@ final class PhutilTypeSpec extends Phobject {
         } else {
           return $tokens[0];
         }
-        break;
       case 'maybe_comment':
         if ($production == 'yes') {
           $tokens[0]->comment = $tokens[1];

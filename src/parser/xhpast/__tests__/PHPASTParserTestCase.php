@@ -82,7 +82,7 @@ final class PHPASTParserTestCase extends PhutilTestCase {
       case 'pass':
         $this->assertEqual(0, $err, pht('Exit code for "%s".', $name));
 
-        if (!strlen($expect)) {
+        if (!phutil_nonempty_string($expect)) {
           // If there's no "expect" data in the test case, that's OK.
           break;
         }
@@ -90,10 +90,11 @@ final class PHPASTParserTestCase extends PhutilTestCase {
         try {
           $stdout = phutil_json_decode($stdout);
         } catch (PhutilJSONParserException $ex) {
-          throw new PhutilProxyException(
+          throw new Exception(
             pht(
               'Output for test file "%s" is not valid JSON.',
               $name),
+            0,
             $ex);
         }
 

@@ -135,7 +135,7 @@ final class FutureIterator
    *
    * @param float $interval Maximum number of seconds to block waiting on
    *              futures before yielding null.
-   * @return this
+   * @return $this
    *
    * @task config
    */
@@ -155,7 +155,7 @@ final class FutureIterator
    *  }
    *
    * @param int $max Maximum number of simultaneous jobs allowed.
-   * @return this
+   * @return $this
    *
    * @task config
    */

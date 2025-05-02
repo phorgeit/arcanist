@@ -68,7 +68,7 @@ final class ArcanistHgProxyServer extends Phobject {
    * Disable status messages to stdout. Controlled with `--quiet`.
    *
    * @param bool $quiet True to disable status messages.
-   * @return this
+   * @return $this
    *
    * @task config
    */
@@ -86,7 +86,7 @@ final class ArcanistHgProxyServer extends Phobject {
    * to profile the server.
    *
    * @param int $limit Client limit, or 0 to disable limit.
-   * @return this
+   * @return $this
    *
    * @task config
    */
@@ -101,7 +101,7 @@ final class ArcanistHgProxyServer extends Phobject {
    * will exit. Controlled with `--idle-limit`.
    *
    * @param int $limit Idle limit, or 0 to disable limit.
-   * @return this
+   * @return $this
    *
    * @task config
    */
@@ -118,7 +118,7 @@ final class ArcanistHgProxyServer extends Phobject {
    * improves performance. Controlled with --skip-hello.
    *
    * @param bool $skip True to skip the "capabilities" message.
-   * @return this
+   * @return $this
    *
    * @task config
    */
@@ -133,7 +133,7 @@ final class ArcanistHgProxyServer extends Phobject {
    * Controlled by --do-not-daemonize. Primarily useful for debugging.
    *
    * @param bool $do_not_daemonize True to run in the foreground.
-   * @return this
+   * @return $this
    *
    * @task config
    */
