@@ -60,20 +60,45 @@ final class ArcanistRepositoryRef
     PhutilTypeSpec::checkMap(
       $params,
       array(
+        // Path to the file or directory.
         'path' => 'optional string|null',
+        // Destination branch.
+        // When the branch is null, we guess the default (e.g. 'master' in git).
         'branch' => 'optional string|null',
+        // Branch support capability.
+        // If this is false, you are probably using svn.
+        'branchSupported' => 'optional bool|null',
+        // Repository root path.
+        // If this is non-null, you are probably using svn. In svn, this path
+        // can be '' for the root, or 'trunk', or 'tags/something' etc.
+        'repoRootPath' => 'optional string|null',
+        // Lines to be highlighted.
+        // This can be null (no line), line '2' or lines '2-3'.
         'lines' => 'optional string|null',
       ));
 
+    // Define arguments who do not accept an empty string.
+    // The 'repoRootPath' must not be listed here.
+    $params_with_str_nonempty = array(
+      'path' => 1,
+      'branch' => 1,
+      'lines' => 1,
+    );
+
+    // For all arguments, drop null.
+    // For some arguments, also drop empty strings.
     foreach ($params as $key => $value) {
-      if ($value === null || !strlen($value)) {
+      if ($value === null
+        || (isset($params_with_str_nonempty[$key]) && !strlen($value))) {
         unset($params[$key]);
       }
     }
 
     $defaults = array(
       'path' => '/',
-      'branch' => $this->getDefaultBranch(),
+      'branch' => null,
+      'branchSupported' => null,
+      'repoRootPath' => null,
       'lines' => null,
     );
 
@@ -82,20 +107,40 @@ final class ArcanistRepositoryRef
     $uri_base = coalesce($this->browseURI, '');
     $uri_base = rtrim($uri_base, '/');
 
-    $uri_branch = phutil_escape_uri_path_component($params['branch']);
+    // Build the Subversion repo root path.
+    // In git, this is an empty string.
+    // In svn, this is 'trunk/' or '/' etc.
+    $uri_root = '';
+    if ($params['repoRootPath'] !== null) {
+      $uri_root = trim($params['repoRootPath'], '/');
+      $uri_root = phutil_escape_uri($uri_root); // Don't escape slashes.
+      if ($uri_root !== '') {
+        $uri_root .= '/';
+      }
+    }
+
+    // Build the branch part of the URI.
+    // In git, this becomes 'master/', 'main/', etc.
+    // In svn, this is an empty string.
+    $uri_branch = '';
+    if ($params['branchSupported']) {
+      $uri_branch = coalesce($params['branch'], $this->getDefaultBranch());
+      $uri_branch = phutil_escape_uri_path_component($uri_branch); // Escape '/'
+      $uri_branch .= '/';
+    }
 
     $uri_path = ltrim($params['path'], '/');
     $uri_path = phutil_escape_uri($uri_path);
 
     $uri_lines = null;
     if ($params['lines']) {
+      // TODO: We should encourage an #anchor, not a dollar.
+      // https://we.phorge.it/T15670
       $uri_lines = '$'.phutil_escape_uri($params['lines']);
     }
 
-    // TODO: This construction, which includes a branch, is probably wrong for
-    // Subversion.
-
-    return "{$uri_base}/browse/{$uri_branch}/{$uri_path}{$uri_lines}";
+    // This construction supports both git and Subversion.
+    return "{$uri_base}/browse/{$uri_root}{$uri_branch}{$uri_path}{$uri_lines}";
   }
 
   public function getDefaultBranch() {

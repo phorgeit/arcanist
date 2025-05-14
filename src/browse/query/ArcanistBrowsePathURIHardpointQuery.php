@@ -55,10 +55,26 @@ final class ArcanistBrowsePathURIHardpointQuery
         $path = Filesystem::readablePath($full_path, $working_root);
       }
 
+      // Define the repository root path, probably useful just for Subversion.
+      $repo_root_path = null;
+      if ($ref->getBranchSupported() === false) {
+        // In software like SVN there is no native branch support. Really.
+        // So, in SVN, we use getBranchName() to get the SVN
+        // "branch", that is, the repository root path, and that's
+        // a root relative path of the repository, like 'trunk' or 'tags/lol'.
+        // Note that the empty string '' is a valid SVN repo root path
+        // that may be returned by "svn info".
+        $repo_root_path = $this
+          ->getRepositoryApi()
+          ->getBranchName();
+      }
+
       $params = array(
         'path' => $path,
         'lines' => $lines,
         'branch' => $ref->getBranch(),
+        'branchSupported' => $ref->getBranchSupported(),
+        'repoRootPath' => $repo_root_path,
       );
 
       $uri = $repository_ref->newBrowseURI($params);

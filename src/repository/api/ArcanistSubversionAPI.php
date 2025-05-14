@@ -624,6 +624,15 @@ EODIFF;
     return false;
   }
 
+  /**
+   * @return bool
+   */
+  public function supportsBranches() {
+    // Even if you are the best SVN salesman, a little cute
+    // directory cannot really be considered a "branch" feature.
+    return false;
+  }
+
   public function supportsCommitRanges() {
     return false;
   }

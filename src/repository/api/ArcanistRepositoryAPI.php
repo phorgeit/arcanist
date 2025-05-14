@@ -567,6 +567,20 @@ abstract class ArcanistRepositoryAPI extends Phobject {
 
 /* -(  Base Commits  )------------------------------------------------------- */
 
+  /**
+   * In Subversion the concept of a "branch" is instead represented by
+   * subfolders within the SVN repository on your local filesystem,
+   * like "trunk/", "tags/", "branches/".
+   *
+   * @return bool True if the branch is supported by this API.
+   */
+  public function supportsBranches() {
+    // Assume a decent default.
+    // In the future we may want to make this method abstract. But not now,
+    // to avoid breaking changes in alien class extensions.
+    return true;
+  }
+
   abstract public function supportsCommitRanges();
 
   final public function setBaseCommit($symbolic_commit) {

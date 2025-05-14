@@ -55,7 +55,7 @@ function idx(array $array, $key, $default = null) {
  *
  * For example, `idxv($dict, array('a', 'b', 'c'))` accesses the key at
  * `$dict['a']['b']['c']`, if it exists. If it does not, or any intermediate
- * value is not itself an array, it returns the defualt value.
+ * value is not itself an array, it returns the default value.
  *
  * @param array $map Array to access.
  * @param list<string> $path List of keys to access, in sequence.
