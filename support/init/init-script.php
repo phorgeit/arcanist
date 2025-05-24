@@ -47,10 +47,6 @@ function __arcanist_init_script__() {
     // processing large inputs without many tangible benefits.
     'memory_limit'                => -1,
 
-    // See T13296. On macOS under PHP 7.3.x, PCRE currently segfaults after
-    // "fork()" if "pcre.jit" is enabled.
-    'pcre.jit' => 0,
-
     // See PHI1894. This option was introduced in PHP 7.4, and removes the
     // "args" value from exception backtraces. We have some unit tests which
     // inspect "args", and this option generally obscures useful debugging
