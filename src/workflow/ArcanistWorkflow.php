@@ -1012,7 +1012,7 @@ abstract class ArcanistWorkflow extends Phobject {
   }
 
   final protected function shouldRequireCleanUntrackedFiles() {
-    return empty($this->arguments['allow-untracked']);
+    return empty($this->getArgument('allow-untracked'));
   }
 
   final public function setCommitMode($mode) {
