@@ -909,7 +909,7 @@ final class ExecFuture extends PhutilExecutableFuture {
   /**
    * Execute `proc_get_status()`, but avoid pitfalls.
    *
-   * @return dict Process status.
+   * @return array Process status.
    * @task internal
    */
   private function procGetStatus() {

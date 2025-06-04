@@ -91,7 +91,7 @@ abstract class PhutilChannel extends Phobject {
    * @{method:waitForActivity}.
    *
    * @param   list<PhutilChannel>   $channels A list of channels to wait for.
-   * @param   dict                  $options (optional) Options, see above.
+   * @param   array                 $options (optional) Options, see above.
    * @return  void
    *
    * @task wait
@@ -121,7 +121,7 @@ abstract class PhutilChannel extends Phobject {
    *
    * @param list<PhutilChannel> $reads List of channels to wait for reads on.
    * @param list<PhutilChannel> $writes List of channels to wait for writes on.
-   * @param   dict              $options (optional) Options, see above.
+   * @param array               $options (optional) Options, see above.
    * @return void
    *
    * @task wait

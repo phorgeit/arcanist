@@ -56,8 +56,8 @@ abstract class AbstractDirectedGraph extends Phobject {
    * this requirement.
    *
    * @param   list  $nodes A list of nodes.
-   * @return  dict  A map of nodes to the nodes reachable along their edges.
-   *                There must be an entry for each node you were provided.
+   * @return  array  A map of nodes to the nodes reachable along their edges.
+   *                 There must be an entry for each node you were provided.
    * @task build
    */
   abstract protected function loadEdges(array $nodes);
@@ -68,7 +68,7 @@ abstract class AbstractDirectedGraph extends Phobject {
    * edges that a user is trying to create here, or the initial set of edges
    * you know about.
    *
-   * @param   dict  $nodes A map of nodes to the nodes reachable along their
+   * @param   array $nodes A map of nodes to the nodes reachable along their
    *   edges
    * @return  $this
    * @task build

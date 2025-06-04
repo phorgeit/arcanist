@@ -161,9 +161,9 @@ final class PhutilSymbolLoader {
    * Execute the query and select matching symbols, then load them so they can
    * be used.
    *
-   * @return dict A dictionary of matching symbols. See top-level class
-   *              documentation for details. These symbols will be loaded
-   *              and available.
+   * @return array A dictionary of matching symbols. See top-level class
+   *               documentation for details. These symbols will be loaded
+   *               and available.
    *
    * @task load
    */
@@ -331,8 +331,8 @@ final class PhutilSymbolLoader {
    * of the symbols and don't plan to use them; otherwise, use
    * @{method:selectAndLoadSymbols}.
    *
-   * @return dict A dictionary of matching symbols. See top-level class
-   *              documentation for details.
+   * @return array A dictionary of matching symbols. See top-level class
+   *               documentation for details.
    *
    * @task load
    */

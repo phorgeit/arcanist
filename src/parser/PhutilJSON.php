@@ -16,7 +16,7 @@ final class PhutilJSON extends Phobject {
    * Encode an object in JSON and pretty-print it. This generates a valid JSON
    * object with human-readable whitespace and indentation.
    *
-   * @param   dict    $object An object to encode in JSON.
+   * @param   array   $object An object to encode in JSON.
    * @return  string  Pretty-printed object representation.
    */
   public function encodeFormatted($object) {
@@ -41,7 +41,7 @@ final class PhutilJSON extends Phobject {
   /**
    * Pretty-print a JSON object.
    *
-   * @param   dict    $object Object to format.
+   * @param   array   $object Object to format.
    * @param   int     $depth Current depth, for indentation.
    * @return  string  Pretty-printed value.
    * @task internal
@@ -115,7 +115,7 @@ final class PhutilJSON extends Phobject {
   /**
    * Pretty-print a JSON value.
    *
-   * @param   dict    $value Value to format.
+   * @param   array   $value Value to format.
    * @param   int     $depth Current depth, for indentation.
    * @return  string  Pretty-printed value.
    * @task internal

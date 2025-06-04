@@ -152,7 +152,7 @@ final class PhutilLibraryMapBuilder extends Phobject {
   /**
    * Load the library symbol cache, if it exists and is readable and valid.
    *
-   * @return dict  Map of content hashes to cache of output from
+   * @return array Map of content hashes to cache of output from
    *               `extract-symbols.php`.
    *
    * @task symbol
@@ -188,8 +188,8 @@ final class PhutilLibraryMapBuilder extends Phobject {
   /**
    * Write a symbol map to disk cache.
    *
-   * @param  dict  $symbol_map Symbol map of relative paths to symbols.
-   * @param  dict  $source_map Source map (like @{method:loadSourceFileMap}).
+   * @param  array $symbol_map Symbol map of relative paths to symbols.
+   * @param  array $source_map Source map (like @{method:loadSourceFileMap}).
    * @return void
    *
    * @task symbol
@@ -268,7 +268,7 @@ final class PhutilLibraryMapBuilder extends Phobject {
    *     // ...
    *   );
    *
-   * @return dict  Map of library-relative paths to content hashes.
+   * @return array Map of library-relative paths to content hashes.
    * @task source
    */
   private function loadSourceFileMap() {
@@ -321,8 +321,8 @@ final class PhutilLibraryMapBuilder extends Phobject {
    * Convert the symbol analysis of all the source files in the library into
    * a library map.
    *
-   * @param   dict  $symbol_map Symbol analysis of all source files.
-   * @return  dict  Library map.
+   * @param   array $symbol_map Symbol analysis of all source files.
+   * @return  array Library map.
    * @task source
    */
   private function buildLibraryMap(array $symbol_map) {
@@ -381,7 +381,7 @@ final class PhutilLibraryMapBuilder extends Phobject {
   /**
    * Write a finalized library map.
    *
-   * @param  dict $library_map Library map structure to write.
+   * @param  array $library_map Library map structure to write.
    * @return void
    *
    * @task source

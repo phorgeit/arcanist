@@ -85,7 +85,7 @@ final class PhutilDeferredLog extends Phobject {
    * When the log is written, the "%T" and "%u" variables will be replaced with
    * the values you provide.
    *
-   * @param dict  $map Map of variables to values.
+   * @param array $map Map of variables to values.
    * @return $this
    * @task log
    */

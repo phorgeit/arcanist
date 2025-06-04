@@ -417,7 +417,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * NOTE: You can not call this method after calling
    * @{method:authenticateConduit}.
    *
-   * @param dict  $credentials A credential dictionary, see
+   * @param array  $credentials A credential dictionary, see
    *   @{method:authenticateConduit}.
    * @return $this
    * @task conduit

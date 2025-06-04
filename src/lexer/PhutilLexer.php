@@ -87,7 +87,7 @@ abstract class PhutilLexer extends Phobject {
    * Return a set of rules for this lexer. See description in
    * @{class:PhutilLexer}.
    *
-   * @return dict Lexer rules.
+   * @return array Lexer rules.
    * @task lexerimpl
    */
   abstract protected function getRawRules();

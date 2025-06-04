@@ -1803,7 +1803,7 @@ EOTEXT
    * errors (e.g., if the user typed a reviewer name incorrectly) and a
    * summary of the commits themselves.
    *
-   * @param dict  $local Local commit information.
+   * @param array $local Local commit information.
    * @return list Complex output, see summary.
    * @task message
    */

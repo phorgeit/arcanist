@@ -58,7 +58,7 @@ function phlog($value/* , ... */) {
  * @param  wild   $value The event value, like the Exception object for an
  *                exception event, an error string for an error event, or some
  *                user object for user messages.
- * @param  dict   $metadata A dictionary of metadata about the event. The keys
+ * @param  array  $metadata A dictionary of metadata about the event. The keys
  *                'file', 'line' and 'trace' are always available. Other keys
  *                may be present, depending on the event type.
  * @return void

@@ -380,7 +380,7 @@ final class PhutilErrorHandler extends Phobject {
    *
    * @param string $event Event type constant.
    * @param wild $value Event value.
-   * @param dict $metadata Event metadata.
+   * @param array $metadata Event metadata.
    * @return void
    * @task internal
    */

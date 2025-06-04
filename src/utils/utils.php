@@ -136,7 +136,7 @@ function idxv(array $map, array $path, $default = null) {
  *                        Use a string like 'getID' to use the result
  *                        of calling the named method as each object's key, or
  *                        `null` to preserve the original keys.
- * @return  dict          A dictionary with keys and values derived according
+ * @return  array         A dictionary with keys and values derived according
  *                        to whatever you passed as `$method` and `$key_method`.
  */
 function mpull(array $list, $method, $key_method = null) {
@@ -210,7 +210,7 @@ function mpull(array $list, $method, $key_method = null) {
  *                        'id' to use the result of accessing the named property
  *                        as each object's key, or `null` to preserve the
  *                        original keys.
- * @return  dict          A dictionary with keys and values derived according
+ * @return  array         A dictionary with keys and values derived according
  *                        to whatever you passed as `$property` and
  *                        `$key_property`.
  */
@@ -260,7 +260,7 @@ function ppull(array $list, $property, $key_property = null) {
  *                        appear in the result array. Use a scalar to select
  *                        that index from each array, or null to preserve the
  *                        array keys.
- * @return  dict          A dictionary with keys and values derived according
+ * @return  array         A dictionary with keys and values derived according
  *                        to whatever you passed for `$index` and `$key_index`.
  */
 function ipull(array $list, $index, $key_index = null) {
@@ -309,7 +309,7 @@ function ipull(array $list, $index, $key_index = null) {
  *                  placed into.
  * @param   string  $methods,... Zero or more additional method names, to
  *                  subgroup the groups.
- * @return  dict    Dictionary mapping distinct method returns to lists of
+ * @return  array   Dictionary mapping distinct method returns to lists of
  *                  all objects which returned that value.
  */
 function mgroup(array $list, $by /* , ... */) {
@@ -349,7 +349,7 @@ function mgroup(array $list, $by /* , ... */) {
  *                  determine which group it should be placed into.
  * @param   string  $methods,... Zero or more additional indexes names, to
  *                  subgroup the groups.
- * @return  dict    Dictionary mapping distinct index values to lists of
+ * @return  array   Dictionary mapping distinct index values to lists of
  *                  all objects which had that value at the index.
  */
 function igroup(array $list, $by /* , ... */) {
@@ -603,9 +603,9 @@ function ifilter(array $list, $index, $negate = false) {
  * uses: either reducing a large dictionary to a smaller one, or changing the
  * key order on an existing dictionary.
  *
- * @param  dict    $dict Dictionary of key-value pairs to select from.
+ * @param  array   $dict Dictionary of key-value pairs to select from.
  * @param  list    $keys List of keys to select.
- * @return dict    Dictionary of only those key-value pairs where the key was
+ * @return array   Dictionary of only those key-value pairs where the key was
  *                 present in the list of keys to select. Ordering is
  *                 determined by the list order.
  */
@@ -958,7 +958,7 @@ function phutil_split_lines($corpus, $retain_endings = true) {
  *   $result = array_fuse($list);
  *
  * @param   list  $list (optional) List of scalars.
- * @return  dict  Dictionary with inputs mapped to themselves.
+ * @return  array Dictionary with inputs mapped to themselves.
  */
 function array_fuse(?array $list = null) {
   if ($list) {

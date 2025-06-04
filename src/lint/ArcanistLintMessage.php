@@ -184,7 +184,7 @@ final class ArcanistLintMessage extends Phobject {
   }
 
   /**
-   * @param dict $locations Keys 'path', 'line', 'char', 'original'.
+   * @param array $locations Keys 'path', 'line', 'char', 'original'.
    */
   public function setOtherLocations(array $locations) {
     assert_instances_of($locations, 'array');
