@@ -364,7 +364,7 @@ final class ArcanistScriptAndRegexLinter extends ArcanistLinter {
    * with a valid name.
    *
    * @param dict $match Captured groups from regex.
-   * @return const  @{class:ArcanistLintSeverity} constant.
+   * @return string @{class:ArcanistLintSeverity} constant.
    *
    * @task parse
    */
