@@ -50,7 +50,7 @@ final class ArcanistHgClientChannel extends PhutilProtocolChannel {
    * For a detailed description of the cmdserver protocol, see
    * @{class:ArcanistHgServerChannel}.
    *
-   * @param pair<string,string> $argv The <channel, data> pair to encode.
+   * @param array<string,string> $argv The <channel, data> pair to encode.
    * @return string Encoded string for transmission to the client.
    *
    * @task protocol

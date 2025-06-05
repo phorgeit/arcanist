@@ -1726,7 +1726,7 @@ function phutil_build_http_querystring_from_pairs(array $pairs) {
  *
  * @param scalar $key HTTP parameter key.
  * @param scalar $value HTTP parameter value.
- * @return pair<string, string> Key and value as strings.
+ * @return array<string, string> Key and value as strings.
  */
 function phutil_http_parameter_pair($key, $value) {
   try {

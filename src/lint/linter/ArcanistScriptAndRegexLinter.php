@@ -326,7 +326,7 @@ final class ArcanistScriptAndRegexLinter extends ArcanistLinter {
    *
    * @param dict $match Captured groups from regex.
    * @param string $path
-   * @return pair<int|null,int|null> Line and character of the message.
+   * @return array<int|null,int|null> Line and character of the message.
    *
    * @task parse
    */
