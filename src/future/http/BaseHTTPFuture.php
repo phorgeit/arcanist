@@ -317,7 +317,7 @@ abstract class BaseHTTPFuture extends Future {
    * Parse a raw HTTP response into a <status, body, headers> tuple.
    *
    * @param string $raw_response Raw HTTP response.
-   * @return tuple Valid resolution tuple.
+   * @return array Valid resolution tuple.
    * @task internal
    */
   protected function parseRawHTTPResponse($raw_response) {
@@ -444,7 +444,7 @@ abstract class BaseHTTPFuture extends Future {
    * Build a result tuple indicating a parse error resulting from a malformed
    * HTTP response.
    *
-   * @return tuple Valid resolution tuple.
+   * @return array Valid resolution tuple.
    * @task internal
    */
   protected function buildMalformedResult($raw_response) {
