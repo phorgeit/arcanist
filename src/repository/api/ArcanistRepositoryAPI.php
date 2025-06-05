@@ -139,7 +139,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
    * A file may be in several states. Not all states are possible with all
    * version control systems.
    *
-   * @return map<string, bitmask> Map of paths, see above.
+   * @return map<string, string> Map of paths to bitmasks with status.
    * @task status
    */
   final public function getUncommittedStatus() {
@@ -227,7 +227,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
    *
    * See @{method:getUncommittedStatus} for a description of the return value.
    *
-   * @return map<string, bitmask> Map from paths to status.
+   * @return map<string, string> Map from paths to bitmasks with status.
    * @task status
    */
   final public function getCommitRangeStatus() {
@@ -247,7 +247,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
    *
    * See @{method:getUncommittedStatus} for a description of the return value.
    *
-   * @return map<string, bitmask> Map from paths to status.
+   * @return map<string, string> Map from paths to bitmasks with status.
    * @task status
    */
   final public function getWorkingCopyStatus() {
