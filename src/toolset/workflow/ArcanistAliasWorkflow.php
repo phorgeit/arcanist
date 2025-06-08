@@ -91,7 +91,7 @@ EOTEXT
     );
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $argv = $this->getArgument('argv');
 
     $is_list = false;

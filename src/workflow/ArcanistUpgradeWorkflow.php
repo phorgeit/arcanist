@@ -23,7 +23,7 @@ EOTEXT
     return array();
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $log = $this->getLogEngine();
 
     $roots = array(

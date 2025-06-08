@@ -23,7 +23,7 @@ EOTEXT
     return array();
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     if (!Filesystem::binaryExists('python3')) {
       throw new PhutilArgumentUsageException(
         pht(

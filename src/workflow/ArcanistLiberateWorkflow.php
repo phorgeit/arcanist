@@ -44,7 +44,7 @@ EOTEXT
   }
 
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $log = $this->getLogEngine();
 
     $argv = $this->getArgument('argv');

@@ -56,7 +56,7 @@ EOTEXT
     );
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $argv = $this->getArgument('argv');
 
     if (!$argv) {

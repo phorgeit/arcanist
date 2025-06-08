@@ -7,7 +7,7 @@ abstract class ArcanistMarkersWorkflow
 
   abstract protected function getWorkflowMarkerType();
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $api = $this->getRepositoryAPI();
 
     $marker_type = $this->getWorkflowMarkerType();

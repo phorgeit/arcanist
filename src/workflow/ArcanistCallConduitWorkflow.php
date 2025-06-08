@@ -35,7 +35,7 @@ EOTEXT
     );
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $method = $this->getArgument('method');
     if (count($method) !== 1) {
       throw new PhutilArgumentUsageException(

@@ -27,7 +27,7 @@ EOTEXT
     );
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $files = $this->getArgument('files');
 
     if (count($files) < 2) {

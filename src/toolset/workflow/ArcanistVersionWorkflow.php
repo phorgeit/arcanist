@@ -31,7 +31,7 @@ EOTEXT
     return array();
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     // TOOLSETS: Show the toolset version, not just the "arc" version.
 
     $console = PhutilConsole::getConsole();

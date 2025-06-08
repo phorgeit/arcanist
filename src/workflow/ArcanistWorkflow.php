@@ -51,6 +51,7 @@ abstract class ArcanistWorkflow extends Phobject {
   private $userName;
   private $repositoryAPI;
   private $configurationManager;
+  /** @var array|PhutilArgumentParser */
   private $arguments = array();
   private $command;
 
@@ -224,7 +225,7 @@ abstract class ArcanistWorkflow extends Phobject {
     $runtime->pushWorkflow($this);
 
     try {
-      $err = $this->runWorkflow($args);
+      $err = $this->runWorkflow();
     } catch (Exception $ex) {
       $caught = $ex;
     }
@@ -256,6 +257,15 @@ abstract class ArcanistWorkflow extends Phobject {
   public function __construct() {}
 
   public function run() {
+    throw new PhutilMethodNotImplementedException();
+  }
+
+  /**
+   * Modern workflow main method. Must be implemented in child classes.
+   *
+   * @return int exit code
+   */
+  protected function runWorkflow() {
     throw new PhutilMethodNotImplementedException();
   }
 

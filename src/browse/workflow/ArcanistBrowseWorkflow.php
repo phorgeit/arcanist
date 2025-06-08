@@ -58,7 +58,7 @@ EOTEXT
     );
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $targets = $this->getArgument('targets');
     $targets = array_fuse($targets);
 
