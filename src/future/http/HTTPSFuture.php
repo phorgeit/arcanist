@@ -753,14 +753,7 @@ final class HTTPSFuture extends BaseHTTPFuture {
       Filesystem::writeFile($tmp, $info['data']);
       $this->temporaryFiles[] = $tmp;
 
-      // In 5.5.0 and later, we can use CURLFile. Prior to that, we have to
-      // use this "@" stuff.
-
-      if (class_exists('CURLFile', false)) {
-        $file_value = new CURLFile((string)$tmp, $info['mime'], $info['name']);
-      } else {
-        $file_value = '@'.(string)$tmp;
-      }
+      $file_value = new CURLFile((string)$tmp, $info['mime'], $info['name']);
 
       $data[$name] = $file_value;
     }
@@ -784,18 +777,6 @@ final class HTTPSFuture extends BaseHTTPFuture {
     }
 
     if ($is_query_string) {
-      if (version_compare(phpversion(), '5.2.0', '<')) {
-        throw new Exception(
-          pht(
-            'Attempting to make an HTTP request, but query string data begins '.
-            'with "%s". Prior to PHP 5.2.0 this reads files off disk, which '.
-            'creates a wide attack window for security vulnerabilities. '.
-            'Upgrade PHP or avoid making cURL requests which begin with "%s".',
-            '@',
-            '@'));
-      }
-
-      // This is safe if we're on PHP 5.2.0 or newer.
       return;
     }
 
