@@ -68,7 +68,7 @@ function __arcanist_init_script__() {
   }
 
   $php_version = phpversion();
-  $min_version = '5.5.0';
+  $min_version = '7.2.25';
   if (version_compare($php_version, $min_version, '<')) {
     echo sprintf(
       'UPGRADE PHP: '.

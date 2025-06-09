@@ -443,84 +443,8 @@ final class Filesystem extends Phobject {
       throw new Exception(pht('You must generate at least 1 byte of entropy.'));
     }
 
-    // Under PHP 7.2.0 and newer, we have a reasonable builtin. For older
-    // versions, we fall back to various sources which have a roughly similar
-    // effect.
-    if (function_exists('random_bytes')) {
-      return random_bytes($number_of_bytes);
-    }
-
-    // Try to use `openssl_random_pseudo_bytes()` if it's available. This source
-    // is the most widely available source, and works on Windows/Linux/OSX/etc.
-
-    if (function_exists('openssl_random_pseudo_bytes')) {
-      $strong = true;
-      $data = openssl_random_pseudo_bytes($number_of_bytes, $strong);
-
-      if (!$strong) {
-        // NOTE: This indicates we're using a weak random source. This is
-        // probably OK, but maybe we should be more strict here.
-      }
-
-      if ($data === false) {
-        throw new Exception(
-          pht(
-            '%s failed to generate entropy!',
-            'openssl_random_pseudo_bytes()'));
-      }
-
-      if (strlen($data) != $number_of_bytes) {
-        throw new Exception(
-          pht(
-            '%s returned an unexpected number of bytes (got %s, expected %s)!',
-            'openssl_random_pseudo_bytes()',
-            new PhutilNumber(strlen($data)),
-            new PhutilNumber($number_of_bytes)));
-      }
-
-      return $data;
-    }
-
-
-    // Try to use `/dev/urandom` if it's available. This is usually available
-    // on non-Windows systems, but some PHP config (open_basedir) and chrooting
-    // may limit our access to it.
-
-    $urandom = @fopen('/dev/urandom', 'rb');
-    if ($urandom) {
-      $data = @fread($urandom, $number_of_bytes);
-      @fclose($urandom);
-      if (strlen($data) != $number_of_bytes) {
-        throw new FilesystemException(
-          '/dev/urandom',
-          pht('Failed to read random bytes!'));
-      }
-      return $data;
-    }
-
-    // (We might be able to try to generate entropy here from a weaker source
-    // if neither of the above sources panned out, see some discussion in
-    // T4153.)
-
-    // We've failed to find any valid entropy source. Try to fail in the most
-    // useful way we can, based on the platform.
-
-    if (phutil_is_windows()) {
-      throw new Exception(
-        pht(
-          '%s requires the PHP OpenSSL extension to be installed and enabled '.
-          'to access an entropy source. On Windows, this extension is usually '.
-          'installed but not enabled by default. Enable it in your "php.ini".',
-          __METHOD__.'()'));
-    }
-
-    throw new Exception(
-      pht(
-        '%s requires the PHP OpenSSL extension or access to "%s". Install or '.
-        'enable the OpenSSL extension, or make sure "%s" is accessible.',
-        __METHOD__.'()',
-        '/dev/urandom',
-        '/dev/urandom'));
+    // Since PHP 7.2.0, we have a reasonable builtin:
+    return random_bytes($number_of_bytes);
   }
 
 
