@@ -788,7 +788,7 @@ final class Filesystem extends Phobject {
 
     $tries = 3;
     do {
-      $dir = $base.substr(base_convert(md5(mt_rand()), 16, 36), 0, 16);
+      $dir = $base.substr(base_convert(md5((string)mt_rand()), 16, 36), 0, 16);
       try {
         self::createDirectory($dir, $umask);
         break;

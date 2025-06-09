@@ -817,7 +817,7 @@ final class HTTPSFuture extends BaseHTTPFuture {
 
     $osx_version = PhutilExecutionEnvironment::getOSXVersion();
     if ($osx_version) {
-      if (version_compare($osx_version, 14, '>=')) {
+      if (version_compare($osx_version, '14', '>=')) {
         return false;
       }
     }
