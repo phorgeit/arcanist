@@ -1633,7 +1633,7 @@ abstract class ArcanistWorkflow extends Phobject {
    *
    * @param   list          $paths List of explicitly provided paths.
    * @param   string|null   $rev Revision name, if provided.
-   * @param   mask          $omit_mask (optional) Mask of ArcanistRepositoryAPI
+   * @param   int           $omit_mask (optional) Mask of ArcanistRepositoryAPI
    *                        flags to exclude.
    *                        Defaults to ArcanistRepositoryAPI::FLAG_UNTRACKED.
    * @return  list          List of paths the workflow should act on.

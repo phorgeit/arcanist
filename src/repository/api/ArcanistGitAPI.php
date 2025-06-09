@@ -404,7 +404,7 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
 
   /**
    * Translates a symbolic commit (like "HEAD^") to a commit identifier.
-   * @param string_symbol $symbolic_commit commit.
+   * @param string $symbolic_commit commit.
    * @return string the commit SHA.
    */
   private function resolveCommit($symbolic_commit) {

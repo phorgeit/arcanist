@@ -300,7 +300,7 @@ final class PhutilErrorHandler extends Phobject {
   /**
    * Output a stacktrace to the PHP error log.
    *
-   * @param trace $trace A stacktrace, e.g. from debug_backtrace();
+   * @param array $trace A stacktrace, e.g. from debug_backtrace();
    * @return void
    * @task internal
    */
@@ -315,7 +315,7 @@ final class PhutilErrorHandler extends Phobject {
   /**
    * Format a stacktrace for output.
    *
-   * @param trace $trace A stacktrace, e.g. from debug_backtrace();
+   * @param array $trace A stacktrace, e.g. from debug_backtrace();
    * @return string Human-readable trace.
    * @task internal
    */

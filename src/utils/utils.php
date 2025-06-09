@@ -1692,7 +1692,7 @@ function phutil_build_http_querystring(array $parameters) {
 /**
  * Build a query string from a list of parameter pairs.
  *
- * @param list<pair<string, string>> $pairs List of pairs.
+ * @param list<array<string, string>> $pairs List of pairs.
  * @return string HTTP query string.
  */
 function phutil_build_http_querystring_from_pairs(array $pairs) {
