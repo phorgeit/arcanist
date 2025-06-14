@@ -188,8 +188,8 @@ final class ExecFuture extends PhutilExecutableFuture {
    * NOTE: If you call @{method:discardBuffers}, all the stdout/stderr data
    * will be thrown away and the cursors will be reset.
    *
-   * @return pair <$stdout, $stderr> pair with new output since the last call
-   *              to this method.
+   * @return array A pair of <$stdout, $stderr> with new output since the last
+   *               call to this method.
    * @task interact
    */
   public function read() {
@@ -331,9 +331,7 @@ final class ExecFuture extends PhutilExecutableFuture {
    *
    *   list($stdout, $stderr) = $future->resolvex();
    *
-   * @param  float Optional timeout after which resolution will pause and
-   *               execution will return to the caller.
-   * @return pair  <$stdout, $stderr> pair.
+   * @return array A pair of <$stdout, $stderr>.
    * @task resolve
    */
   public function resolvex() {
@@ -346,8 +344,6 @@ final class ExecFuture extends PhutilExecutableFuture {
    * @{method:resolvex}, but also throws if stderr is nonempty, or stdout is not
    * valid JSON. Returns a PHP array, decoded from the JSON command output.
    *
-   * @param  float Optional timeout after which resolution will pause and
-   *               execution will return to the caller.
    * @return array PHP array, decoded from JSON command output.
    * @task resolve
    */
@@ -418,6 +414,9 @@ final class ExecFuture extends PhutilExecutableFuture {
     $this->setResult($result);
   }
 
+  /**
+   * @return array A pair of <$stdout, $stderr>.
+   */
   private function raiseResultError($result) {
     list($err, $stdout, $stderr) = $result;
 

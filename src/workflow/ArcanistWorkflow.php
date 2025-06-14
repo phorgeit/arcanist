@@ -662,7 +662,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * @{method:requireAuthentication} return true, or explicitly by calling
    * @{method:establishConduit} or @{method:authenticateConduit}.
    *
-   * @return @{class@libphutil:ConduitClient} Live conduit client.
+   * @return ConduitClient Live conduit client.
    * @task conduit
    */
   final public function getConduit() {

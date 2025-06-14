@@ -290,9 +290,9 @@ abstract class ArcanistLintEngine extends Phobject {
   }
 
   /**
-   * @param array<string,array<string,array<string>>>
-   *   $results Array of format <string path, array<string version,
-   *     list<array message>>>
+   * @param array<string,array<string,array<string>>> $results
+   *   Array of format
+   *     <string path, array<string version,list<array message>>>
    *   $results
    * @return $this
    */

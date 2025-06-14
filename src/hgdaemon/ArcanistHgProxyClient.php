@@ -75,7 +75,7 @@ final class ArcanistHgProxyClient extends Phobject {
    *
    * @param list<string> $argv A list of command arguments, like "log", "-l",
    *   "5".
-   * @return array<int, string, string> Tuple of return code, stdout, stderr.
+   * @return array Tuple of return code (integer), stdout, stderr.
    *
    * @task exec
    */

@@ -99,7 +99,7 @@ final class PhutilConsoleServer extends Phobject {
   /**
    * Set handler called for unknown messages.
    *
-   * @param callable Signature: (PhutilConsoleMessage $message).
+   * @param callable $callback Signature: (PhutilConsoleMessage $message).
    */
   public function setHandler($callback) {
     $this->handler = $callback;
