@@ -355,7 +355,7 @@ final class ArcanistHgProxyServer extends Phobject {
           $errstr));
     }
 
-    $ok = stream_set_blocking($socket, 0);
+    $ok = stream_set_blocking($socket, false);
     if ($ok === false) {
       throw new Exception(pht('Unable to set socket nonblocking!'));
     }

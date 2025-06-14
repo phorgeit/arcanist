@@ -179,7 +179,7 @@ final class HTTPFuture extends BaseHTTPFuture {
       return null;
     }
 
-    $ok = stream_set_blocking($socket, 0);
+    $ok = stream_set_blocking($socket, false);
     if (!$ok) {
       throw new Exception(pht('Failed to set stream nonblocking.'));
     }
