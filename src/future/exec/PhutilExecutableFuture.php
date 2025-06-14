@@ -143,7 +143,7 @@ abstract class PhutilExecutableFuture extends Future {
 
       foreach ($known_keys as $known_key) {
         $value = getenv($known_key);
-        if (strlen($value)) {
+        if ($value && $value !== '') {
           $default_env[$known_key] = $value;
         }
       }
