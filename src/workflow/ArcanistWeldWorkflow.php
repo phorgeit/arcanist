@@ -70,6 +70,8 @@ EOTEXT
     }
 
     echo implode('', $buffer);
+
+    return 0;
   }
 
   private function weldLines($u, $v, $bias) {
