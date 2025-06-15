@@ -45,10 +45,7 @@ final class HTTPFutureCURLResponseStatus extends HTTPFutureResponseStatus {
         'CA bundle. See instructions in "%s".',
         'arcanist/resources/ssl/README'),
 
-      // Apparently there's no error constant for this? In cURL it's
-      // CURLE_SSL_CACERT_BADFILE but there's no corresponding constant in
-      // PHP.
-      77 => pht(
+      CURLE_SSL_CACERT_BADFILE => pht(
         'The SSL CA Bundles that we tried to use could not be read or are '.
         'not formatted correctly.'),
 
