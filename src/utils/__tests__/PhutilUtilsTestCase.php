@@ -409,12 +409,12 @@ final class PhutilUtilsTestCase extends PhutilTestCase {
       '' => array(''),
       'x' => array('x'),
       "x\n" => array('x'),
-      "\n" => array(''),
-      "\n\n\n" => array('', '', ''),
-      "\r\n" => array(''),
+      "\n" => array(),
+      "\n\n\n" => array(),
+      "\r\n" => array(),
       "x\r\ny\n" => array('x', 'y'),
       "x\ry\nz\r\n" => array("x\ry", 'z'),
-      "x\ry\nz\r\n\n" => array("x\ry", 'z', ''),
+      "x\ry\nz\r\n\n" => array("x\ry", 'z'),
     );
 
     foreach ($discard_cases as $input => $expect) {

@@ -927,7 +927,7 @@ function phutil_split_lines($corpus, $retain_endings = true) {
 
   // If the text ends with "\n" or similar, we'll end up with an empty string
   // at the end; discard it.
-  if (end($lines) == '') {
+  while ($lines && end($lines) == '') {
     array_pop($lines);
   }
 
