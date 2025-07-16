@@ -14,7 +14,12 @@ final class PhutilCzechLocale extends PhutilLocale {
   }
 
   public function selectPluralVariant($variant, array $translations) {
-    list($singular, $paucal, $plural) = $translations;
+    if (count($translations) === 2) {
+      list($singular, $plural) = $translations;
+      $paucal = $plural;
+    } else {
+      list($singular, $paucal, $plural) = $translations;
+    }
 
     if ($variant == 1) {
       return $singular;
