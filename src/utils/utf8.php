@@ -836,7 +836,7 @@ function phutil_utf8_strtoupper($str) {
  * @{function:strtr}.
  *
  * @param   string              $str UTF-8 input string.
- * @param   map<string, string> $map Map of characters to replace.
+ * @param   array<string, string> $map Map of characters to replace.
  * @return  string              Input with translated characters.
  */
 function phutil_utf8_strtr($str, array $map) {

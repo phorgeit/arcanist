@@ -200,7 +200,7 @@ EOTEXT
   /**
    * Get human-readable linter statuses, padded to fixed width.
    *
-   * @return map<string, string> Human-readable linter status names.
+   * @return array<string, string> Human-readable linter status names.
    */
   private function getStatusMap() {
     $text_map = array(

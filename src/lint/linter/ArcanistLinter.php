@@ -63,7 +63,7 @@ abstract class ArcanistLinter extends Phobject {
    * Linters can use this method to provide arbitrary additional information to
    * be included in the output of `arc linters`.
    *
-   * @return map<string, string>  A mapping of header to body content for the
+   * @return array<string, string>  A mapping of header to body content for the
    *                              additional information sections.
    * @task info
    */

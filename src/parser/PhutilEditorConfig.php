@@ -101,7 +101,7 @@ final class PhutilEditorConfig extends Phobject {
    * - Invalid glob patterns will be silently ignored.
    *
    * @param  string $path
-   * @return map<string,mixed>
+   * @return array<string,mixed>
    */
   public function getProperties($path) {
     $configs = $this->getEditorConfigs($path);

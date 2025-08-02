@@ -43,7 +43,7 @@ final class CaseInsensitiveArray extends PhutilArray {
    * All keys in the parent `PhutilArray` are indexed using the case-invariant
    * key rather than the original key.
    *
-   * @var map<string, string>
+   * @var array<string, string>
    */
   private $keys = array();
 

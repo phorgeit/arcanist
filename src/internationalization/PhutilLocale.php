@@ -139,7 +139,7 @@ abstract class PhutilLocale extends Phobject {
   /**
    * Load all available locales.
    *
-   * @return map<string, PhutilLocale> Map from codes to locale objects.
+   * @return array<string, PhutilLocale> Map from codes to locale objects.
    */
   public static function loadAllLocales() {
     static $locales;
@@ -216,9 +216,9 @@ abstract class PhutilLocale extends Phobject {
   /**
    * Recursively check locale fallbacks for cycles.
    *
-   * @param map<string, PhutilLocale> $map Map of locales.
+   * @param array<string, PhutilLocale> $map Map of locales.
    * @param PhutilLocale $locale Current locale.
-   * @param map<string, string> $seen Map of visited locales.
+   * @param array<string, string> $seen Map of visited locales.
    * @return void
    */
   private static function checkLocaleFallback(

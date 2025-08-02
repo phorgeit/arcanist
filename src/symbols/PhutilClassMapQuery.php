@@ -174,7 +174,7 @@ final class PhutilClassMapQuery extends Phobject {
   /**
    * Execute the query as configured.
    *
-   * @return map<string, object> Realized class map.
+   * @return array<string, object> Realized class map.
    * @task exec
    */
   public function execute() {
@@ -204,7 +204,7 @@ final class PhutilClassMapQuery extends Phobject {
    *
    * This method is used to fill the cache.
    *
-   * @return map<string, object> Realized class map.
+   * @return array<string, object> Realized class map.
    * @task exec
    */
   private function loadMap() {

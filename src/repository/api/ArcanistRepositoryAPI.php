@@ -139,7 +139,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
    * A file may be in several states. Not all states are possible with all
    * version control systems.
    *
-   * @return map<string, string> Map of paths to bitmasks with status.
+   * @return array<string, string> Map of paths to bitmasks with status.
    * @task status
    */
   final public function getUncommittedStatus() {
@@ -227,7 +227,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
    *
    * See @{method:getUncommittedStatus} for a description of the return value.
    *
-   * @return map<string, string> Map from paths to bitmasks with status.
+   * @return array<string, string> Map from paths to bitmasks with status.
    * @task status
    */
   final public function getCommitRangeStatus() {
@@ -247,7 +247,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
    *
    * See @{method:getUncommittedStatus} for a description of the return value.
    *
-   * @return map<string, string> Map from paths to bitmasks with status.
+   * @return array<string, string> Map from paths to bitmasks with status.
    * @task status
    */
   final public function getWorkingCopyStatus() {
@@ -298,7 +298,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
   /**
    * Fetches the original file data for each path provided.
    *
-   * @return map<string, string> Map from path to file data.
+   * @return array<string, string> Map from path to file data.
    */
   public function getBulkOriginalFileData($paths) {
     $filedata = array();
@@ -312,7 +312,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
   /**
    * Fetches the current file data for each path provided.
    *
-   * @return map<string, string> Map from path to file data.
+   * @return array<string, string> Map from path to file data.
    */
   public function getBulkCurrentFileData($paths) {
     $filedata = array();

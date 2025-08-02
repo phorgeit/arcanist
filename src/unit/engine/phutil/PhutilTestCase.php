@@ -346,10 +346,10 @@ abstract class PhutilTestCase extends Phobject {
    *      is_a_fruit($input);
    *    }
    *
-   * @param map       $inputs Map of test case labels to test case inputs.
-   * @param list      $expect List of expected results, true to indicate that
-   *                  the case is expected to succeed and false to indicate
-   *                  that the case is expected to throw.
+   * @param array       $inputs Map of test case labels to test case inputs.
+   * @param array<bool> $expect List of expected results, true to indicate that
+   *                    the case is expected to succeed and false to indicate
+   *                    that the case is expected to throw.
    * @param callable  $callable Callback to invoke for each test case.
    * @param string    $exception_class (optional) Exception class to catch,
    *                  defaults to 'Exception'.
@@ -436,7 +436,7 @@ abstract class PhutilTestCase extends Phobject {
    *
    * For cases where your inputs are not scalar, use @{method:tryTestCases}.
    *
-   * @param map       $map Map of scalar test inputs to expected success (true
+   * @param array     $map Map of scalar test inputs to expected success (true
    *                  expects success, false expects an exception).
    * @param callable  $callable Callback to invoke for each test case.
    * @param string    $exception_class (optional) Exception class to catch,
