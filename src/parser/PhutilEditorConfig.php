@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Parser for [[http://editorconfig.org/ | EditorConfig]] files.
+ * Parser for [[https://editorconfig.org/ | EditorConfig]] files.
  */
 final class PhutilEditorConfig extends Phobject {
 
@@ -17,7 +17,7 @@ final class PhutilEditorConfig extends Phobject {
   /**
    * Valid properties.
    *
-   * See http://editorconfig.org/#file-format-details.
+   * See https://editorconfig.org/#file-format-details.
    */
   private static $knownProperties = array(
     self::CHARSET => array(
