@@ -20,14 +20,6 @@
     "overview": {
       "name": "libphutil Overview"
     },
-    "aphront": {
-      "name": "Aphront",
-      "include": "(^src/aphront/)"
-    },
-    "auth": {
-      "name": "Authentication",
-      "include": "(^src/auth/)"
-    },
     "conduit": {
       "name": "Conduit",
       "include": "(^src/conduit/)"
@@ -35,10 +27,6 @@
     "console": {
       "name": "Console",
       "include": "(^src/console/)"
-    },
-    "daemon": {
-      "name": "Daemons",
-      "include": "(^src/daemon/)"
     },
     "error": {
       "name": "Errors",
@@ -71,10 +59,6 @@
     "phage": {
       "name": "Phage",
       "include": "(^src/phage/)"
-    },
-    "remarkup": {
-      "name": "Remarkup",
-      "include": "(^src/markup/)"
     },
     "utf8": {
       "name": "Handling Unicode and UTF-8"
