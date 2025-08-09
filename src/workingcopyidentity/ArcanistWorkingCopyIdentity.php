@@ -248,8 +248,8 @@ final class ArcanistWorkingCopyIdentity extends Phobject {
    * user configuration.
    *
    * @param string $key Key to read.
-   * @param wild   $default (Optional) Default value if key is not found.
-   * @return wild  Value, or default value if not found.
+   * @param mixed  $default (Optional) Default value if key is not found.
+   * @return mixed Value, or default value if not found.
    *
    * @task config
    */

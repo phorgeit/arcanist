@@ -4,6 +4,8 @@
  * A 'future' or 'promise' is an object which represents the result of some
  * pending computation. For a more complete overview of futures, see
  * @{article:Using Futures}.
+ *
+ * @template T
  */
 abstract class Future extends Phobject {
 
@@ -30,7 +32,7 @@ abstract class Future extends Phobject {
    * Resolve a future and return its result, blocking until the result is ready
    * if necessary.
    *
-   * @return wild Future result.
+   * @return T Future result.
    */
   public function resolve() {
     $args = func_get_args();
@@ -170,7 +172,7 @@ abstract class Future extends Phobject {
   /**
    * Retrieve the final result of the future.
    *
-   * @return wild Final resolution of this future.
+   * @return T Final resolution of this future.
    */
   final protected function getResult() {
     if (!$this->hasResult()) {

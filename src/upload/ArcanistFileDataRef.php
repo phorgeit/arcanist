@@ -65,7 +65,7 @@ final class ArcanistFileDataRef extends Phobject {
    * data, or by calling @{method:setPath} and providing a path to a file on
    * disk.
    *
-   * @param wild $data Blob of file data.
+   * @param string $data Blob of file data.
    * @task config
    */
   public function setData($data) {

@@ -46,7 +46,7 @@ abstract class PhutilLocale extends Phobject {
    * rule with two gender variants, listed in "<male, female>" order.
    *
    * @param string $variant `PhutilPerson` gender constant.
-   * @param list<wild> $translations List of variants.
+   * @param list<mixed> $translations List of variants.
    * @return string Variant for use.
    */
   public function selectGenderVariant($variant, array $translations) {
@@ -63,7 +63,7 @@ abstract class PhutilLocale extends Phobject {
    * rule with two plural variants, listed in "<singular, plural>" order.
    *
    * @param int $variant Plurality of the value.
-   * @param list<wild> $translations List of variants.
+   * @param list<mixed> $translations List of variants.
    * @return string Variant for use.
    */
   public function selectPluralVariant($variant, array $translations) {
@@ -123,7 +123,7 @@ abstract class PhutilLocale extends Phobject {
    *
    * @param string $raw_pattern The raw input pattern.
    * @param string $translated_pattern The selected translation pattern.
-   * @param list<wild> $args The raw input arguments.
+   * @param list<mixed> $args The raw input arguments.
    * @param string $result_text The translated string.
    * @return string Post-processed translation string.
    */

@@ -8,6 +8,8 @@
  * @task path     Path Management
  * @task symbol   Symbol Analysis and Caching
  * @task source   Source Management
+ *
+ * @phpstan-type LibraryMapArray array{class:array,function:array,xmap:array}
  */
 final class PhutilLibraryMapBuilder extends Phobject {
 
@@ -54,7 +56,7 @@ final class PhutilLibraryMapBuilder extends Phobject {
    * Get the map of symbols in this library, analyzing the library to build it
    * if necessary.
    *
-   * @return map<string, wild> Information about symbols in this library.
+   * @return LibraryMapArray Information about symbols in this library.
    *
    * @task map
    */
@@ -73,7 +75,8 @@ final class PhutilLibraryMapBuilder extends Phobject {
    * Returns a map of file paths to information about symbols used and defined
    * in the file.
    *
-   * @return map<string, wild> Information about files in this library.
+   * @return array<string,LibraryMapArray> Information about files in this
+   *                                       library.
    *
    * @task map
    */

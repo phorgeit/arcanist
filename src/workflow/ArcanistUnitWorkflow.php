@@ -353,7 +353,7 @@ EOTEXT
    * invalid format.
    *
    * @param ArcanistUnitTestEngine $engine The engine.
-   * @param wild $results Results from the engine.
+   * @param mixed $results Results from the engine.
    */
   private function validateUnitEngineResults(
     ArcanistUnitTestEngine $engine,

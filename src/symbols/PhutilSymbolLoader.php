@@ -355,8 +355,7 @@ final class PhutilSymbolLoader {
    *
    * This method implicitly restricts the query to match only concrete
    * classes.
-   *
-   * @param  list<wild>           $argv List of constructor arguments.
+   * @param  array<mixed>         $argv List of constructor arguments.
    * @return map<string, object>  Map of class names to constructed objects.
    */
   public function loadObjects(array $argv = array()) {

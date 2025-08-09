@@ -27,7 +27,7 @@
  * ("C"), with values "moon" and "cheese" respectively.
  *
  * @param   string  $callback The name of a callback to pass conversions to.
- * @param   wild    $userdata Optional userdata to pass to the callback. For
+ * @param   mixed   $userdata Optional userdata to pass to the callback. For
  *                  @{function:qsprintf}, this is the database connection.
  * @param   list    $argv List of arguments, with the `sprintf()` pattern in
  *                  position 0.
@@ -118,11 +118,11 @@ function xsprintf($callback, $userdata, array $argv) {
  * For example implementations, see @{function:xsprintf_command},
  * @{function:xsprintf_javascript} and @{function:xsprintf_query}.
  *
- * @param   wild    $userdata Arbitrary, optional userdata. This is whatever
+ * @param   mixed   $userdata Arbitrary, optional userdata. This is whatever
  *                  userdata was passed to @{function:xsprintf}.
  * @param   string  &$pattern The pattern string being parsed.
  * @param   int     &$pos The current character position in the string.
- * @param   wild    &$value The value to convert.
+ * @param   mixed   &$value The value to convert.
  * @param   int     &$length The string length.
  */
 function xsprintf_callback_example(

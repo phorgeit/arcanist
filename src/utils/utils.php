@@ -59,8 +59,8 @@ function idx(array $array, $key, $default = null) {
  *
  * @param array $map Array to access.
  * @param list<string> $path List of keys to access, in sequence.
- * @param wild $default (optional) Default value to return.
- * @return wild Accessed value, or default if the value is not accessible.
+ * @param mixed $default (optional) Default value to return.
+ * @return mixed Accessed value, or default if the value is not accessible.
  */
 function idxv(array $map, array $path, $default = null) {
   if (!$path) {
@@ -817,8 +817,9 @@ function newv($class_name, array $argv) {
  * choke if you pass it some non-referenceable value like the return value of
  * a function.
  *
- * @param    array $arr Array to retrieve the first element from.
- * @return   wild  The first value of the array.
+ * @template T
+ * @param    array<T> $arr Array to retrieve the first element from.
+ * @return   T|false  The first value of the array.
  */
 function head(array $arr) {
   return reset($arr);
@@ -829,8 +830,9 @@ function head(array $arr) {
  * that it won't warn you if you pass some non-referencable array to
  * it -- e.g., the result of some other array operation.
  *
- * @param    array $arr Array to retrieve the last element from.
- * @return   wild  The last value of the array.
+ * @template T
+ * @param    array<T> $arr Array to retrieve the last element from.
+ * @return   T|false  The last value of the array.
  */
 function last(array $arr) {
   return end($arr);
@@ -982,7 +984,7 @@ function array_fuse(?array $list = null) {
  *
  * This function does not preserve keys.
  *
- * @param wild  $interleave Element to interleave.
+ * @param mixed $interleave Element to interleave.
  * @param list  $array List of elements to be interleaved.
  * @return list Original list with the new element interleaved.
  */
@@ -1328,7 +1330,7 @@ function phutil_json_decode($string) {
 /**
  * Encode a value in JSON, raising an exception if it can not be encoded.
  *
- * @param wild $value A value to encode.
+ * @param mixed $value A value to encode.
  * @return string JSON representation of the value.
  */
 function phutil_json_encode($value) {
@@ -1368,7 +1370,7 @@ function phutil_json_encode($value) {
 /**
  * Produce a human-readable explanation why a value can not be JSON-encoded.
  *
- * @param wild $value Value to validate.
+ * @param mixed $value Value to validate.
  * @param string $path (optional) Path within the object to provide context.
  * @return string|null Explanation of why it can't be encoded, or null.
  */
@@ -1514,7 +1516,7 @@ function phutil_censor_credentials($string) {
  * This function is intended to behave similarly to PHP's `var_export` function,
  * but the output is intended to follow our style conventions.
  *
- * @param  wild    $var The variable you want to export.
+ * @param  mixed    $var The variable you want to export.
  * @return string
  */
 function phutil_var_export($var) {
@@ -1793,7 +1795,7 @@ function phutil_decode_mime_header($header) {
  * We also reject arrays. PHP casts them to the string "Array". This behavior
  * is, charitably, evil.
  *
- * @param wild $value Any value which aspires to be represented as a string.
+ * @param mixed $value Any value which aspires to be represented as a string.
  * @return string String representation of the provided value.
  */
 function phutil_string_cast($value) {
@@ -1830,7 +1832,7 @@ function phutil_string_cast($value) {
  * This is similar to "get_type()", but describes objects and arrays in more
  * detail.
  *
- * @param wild $value Anything.
+ * @param mixed $value Anything.
  * @return string Human-readable description of the value's type.
  */
 function phutil_describe_type($value) {

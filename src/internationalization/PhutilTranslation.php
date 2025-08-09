@@ -16,7 +16,7 @@ abstract class PhutilTranslation extends Phobject {
   /**
    * Return a map of all translations.
    *
-   * @return map<string, wild> Map of raw strings to translations.
+   * @return map<string,mixed> Map of raw strings to translations.
    */
   abstract protected function getTranslations();
 
@@ -26,7 +26,7 @@ abstract class PhutilTranslation extends Phobject {
    *
    * Filters out empty/placeholder translations.
    *
-   * @return map<string, wild> Map of raw strings to translations.
+   * @return map<string,mixed> Map of raw strings to translations.
    */
   final public function getFilteredTranslations() {
     $translations = $this->getTranslations();
@@ -60,7 +60,7 @@ abstract class PhutilTranslation extends Phobject {
    * translation map.
    *
    * @param string $locale_code Locale code, like "en_US".
-   * @return map<string, wild> Map of all avialable translations.
+   * @return map<string,mixed> Map of all available translations.
    */
   public static function getTranslationMapForLocale($locale_code) {
     $locale = PhutilLocale::loadLocale($locale_code);

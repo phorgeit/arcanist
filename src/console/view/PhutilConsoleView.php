@@ -57,8 +57,8 @@ abstract class PhutilConsoleView extends Phobject {
   /**
    * Reduce a view to a list of simple, unnested parts.
    *
-   * @param wild $view Any drawable view.
-   * @return list<wild> List of unnested drawables.
+   * @param mixed $view Any drawable view.
+   * @return list<mixed> List of unnested drawables.
    * @task draw
    */
   private function reduceView($view) {
@@ -84,8 +84,8 @@ abstract class PhutilConsoleView extends Phobject {
 
 
   /**
-   * @param list<wild> $parts List of views, one per line.
-   * @return wild Each view rendered on a separate line.
+   * @param list<mixed> $parts List of views, one per line.
+   * @return mixed Each view rendered on a separate line.
    */
   final protected function drawLines(array $parts) {
     $result = array();

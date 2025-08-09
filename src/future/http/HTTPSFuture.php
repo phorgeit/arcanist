@@ -658,7 +658,7 @@ final class HTTPSFuture extends BaseHTTPFuture {
   /**
    * Produces a value safe to pass to `CURLOPT_POSTFIELDS`.
    *
-   * @return wild   Some value, suitable for use in `CURLOPT_POSTFIELDS`.
+   * @return mixed   Some value, suitable for use in `CURLOPT_POSTFIELDS`.
    */
   private function formatRequestDataForCURL() {
     // We're generating a value to hand to cURL as CURLOPT_POSTFIELDS. The way

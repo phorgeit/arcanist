@@ -423,9 +423,9 @@ abstract class ArcanistLintEngine extends Phobject {
    * times.
    *
    * @param string  $key Resource identifier.
-   * @param wild    $default (optional) Default value to return if resource
+   * @param mixed   $default (optional) Default value to return if resource
    *                does not exist.
-   * @return wild   Resource, or default value if not present.
+   * @return mixed  Resource, or default value if not present.
    */
   public function getLinterResource($key, $default = null) {
     return idx($this->linterResources, $key, $default);
@@ -438,7 +438,7 @@ abstract class ArcanistLintEngine extends Phobject {
    * See @{method:getLinterResource} for a description of this mechanism.
    *
    * @param string $key Resource identifier.
-   * @param wild   $value Resource.
+   * @param mixed  $value Resource.
    * @return $this
    */
   public function setLinterResource($key, $value) {

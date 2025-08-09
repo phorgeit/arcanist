@@ -734,7 +734,7 @@ final class ArcanistMercurialAPI extends ArcanistRepositoryAPI {
    *
    * @param array $child_nodes The list of child changesets off the original
    *   commit.
-   * @param wild  $tmp_file The file containing the new commit message.
+   * @param TempFile $tmp_file The file containing the new commit message.
    */
   private function amendNonHeadCommit($child_nodes, $tmp_file) {
     list($current) = $this->execxLocal(

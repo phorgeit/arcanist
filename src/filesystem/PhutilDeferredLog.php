@@ -99,9 +99,9 @@ final class PhutilDeferredLog extends Phobject {
    * Get existing log data.
    *
    * @param   string  $key Log data key.
-   * @param   wild    $default (optional) Default to return if data does not
+   * @param   mixed   $default (optional) Default to return if data does not
    *   exist.
-   * @return  wild    Data, or default if data does not exist.
+   * @return  mixed   Data, or default if data does not exist.
    * @task log
    */
   public function getData($key, $default = null) {

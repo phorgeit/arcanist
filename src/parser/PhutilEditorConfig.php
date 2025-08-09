@@ -52,7 +52,7 @@ final class PhutilEditorConfig extends Phobject {
    *
    * @param  string $path
    * @param  string $key
-   * @return wild
+   * @return mixed
    */
   public function getProperty($path, $key) {
     if (!idx(self::$knownProperties, $key)) {
@@ -101,7 +101,7 @@ final class PhutilEditorConfig extends Phobject {
    * - Invalid glob patterns will be silently ignored.
    *
    * @param  string $path
-   * @return map<string, wild>
+   * @return map<string,mixed>
    */
   public function getProperties($path) {
     $configs = $this->getEditorConfigs($path);

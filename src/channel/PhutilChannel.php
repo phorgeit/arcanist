@@ -26,6 +26,9 @@
  * @task  wait    Waiting for Activity
  * @task  update  Responding to Activity
  * @task  impl    Channel Implementation
+ *
+ * @template TRead = string
+ * @template TWrite = string
  */
 abstract class PhutilChannel extends Phobject {
 
@@ -48,7 +51,7 @@ abstract class PhutilChannel extends Phobject {
    *
    * The default implementation returns bytes.
    *
-   * @return wild  Data from the channel, normally bytes.
+   * @return TRead  Data from the channel, normally bytes.
    *
    * @task io
    */
@@ -65,7 +68,7 @@ abstract class PhutilChannel extends Phobject {
    *
    * The default implementation accepts bytes.
    *
-   * @param   wild $bytes Data to write to the channel, normally bytes.
+   * @param   TWrite  $bytes Data to write to the channel, normally bytes.
    * @return  $this
    *
    * @task io

@@ -179,7 +179,7 @@ final class PhutilErrorHandler extends Phobject {
    * @param string $str Error message.
    * @param string $file File where the error occurred.
    * @param int $line Line on which the error occurred.
-   * @param wild $ctx (optional) Error context information.
+   * @param mixed $ctx (optional) Error context information.
    * @return void
    * @task internal
    */
@@ -379,7 +379,7 @@ final class PhutilErrorHandler extends Phobject {
    * log.
    *
    * @param string $event Event type constant.
-   * @param wild $value Event value.
+   * @param mixed $value Event value.
    * @param array $metadata Event metadata.
    * @return void
    * @task internal
@@ -557,7 +557,7 @@ final class PhutilErrorHandler extends Phobject {
    * origins and has been aggregated or proxied.
    *
    * @param Exception|Throwable $ex Exception to retrieve a trace for.
-   * @return list<wild> List of stack frames.
+   * @return list<array> List of stack frames.
    */
   public static function getExceptionTrace($ex) {
     $id = 1;
