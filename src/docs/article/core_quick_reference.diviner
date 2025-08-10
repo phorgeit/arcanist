@@ -1,11 +1,11 @@
 @title Core Utilities Quick Reference
 @group util
 
-Summary of libphutil core utilities.
+Summary of core utilities.
 
 = Overview =
 
-This document provides a brief overview of the libphutil core utilities.
+This document provides a brief overview of the Arcanist core utilities.
 
 = Language Capabilities =
 

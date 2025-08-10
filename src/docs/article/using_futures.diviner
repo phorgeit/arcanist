@@ -1,7 +1,7 @@
 @title Using Futures
 @group future
 
-Overview of how futures work in libphutil.
+Overview of how futures work in Arcanist.
 
 
 = Overview =
@@ -14,7 +14,7 @@ around as a representation for the real result while the real result is being
 computed in the background. When the object is asked to return the actual
 result, it blocks until the result is available.
 
-libphutil provides a number of future-based APIs, as they strike a good balance
+Arcanist provides a number of future-based APIs, as they strike a good balance
 between ease of use and power for many of the domains where PHP is a reasonable
 language choice.
 
@@ -51,7 +51,7 @@ activate it. If you simply call `resolve()` it will start, block until it is
 complete, and then return the result, acting in a completely synchronous way.
 
 See @{article:Command Execution} for more detailed documentation on how to
-execute system commands with libphutil.
+execute system commands with Arcanist.
 
 
 = Managing Multiple Futures =

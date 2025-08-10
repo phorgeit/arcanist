@@ -2,7 +2,7 @@
 @group exec
 
 This document describes best practices for executing system commands in PHP
-using libphutil.
+using Arcanist.
 
 = Overview =
 
@@ -12,7 +12,7 @@ often make it difficult to get all the information you need to handle error
 conditions, properly escaping commands is cumbersome, and they do not provide
 more advanced features like parallel execution and timeouts.
 
-This document describes how to use the APIs in libphutil to execute commands
+This document describes how to use the APIs in Arcanist to execute commands
 without encountering these problems.
 
 = Simple Commands: `execx()` and `exec_manual()` =
@@ -43,7 +43,7 @@ and asynchronous I/O, use @{class:ExecFuture}.
 @{class:ExecFuture} is a @{class:Future}, and can be used with constructs like
 @{class:FutureIterator} to achieve and manage parallelism. See
 @{article:Using Futures} for general information on how to use futures in
-libphutil.
+Arcanist.
 
 In addition to futures-based parallelism, you can set a timeout on an
 @{class:ExecFuture}, which will kill the command if it takes longer than the
