@@ -17,13 +17,63 @@
     "(^support/)"
   ],
   "groups": {
+    "overview": {
+      "name": "arcanist Overview"
+    },
+    "conduit": {
+      "name": "Conduit",
+      "include": "(^src/conduit/)"
+    },
+    "console": {
+      "name": "Console",
+      "include": "(^src/console/)"
+    },
+    "error": {
+      "name": "Errors",
+      "include": "(^src/error/)"
+    },
+    "filesystem": {
+      "name": "Filesystem",
+      "include": "(^src/filesystem/)"
+    },
+    "future": {
+      "name": "Futures",
+      "include": "(^src/future/)"
+    },
+    "internationalization": {
+      "name": "Internationalization",
+      "include": "(^src/internationalization/)"
+    },
+    "lexer": {
+      "name": "Lexers",
+      "include": "(^src/lexer/)"
+    },
+    "library": {
+      "name": "Library System",
+      "include": "(^src/moduleutils/)"
+    },
     "lint": {
       "name": "Lint",
       "include": "(^src/lint/)"
     },
+    "parser": {
+      "name": "Parsers",
+      "include": "(^src/parser/)"
+    },
+    "phage": {
+      "name": "Phage",
+      "include": "(^src/phage/)"
+    },
     "unit": {
       "name": "Unit Testing",
       "include": "(^src/unit/)"
+    },
+    "utf8": {
+      "name": "Handling Unicode and UTF-8"
+    },
+    "util": {
+      "name": "Core Utilities",
+      "include": "(^src/utils/)"
     },
     "workflow": {
       "name": "Workflows",
