@@ -8,7 +8,7 @@
  * explanation of futures. When an ExecFuture resolves, it returns the exit
  * code, stdout and stderr of the process it executed.
  *
- * ExecFuture is the core command execution implementation in libphutil, but is
+ * ExecFuture is the core command execution implementation in Arcanist, but is
  * exposed through a number of APIs. See @{article:Command Execution} for more
  * discussion about executing system commands.
  *

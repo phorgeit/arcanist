@@ -52,7 +52,9 @@ $base_args->parsePartial(
     array(
       'name'    => 'load-phutil-library',
       'param'   => 'path',
-      'help'    => pht('Load a libphutil library.'),
+      'help'    => pht(
+                     'Load an %s library.',
+                     PlatformSymbols::getPlatformClientName()),
       'repeat'  => true,
     ),
     array(
@@ -614,8 +616,8 @@ function arcanist_load_libraries(
     //     check out a library alongside a working copy and reference it.
     //     If we haven't resolved yet, "library/src" will try to resolve to
     //     "../library/src" if it exists.
-    //  3. Using normal libphutil resolution rules. Generally, this means
-    //     that it checks for libraries next to libphutil, then libraries
+    //  3. Using normal Arcanist resolution rules. Generally, this means
+    //     that it checks for libraries next to Arcanist, then libraries
     //     in the PHP include_path.
     //
     // Note that absolute paths will just resolve absolutely through rule (1).

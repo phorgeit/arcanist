@@ -403,8 +403,8 @@ final class ArcanistRuntime {
     //     check out a library alongside a working copy and reference it.
     //     If we haven't resolved yet, "library/src" will try to resolve to
     //     "../library/src" if it exists.
-    //  3. Using normal libphutil resolution rules. Generally, this means
-    //     that it checks for libraries next to libphutil, then libraries
+    //  3. Using normal Arcanist resolution rules. Generally, this means
+    //     that it checks for libraries next to Arcanist, then libraries
     //     in the PHP include_path.
     //
     // Note that absolute paths will just resolve absolutely through rule (1).

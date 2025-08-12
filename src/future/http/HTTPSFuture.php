@@ -33,8 +33,8 @@ final class HTTPSFuture extends BaseHTTPFuture {
    * Create a temp file containing an SSL cert, and use it for this session.
    *
    * This allows us to do host-specific SSL certificates in whatever client
-   * is using libphutil. e.g. in Arcanist, you could add an "ssl_cert" key
-   * to a specific host in ~/.arcrc and use that.
+   * might be using Arcanist, you could add an "ssl_cert" key to a specific
+   * host in ~/.arcrc and use that.
    *
    * cURL needs this to be a file, it doesn't seem to be able to handle a string
    * which contains the cert. So we make a temporary file and store it there.
@@ -378,8 +378,8 @@ final class HTTPSFuture extends BaseHTTPFuture {
       //   curl.cainfo).
       // - Otherwise, try using curl.cainfo. If it's set explicitly, it's
       //   probably reasonable to try using it before we fall back to what
-      //   libphutil ships with.
-      // - Lastly, try the default that libphutil ships with. If it doesn't
+      //   Arcanist ships with.
+      // - Lastly, try the default that Arcanist ships with. If it doesn't
       //   work, give up and yell at the user.
 
       if (!$this->getCABundle()) {

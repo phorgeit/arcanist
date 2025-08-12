@@ -3,7 +3,7 @@
 /**
  * Load a map of concrete subclasses of some abstract parent class.
  *
- * libphutil is extensively modular through runtime introspection of class
+ * Arcanist is extensively modular through runtime introspection of class
  * maps. This method makes querying class maps easier.
  *
  * There are several common patterns used with modular class maps:

@@ -42,7 +42,7 @@ final class ArcanistFormattedStringXHPASTLinterRule
       'sprintf' => 0,
       'vfprintf' => 1,
 
-      // libphutil
+      // Arcanist
       'csprintf' => 0,
       'execx' => 0,
       'exec_manual' => 0,

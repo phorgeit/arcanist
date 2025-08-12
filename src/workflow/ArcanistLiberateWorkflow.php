@@ -174,7 +174,7 @@ EOTEXT
       if (!is_dir($path)) {
         throw new ArcanistUsageException(
           pht(
-            'Provide a directory to create or update a libphutil library in.'));
+            'Provide a directory to create or update a library in.'));
       }
       return;
     }
@@ -205,7 +205,7 @@ EOTEXT
       return 0;
     }
 
-    echo pht("Creating new libphutil library in '%s'.", $path)."\n";
+    echo pht("Creating new library in '%s'.", $path)."\n";
 
     do {
       echo pht('Choose a name for the new library.')."\n";

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * libphutil log function for development debugging. Takes any argument and
+ * Arcanist log function for development debugging. Takes any argument and
  * forwards it to registered listeners. This is essentially a more powerful
  * version of `error_log()`.
  *

@@ -656,7 +656,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
 
   /**
-   * Get the established @{class@libphutil:ConduitClient} in order to make
+   * Get the established @{class@arcanist:ConduitClient} in order to make
    * Conduit method calls. Before the client is available it must be connected,
    * either implicitly by making @{method:requireConduit} or
    * @{method:requireAuthentication} return true, or explicitly by calling

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * IMPORTANT: Do not call any libphutil functions in this class, including
+ * IMPORTANT: Do not call any Arcanist functions in this class, including
  * functions like @{function:id}, @{function:idx} and @{function:pht}. They
  * may not have loaded yet.
  */
@@ -58,7 +58,7 @@ final class PhutilBootloader {
 
     $this->registeredLibraries[$name] = $path;
 
-    // If we're loading libphutil itself, load the utility functions first so
+    // If we're loading Arcanist itself, load the utility functions first so
     // we can safely call functions like "id()" when handling errors. In
     // particular, this improves error behavior when "utils.php" itself can
     // not load.
@@ -67,7 +67,8 @@ final class PhutilBootloader {
       $this->executeInclude($root.'/utils/utils.php');
     }
 
-    // For libphutil v2 libraries, load all functions when we load the library.
+    // For modern Arcanist libraries (previously called libphutil v2), load all
+    // functions when we load the library.
 
     if (!class_exists('PhutilSymbolLoader', false)) {
       $root = $this->getLibraryRoot('arcanist');
@@ -147,7 +148,7 @@ final class PhutilBootloader {
       switch ($version) {
         case 1:
           throw new Exception(
-            'libphutil v1 libraries are no longer supported.');
+            'Arcanist libphutil v1 libraries are no longer supported.');
         case 2:
           // NOTE: In version 2 of the library format, all parents (both
           // classes and interfaces) are stored in the 'xmap'. The value is

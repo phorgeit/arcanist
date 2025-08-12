@@ -32,7 +32,7 @@
  * The **library** and **where** keys show where the symbol is defined. The
  * **type** and **name** keys identify the symbol itself.
  *
- * NOTE: This class must not use libphutil functions, including @{function:id}
+ * NOTE: This class must not use Arcanist functions, including @{function:id}
  * and @{function:idx}.
  *
  * @task config   Configuring the Query
@@ -292,7 +292,7 @@ final class PhutilSymbolLoader {
 
       if ($caught) {
         // NOTE: We try to load everything even if we fail to load something,
-        // primarily to make it possible to remove functions from a libphutil
+        // primarily to make it possible to remove functions from an Arcanist
         // library without breaking library startup.
         if ($should_continue) {
           // We may not have `pht()` yet.

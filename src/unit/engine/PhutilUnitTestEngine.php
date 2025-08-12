@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Very basic unit test engine which runs libphutil tests.
+ * Very basic unit test engine which runs Arcanist tests.
  */
 final class PhutilUnitTestEngine extends ArcanistUnitTestEngine {
 

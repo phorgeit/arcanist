@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Build maps of libphutil libraries. libphutil uses the library map to locate
+ * Build maps of Arcanist libraries. Arcanist uses the library map to locate
  * and load classes and functions in the library.
  *
- * @task map      Mapping libphutil Libraries
+ * @task map      Mapping Arcanist Libraries
  * @task path     Path Management
  * @task symbol   Symbol Analysis and Caching
  * @task source   Source Management
@@ -24,7 +24,7 @@ final class PhutilLibraryMapBuilder extends Phobject {
   const SYMBOL_CACHE_VERSION      = 11;
 
 
-/* -(  Mapping libphutil Libraries  )---------------------------------------- */
+/* -(  Mapping Arcanist Libraries  )---------------------------------------- */
 
   /**
    * Create a new map builder for a library.

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base test case for the very simple libphutil test framework.
+ * Base test case for the very simple Arcanist test framework.
  *
  * @task assert       Making Test Assertions
  * @task exceptions   Exception Handling
