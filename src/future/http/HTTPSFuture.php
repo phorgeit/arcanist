@@ -300,6 +300,7 @@ final class HTTPSFuture extends BaseHTTPFuture {
 
       $saw_expect = false;
       $saw_accept = false;
+      $saw_useragent = false;
       for ($ii = 0; $ii < count($headers); $ii++) {
         list($name, $value) = $headers[$ii];
         $headers[$ii] = $name.': '.$value;
@@ -308,6 +309,9 @@ final class HTTPSFuture extends BaseHTTPFuture {
         }
         if (!strcasecmp($name, 'Accept-Encoding')) {
           $saw_accept = true;
+        }
+        if (!strcasecmp($name, 'User-Agent')) {
+          $saw_useragent = true;
         }
       }
       if (!$saw_expect) {
@@ -432,6 +436,11 @@ final class HTTPSFuture extends BaseHTTPFuture {
 
       if ($proxy) {
         curl_setopt($curl, CURLOPT_PROXY, (string)$proxy);
+      }
+
+      if (!$saw_useragent) {
+        curl_setopt($curl, CURLOPT_USERAGENT,
+          parent::getDefaultUserAgent().' cURL/'.$version);
       }
 
       foreach ($this->curlOptions as $curl_option) {

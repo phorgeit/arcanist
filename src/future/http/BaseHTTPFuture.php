@@ -20,6 +20,12 @@
  */
 abstract class BaseHTTPFuture extends Future {
 
+  /**
+   * Default User-Agent for HTTP requests.
+   * @var ?string
+   */
+  private static $defaultUserAgent = null;
+
   private $method   = 'GET';
   private $timeout  = 300.0;
   private $headers  = array();
@@ -455,6 +461,33 @@ abstract class BaseHTTPFuture extends Future {
       HTTPFutureParseResponseStatus::ERROR_MALFORMED_RESPONSE,
       $raw_response);
     return array($status, $body, $headers);
+  }
+
+
+/* -(  Configuring global options  )----------------------------------------- */
+
+
+  /**
+   * Get default user-agent in use.
+   *
+   * @return string Default User-Agent to use
+   * @task config
+   */
+  final public static function getDefaultUserAgent() {
+    if (self::$defaultUserAgent === null) {
+      self::$defaultUserAgent = PlatformSymbols::getPlatformClientName().'/1.0';
+    }
+    return self::$defaultUserAgent;
+  }
+
+  /**
+   * Set a default user-agent to use.
+   *
+   * @param string $ua Default User-Agent to use
+   * @task config
+   */
+  final public static function setDefaultUserAgent($ua) {
+    self::$defaultUserAgent = $ua;
   }
 
 }

@@ -106,10 +106,6 @@ final class HTTPFuture extends BaseHTTPFuture {
     return $this->stateWriteComplete;
   }
 
-  private function getDefaultUserAgent() {
-    return __CLASS__.'/1.0';
-  }
-
   public function isReady() {
     if ($this->stateReady) {
       return true;
@@ -264,7 +260,7 @@ final class HTTPFuture extends BaseHTTPFuture {
     if (!$this->getHeaders('User-Agent')) {
       $add_headers[] = array(
         'User-Agent',
-        $this->getDefaultUserAgent(),
+        parent::getDefaultUserAgent(),
       );
     }
 
