@@ -3,8 +3,11 @@
 abstract class ArcanistMultiSourceConfigOption
   extends ArcanistConfigOption {
 
+  /**
+   * @param array<ArcanistConfigurationSourceValue> $list
+   */
   public function getValueFromStorageValueList(array $list) {
-    assert_instances_of($list, 'ArcanistConfigurationSourceValue');
+    assert_instances_of($list, ArcanistConfigurationSourceValue::class);
 
     $result_list = array();
     foreach ($list as $source_value) {
@@ -24,8 +27,11 @@ abstract class ArcanistMultiSourceConfigOption
     return $result_list;
   }
 
+  /**
+   * @param array<ArcanistConfigurationSourceValue> $list
+   */
   protected function didReadStorageValueList(array $list) {
-    assert_instances_of($list, 'ArcanistConfigurationSourceValue');
+    assert_instances_of($list, ArcanistConfigurationSourceValue::class);
     return mpull($list, 'getValue');
   }
 

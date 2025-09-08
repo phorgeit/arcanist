@@ -157,8 +157,11 @@ final class ArcanistLandCommit
     return null;
   }
 
+  /**
+   * @param array<ArcanistRevisionRef> $refs
+   */
   public function setRelatedRevisionRefs(array $refs) {
-    assert_instances_of($refs, 'ArcanistRevisionRef');
+    assert_instances_of($refs, ArcanistRevisionRef::class);
     $this->relatedRevisionRefs = $refs;
     return $this;
   }

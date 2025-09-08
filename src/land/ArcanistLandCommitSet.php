@@ -16,8 +16,11 @@ final class ArcanistLandCommitSet
     return $this->revisionRef;
   }
 
+  /**
+   * @param array<ArcanistLandCommit> $commits
+   */
   public function setCommits(array $commits) {
-    assert_instances_of($commits, 'ArcanistLandCommit');
+    assert_instances_of($commits, ArcanistLandCommit::class);
     $this->commits = $commits;
 
     $revision_phid = $this->getRevisionRef()->getPHID();

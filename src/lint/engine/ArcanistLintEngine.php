@@ -446,9 +446,11 @@ abstract class ArcanistLintEngine extends Phobject {
     return $this;
   }
 
-
+  /**
+   * @param array<ArcanistLinter> $linters
+   */
   private function getRunnableLinters(array $linters) {
-    assert_instances_of($linters, 'ArcanistLinter');
+    assert_instances_of($linters, ArcanistLinter::class);
 
     // TODO: The canRun() mechanism is only used by one linter, and just
     // silently disables the linter. Almost every other linter handles this
@@ -466,8 +468,11 @@ abstract class ArcanistLintEngine extends Phobject {
     return $runnable;
   }
 
+  /**
+   * @param array<ArcanistLinter> $runnable
+   */
   private function executeLinters(array $runnable) {
-    assert_instances_of($runnable, 'ArcanistLinter');
+    assert_instances_of($runnable, ArcanistLinter::class);
 
     $all_paths = $this->getPaths();
     $path_chunks = array_chunk($all_paths, 32, $preserve_keys = true);
@@ -480,9 +485,12 @@ abstract class ArcanistLintEngine extends Phobject {
     return array_mergev($exception_lists);
   }
 
-
+  /**
+   * @param array<ArcanistLinter> $runnable
+   * @param array $path_list
+   */
   private function executeLintersOnChunk(array $runnable, array $path_list) {
-    assert_instances_of($runnable, 'ArcanistLinter');
+    assert_instances_of($runnable, ArcanistLinter::class);
 
     $path_map = array_fuse($path_list);
 

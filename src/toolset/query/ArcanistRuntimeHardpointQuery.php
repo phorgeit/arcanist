@@ -102,8 +102,12 @@ abstract class ArcanistRuntimeHardpointQuery
     return $this->yieldFuture($ref_future);
   }
 
+  /**
+   * @param array<ArcanistRef> $refs
+   * @param mixed $value
+   */
   final public function yieldValue(array $refs, $value) {
-    assert_instances_of($refs, 'ArcanistRef');
+    assert_instances_of($refs, ArcanistRef::class);
 
     $keys = array_keys($refs);
     $map = array_fill_keys($keys, $value);

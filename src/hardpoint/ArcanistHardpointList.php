@@ -7,8 +7,11 @@ final class ArcanistHardpointList
   private $attached = array();
   private $data = array();
 
+  /**
+   * @param array<ArcanistHardpoint> $hardpoints
+   */
   public function setHardpoints(array $hardpoints) {
-    assert_instances_of($hardpoints, 'ArcanistHardpoint');
+    assert_instances_of($hardpoints, ArcanistHardpoint::class);
 
     $map = array();
     foreach ($hardpoints as $idx => $hardpoint) {

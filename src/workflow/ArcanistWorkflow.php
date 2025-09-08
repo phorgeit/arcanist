@@ -118,7 +118,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
   public function newPhutilWorkflow() {
     $arguments = $this->getWorkflowArguments();
-    assert_instances_of($arguments, 'ArcanistWorkflowArgument');
+    assert_instances_of($arguments, ArcanistWorkflowArgument::class);
 
     $specs = mpull($arguments, 'getPhutilSpecification');
 
@@ -2362,7 +2362,7 @@ abstract class ArcanistWorkflow extends Phobject {
   public function getPromptMap() {
     if ($this->promptMap === null) {
       $prompts = $this->newPrompts();
-      assert_instances_of($prompts, 'ArcanistPrompt');
+      assert_instances_of($prompts, ArcanistPrompt::class);
 
       // TODO: Move this somewhere modular.
 

@@ -2474,8 +2474,11 @@ EOTEXT
 /* -(  File Uploads  )------------------------------------------------------- */
 
 
+  /**
+   * @param array<ArcanistDiffChange> $changes
+   */
   private function uploadFilesForChanges(array $changes) {
-    assert_instances_of($changes, 'ArcanistDiffChange');
+    assert_instances_of($changes, ArcanistDiffChange::class);
 
     // Collect all the files we need to upload.
 

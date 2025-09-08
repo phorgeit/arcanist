@@ -40,8 +40,11 @@ final class ArcanistDiffParser extends Phobject {
     return $this;
   }
 
+  /**
+   * @param array<ArcanistDiffChange> $changes
+   */
   public function setChanges(array $changes) {
-    assert_instances_of($changes, 'ArcanistDiffChange');
+    assert_instances_of($changes, ArcanistDiffChange::class);
     $this->changes = mpull($changes, null, 'getCurrentPath');
     return $this;
   }

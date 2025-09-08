@@ -45,7 +45,9 @@ final class ArcanistImplicitFallthroughXHPASTLinterRule
 
     if ($hook_class) {
       $hook_obj = newv($hook_class, array());
-      assert_instances_of(array($hook_obj), 'ArcanistXHPASTLintSwitchHook');
+      assert_instances_of(
+        array($hook_obj),
+        ArcanistXHPASTLintSwitchHook::class);
     }
 
     $switches = $root->selectDescendantsOfType('n_SWITCH');

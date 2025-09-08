@@ -26,8 +26,11 @@ final class ArcanistAliasEngine
     return $this->toolset;
   }
 
+  /**
+   * @param array<ArcanistWorkflow> $workflows
+   */
   public function setWorkflows(array $workflows) {
-    assert_instances_of($workflows, 'ArcanistWorkflow');
+    assert_instances_of($workflows, ArcanistWorkflow::class);
     $this->workflows = $workflows;
     return $this;
   }

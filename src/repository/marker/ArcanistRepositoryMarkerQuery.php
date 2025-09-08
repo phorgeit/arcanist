@@ -21,8 +21,11 @@ abstract class ArcanistRepositoryMarkerQuery
     return $this;
   }
 
+  /**
+   * @param array<ArcanistRemoteRef> $remotes
+   */
   final public function withRemotes(array $remotes) {
-    assert_instances_of($remotes, 'ArcanistRemoteRef');
+    assert_instances_of($remotes, ArcanistRemoteRef::class);
     $this->remotes = $remotes;
     return $this;
   }

@@ -114,8 +114,11 @@ final class ArcanistConfigurationSourceList
     return $options[$key];
   }
 
+  /**
+   * @param array<ArcanistConfigOption> $config_options
+   */
   public function setConfigOptions(array $config_options) {
-    assert_instances_of($config_options, 'ArcanistConfigOption');
+    assert_instances_of($config_options, ArcanistConfigOption::class);
 
     $config_options = mpull($config_options, null, 'getKey');
     $this->configOptions = $config_options;

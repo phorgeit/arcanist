@@ -392,14 +392,15 @@ final class PhutilArgumentParser extends Phobject {
    *
    * See @{class:PhutilArgumentWorkflow} for details on using workflows.
    *
-   * @param list $workflows List of @{class:PhutilArgumentWorkflow}s.
+   * @param array<PhutilArgumentWorkflow> $workflows List of
+   *                                      @{class:PhutilArgumentWorkflow}s.
    * @return PhutilArgumentWorkflow|no  Returns the chosen workflow if it is
    *                                    not executable, or executes it and
    *                                    exits with a return code if it is.
    * @task parse
    */
   public function parseWorkflowsFull(array $workflows) {
-    assert_instances_of($workflows, 'PhutilArgumentWorkflow');
+    assert_instances_of($workflows, PhutilArgumentWorkflow::class);
 
     // Clear out existing workflows. We need to do this to permit the
     // construction of sub-workflows.

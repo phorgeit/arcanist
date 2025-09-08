@@ -275,8 +275,11 @@ abstract class ArcanistLandEngine
     return $this->getWorkflow()->getConfig($config_key);
   }
 
+  /**
+   * @param array<ArcanistLandCommitSet> $sets
+   */
   final protected function confirmRevisions(array $sets) {
-    assert_instances_of($sets, 'ArcanistLandCommitSet');
+    assert_instances_of($sets, ArcanistLandCommitSet::class);
 
     $revision_refs = mpull($sets, 'getRevisionRef');
     $viewer = $this->getViewer();
@@ -533,8 +536,11 @@ abstract class ArcanistLandEngine
       ));
   }
 
+  /**
+   * @param array<ArcanistRevisionRef> $revision_refs
+   */
   private function confirmBuilds(array $revision_refs) {
-    assert_instances_of($revision_refs, 'ArcanistRevisionRef');
+    assert_instances_of($revision_refs, ArcanistRevisionRef::class);
 
     $this->getWorkflow()->loadHardpoints(
       $revision_refs,
@@ -717,9 +723,13 @@ abstract class ArcanistLandEngine
       ->execute();
   }
 
+  /**
+   * @param array<ArcanistLandCommitSet> $sets
+   * @param array<ArcanistLandSymbol> $symbols
+   */
   final protected function confirmImplicitCommits(array $sets, array $symbols) {
-    assert_instances_of($sets, 'ArcanistLandCommitSet');
-    assert_instances_of($symbols, 'ArcanistLandSymbol');
+    assert_instances_of($sets, ArcanistLandCommitSet::class);
+    assert_instances_of($symbols, ArcanistLandSymbol::class);
 
     $implicit = array();
     foreach ($sets as $set) {
@@ -795,8 +805,11 @@ abstract class ArcanistLandEngine
     }
   }
 
+  /**
+   * @param array<ArcanistLandCommit> $commit_map
+   */
   final protected function loadRevisionRefs(array $commit_map) {
-    assert_instances_of($commit_map, 'ArcanistLandCommit');
+    assert_instances_of($commit_map, ArcanistLandCommit::class);
     $api = $this->getRepositoryAPI();
     $workflow = $this->getWorkflow();
 
@@ -1526,8 +1539,11 @@ abstract class ArcanistLandEngine
     return $strategy;
   }
 
+  /**
+   * @param array<ArcanistLandCommitSet> $sets
+   */
   private function filterCommitSets(array $sets) {
-    assert_instances_of($sets, 'ArcanistLandCommitSet');
+    assert_instances_of($sets, ArcanistLandCommitSet::class);
     $log = $this->getLogEngine();
 
     // If some of the ancestor revisions are already closed, and the user did

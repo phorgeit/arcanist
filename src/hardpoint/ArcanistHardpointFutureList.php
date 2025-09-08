@@ -6,8 +6,11 @@ final class ArcanistHardpointFutureList
   private $futures;
   private $sendResult;
 
+  /**
+   * @param array<Future> $futures
+   */
   public static function newFromFutures(array $futures) {
-    assert_instances_of($futures, 'Future');
+    assert_instances_of($futures, Future::class);
 
     $object = new self();
     $object->futures = $futures;

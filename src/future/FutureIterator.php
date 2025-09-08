@@ -52,11 +52,11 @@ final class FutureIterator
   /**
    * Create a new iterator over a list of futures.
    *
-   * @param list $futures List of @{class:Future}s to resolve.
+   * @param array<Future> $futures List of @{class:Future}s to resolve.
    * @task basics
    */
   public function __construct(array $futures) {
-    assert_instances_of($futures, 'Future');
+    assert_instances_of($futures, Future::class);
 
     foreach ($futures as $map_key => $future) {
       $future->setFutureKey($map_key);

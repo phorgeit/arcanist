@@ -572,8 +572,12 @@ final class ArcanistRuntime {
     return $this->logEngine;
   }
 
+  /**
+   * @param array<ArcanistAliasEffect> $effects
+   * @param array<string> $argv
+   */
   private function applyAliasEffects(array $effects, array $argv) {
-    assert_instances_of($effects, 'ArcanistAliasEffect');
+    assert_instances_of($effects, ArcanistAliasEffect::class);
 
     $log = $this->getLogEngine();
 

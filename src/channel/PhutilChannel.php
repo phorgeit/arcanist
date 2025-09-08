@@ -119,8 +119,9 @@ abstract class PhutilChannel extends Phobject {
    * NOTE: Extra streams must be //streams//, not //sockets//, because this
    * method uses `stream_select()`, not `socket_select()`.
    *
-   * @param list<PhutilChannel> $reads List of channels to wait for reads on.
-   * @param list<PhutilChannel> $writes List of channels to wait for writes on.
+   * @param array<PhutilChannel> $reads List of channels to wait for reads on.
+   * @param array<PhutilChannel> $writes List of channels to wait for writes
+   *                             on.
    * @param array               $options (optional) Options, see above.
    * @return void
    *

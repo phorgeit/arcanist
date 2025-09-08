@@ -11,8 +11,11 @@ final class ArcanistHardpointEngine
   private $futureIterator;
   private $waitFutures = array();
 
+  /**
+   * @param array<ArcanistHardpointQuery> $queries
+   */
   public function setQueries(array $queries) {
-    assert_instances_of($queries, 'ArcanistHardpointQuery');
+    assert_instances_of($queries, ArcanistHardpointQuery::class);
 
     $this->queries = $queries;
     $this->queryHardpointMap = null;
@@ -40,8 +43,12 @@ final class ArcanistHardpointEngine
     return idx($this->queryHardpointMap, $hardpoint, array());
   }
 
+  /**
+   * @param array<ArcanistHardpointObject> $objects
+   * @param array<ArcanistHardpointRequest|string> $requests
+   */
   public function requestHardpoints(array $objects, array $requests) {
-    assert_instances_of($objects, 'ArcanistHardpointObject');
+    assert_instances_of($objects, ArcanistHardpointObject::class);
 
     $results = array();
     foreach ($requests as $request) {
@@ -225,8 +232,11 @@ final class ArcanistHardpointEngine
     return $resolved_key;
   }
 
+  /**
+   * @param array<Future> $futures
+   */
   public function addFutures(array $futures) {
-    assert_instances_of($futures, 'Future');
+    assert_instances_of($futures, Future::class);
     $this->waitFutures += mpull($futures, null, 'getFutureKey');
 
     // TODO: We could reasonably add these futures to the iterator

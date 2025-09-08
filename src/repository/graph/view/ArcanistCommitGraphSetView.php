@@ -69,6 +69,9 @@ final class ArcanistCommitGraphSetView
     return $this;
   }
 
+  /**
+   * @param array<ArcanistCommitGraphSetView> $child_views
+   */
   public function setChildViews(array $child_views) {
     assert_instances_of($child_views, __CLASS__);
     $this->childViews = $child_views;

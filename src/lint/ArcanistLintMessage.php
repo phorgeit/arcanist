@@ -250,6 +250,9 @@ final class ArcanistLintMessage extends Phobject {
     return $this->granularity;
   }
 
+  /**
+   * @param array<ArcanistLintMessage> $messages
+   */
   public function setDependentMessages(array $messages) {
     assert_instances_of($messages, __CLASS__);
     $this->dependentMessages = $messages;

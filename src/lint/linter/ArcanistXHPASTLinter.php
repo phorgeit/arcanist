@@ -29,11 +29,11 @@ final class ArcanistXHPASTLinter extends ArcanistBaseXHPASTLinter {
    * This is primarily useful for unit tests in which it is desirable to test
    * linter rules in isolation. By default, all linter rules will be enabled.
    *
-   * @param  list<ArcanistXHPASTLinterRule> $rules
+   * @param  array<ArcanistXHPASTLinterRule> $rules
    * @return $this
    */
   public function setRules(array $rules) {
-    assert_instances_of($rules, 'ArcanistXHPASTLinterRule');
+    assert_instances_of($rules, ArcanistXHPASTLinterRule::class);
     $this->rules = $rules;
     return $this;
   }

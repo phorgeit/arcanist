@@ -90,8 +90,8 @@ abstract class AASTNode extends Phobject {
   }
 
   final public function setChildren(array $children) {
-    // We don't call `assert_instances_of($children, 'AASTNode')` because doing
-    // so would incur a significant performance penalty.
+    // We don't call `assert_instances_of($children, AASTNode::class)` because
+    // doing so would incur a significant performance penalty.
     $this->children = $children;
     return $this;
   }
