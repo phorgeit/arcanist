@@ -21,8 +21,8 @@ final class ArcanistCpplintLinter extends ArcanistExternalLinter {
     return pht(
       'Install cpplint.py using `%s`, and place it in your path with the '.
       'appropriate permissions set.',
-      'wget https://raw.github.com'.
-      '/google/styleguide/gh-pages/cpplint/cpplint.py');
+      'wget https://raw.githubusercontent.com'.
+      '/cpplint/cpplint/refs/heads/develop/cpplint.py');
   }
 
   protected function getDefaultMessageSeverity($code) {
