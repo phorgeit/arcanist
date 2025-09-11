@@ -33,13 +33,13 @@ final class ArcanistSingleLintEngine extends ArcanistLintEngine {
           $key));
     }
 
-    if (!is_subclass_of($linter_name, 'ArcanistLinter')) {
+    if (!is_subclass_of($linter_name, ArcanistLinter::class)) {
       throw new ArcanistUsageException(
         pht(
           "Linter `%s` configured in '%s' MUST be a subclass of `%s`.",
           $linter_name,
           $key,
-          'ArcanistLinter'));
+          ArcanistLinter::class));
     }
 
     // Filter the affected paths.

@@ -13,7 +13,7 @@ abstract class ArcanistLinterTestCase extends PhutilTestCase {
   protected function getLinter() {
     $matches = null;
     if (!preg_match('/^(\w+Linter)TestCase$/', get_class($this), $matches) ||
-        !is_subclass_of($matches[1], 'ArcanistLinter')) {
+        !is_subclass_of($matches[1], ArcanistLinter::class)) {
       throw new Exception(pht('Unable to infer linter class name.'));
     }
 

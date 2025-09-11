@@ -22,14 +22,14 @@ final class ArcanistMercurialAPI extends ArcanistRepositoryAPI {
   protected function buildLocalFuture(array $argv) {
     $argv[0] = self::ROOT_HG_COMMAND.$argv[0];
 
-    return $this->newConfiguredFuture(newv('ExecFuture', $argv));
+    return $this->newConfiguredFuture(newv(ExecFuture::class, $argv));
   }
 
   public function newPassthru($pattern /* , ... */) {
     $args = func_get_args();
     $args[0] = self::ROOT_HG_COMMAND.$args[0];
 
-    return $this->newConfiguredFuture(newv('PhutilExecPassthru', $args));
+    return $this->newConfiguredFuture(newv(PhutilExecPassthru::class, $args));
   }
 
   private function newConfiguredFuture(PhutilExecutableFuture $future) {

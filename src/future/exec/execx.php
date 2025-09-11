@@ -13,7 +13,7 @@
  */
 function execx($cmd /* , ... */) {
   $args = func_get_args();
-  $future = newv('ExecFuture', $args);
+  $future = newv(ExecFuture::class, $args);
   return $future->resolvex();
 }
 
@@ -33,7 +33,7 @@ function execx($cmd /* , ... */) {
  */
 function exec_manual($cmd /* , ... */) {
   $args = func_get_args();
-  $ef = newv('ExecFuture', $args);
+  $ef = newv(ExecFuture::class, $args);
   return $ef->resolve();
 }
 
@@ -47,7 +47,7 @@ function exec_manual($cmd /* , ... */) {
  */
 function phutil_passthru($cmd /* , ... */) {
   $args = func_get_args();
-  return newv('PhutilExecPassthru', $args)->resolve();
+  return newv(PhutilExecPassthru::class, $args)->resolve();
 }
 
 

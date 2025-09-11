@@ -532,7 +532,7 @@ final class ArcanistRuntime {
 
   private function newWorkflows(ArcanistToolset $toolset) {
     $workflows = id(new PhutilClassMapQuery())
-      ->setAncestorClass('ArcanistWorkflow')
+      ->setAncestorClass(ArcanistWorkflow::class)
       ->setContinueOnFailure(true)
       ->execute();
 

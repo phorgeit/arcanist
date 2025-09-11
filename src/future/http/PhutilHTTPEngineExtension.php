@@ -115,7 +115,7 @@ abstract class PhutilHTTPEngineExtension
             $extension->getExtensionName(),
             get_class($extension),
             'getHTTPProxyURI()',
-            'PhutilURI'));
+            PhutilURI::class));
       }
 
       if ($proxy) {

@@ -222,7 +222,7 @@ final class ArcanistConfigurationEngine
 
   private function newEngineExtensions() {
     return id(new PhutilClassMapQuery())
-      ->setAncestorClass('ArcanistConfigurationEngineExtension')
+      ->setAncestorClass(ArcanistConfigurationEngineExtension::class)
       ->setUniqueMethod('getExtensionKey')
       ->setContinueOnFailure(true)
       ->execute();

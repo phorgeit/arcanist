@@ -301,7 +301,7 @@ final class PhutilClassMapQuery extends Phobject {
 
         // Since we may be early in the stack, use a string to avoid triggering
         // autoload in old versions of PHP.
-        $vector_class = 'PhutilSortVector';
+        $vector_class = PhutilSortVector::class;
         if ($item instanceof $vector_class) {
           $map = msortv($map, $sort);
         } else {

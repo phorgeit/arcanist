@@ -39,7 +39,7 @@ class ArcanistConfiguration extends Phobject {
 
   public function buildAllWorkflows() {
     return id(new PhutilClassMapQuery())
-      ->setAncestorClass('ArcanistWorkflow')
+      ->setAncestorClass(ArcanistWorkflow::class)
       ->setUniqueMethod('getWorkflowName')
       ->execute();
   }

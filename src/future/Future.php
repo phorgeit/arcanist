@@ -74,7 +74,7 @@ abstract class Future extends Phobject {
     // ServiceProfiler into the Phage agent. Normally, this class is always
     // available.
 
-    if (!class_exists('PhutilServiceProfiler')) {
+    if (!class_exists(PhutilServiceProfiler::class)) {
       return;
     }
 

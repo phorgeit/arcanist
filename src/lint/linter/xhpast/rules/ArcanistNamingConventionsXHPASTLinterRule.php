@@ -22,7 +22,7 @@ final class ArcanistNamingConventionsXHPASTLinterRule
         'help' => pht(
           'Name of a concrete subclass of `%s` which enforces more '.
           'granular naming convention rules for symbols.',
-          'ArcanistXHPASTLintNamingHook'),
+          ArcanistXHPASTLintNamingHook::class),
       ),
     );
   }

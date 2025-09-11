@@ -35,7 +35,7 @@ abstract class ArcanistXHPASTLinterRuleTestCase
     $matches = null;
 
     if (!preg_match('/^(\w+XHPASTLinterRule)TestCase$/', $class, $matches) ||
-        !is_subclass_of($matches[1], 'ArcanistXHPASTLinterRule')) {
+        !is_subclass_of($matches[1], ArcanistXHPASTLinterRule::class)) {
       throw new Exception(pht('Unable to infer linter rule class name.'));
     }
 

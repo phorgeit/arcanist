@@ -20,7 +20,7 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
   protected function buildLocalFuture(array $argv) {
     $argv[0] = 'git '.$argv[0];
 
-    return newv('ExecFuture', $argv)
+    return newv(ExecFuture::class, $argv)
       ->setCWD($this->getPath());
   }
 
@@ -42,7 +42,7 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
 
     $args[0] = $git.' '.$args[0];
 
-    return newv('PhutilExecPassthru', $args)
+    return newv(PhutilExecPassthru::class, $args)
       ->setCWD($this->getPath());
   }
 

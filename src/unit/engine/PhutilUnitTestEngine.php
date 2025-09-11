@@ -82,7 +82,7 @@ final class PhutilUnitTestEngine extends ArcanistUnitTestEngine {
 
     $symbols = id(new PhutilSymbolLoader())
       ->setType('class')
-      ->setAncestorClass('PhutilTestCase')
+      ->setAncestorClass(PhutilTestCase::class)
       ->setConcreteOnly(true)
       ->selectSymbolsWithoutLoading();
 
@@ -137,7 +137,7 @@ final class PhutilUnitTestEngine extends ArcanistUnitTestEngine {
         ->setType('class')
         ->setLibrary($library)
         ->setPathPrefix($path)
-        ->setAncestorClass('PhutilTestCase')
+        ->setAncestorClass(PhutilTestCase::class)
         ->setConcreteOnly(true)
         ->selectAndLoadSymbols();
 

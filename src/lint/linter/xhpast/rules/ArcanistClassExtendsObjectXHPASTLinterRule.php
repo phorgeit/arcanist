@@ -6,7 +6,7 @@ final class ArcanistClassExtendsObjectXHPASTLinterRule
   const ID = 88;
 
   public function getLintName() {
-    return pht('Class Not Extending `%s`', 'Phobject');
+    return pht('Class Not Extending `%s`', Phobject::class);
   }
 
   public function getLintSeverity() {
@@ -31,8 +31,8 @@ final class ArcanistClassExtendsObjectXHPASTLinterRule
           pht(
             'Classes should extend from `%s` or from some other class. '.
             'All classes (except for `%s` itself) should have a base class.',
-            'Phobject',
-            'Phobject'));
+            Phobject::class,
+            Phobject::class));
       }
     }
   }

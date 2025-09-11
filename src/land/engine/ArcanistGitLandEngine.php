@@ -1550,8 +1550,12 @@ final class ArcanistGitLandEngine
     }
   }
 
-  protected function selectCommits($into_commit, array $symbols) {
-    assert_instances_of($symbols, 'ArcanistLandSymbol');
+   /**
+    * @param string $into_commit
+    * @param array<ArcanistLandSymbol> $symbols
+    */
+   protected function selectCommits($into_commit, array $symbols) {
+    assert_instances_of($symbols, ArcanistLandSymbol::class);
     $api = $this->getRepositoryAPI();
 
     $commit_map = array();

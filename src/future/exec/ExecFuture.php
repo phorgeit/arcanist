@@ -598,7 +598,7 @@ final class ExecFuture extends PhutilExecutableFuture {
       $cwd = $this->getCWD();
 
       // NOTE: See note above about Phage.
-      if (class_exists('PhutilErrorTrap')) {
+      if (class_exists(PhutilErrorTrap::class)) {
         $trap = new PhutilErrorTrap();
       } else {
         $trap = null;

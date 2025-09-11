@@ -70,7 +70,7 @@ final class PhutilBootloader {
     // For modern Arcanist libraries (previously called libphutil v2), load all
     // functions when we load the library.
 
-    if (!class_exists('PhutilSymbolLoader', false)) {
+    if (!class_exists(PhutilSymbolLoader::class, false)) {
       $root = $this->getLibraryRoot('arcanist');
       $this->executeInclude($root.'/symbols/PhutilSymbolLoader.php');
     }

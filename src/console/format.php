@@ -3,7 +3,7 @@
 function phutil_console_format($format /* ... */) {
   $args = func_get_args();
   return call_user_func_array(
-    array('PhutilConsoleFormatter', 'formatString'),
+    array(PhutilConsoleFormatter::class, 'formatString'),
     $args);
 }
 

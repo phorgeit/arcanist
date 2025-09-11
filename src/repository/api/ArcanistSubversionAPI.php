@@ -39,7 +39,7 @@ final class ArcanistSubversionAPI extends ArcanistRepositoryAPI {
   protected function buildLocalFuture(array $argv) {
     $argv[0] = 'svn '.$argv[0];
 
-    $future = newv('ExecFuture', $argv);
+    $future = newv(ExecFuture::class, $argv);
 
     // For historical reasons we run Subversion commands keeping env.
     // But, let's keep English, to have a reliable parser.

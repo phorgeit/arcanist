@@ -121,7 +121,7 @@ function xsprintf_command($userdata, &$pattern, &$pos, &$value, &$length) {
     case 'P':
       if (!($value instanceof PhutilOpaqueEnvelope)) {
         throw new InvalidArgumentException(
-          pht('Expected %s for %%P conversion.', 'PhutilOpaqueEnvelope'));
+          pht('Expected %s for %%P conversion.', PhutilOpaqueEnvelope::class));
       }
       if ($is_unmasked) {
         $value = $value->openEnvelope();

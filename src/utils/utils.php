@@ -457,7 +457,7 @@ function msortv_internal(array $list, $method, $flags) {
           'class "%s") from the specified method ("%s"). One object (with '.
           'key "%s") did not.',
           'msortv()',
-          'PhutilSortVector',
+          PhutilSortVector::class,
           $method,
           $key));
     }

@@ -47,7 +47,7 @@ EOTEXT
     $console = PhutilConsole::getConsole();
 
     $linters = id(new PhutilClassMapQuery())
-      ->setAncestorClass('ArcanistLinter')
+      ->setAncestorClass(ArcanistLinter::class)
       ->execute();
 
     try {

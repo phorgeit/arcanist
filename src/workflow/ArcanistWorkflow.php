@@ -2082,7 +2082,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
     if (!$engine_class) {
       if (Filesystem::pathExists($working_copy->getProjectPath('.arclint'))) {
-        $engine_class = 'ArcanistConfigurationDrivenLintEngine';
+        $engine_class = ArcanistConfigurationDrivenLintEngine::class;
       }
     }
 
@@ -2096,7 +2096,7 @@ abstract class ArcanistWorkflow extends Phobject {
           '.arcconfig'));
     }
 
-    $base_class = 'ArcanistLintEngine';
+    $base_class = ArcanistLintEngine::class;
     if (!class_exists($engine_class) ||
         !is_subclass_of($engine_class, $base_class)) {
       throw new ArcanistUsageException(
@@ -2133,7 +2133,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
     if (!$engine_class) {
       if (Filesystem::pathExists($working_copy->getProjectPath('.arcunit'))) {
-        $engine_class = 'ArcanistConfigurationDrivenUnitTestEngine';
+        $engine_class = ArcanistConfigurationDrivenUnitTestEngine::class;
       }
     }
 
@@ -2147,7 +2147,7 @@ abstract class ArcanistWorkflow extends Phobject {
           '.arcconfig'));
     }
 
-    $base_class = 'ArcanistUnitTestEngine';
+    $base_class = ArcanistUnitTestEngine::class;
     if (!class_exists($engine_class) ||
         !is_subclass_of($engine_class, $base_class)) {
       throw new ArcanistUsageException(
