@@ -557,7 +557,7 @@ final class PhutilErrorHandler extends Phobject {
    * origins and has been aggregated or proxied.
    *
    * @param Exception|Throwable $ex Exception to retrieve a trace for.
-   * @return list<array> List of stack frames.
+   * @return array<array<string>> List of stack frames.
    */
   public static function getExceptionTrace($ex) {
     $id = 1;

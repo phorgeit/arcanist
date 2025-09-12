@@ -120,7 +120,7 @@ abstract class Future extends Phobject {
    * the resolve loop do a `select()`. If you do not return sockets in either
    * case, you'll get a busy wait.
    *
-   * @return list  A list of sockets which we expect to become readable.
+   * @return array  A list of sockets which we expect to become readable.
    */
   public function getReadSockets() {
     return array();
@@ -131,7 +131,7 @@ abstract class Future extends Phobject {
    * Retrieve a list of sockets which we can wait to become writable while a
    * future is resolving. See @{method:getReadSockets}.
    *
-   * @return list  A list of sockets which we expect to become writable.
+   * @return array  A list of sockets which we expect to become writable.
    */
   public function getWriteSockets() {
     return array();

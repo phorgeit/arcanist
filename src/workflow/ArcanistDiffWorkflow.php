@@ -1804,7 +1804,7 @@ EOTEXT
    * summary of the commits themselves.
    *
    * @param array $local Local commit information.
-   * @return list Complex output, see summary.
+   * @return array Complex output, see summary.
    * @task message
    */
   private function parseCommitMessagesIntoFields(array $local) {

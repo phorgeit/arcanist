@@ -60,7 +60,7 @@ function idx(array $array, $key, $default = null) {
  * value is not itself an array, it returns the default value.
  *
  * @param array $map Array to access.
- * @param list<string> $path List of keys to access, in sequence.
+ * @param array<string> $path List of keys to access, in sequence.
  * @param mixed $default (optional) Default value to return.
  * @return mixed Accessed value, or default if the value is not accessible.
  */
@@ -128,7 +128,7 @@ function idxv(array $map, array $path, $default = null) {
  * See also @{function:ipull}, which works similarly but accesses array indexes
  * instead of calling methods.
  *
- * @param   list          $list Some list of objects.
+ * @param   array         $list Some list of objects.
  * @param   string|null   $method Determines which **values** will appear in
  *                        the result array. Use a string like 'getName' to
  *                        store the value of calling the named method in each
@@ -202,7 +202,7 @@ function mpull(array $list, $method, $key_method = null) {
  * See also @{function:mpull}, which works similarly but calls object methods
  * instead of accessing object properties.
  *
- * @param   list          $list Some list of objects.
+ * @param   array         $list Some list of objects.
  * @param   string|null   $property Determines which **values** will appear in
  *                        the result array. Use a string like 'name' to store
  *                        the value of accessing the named property in each
@@ -253,7 +253,7 @@ function ppull(array $list, $property, $key_property = null) {
  *
  * See @{function:mpull} for more usage examples.
  *
- * @param   list          $list Some list of arrays.
+ * @param   array         $list Some list of arrays.
  * @param   scalar|null   $index Determines which **values** will appear in the
  *                        result array. Use a scalar to select that index from
  *                        each array, or null to preserve the arrays unmodified
@@ -305,7 +305,7 @@ function ipull(array $list, $index, $key_index = null) {
  * See also @{function:igroup}, which works the same way but operates on
  * array indexes.
  *
- * @param   list    $list List of objects to group by some property.
+ * @param   array   $list List of objects to group by some property.
  * @param   string  $by Name of a method, like 'getType', to call on each
  *                  object in order to determine which group it should be
  *                  placed into.
@@ -346,7 +346,7 @@ function mgroup(array $list, $by /* , ... */) {
  * as @{function:mgroup}, except it operates on the values of array indexes
  * rather than the return values of method calls.
  *
- * @param   list    $list List of arrays to group by some index value.
+ * @param   array   $list List of arrays to group by some index value.
  * @param   string  $by Name of an index to select from each array in order to
  *                  determine which group it should be placed into.
  * @param   string  $methods,... Zero or more additional indexes names, to
@@ -393,10 +393,11 @@ function igroup(array $list, $by /* , ... */) {
  *
  * NOTE: This method does not take the list by reference; it returns a new list.
  *
- * @param   list    $list List of objects to sort by some property.
+ * @param   array   $list List of objects to sort by some property.
  * @param   string  $method Name of a method to call on each object; the return
  *                  values will be used to sort the list.
- * @return  list    Objects ordered by the return values of the method calls.
+ * @return  array   List of objects ordered by the return values of the method
+ *                  calls.
  */
 function msort(array $list, $method) {
   $surrogate = mpull($list, $method);
@@ -434,10 +435,10 @@ function msort(array $list, $method) {
  *
  * This sort is stable, well-behaved, and more efficient than `usort()`.
  *
- * @param list $list List of objects to sort.
+ * @param array $list List of objects to sort.
  * @param string $method Name of a method to call on each object. The method
  *   must return a @{class:PhutilSortVector}.
- * @return list Objects ordered by the vectors.
+ * @return array List of objects ordered by the vectors.
  */
 function msortv(array $list, $method) {
   return msortv_internal($list, $method, SORT_STRING);
@@ -486,10 +487,10 @@ function msortv_internal(array $list, $method, $flags) {
  * @{function:msort}, but operates on a list of arrays instead of a list of
  * objects.
  *
- * @param   list    $list List of arrays to sort by some index value.
+ * @param   array   $list List of arrays to sort by some index value.
  * @param   string  $index Index to access on each object; the return values
  *                  will be used to sort the list.
- * @return  list    Arrays ordered by the index values.
+ * @return  array   Arrays ordered by the index values.
  */
 function isort(array $list, $index) {
   $surrogate = ipull($list, $index);
@@ -606,10 +607,10 @@ function ifilter(array $list, $index, $negate = false) {
  * key order on an existing dictionary.
  *
  * @param  array   $dict Dictionary of key-value pairs to select from.
- * @param  list    $keys List of keys to select.
- * @return array   Dictionary of only those key-value pairs where the key was
- *                 present in the list of keys to select. Ordering is
- *                 determined by the list order.
+ * @param  array<string> $keys List of keys to select.
+ * @return array         Dictionary of only those key-value pairs where the key
+ *                       was present in the list of keys to select. Ordering is
+ *                       determined by the list order.
  */
 function array_select_keys(array $dict, array $keys) {
   $result = array();
@@ -800,7 +801,7 @@ function nonempty(/* ... */) {
  * class a cleaner and more descriptive API.
  *
  * @param  string  $class_name The name of a class.
- * @param  list    $argv Array of arguments to pass to its constructor.
+ * @param  array   $argv Array of arguments to pass to its constructor.
  * @return object  A new object of the specified class, constructed by passing
  *                 the argument vector to its constructor.
  */
@@ -873,8 +874,8 @@ function last_key(array $arr) {
  * merge them with this function than by calling array_merge() in a loop,
  * because using a loop generates an intermediary array on each iteration.
  *
- * @param list $arrayv Vector of arrays to merge.
- * @return list Arrays, merged with array_merge() semantics.
+ * @param array $arrayv Vector of arrays to merge.
+ * @return array Arrays, merged with array_merge() semantics.
  */
 function array_mergev(array $arrayv) {
   if (!$arrayv) {
@@ -912,7 +913,7 @@ function array_mergev(array $arrayv) {
  * @param string|PhutilSafeHTML $corpus Block of text to be split into lines.
  * @param bool $retain_endings (optional) If true, retain line endings in
  *   result strings.
- * @return list List of lines.
+ * @return array<string> List of lines.
  *
  * @phutil-external-symbol class PhutilSafeHTML
  * @phutil-external-symbol function phutil_safe_html
@@ -961,7 +962,7 @@ function phutil_split_lines($corpus, $retain_endings = true) {
  *
  *   $result = array_fuse($list);
  *
- * @param   list  $list (optional) List of scalars.
+ * @param   ?array<scalar> $list (optional) List of scalars.
  * @return  array Dictionary with inputs mapped to themselves.
  */
 function array_fuse(?array $list = null) {
@@ -987,8 +988,8 @@ function array_fuse(?array $list = null) {
  * This function does not preserve keys.
  *
  * @param mixed $interleave Element to interleave.
- * @param list  $array List of elements to be interleaved.
- * @return list Original list with the new element interleaved.
+ * @param array $array List of elements to be interleaved.
+ * @return array Original list with the new element interleaved.
  */
 function array_interleave($interleave, array $array) {
   $result = array();
@@ -1696,7 +1697,7 @@ function phutil_build_http_querystring(array $parameters) {
 /**
  * Build a query string from a list of parameter pairs.
  *
- * @param list<array<string, string>> $pairs List of pairs.
+ * @param array<array<string, string>> $pairs List of pairs.
  * @return string HTTP query string.
  */
 function phutil_build_http_querystring_from_pairs(array $pairs) {

@@ -123,7 +123,8 @@ final class PhutilUnitTestEngine extends ArcanistUnitTestEngine {
    * defines more specific tests that run only when "rebar/" (or some
    * subdirectory) changes.
    *
-   * @return list<string>  The names of the test case classes to be executed.
+   * @return array<string> List of the names of the test case classes to be
+   *   executed.
    */
   private function getTestsForPaths() {
     $look_here = $this->getTestPaths();
@@ -152,7 +153,7 @@ final class PhutilUnitTestEngine extends ArcanistUnitTestEngine {
   /**
    * Returns the paths in which we should look for tests to execute.
    *
-   * @return list<string>  A list of paths in which to search for test cases.
+   * @return array<string> A list of paths in which to search for test cases.
    */
   public function getTestPaths() {
     $root  = $this->getWorkingCopy()->getProjectRoot();

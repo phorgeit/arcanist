@@ -101,8 +101,8 @@ abstract class ArcanistBaseXHPASTLinter extends ArcanistFutureLinter {
   /**
    * Build futures on this linter, for use and to share with other linters.
    *
-   * @param list<string> $paths Paths to build futures for.
-   * @return list<ExecFuture> Futures.
+   * @param array<string> $paths List of paths to build futures for.
+   * @return array<ExecFuture> List of futures.
    * @task sharing
    */
   final protected function buildSharedFutures(array $paths) {
@@ -122,7 +122,7 @@ abstract class ArcanistBaseXHPASTLinter extends ArcanistFutureLinter {
   /**
    * Release futures on this linter which are no longer in use elsewhere.
    *
-   * @param list<string> $paths Paths to release futures for.
+   * @param array<string> $paths List of paths to release futures for.
    * @return void
    * @task sharing
    */
@@ -210,7 +210,7 @@ abstract class ArcanistBaseXHPASTLinter extends ArcanistFutureLinter {
    * specified functions.
    *
    * @param  XHPASTNode    $root Root node.
-   * @param  list<string>  $function_names Function names.
+   * @param  array<string>  $function_names List of function names.
    * @return AASTNodeList
    */
   protected function getFunctionCalls(XHPASTNode $root, array $function_names) {

@@ -78,7 +78,7 @@ abstract class ArcanistExternalLinter extends ArcanistFutureLinter {
    * Flags which are not mandatory should be provided in
    * @{method:getDefaultFlags} instead.
    *
-   * @return list<string>  Mandatory flags, like `"--format=xml"`.
+   * @return array<string> List of mandatory flags, like `"--format=xml"`.
    * @task bin
    */
   protected function getMandatoryFlags() {
@@ -93,7 +93,7 @@ abstract class ArcanistExternalLinter extends ArcanistFutureLinter {
    *
    * Default flags can be overridden with @{method:setFlags}.
    *
-   * @return list<string>  Overridable default flags.
+   * @return array<string> List of overridable default flags.
    * @task bin
    */
   protected function getDefaultFlags() {
@@ -104,7 +104,7 @@ abstract class ArcanistExternalLinter extends ArcanistFutureLinter {
    * Override default flags with custom flags. If not overridden, flags provided
    * by @{method:getDefaultFlags} are used.
    *
-   * @param list<string> $flags New flags.
+   * @param array<string> $flags List of new flags.
    * @return $this
    * @task bin
    */
@@ -227,7 +227,7 @@ abstract class ArcanistExternalLinter extends ArcanistFutureLinter {
    * @param  int      $err Exit code of the linter.
    * @param  string   $stdout Stdout of the linter.
    * @param  string   $stderr Stderr of the linter.
-   * @return list<ArcanistLintMessage>|false  List of lint messages, or false
+   * @return array<ArcanistLintMessage>|false  List of lint messages, or false
    *                                          to indicate parser failure.
    * @task parse
    */
@@ -382,7 +382,7 @@ abstract class ArcanistExternalLinter extends ArcanistFutureLinter {
    * Get the composed flags for the executable, including both mandatory and
    * configured flags.
    *
-   * @return list<string> Composed flags.
+   * @return array<string> List of composed flags.
    * @task exec
    */
   final protected function getCommandFlags() {

@@ -1426,10 +1426,11 @@ abstract class ArcanistWorkflow extends Phobject {
    * change list is meaningless (for example, because the path is a directory
    * or binary file).
    *
-   * @param string      $path Path within the repository.
-   * @param string      $mode Change selection mode (see ArcanistDiffHunk).
-   * @return list|null  List of changed line numbers, or null to indicate that
-   *                    the path is not a line-oriented text file.
+   * @param string            $path Path within the repository.
+   * @param string            $mode Change selection mode (see
+   *                          @{class:ArcanistDiffHunk}).
+   * @return array<int>|null  List of changed line numbers, or null to indicate
+   *                          that the path is not a line-oriented text file.
    */
   final protected function getChangedLines($path, $mode) {
     $repository_api = $this->getRepositoryAPI();
@@ -1631,12 +1632,12 @@ abstract class ArcanistWorkflow extends Phobject {
    * This method takes the user's selections and returns the paths that the
    * workflow should act upon.
    *
-   * @param   list          $paths List of explicitly provided paths.
+   * @param   array<string> $paths List of explicitly provided paths.
    * @param   string|null   $rev Revision name, if provided.
    * @param   int           $omit_mask (optional) Mask of ArcanistRepositoryAPI
    *                        flags to exclude.
    *                        Defaults to ArcanistRepositoryAPI::FLAG_UNTRACKED.
-   * @return  list          List of paths the workflow should act on.
+   * @return  array<string> List of paths the workflow should act on.
    */
   final protected function selectPathsForWorkflow(
     array $paths,
@@ -1939,7 +1940,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * Phabricator repository corresponds to this working copy. Used by
    * `arc which` to explain the process to users.
    *
-   * @return list<string> Human-readable explanation of the repository
+   * @return array<string> Human-readable explanation of the repository
    *                      association process.
    *
    * @task phabrep

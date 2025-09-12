@@ -44,7 +44,7 @@ abstract class PhutilTranslation extends Phobject {
   /**
    * Load all available translation objects.
    *
-   * @return list<PhutilTranslation> List of available translation sources.
+   * @return array<PhutilTranslation> List of available translation sources.
    */
   public static function loadAllTranslations() {
     return id(new PhutilClassMapQuery())

@@ -417,8 +417,8 @@ final class FutureIterator
   /**
    * Wait for activity on one of several sockets.
    *
-   * @param  list  $read_list List of sockets expected to become readable.
-   * @param  list  $write_list List of sockets expected to become writable.
+   * @param  array  $read_list List of sockets expected to become readable.
+   * @param  array  $write_list List of sockets expected to become writable.
    * @param  float $timeout (optional) Timeout, in seconds.
    * @return void
    */

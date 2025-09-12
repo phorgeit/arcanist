@@ -380,7 +380,7 @@ final class ExecFuture extends PhutilExecutableFuture {
   /**
    * Resolve the process by abruptly terminating it.
    *
-   * @return list List of <err, stdout, stderr> results.
+   * @return array List of <err, stdout, stderr> results.
    * @task resolve
    */
   public function resolveKill() {
@@ -451,7 +451,7 @@ final class ExecFuture extends PhutilExecutableFuture {
   /**
    * Provides read sockets to the future core.
    *
-   * @return list List of read sockets.
+   * @return array List of read sockets.
    * @task internal
    */
   public function getReadSockets() {
@@ -470,7 +470,7 @@ final class ExecFuture extends PhutilExecutableFuture {
   /**
    * Provides write sockets to the future core.
    *
-   * @return list List of write sockets.
+   * @return array List of write sockets.
    * @task internal
    */
   public function getWriteSockets() {

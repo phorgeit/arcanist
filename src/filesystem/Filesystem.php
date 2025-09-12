@@ -780,7 +780,7 @@ final class Filesystem extends Phobject {
    *
    * @param  string        $path Path, absolute or relative to PWD.
    * @param  string        $root (optional) The root directory.
-   * @return list<string>  List of parent paths, including the provided path.
+   * @return array<string> List of parent paths, including the provided path.
    * @task   directory
    */
   public static function walkToRoot($path, $root = null) {

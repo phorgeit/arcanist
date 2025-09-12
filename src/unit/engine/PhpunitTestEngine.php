@@ -193,7 +193,7 @@ final class PhpunitTestEngine extends ArcanistUnitTestEngine {
    * intentionally filesystem-agnostic to be unit testable.
    *
    * @param   string        $path PHP file to locate test cases for.
-   * @return  list<string>  List of directories to search for tests in.
+   * @return  array<string> List of directories to search for tests in.
    */
   public static function getSearchLocationsForTests($path) {
     $file = basename($path);

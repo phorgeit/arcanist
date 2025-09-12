@@ -210,7 +210,7 @@ final class PhutilConsoleTable extends PhutilConsoleView {
   /**
    * Returns the column IDs.
    *
-   * @return list<string>
+   * @return array<string> List of column IDs.
    */
   protected function getColumns() {
     return array_keys($this->columns);
@@ -265,7 +265,7 @@ final class PhutilConsoleTable extends PhutilConsoleView {
   /**
    * Format cells into an entire row.
    *
-   * @param  list<string> $columns
+   * @param  array<string> $columns List of columns.
    * @return string
    */
   protected function formatRow(array $columns) {

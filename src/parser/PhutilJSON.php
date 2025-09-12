@@ -27,7 +27,7 @@ final class PhutilJSON extends Phobject {
   /**
    * Encode a list in JSON and pretty-print it, discarding keys.
    *
-   * @param list<mixed> $list List to encode in JSON.
+   * @param array<mixed> $list List to encode in JSON.
    * @return string Pretty-printed list representation.
    */
   public function encodeAsList(array $list) {
@@ -84,7 +84,7 @@ final class PhutilJSON extends Phobject {
   /**
    * Pretty-print a JSON list.
    *
-   * @param   list    $array List to format.
+   * @param   array   $array List to format.
    * @param   int     $depth Current depth, for indentation.
    * @return  string  Pretty-printed value.
    * @task internal

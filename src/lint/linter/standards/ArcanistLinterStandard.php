@@ -88,7 +88,7 @@ abstract class ArcanistLinterStandard extends Phobject {
   /**
    * Load all linter standards.
    *
-   * @return list<ArcanistLinterStandard>
+   * @return array<ArcanistLinterStandard>
    */
   final public static function loadAllStandards() {
     return id(new PhutilClassMapQuery())
@@ -101,7 +101,7 @@ abstract class ArcanistLinterStandard extends Phobject {
    * Load all linter standards which support a specified linter.
    *
    * @param  ArcanistLinter $linter
-   * @return list<ArcanistLinterStandard>
+   * @return array<ArcanistLinterStandard>
    */
   final public static function loadAllStandardsForLinter(
     ArcanistLinter $linter) {

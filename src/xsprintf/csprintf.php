@@ -41,7 +41,7 @@ function csprintf($pattern /* , ... */) {
  * Version of @{function:csprintf} that takes a vector of arguments.
  *
  * @param  string  $pattern sprintf()-style format string.
- * @param  list    $argv List of zero or more arguments to csprintf().
+ * @param  array   $argv List of zero or more arguments to csprintf().
  * @return PhutilCommandString  Formatted string, escaped appropriately for
  *   shell contexts.
  */

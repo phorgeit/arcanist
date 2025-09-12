@@ -168,7 +168,7 @@ abstract class ArcanistLinter extends Phobject {
    * Linters which are not parallelizable should normally ignore this callback
    * and implement @{method:lintPath} instead.
    *
-   * @param list<string> $paths A list of paths to be linted
+   * @param array<string> $paths A list of paths to be linted
    * @return void
    * @task exec
    */
@@ -202,7 +202,7 @@ abstract class ArcanistLinter extends Phobject {
    * Linters which are not paralleizable should normally ignore this callback
    * and implement @{method:lintPath} instead.
    *
-   * @param list<string> $paths A list of paths which were linted.
+   * @param array<string> $paths A list of paths which were linted.
    * @return void
    * @task exec
    */
@@ -288,8 +288,8 @@ abstract class ArcanistLinter extends Phobject {
    * Filter out paths which this linter doesn't act on (for example, because
    * they are binaries and the linter doesn't apply to binaries).
    *
-   * @param  list<string> $paths
-   * @return list<string>
+   * @param  array<string> $paths List of paths
+   * @return array<string> List of paths
    */
   private function filterPaths(array $paths) {
     $engine = $this->getEngine();

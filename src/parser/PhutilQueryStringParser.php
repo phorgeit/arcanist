@@ -68,8 +68,8 @@ final class PhutilQueryStringParser extends Phobject {
    * Use @{method:parseQueryString} to produce a more sophisticated parse which
    * applies array rules and returns a dictionary.
    *
-   * @param   string                      $query_string Query string.
-   * @return  list<array<string, string>>  List of parsed parameters.
+   * @param   string                       $query_string Query string.
+   * @return  array<array<string, string>> List of parsed parameters.
    */
   public function parseQueryStringToPairList($query_string) {
     $list = array();

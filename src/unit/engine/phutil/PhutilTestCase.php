@@ -513,7 +513,7 @@ abstract class PhutilTestCase extends Phobject {
    * This hook is invoked once, before any test cases execute. It gives you
    * an opportunity to perform setup steps for the entire suite of test cases.
    *
-   * @param list<PhutilTestCase> $test_cases List of test cases to be run.
+   * @param array<PhutilTestCase> $test_cases List of test cases to be run.
    * @return void
    * @task hook
    */
@@ -525,7 +525,7 @@ abstract class PhutilTestCase extends Phobject {
   /**
    * This hook is invoked once, after all test cases execute.
    *
-   * @param list<PhutilTestCase> $test_cases List of test cases that ran.
+   * @param array<PhutilTestCase> $test_cases List of test cases that ran.
    * @return void
    * @task hook
    */

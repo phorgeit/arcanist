@@ -93,7 +93,7 @@ abstract class PhutilChannel extends Phobject {
    * Wait for any activity on a list of channels. Convenience wrapper around
    * @{method:waitForActivity}.
    *
-   * @param   list<PhutilChannel>   $channels A list of channels to wait for.
+   * @param   array<PhutilChannel>  $channels A list of channels to wait for.
    * @param   array                 $options (optional) Options, see above.
    * @return  void
    *
@@ -340,7 +340,7 @@ abstract class PhutilChannel extends Phobject {
   /**
    * Get sockets to select for reading.
    *
-   * @return list<resource> Read sockets.
+   * @return array<resource> List of read sockets.
    *
    * @task impl
    */
@@ -352,7 +352,7 @@ abstract class PhutilChannel extends Phobject {
   /**
    * Get sockets to select for writing.
    *
-   * @return list<resource> Write sockets.
+   * @return array<resource> List of write sockets.
    *
    * @task impl
    */

@@ -206,7 +206,7 @@ abstract class ArcanistXHPASTLinterRule extends Phobject {
    * specified functions.
    *
    * @param  XHPASTNode    $root Root node.
-   * @param  list<string>  $function_names Function names.
+   * @param  array<string>  $function_names List of function names.
    * @return AASTNodeList
    */
   protected function getFunctionCalls(XHPASTNode $root, array $function_names) {
@@ -257,7 +257,7 @@ abstract class ArcanistXHPASTLinterRule extends Phobject {
   /**
    * Get PHP superglobals.
    *
-   * @return list<string>
+   * @return array<string> List of superglobals.
    */
   public function getSuperGlobalNames() {
     return array(

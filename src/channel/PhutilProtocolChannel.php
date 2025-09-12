@@ -104,7 +104,7 @@ abstract class PhutilProtocolChannel extends PhutilChannelChannel {
    * to process incoming data in small chunks.
    *
    * @param   string      $data One or more bytes from the underlying channel.
-   * @return  list<TRead>  Zero or more parsed messages.
+   * @return  array<TRead> List of zero or more parsed messages.
    *
    * @task protocol
    */

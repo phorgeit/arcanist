@@ -80,7 +80,7 @@ final class ArcanistHgServerChannel extends PhutilProtocolChannel {
    *   -l\0
    *   5
    *
-   * @param list<string> $argv List of command arguments.
+   * @param array<string> $argv List of command arguments.
    * @return string Encoded string for transmission to the server.
    *
    * @task protocol
@@ -117,7 +117,8 @@ final class ArcanistHgServerChannel extends PhutilProtocolChannel {
    *   array('o', '<data...>');
    *
    * @param string $data Bytes from the server.
-   * @return list<array<string,string>> Zero or more complete messages.
+   * @return array<array<string,string>> List of zero or more complete
+   *   messages.
    *
    * @task protocol
    */

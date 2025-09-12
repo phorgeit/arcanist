@@ -65,7 +65,7 @@ final class ArcanistGitUpstreamPath extends Phobject {
   /**
    * If this path contains a cycle, return a description of it.
    *
-   * @return list<string>|null Cycle, if the path contains one.
+   * @return array<string>|null Cycle, if the path contains one.
    */
   public function getCycle() {
     $last = last($this->path);

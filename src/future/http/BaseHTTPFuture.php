@@ -394,7 +394,7 @@ abstract class BaseHTTPFuture extends Future {
    * Parse an HTTP header block.
    *
    * @param string $head_raw Raw HTTP headers.
-   * @return list List of HTTP header tuples.
+   * @return array List of HTTP header tuples.
    * @task internal
    */
   protected function parseHeaders($head_raw) {
@@ -423,7 +423,7 @@ abstract class BaseHTTPFuture extends Future {
   /**
    * Find value of the first header with given name.
    *
-   * @param list $headers List of headers from `resolve()`.
+   * @param array $headers List of headers from `resolve()`.
    * @param string $search Case insensitive header name.
    * @return string|null Value of the header or null if not found.
    * @task resolve

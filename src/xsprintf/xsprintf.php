@@ -29,7 +29,7 @@
  * @param   string  $callback The name of a callback to pass conversions to.
  * @param   mixed   $userdata Optional userdata to pass to the callback. For
  *                  @{function:qsprintf}, this is the database connection.
- * @param   list    $argv List of arguments, with the `sprintf()` pattern in
+ * @param   array   $argv List of arguments, with the `sprintf()` pattern in
  *                  position 0.
  * @return  string  Formatted string.
  */
