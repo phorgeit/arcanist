@@ -475,10 +475,6 @@ EOTEXT
 
         echo pht('Updated an existing Differential revision:')."\n";
       } else {
-        // NOTE: We're either using "differential.revision.edit" (preferred)
-        // if we can, or falling back to "differential.createrevision"
-        // (the older way) if not.
-
         $xactions = $this->revisionTransactions;
         if ($xactions) {
           $xactions[] = array(
@@ -512,22 +508,13 @@ EOTEXT
           $result_uri = id(new PhutilURI($this->getConduitURI()))
             ->setPath('/D'.$result_id);
         } else {
-          if ($is_draft) {
-            throw new ArcanistUsageException(
-              pht(
-                'You have specified "--draft", but the software version '.
-                'on the server is too old to support draft revisions. Omit '.
-                'the flag or upgrade the server software.'));
-          }
-
-          $revision = $this->dispatchWillCreateRevisionEvent($revision);
-
-          $result = $conduit->callMethodSynchronous(
-            'differential.createrevision',
-            $revision);
-
-          $result_uri = $result['uri'];
-          $result_id = $result['revisionid'];
+          // NOTE: "differential.revision.edit" relies on transactions code
+          // which does not exist prior to late October 2017.
+          throw new ArcanistUsageException(
+            pht(
+              'The software version on the server is too old to support this '.
+              'workflow. Upgrade the software version on the server to a '.
+              'version released after October 2017.'));
         }
 
         $revised_message = $conduit->callMethodSynchronous(
