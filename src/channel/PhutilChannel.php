@@ -340,7 +340,7 @@ abstract class PhutilChannel extends Phobject {
   /**
    * Get sockets to select for reading.
    *
-   * @return list<stream> Read sockets.
+   * @return list<resource> Read sockets.
    *
    * @task impl
    */
@@ -352,7 +352,7 @@ abstract class PhutilChannel extends Phobject {
   /**
    * Get sockets to select for writing.
    *
-   * @return list<stream> Write sockets.
+   * @return list<resource> Write sockets.
    *
    * @task impl
    */

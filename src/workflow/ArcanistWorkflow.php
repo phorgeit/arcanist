@@ -1874,7 +1874,12 @@ abstract class ArcanistWorkflow extends Phobject {
           ? md5_file($path)
           : '');
       }
-      $this->repositoryVersion = md5(json_encode($versions));
+      $versions_json = json_encode($versions);
+      if ($versions_json) {
+        $this->repositoryVersion = md5($versions_json);
+      } else {
+        throw new Exception(pht('Could not encode repository versions!'));
+      }
     }
     return $this->repositoryVersion;
   }

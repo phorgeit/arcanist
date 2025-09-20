@@ -525,7 +525,8 @@ function sanity_check_environment() {
       phpinfo(INFO_GENERAL);
       $info = ob_get_clean();
       $matches = null;
-      if (preg_match('/^Configure Command =>\s*(.*?)$/m', $info, $matches)) {
+      if ($info !== false &&
+          preg_match('/^Configure Command =>\s*(.*?)$/m', $info, $matches)) {
         $config = $matches[1];
       }
     }
@@ -533,7 +534,7 @@ function sanity_check_environment() {
     $generic = true;
     list($what, $which) = $resolution;
 
-    if ($what == 'flag' && strpos($config, $which) !== false) {
+    if ($what == 'flag' && $config && strpos($config, $which) !== false) {
       $show_config = true;
       $generic = false;
       $problems[] =

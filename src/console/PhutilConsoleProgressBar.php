@@ -139,7 +139,7 @@ final class PhutilConsoleProgressBar extends Phobject {
     $pattern = "[%-{$max_width}.{$max_width}s] % 5s%%";
     $out = sprintf(
       $pattern,
-      str_repeat('=', $bar_int).$frac_char,
+      str_repeat('=', (int)$bar_int).$frac_char,
       sprintf('%.1f', 100 * $percent));
 
     $this->eraseLine();

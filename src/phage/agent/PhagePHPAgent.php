@@ -97,7 +97,7 @@ final class PhagePHPAgent extends Phobject {
 
         $timeout = $spec['timeout'];
         if ($timeout) {
-          $future->setTimeout(ceil($timeout));
+          $future->setTimeout((int)ceil($timeout));
         }
 
         $future->setFutureKey($key);
