@@ -393,11 +393,12 @@ function igroup(array $list, $by /* , ... */) {
  *
  * NOTE: This method does not take the list by reference; it returns a new list.
  *
- * @param   array   $list List of objects to sort by some property.
- * @param   string  $method Name of a method to call on each object; the return
- *                  values will be used to sort the list.
- * @return  array   List of objects ordered by the return values of the method
- *                  calls.
+ * @template T
+ * @param    array<T> $list List of objects to sort by some property.
+ * @param    string   $method Name of a method to call on each object;
+ *                    the return values will be used to sort the list.
+ * @return   array<T> List of objects ordered by the return values of
+ *                    the method calls.
  */
 function msort(array $list, $method) {
   $surrogate = mpull($list, $method);
@@ -435,15 +436,25 @@ function msort(array $list, $method) {
  *
  * This sort is stable, well-behaved, and more efficient than `usort()`.
  *
- * @param array $list List of objects to sort.
- * @param string $method Name of a method to call on each object. The method
- *   must return a @{class:PhutilSortVector}.
- * @return array List of objects ordered by the vectors.
+ * @template T
+ * @param    array<T> $list List of objects to sort.
+ * @param    string   $method Name of a method to call on each object.
+ *                    The method must return a @{class:PhutilSortVector}.
+ * @return   array<T> List of objects ordered by the vectors.
  */
 function msortv(array $list, $method) {
   return msortv_internal($list, $method, SORT_STRING);
 }
 
+/**
+ * Sort a list of objects by a sort vector using natural sort.
+ *
+ * @template T
+ * @param    array<T> $list List of objects to sort.
+ * @param    string   $method Name of a method to call on each object.
+ *                    The method must return a @{class:PhutilSortVector}.
+ * @return   array<T> List of objects ordered by the vectors.
+ */
 function msortv_natural(array $list, $method) {
   return msortv_internal($list, $method, SORT_NATURAL | SORT_FLAG_CASE);
 }
@@ -487,10 +498,11 @@ function msortv_internal(array $list, $method, $flags) {
  * @{function:msort}, but operates on a list of arrays instead of a list of
  * objects.
  *
- * @param   array   $list List of arrays to sort by some index value.
- * @param   string  $index Index to access on each object; the return values
- *                  will be used to sort the list.
- * @return  array   Arrays ordered by the index values.
+ * @template T
+ * @param    array<T> $list List of arrays to sort by some index value.
+ * @param    string   $index Index to access on each object; the return values
+ *                    will be used to sort the list.
+ * @return   array<T> Arrays ordered by the index values.
  */
 function isort(array $list, $index) {
   $surrogate = ipull($list, $index);
@@ -522,11 +534,12 @@ function isort(array $list, $index) {
  *
  *   mfilter($list, 'hasChildren', true);
  *
- * @param  array        $list List of objects to filter.
- * @param  string       $method A method name.
- * @param  bool         $negate (optional) Pass true to drop objects which pass
- *                      the filter instead of keeping them.
- * @return array        List of objects which pass the filter.
+ * @template T
+ * @param    array<T>     $list List of objects to filter.
+ * @param    string       $method A method name.
+ * @param    bool         $negate (optional) Pass true to drop objects which
+ *                        pass the filter instead of keeping them.
+ * @return   array<T>     List of objects which pass the filter.
  */
 function mfilter(array $list, $method, $negate = false) {
   if (!is_string($method)) {
@@ -567,11 +580,12 @@ function mfilter(array $list, $method, $negate = false) {
  *
  *   ifilter($list, 'username', true);
  *
- * @param  array        $list List of arrays to filter.
- * @param  scalar       $index The index.
- * @param  bool         $negate (optional) Pass true to drop arrays which pass
- *                      the filter instead of keeping them.
- * @return array        List of arrays which pass the filter.
+ * @template T
+ * @param    array<T>     $list List of arrays to filter.
+ * @param    scalar       $index The index.
+ * @param    bool         $negate (optional) Pass true to drop arrays which
+ *                        pass the filter instead of keeping them.
+ * @return   array<T>     List of arrays which pass the filter.
  */
 function ifilter(array $list, $index, $negate = false) {
   if (!is_scalar($index)) {
