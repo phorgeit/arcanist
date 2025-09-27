@@ -778,9 +778,16 @@ abstract class ArcanistWorkflow extends Phobject {
   }
 
   final public function getArgument($key, $default = null) {
+
     // TOOLSETS: Remove this legacy code.
     if (is_array($this->arguments)) {
       return idx($this->arguments, $key, $default);
+    }
+    if ($default !== null) {
+      $msg = pht('Warning - legacy default value ignored');
+      phlog($msg);
+      $console = PhutilConsole::getConsole();
+      $console->writeErr($msg);
     }
 
     return $this->arguments->getArg($key);
@@ -2488,6 +2495,18 @@ abstract class ArcanistWorkflow extends Phobject {
     }
 
     return $this;
+  }
+
+
+  public function getWorkflowArguments() {
+    // TODO should be made abstract eventually.
+    throw new PhutilMethodNotImplementedException();
+  }
+
+  public function getWorkflowInformation() {
+    // should also maybe be `protected`?
+    // TODO should be made abstract eventually.
+    throw new PhutilMethodNotImplementedException();
   }
 
 }

@@ -11,6 +11,7 @@ final class ArcanistWorkflowArgument
   private $shortFlag;
   private $repeatable;
   private $relatedConfig = array();
+  private $default;
 
   public function setKey($key) {
     $this->key = $key;
@@ -100,6 +101,11 @@ final class ArcanistWorkflowArgument
       $spec['repeat'] = $repeatable;
     }
 
+    $default = $this->getDefault();
+    if ($default !== null) {
+      $spec['default'] = $default;
+    }
+
     return $spec;
   }
 
@@ -123,6 +129,15 @@ final class ArcanistWorkflowArgument
 
   public function getParameter() {
     return $this->parameter;
+  }
+
+  public function setDefault($default) {
+    $this->default = $default;
+    return $this;
+  }
+
+  public function getDefault() {
+    return $this->default;
   }
 
   public function setIsPathArgument($is_path_argument) {
