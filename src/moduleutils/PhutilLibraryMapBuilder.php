@@ -15,6 +15,7 @@ final class PhutilLibraryMapBuilder extends Phobject {
 
   private $root;
   private $subprocessLimit = 8;
+  private $alternativeParser = false;
 
   private $fileSymbolMap;
   private $librarySymbolMap;
@@ -49,6 +50,19 @@ final class PhutilLibraryMapBuilder extends Phobject {
    */
   public function setSubprocessLimit($limit) {
     $this->subprocessLimit = $limit;
+    return $this;
+  }
+
+  /**
+   * Set if the alternative parser should be used.
+   *
+   * @param bool $alternative
+   * @return $this
+   *
+   * @task map
+   */
+  public function setAlternativeParser($alternative) {
+    $this->alternativeParser = $alternative;
     return $this;
   }
 
@@ -228,19 +242,31 @@ final class PhutilLibraryMapBuilder extends Phobject {
    * file.
    *
    * @param  string  $file Relative path to the source file to analyze.
+   * @param  boolean $alternative_parser Use PHP-parser instead of XHPAST
    * @return Future  Analysis future.
    *
    * @task symbol
    */
-  private function buildSymbolAnalysisFuture($file) {
+  private function buildSymbolAnalysisFuture($file, bool $alternative_parser) {
     $absolute_file = $this->getPath($file);
     return self::newExtractSymbolsFuture(
       array(),
-      array($absolute_file));
+      array($absolute_file),
+      $alternative_parser);
   }
 
-  private static function newExtractSymbolsFuture(array $flags, array $paths) {
-    $bin = dirname(__FILE__).'/../../support/lib/extract-symbols.php';
+  private static function newExtractSymbolsFuture(
+    array $flags,
+    array $paths,
+    bool $alternative_parser) {
+
+    $root = dirname(__FILE__).'/../../support/lib';
+
+    if ($alternative_parser) {
+      $bin = $root.'/extract-symbols-with-php-parser.php';
+    } else {
+      $bin = $root.'/extract-symbols.php';
+    }
 
     return new ExecFuture(
       'php -f %R -- --ugly %Ls -- %Ls',
@@ -249,10 +275,11 @@ final class PhutilLibraryMapBuilder extends Phobject {
       $paths);
   }
 
-  public static function newBuiltinMap() {
+  public static function newBuiltinMap(bool $alternative_parser) {
     $future = self::newExtractSymbolsFuture(
       array('--builtins'),
-      array());
+      array(),
+      $alternative_parser);
 
     list($json) = $future->resolvex();
 
@@ -338,6 +365,7 @@ final class PhutilLibraryMapBuilder extends Phobject {
     $type_translation = array(
       'interface' => 'class',
       'trait' => 'class',
+      'enum' => 'class',
     );
 
     // Detect duplicate symbols within the library.
@@ -430,12 +458,22 @@ EOPHP;
     // to remap libraries quickly by analyzing only changed files.
     $symbol_cache = $this->loadSymbolCache();
 
-    // If the XHPAST binary is not up-to-date, build it now. Otherwise,
-    // `extract-symbols.php` will attempt to build the binary and will fail
-    // miserably because it will be trying to build the same file multiple
-    // times in parallel.
-    if (!PhutilXHPASTBinary::isAvailable()) {
-      PhutilXHPASTBinary::build();
+    if ($this->alternativeParser) {
+      // If the PHP-Parser library is not up-to-date, build it now. Otherwise,
+      // `extract-symbols.php` will attempt to build the binary and will fail
+      // miserably because it will be trying to download the same library
+      // multiple times in parallel.
+      if (!PhutilPHPParserLibrary::isAvailable()) {
+        PhutilPHPParserLibrary::build();
+      }
+    } else {
+      // If the XHPAST binary is not up-to-date, build it now. Otherwise,
+      // `extract-symbols.php` will attempt to build the binary and will fail
+      // miserably because it will be trying to build the same file multiple
+      // times in parallel.
+      if (!PhutilXHPASTBinary::isAvailable()) {
+        PhutilXHPASTBinary::build();
+      }
     }
 
     // Build out the symbol analysis for all the files in the library. For
@@ -448,7 +486,9 @@ EOPHP;
         $symbol_map[$file] = $symbol_cache[$hash];
         continue;
       }
-      $futures[$file] = $this->buildSymbolAnalysisFuture($file);
+      $futures[$file] = $this->buildSymbolAnalysisFuture(
+        $file,
+        $this->alternativeParser);
     }
 
     // Run the analyzer on any files which need analysis.

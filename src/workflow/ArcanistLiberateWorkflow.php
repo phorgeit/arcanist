@@ -28,6 +28,9 @@ EOTEXT
       $this->newWorkflowArgument('clean')
         ->setHelp(
           pht('Perform a clean rebuild, ignoring caches. Thorough, but slow.')),
+      $this->newWorkflowArgument('alternative-parser')
+        ->setHelp(
+          pht('Use PHP-Parser instead of XHPAST.')),
       $this->newWorkflowArgument('argv')
         ->setWildcard(true)
         ->setIsPathArgument(true),
@@ -160,6 +163,9 @@ EOTEXT
     $argv = array();
     if ($this->getArgument('clean')) {
       $argv[] = '--drop-cache';
+    }
+    if ($this->getArgument('alternative-parser')) {
+      $argv[] = '--alternative-parser';
     }
 
     return phutil_passthru(

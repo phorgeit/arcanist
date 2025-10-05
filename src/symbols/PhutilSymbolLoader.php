@@ -198,7 +198,7 @@ final class PhutilSymbolLoader {
     foreach ($libraries as $library) {
       $map = $bootloader->getLibraryMap($library);
       foreach ($types as $type) {
-        if ($type == 'interface') {
+        if ($type == 'interface' || $type == 'enum' || $type == 'trait') {
           $lookup_map = $map['class'];
         } else {
           $lookup_map = $map[$type];
@@ -399,9 +399,15 @@ final class PhutilSymbolLoader {
 
 
   private static function classLikeExists($name) {
-    return class_exists($name, false) ||
-           interface_exists($name, false) ||
-           trait_exists($name, false);
+    $exists = class_exists($name, false) ||
+      interface_exists($name, false) ||
+      trait_exists($name, false);
+
+    if (PHP_VERSION < 80100) {
+      return $exists;
+    }
+
+    return $exists || enum_exists($name, false);
   }
 
   /**
@@ -438,7 +444,7 @@ final class PhutilSymbolLoader {
       }
     } else {
       if (!self::classLikeExists($name)) {
-        $load_failed = pht('class or interface');
+        $load_failed = pht('class, interface, trait or enum');
       }
     }
 

@@ -72,7 +72,7 @@ final class ArcanistPhutilLibraryLinter extends ArcanistLinter {
     $libraries  = $bootloader->getAllLibraries();
 
     // Load all the builtin symbols first.
-    $builtin_map = PhutilLibraryMapBuilder::newBuiltinMap();
+    $builtin_map = PhutilLibraryMapBuilder::newBuiltinMap(false);
     $builtin_map = $builtin_map['have'];
 
     $normal_symbols = array();
