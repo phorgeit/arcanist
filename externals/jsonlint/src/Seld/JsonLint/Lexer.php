@@ -186,10 +186,8 @@ class JsonLintLexer
             break;
         case 1:
             return 6;
-           break;
         case 2:
             $this->yytext = substr($this->yytext, 1, $this->yyleng-2);
-
             return 4;
         case 3:
             return 17;
