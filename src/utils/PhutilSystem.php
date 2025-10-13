@@ -213,10 +213,10 @@ final class PhutilSystem extends Phobject {
     // bunch of disk cache. So these numbers aren't totally reliable and they
     // aren't directly comparable to the /proc/meminfo numbers.
 
-    $free = $map['Pages free'];
-    $active = $map['Pages active'];
-    $inactive = $map['Pages inactive'];
-    $wired = $map['Pages wired down'];
+    $free = (int)$map['Pages free'];
+    $active = (int)$map['Pages active'];
+    $inactive = (int)$map['Pages inactive'];
+    $wired = (int)$map['Pages wired down'];
 
     return array(
       'total' => ($free + $active + $inactive + $wired) * $page_size,
