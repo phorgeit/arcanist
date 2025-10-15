@@ -5,7 +5,6 @@ final class ArcanistConfigurationEngine
 
   private $workingCopy;
   private $arguments;
-  private $toolset;
 
   public function setWorkingCopy(ArcanistWorkingCopy $working_copy) {
     $this->workingCopy = $working_copy;

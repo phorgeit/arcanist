@@ -38,8 +38,6 @@ final class HTTPFuture extends BaseHTTPFuture {
   private $stateReady         = false;
   private $stateStartTime;
 
-  private $profilerCallID;
-
   public function setURI($uri) {
     $parts = parse_url($uri);
     if (!$parts) {

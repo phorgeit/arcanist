@@ -11,7 +11,6 @@ final class HTTPSFuture extends BaseHTTPFuture {
   private static $globalCABundle;
 
   private $handle;
-  private $profilerCallID;
   private $cabundle;
   private $followLocation = true;
   private $responseBuffer = '';

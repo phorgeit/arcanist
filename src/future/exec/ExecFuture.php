@@ -38,7 +38,6 @@ final class ExecFuture extends PhutilExecutableFuture {
   private $stdoutSizeLimit = PHP_INT_MAX;
   private $stderrSizeLimit = PHP_INT_MAX;
 
-  private $profilerCallID;
   private $killedByTimeout;
 
   private $windowsStdoutTempFile = null;

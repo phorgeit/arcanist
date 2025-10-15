@@ -3,8 +3,6 @@
 abstract class ArcanistMarkersWorkflow
   extends ArcanistArcWorkflow {
 
-  private $nodes;
-
   abstract protected function getWorkflowMarkerType();
 
   protected function runWorkflow() {

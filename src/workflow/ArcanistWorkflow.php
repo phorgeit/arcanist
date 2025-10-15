@@ -58,7 +58,6 @@ abstract class ArcanistWorkflow extends Phobject {
   private $stashed;
   private $shouldAmend;
 
-  private $projectInfo;
   private $repositoryInfo;
   private $repositoryReasons;
   private $repositoryRef;

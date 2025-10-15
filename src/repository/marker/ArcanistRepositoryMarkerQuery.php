@@ -6,8 +6,6 @@ abstract class ArcanistRepositoryMarkerQuery
   private $isActive;
   private $markerTypes;
   private $names;
-  private $commitHashes;
-  private $ancestorCommitHashes;
   private $remotes;
   private $isRemoteCache = false;
 

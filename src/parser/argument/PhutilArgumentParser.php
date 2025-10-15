@@ -72,7 +72,6 @@ final class PhutilArgumentParser extends Phobject {
   private $argv;
   private $specs = array();
   private $results = array();
-  private $parsed;
 
   private $tagline;
   private $synopsis;
