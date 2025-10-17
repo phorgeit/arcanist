@@ -1519,8 +1519,9 @@ function phutil_ini_decode($string) {
  * for authenticated HTTP remotes.
  *
  * @param   string  $string Some block of text.
- * @return  string  A similar block of text, but with credentials that could
- *                  be identified censored.
+ * @return  string|null  A similar block of text, but with credentials that
+ *                       could be identified censored.
+ *                       Null only if an error occurred.
  */
 function phutil_censor_credentials($string) {
   return preg_replace(',(?<=://)([^/@\s]+)(?=@|$),', '********', $string);

@@ -61,9 +61,14 @@ EOTEXT
         pht('SCAN'),
         pht('Searching for libraries in the current working directory...'));
 
-      $init_files = id(new FileFinder(getcwd()))
-        ->withPath('*/__phutil_library_init__.php')
-        ->find();
+      $cwd = getcwd();
+      $init_files = null;
+
+      if ($cwd) {
+        $init_files = id(new FileFinder($cwd))
+          ->withPath('*/__phutil_library_init__.php')
+          ->find();
+      }
 
       if (!$init_files) {
         throw new ArcanistUsageException(

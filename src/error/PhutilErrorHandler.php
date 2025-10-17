@@ -504,14 +504,17 @@ final class PhutilErrorHandler extends Phobject {
         $try_file = $try_path.'/.git/HEAD';
         if (@file_exists($try_file)) {
           $head = @file_get_contents($try_file);
-          $matches = null;
-          if (preg_match('(^ref: refs/heads/(.*)$)', trim($head), $matches)) {
-            $libinfo[$library]['head'] = trim($matches[1]);
-            $get_refs[] = trim($matches[1]);
-          } else {
-            $libinfo[$library]['head'] = trim($head);
+          if ($head) {
+            $matches = null;
+            if (preg_match('(^ref: refs/heads/(.*)$)', trim($head),
+                $matches)) {
+              $libinfo[$library]['head'] = trim($matches[1]);
+              $get_refs[] = trim($matches[1]);
+            } else {
+              $libinfo[$library]['head'] = trim($head);
+            }
+            break;
           }
-          break;
         }
       }
 

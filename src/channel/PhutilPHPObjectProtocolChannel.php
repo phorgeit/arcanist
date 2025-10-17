@@ -65,7 +65,12 @@ final class PhutilPHPObjectProtocolChannel extends PhutilProtocolChannel {
           $this->buf = substr($this->buf, self::SIZE_LENGTH);
 
           $this->mode = self::MODE_OBJECT;
-          $this->byteLengthOfNextChunk = head(unpack('N', $len));
+          $unpack = unpack('N', $len);
+          if ($unpack) {
+            $this->byteLengthOfNextChunk = head($unpack);
+          } else {
+            throw new Exception(pht('Failed to unpack data.'));
+          }
           break;
         case self::MODE_OBJECT:
           $data = substr($this->buf, 0, $this->byteLengthOfNextChunk);

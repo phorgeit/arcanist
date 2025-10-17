@@ -109,7 +109,7 @@ abstract class ArcanistXHPASTLintNamingHook extends Phobject {
    * with methods like @{method:isLowerCamelCase}.
    *
    * @param   string $symbol Symbol name.
-   * @return  string Stripped symbol.
+   * @return  string|null Stripped symbol. Null only if an error occurred.
    * @task util
    */
   public static function stripPHPFunction($symbol) {
@@ -144,7 +144,7 @@ abstract class ArcanistXHPASTLintNamingHook extends Phobject {
    * @{method:isLowercaseWithUnderscores}.
    *
    * @param string $symbol Symbol name.
-   * @return string Stripped symbol.
+   * @return string|null Stripped symbol. Null only if an error occurred.
    * @task util
    */
   public static function stripPHPVariable($symbol) {

@@ -28,7 +28,10 @@ final class PhutilConsoleFormatter extends Phobject {
   }
 
   private static function newShouldDisableANSI() {
-    $term = phutil_utf8_strtolower(getenv('TERM'));
+    $term = getenv('TERM');
+    if ($term) {
+      $term = phutil_utf8_strtolower($term);
+    }
 
     // ansicon enables ANSI support on Windows
     if (!$term && getenv('ANSICON')) {
