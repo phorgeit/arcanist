@@ -17,8 +17,8 @@ Allows you to make a raw Conduit method call:
 
 This workflow is primarily useful for writing scripts. Examples:
 
-  $ echo '{}' | arc call-conduit -- conduit.ping
-  $ echo '{"phid":"PHID-FILE-xxxx"}' | arc call-conduit -- file.download
+  $ echo '{}' | arc call-conduit conduit.ping --
+  $ echo '{"phid":"PHID-FILE-xxxx"}' | arc call-conduit file.download --
 EOTEXT
       );
 
