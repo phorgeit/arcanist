@@ -158,6 +158,9 @@ function phutil_parse_file(
 
   $traverser = new PhpParser\NodeTraverser();
   $traverser->addVisitor(new PhpParser\NodeVisitor\NameResolver());
+  $ast = $traverser->traverse($ast);
+
+  $traverser = new PhpParser\NodeTraverser();
   $traverser->addVisitor($doc_block_visitor);
   $traverser->addVisitor($call_visitor);
   $traverser->addVisitor($declaration_visitor);
