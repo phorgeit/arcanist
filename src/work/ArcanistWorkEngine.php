@@ -209,7 +209,7 @@ abstract class ArcanistWorkEngine
 
     $this->loadHardpoints(
       $task_ref,
-      ArcanistTaskRef::HARDPOINT_REVISIONREFS);
+      ArcanistWorkingCopyStateRef::HARDPOINT_REVISIONREFS);
   }
 
 }
