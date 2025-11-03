@@ -1423,6 +1423,7 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
                 $source));
             return 'HEAD^';
         }
+        break;
       default:
         return null;
     }

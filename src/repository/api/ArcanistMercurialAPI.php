@@ -860,6 +860,7 @@ final class ArcanistMercurialAPI extends ArcanistRepositoryAPI {
                   $source));
               return trim($outgoing_base);
             }
+            break;
           case 'amended':
             $text = $this->getCommitMessage('.');
             $message = ArcanistDifferentialCommitMessage::newFromRawCorpus(
