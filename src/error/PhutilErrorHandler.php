@@ -73,7 +73,8 @@ final class PhutilErrorHandler extends Phobject {
   }
 
   /**
-   * Deprecated - use `addErrorListener`.
+   * This method has been deprecated, use @{method:addErrorListener} instead.
+   * @deprecated
    */
   public static function setErrorListener($listener) {
     self::addErrorListener($listener);
