@@ -16,6 +16,7 @@
  * @template T
  * @param   T $x Anything
  * @return  T Unmodified argument.
+ * @deprecated https://we.phorge.it/T15976
  */
 function id($x) {
   return $x;
