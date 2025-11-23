@@ -1,0 +1,18 @@
+<?php
+
+array ( 1, 2, 3 );
+list ( $x, $y ) = array();
+[ 1, 2 , 3 ];
+~~~~~~~~~~
+warning:3:8:PHPAST25:Spaces Inside Parentheses
+warning:3:16:PHPAST25:Spaces Inside Parentheses
+warning:4:7:PHPAST25:Spaces Inside Parentheses
+warning:4:14:PHPAST25:Spaces Inside Parentheses
+warning:5:2:PHPAST25:Spaces Inside Parentheses
+warning:5:11:PHPAST25:Spaces Inside Parentheses
+~~~~~~~~~~
+<?php
+
+array (1, 2, 3);
+list ($x, $y) = array();
+[1, 2 , 3];

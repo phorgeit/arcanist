@@ -1,0 +1,5 @@
+<?php
+
+extract();
+~~~~~~~~~~
+error:3:1:PHPAST4:Use of `extract`

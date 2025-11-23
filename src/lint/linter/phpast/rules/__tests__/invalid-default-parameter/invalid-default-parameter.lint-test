@@ -1,0 +1,81 @@
+<?php
+
+function func_one(array $x) {}
+function func_two(array $x = null) {}
+function func_three(array $x = array()) {}
+function func_four(array $x = false) {}
+
+function func_five(callable $x) {}
+function func_six(callable $x = null) {}
+function func_seven(callable $x = false) {}
+
+function func_eight(stdClass $x) {}
+function func_nine(stdClass $x = null) {}
+function func_ten(stdClass $x = array()) {}
+
+function func_eleven(iterable $x) {}
+function func_twelve(iterable $x = null) {}
+function func_thirteen(iterable $x = array()) {}
+function func_fourteen(iterable $x = new Iterator()) {}
+function func_fifteen(iterable $x = false) {}
+
+function func_sixteen(string $x) {}
+function func_sixteen(string $x = null) {}
+function func_sixteen(string $x = 'test') {}
+function func_sixteen(string $x = 5) {}
+
+function func_seventeen(string|Stringable|array $x) {}
+function func_eighteen(string|Stringable|array $x = null) {}
+function func_nineteen(string|Stringable|array $x = array()) {}
+function func_twenty(string|Stringable|array $x = '') {}
+function func_twenty(string|Stringable|array $x = new Stringable()) {}
+function func_twenty(string|Stringable|array $x = true) {}
+function func_twentyone(InterfaceA&InterfaceB $ab = null) {}
+~~~~~~~~~~
+error:4:19:PHPAST70:Invalid Default Parameter
+error:6:31:PHPAST70:Invalid Default Parameter
+error:9:19:PHPAST70:Invalid Default Parameter
+error:10:35:PHPAST70:Invalid Default Parameter
+error:13:20:PHPAST70:Invalid Default Parameter
+error:14:33:PHPAST70:Invalid Default Parameter
+error:17:22:PHPAST70:Invalid Default Parameter
+error:20:37:PHPAST70:Invalid Default Parameter
+error:23:23:PHPAST70:Invalid Default Parameter
+error:25:35:PHPAST70:Invalid Default Parameter
+error:28:24:PHPAST70:Invalid Default Parameter
+error:32:51:PHPAST70:Invalid Default Parameter
+error:33:25:PHPAST70:Invalid Default Parameter
+~~~~~~~~~~
+<?php
+
+function func_one(array $x) {}
+function func_two(?array $x = null) {}
+function func_three(array $x = array()) {}
+function func_four(array $x = false) {}
+
+function func_five(callable $x) {}
+function func_six(?callable $x = null) {}
+function func_seven(callable $x = false) {}
+
+function func_eight(stdClass $x) {}
+function func_nine(?stdClass $x = null) {}
+function func_ten(stdClass $x = array()) {}
+
+function func_eleven(iterable $x) {}
+function func_twelve(?iterable $x = null) {}
+function func_thirteen(iterable $x = array()) {}
+function func_fourteen(iterable $x = new Iterator()) {}
+function func_fifteen(iterable $x = false) {}
+
+function func_sixteen(string $x) {}
+function func_sixteen(?string $x = null) {}
+function func_sixteen(string $x = 'test') {}
+function func_sixteen(string $x = 5) {}
+
+function func_seventeen(string|Stringable|array $x) {}
+function func_eighteen(string|Stringable|array|null $x = null) {}
+function func_nineteen(string|Stringable|array $x = array()) {}
+function func_twenty(string|Stringable|array $x = '') {}
+function func_twenty(string|Stringable|array $x = new Stringable()) {}
+function func_twenty(string|Stringable|array $x = true) {}
+function func_twentyone((InterfaceA&InterfaceB)|null $ab = null) {}

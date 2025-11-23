@@ -1,0 +1,38 @@
+<?php
+
+$non_prefixed_octal = 014;
+$octal = 0o14;
+$fcc = strlen(...);
+
+enum Platform {
+  case phorge;
+  case arcanist;
+
+  private function throw(): never {
+    throw new Exception();
+  }
+}
+
+function intersection(InterfaceA&InterfaceB $implementation) {}
+
+class Test {
+  public final const FINAL_CONST = '';
+
+  public readonly string $init;
+}
+
+~~~~~~~~~~
+error:4:10:PHPAST45:PHP Compatibility
+error:5:8:PHPAST45:PHP Compatibility
+error:7:1:PHPAST45:PHP Compatibility
+error:11:29:PHPAST45:PHP Compatibility
+error:16:23:PHPAST45:PHP Compatibility
+error:19:3:PHPAST45:PHP Compatibility
+error:21:3:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "8.0.0"
+  }
+}

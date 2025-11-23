@@ -1,0 +1,59 @@
+<?php
+
+mpull($array, key_method: 'getKey');
+$obj->call('', locale: 'en');
+$v = new Test(optional: false);
+
+class Test {
+  public function __construct(
+    private string $testName = 'unknown',
+    bool $optional = true) {}
+
+  public function report(): null|string {}
+
+  public function render(mixed $input,): void {}
+}
+
+function stringify(int|float|string $value): string {
+  return (string)$value;
+}
+
+match($string) {
+  'foo' => true,
+  'bar' => false,
+};
+
+$null?->call();
+echo $null?->property;
+
+try {
+  throw new Error();
+} catch (Throwable) {
+  // Ignore
+}
+
+trait T {
+  private function usersMustImplementThis() {}
+}
+
+~~~~~~~~~~
+error:3:15:PHPAST45:PHP Compatibility
+error:4:16:PHPAST45:PHP Compatibility
+error:5:15:PHPAST45:PHP Compatibility
+error:9:5:PHPAST45:PHP Compatibility
+error:12:29:PHPAST45:PHP Compatibility
+error:14:26:PHPAST45:PHP Compatibility
+error:14:38:PHPAST45:PHP Compatibility
+error:17:20:PHPAST45:PHP Compatibility
+error:21:1:PHPAST45:PHP Compatibility
+error:26:1:PHPAST45:PHP Compatibility
+error:27:6:PHPAST45:PHP Compatibility
+error:31:3:PHPAST45:PHP Compatibility
+error:36:3:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "7.4.0"
+  }
+}

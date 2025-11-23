@@ -1,0 +1,36 @@
+<?php
+
+'foobar';
+"foo\"bar";
+"foobar\n";
+"'foobar'";
+"foo{$bar}";
+'foo"bar"';
+pht(
+  "This string requires \x12\x34 double quotes, but ".
+  "this string does not. Here, they are used for consistency.");
+pht(
+  "This string also requires \123\345 double quotes, but ".
+  "this string does not. Here, they are used for consistency.");
+f(a()." ".b());
+f(" ".a()."\n");
+~~~~~~~~~~
+advice:4:1:PHPAST41:Unnecessary Double Quotes
+advice:15:7:PHPAST41:Unnecessary Double Quotes
+~~~~~~~~~~
+<?php
+
+'foobar';
+'foo"bar';
+"foobar\n";
+"'foobar'";
+"foo{$bar}";
+'foo"bar"';
+pht(
+  "This string requires \x12\x34 double quotes, but ".
+  "this string does not. Here, they are used for consistency.");
+pht(
+  "This string also requires \123\345 double quotes, but ".
+  "this string does not. Here, they are used for consistency.");
+f(a().' '.b());
+f(" ".a()."\n");

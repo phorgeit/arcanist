@@ -1,0 +1,39 @@
+<?php
+
+readonly class Test {
+  public int $init;
+
+  public true $true;
+
+  public function types(true $true, false $false, null $null) {}
+
+  public function nullableIntersection(null|(InterfaceA&InterfaceB) $i) {}
+
+  public function trueInUnionType(Test|true $true) {}
+
+  public function staticInReturnType(): static {
+    return new static();
+  }
+}
+
+trait TestTrait {
+  public const CONSTANT_ON_TRAIT = true;
+}
+
+~~~~~~~~~~
+error:3:1:PHPAST45:PHP Compatibility
+error:6:3:PHPAST45:PHP Compatibility
+error:8:25:PHPAST45:PHP Compatibility
+error:8:37:PHPAST45:PHP Compatibility
+error:8:51:PHPAST45:PHP Compatibility
+error:10:40:PHPAST45:PHP Compatibility
+error:12:40:PHPAST45:PHP Compatibility
+error:14:41:PHPAST45:PHP Compatibility
+error:20:3:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "8.1.0"
+  }
+}

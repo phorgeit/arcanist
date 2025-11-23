@@ -1,0 +1,14 @@
+<?php
+
+function test($required, string $optional = 'test', $required) {}
+function test($required, string $optional = null, $required) {}
+
+~~~~~~~~~~
+error:3:26:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "8.1.0"
+  }
+}

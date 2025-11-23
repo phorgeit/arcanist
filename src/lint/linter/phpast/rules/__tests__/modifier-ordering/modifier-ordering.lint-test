@@ -1,0 +1,34 @@
+<?php
+
+class Foo {
+  public $x;
+  static protected $y;
+
+  private string $s;
+
+  public final function bar() {}
+  private function baz() {}
+  static final public function foobar() {}
+
+  public readonly final int $i;
+}
+~~~~~~~~~~
+advice:5:3:PHPAST71:Modifier Ordering
+advice:9:3:PHPAST71:Modifier Ordering
+advice:11:3:PHPAST71:Modifier Ordering
+advice:13:3:PHPAST71:Modifier Ordering
+~~~~~~~~~~
+<?php
+
+class Foo {
+  public $x;
+  protected static $y;
+
+  private string $s;
+
+  final public function bar() {}
+  private function baz() {}
+  final public static function foobar() {}
+
+  final public readonly int $i;
+}

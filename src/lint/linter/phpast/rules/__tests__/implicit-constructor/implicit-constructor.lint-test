@@ -1,0 +1,16 @@
+<?php
+
+final class Platypus {
+  public function platypus() {
+    // This method must be renamed to __construct().
+  }
+}
+~~~~~~~~~~
+error:4:19:PHPAST10:Implicit Constructor
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "7.4.0"
+  }
+}

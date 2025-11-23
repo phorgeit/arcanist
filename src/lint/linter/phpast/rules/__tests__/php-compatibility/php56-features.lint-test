@@ -1,0 +1,44 @@
+<?php
+
+namespace PHP56;
+
+use function array_fuse;
+use const SORT_REGULAR;
+use TestClass;
+
+const DYNAMIC = 'string'.'string';
+const ARRAY_CONST = array();
+
+function g($default = 1 + 2) {
+  return $default;
+}
+
+class Test {
+  const TEST_CONST = 9 / 3;
+}
+
+function pht($text, ...$variant) {}
+
+pht(
+  'An example of argument unpacking: %s, %d.',
+  ...array('A string', 5));
+
+$pow = 2 ** 5;
+
+~~~~~~~~~~
+error:5:1:PHPAST45:PHP Compatibility
+error:6:1:PHPAST45:PHP Compatibility
+error:9:17:PHPAST45:PHP Compatibility
+error:10:21:PHPAST45:PHP Compatibility
+error:12:23:PHPAST45:PHP Compatibility
+error:17:22:PHPAST45:PHP Compatibility
+error:20:21:PHPAST45:PHP Compatibility
+error:24:3:PHPAST45:PHP Compatibility
+error:26:8:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "5.5.0"
+  }
+}

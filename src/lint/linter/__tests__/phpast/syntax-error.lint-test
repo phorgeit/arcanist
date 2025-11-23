@@ -1,0 +1,4 @@
+<?php
+char *buf = null;
+~~~~~~~~~~
+error:2:11:PHPAST1:PHP Syntax Error!

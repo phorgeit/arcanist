@@ -1,0 +1,82 @@
+<?php
+
+function f($x) {}
+function g($x ) {}
+function h ($x) {}
+
+function &i($x) {}
+function &j($x ) {}
+
+final class X {
+  public string $property {
+    get => lcfirst($this->property);
+    set (string|Stringable $value) => strtolower($value);
+  }
+
+  public function a($x) {}
+  public function b($x ) {}
+
+  public static function &c($x) {}
+  public static function &d($x ) {}
+
+  abstract private function e($x);
+  abstract private function f($x );
+
+}
+
+f(function ($x) {});
+f(function ($x ) {});
+f(function ($x ) use ($z) {});
+f(function ($x)use($z) {});
+f(static function ($x) {});
+
+f(fn ($x) => null);
+f(fn ($x ) => null);
+~~~~~~~~~~
+warning:4:14:PHPAST38:Declaration Formatting
+warning:5:11:PHPAST38:Declaration Formatting
+warning:8:15:PHPAST38:Declaration Formatting
+warning:13:8:PHPAST38:Declaration Formatting
+warning:17:23:PHPAST38:Declaration Formatting
+warning:20:31:PHPAST38:Declaration Formatting
+warning:23:33:PHPAST38:Declaration Formatting
+warning:28:15:PHPAST38:Declaration Formatting
+warning:29:15:PHPAST38:Declaration Formatting
+warning:30:16:PHPAST38:Declaration Formatting
+warning:30:19:PHPAST38:Declaration Formatting
+warning:34:9:PHPAST38:Declaration Formatting
+~~~~~~~~~~
+<?php
+
+function f($x) {}
+function g($x) {}
+function h($x) {}
+
+function &i($x) {}
+function &j($x) {}
+
+final class X {
+  public string $property {
+    get => lcfirst($this->property);
+    set(string|Stringable $value) => strtolower($value);
+  }
+
+  public function a($x) {}
+  public function b($x) {}
+
+  public static function &c($x) {}
+  public static function &d($x) {}
+
+  abstract private function e($x);
+  abstract private function f($x);
+
+}
+
+f(function ($x) {});
+f(function ($x) {});
+f(function ($x) use ($z) {});
+f(function ($x) use ($z) {});
+f(static function ($x) {});
+
+f(fn ($x) => null);
+f(fn ($x) => null);

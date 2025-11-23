@@ -1,0 +1,51 @@
+<?php
+
+# no
+#no
+// yes
+# no
+/* yes */ #no
+/*
+ * yes
+ */
+/**
+ * yes
+ */
+//#yes
+/*#yes*/
+#
+//
+/////////////////// yes
+/*no */
+/**no */
+/** yes */
+/**** yes ****/
+~~~~~~~~~~
+error:3:1:PHPAST18:Comment Style
+error:4:1:PHPAST18:Comment Style
+error:6:1:PHPAST18:Comment Style
+error:7:11:PHPAST18:Comment Style
+error:16:1:PHPAST18:Comment Style
+~~~~~~~~~~
+<?php
+
+// no
+// no
+// yes
+// no
+/* yes */ // no
+/*
+ * yes
+ */
+/**
+ * yes
+ */
+//#yes
+/*#yes*/
+//
+//
+/////////////////// yes
+/*no */
+/**no */
+/** yes */
+/**** yes ****/

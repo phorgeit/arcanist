@@ -27,6 +27,12 @@
     "nolint": {
       "type": "nolint"
     },
+    "phpast": {
+      "type": "phpast",
+      "include": "(\\.php$)",
+      "standard": "phutil.phpast",
+      "phpast.php-version": "7.2.25"
+    },
     "phutil-library": {
       "type": "phutil-library",
       "include": "(\\.php$)"

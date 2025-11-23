@@ -1,0 +1,14 @@
+<?php
+
+$x -> doSomething();
+id(new Something())
+  ->doSomething();
+~~~~~~~~~~
+warning:3:3:PHPAST74:Object Operator Spacing
+warning:3:6:PHPAST74:Object Operator Spacing
+~~~~~~~~~~
+<?php
+
+$x->doSomething();
+id(new Something())
+  ->doSomething();

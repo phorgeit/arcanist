@@ -1,0 +1,22 @@
+<?php
+
+// This test is checking that the LintPatcher correctly applies adjacent patches
+// with large character delta effects.
+function f(                                                             ) {
+  g( );
+}
+~~~~~~~~~~
+warning:5:12:PHPAST38:Declaration Formatting
+warning:5:12:PHPAST25:Spaces Inside Parentheses
+warning:5:12:PHPAST25:Spaces Inside Parentheses
+warning:6:5:PHPAST37:Call Formatting
+warning:6:5:PHPAST25:Spaces Inside Parentheses
+warning:6:5:PHPAST25:Spaces Inside Parentheses
+~~~~~~~~~~
+<?php
+
+// This test is checking that the LintPatcher correctly applies adjacent patches
+// with large character delta effects.
+function f() {
+  g();
+}

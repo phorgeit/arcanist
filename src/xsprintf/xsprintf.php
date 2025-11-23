@@ -26,12 +26,12 @@
  * ...the callback will be invoked twice, at string positions 5 ("M") and 19
  * ("C"), with values "moon" and "cheese" respectively.
  *
- * @param   string  $callback The name of a callback to pass conversions to.
- * @param   mixed   $userdata Optional userdata to pass to the callback. For
- *                  @{function:qsprintf}, this is the database connection.
- * @param   array   $argv List of arguments, with the `sprintf()` pattern in
- *                  position 0.
- * @return  string  Formatted string.
+ * @param   callable $callback The name of a callback to pass conversions to.
+ * @param   mixed    $userdata Optional userdata to pass to the callback. For
+ *                   @{function:qsprintf}, this is the database connection.
+ * @param   array    $argv List of arguments, with the `sprintf()` pattern in
+ *                   position 0.
+ * @return  string   Formatted string.
  */
 function xsprintf($callback, $userdata, array $argv) {
   $argc = count($argv);

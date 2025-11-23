@@ -1,0 +1,77 @@
+<?php
+
+function w() {}
+function x() {
+  // This is deliberately empty.
+}
+function y() { }
+function z() {
+
+
+}
+
+if (true) {
+
+} else {
+  w();
+}
+
+for (;;) {
+
+}
+
+switch ('string') {
+  case 'not': {
+    // Something
+  }
+}
+
+interface I {
+  public function f();
+}
+
+class T extends Phobject {
+
+
+}
+
+$anonymous = new class() {
+
+
+};
+~~~~~~~~~~
+advice:7:14:PHPAST47:Empty Block Statement
+advice:8:14:PHPAST47:Empty Block Statement
+advice:13:11:PHPAST47:Empty Block Statement
+advice:19:10:PHPAST47:Empty Block Statement
+advice:33:26:PHPAST47:Empty Block Statement
+advice:38:26:PHPAST47:Empty Block Statement
+~~~~~~~~~~
+<?php
+
+function w() {}
+function x() {
+  // This is deliberately empty.
+}
+function y() {}
+function z() {}
+
+if (true) {} else {
+  w();
+}
+
+for (;;) {}
+
+switch ('string') {
+  case 'not': {
+    // Something
+  }
+}
+
+interface I {
+  public function f();
+}
+
+class T extends Phobject {}
+
+$anonymous = new class() {};

@@ -1,0 +1,40 @@
+<?php
+
+class Foo extends Bar {
+  const FOOBAR = 'FOOBAR';
+
+  public function baz() {
+    echo Foo::FOOBAR;
+    echo self::FOOBAR;
+
+    echo ($this->selfName())::staticFunction(Foo::FOOBAR);
+  }
+
+  private static function staticFunction(string $s) {}
+
+  private function selfName() {
+    return 'Foo';
+  }
+}
+~~~~~~~~~~
+warning:7:10:PHPAST57:Self Member Reference
+warning:10:46:PHPAST57:Self Member Reference
+~~~~~~~~~~
+<?php
+
+class Foo extends Bar {
+  const FOOBAR = 'FOOBAR';
+
+  public function baz() {
+    echo self::FOOBAR;
+    echo self::FOOBAR;
+
+    echo ($this->selfName())::staticFunction(self::FOOBAR);
+  }
+
+  private static function staticFunction(string $s) {}
+
+  private function selfName() {
+    return 'Foo';
+  }
+}

@@ -1,0 +1,17 @@
+<?php
+
+echo (float)0;
+echo (int) 1;
+echo (string)  2;
+echo (string) (5+6);
+~~~~~~~~~~
+advice:4:11:PHPAST66:Cast Spacing
+advice:5:14:PHPAST66:Cast Spacing
+advice:6:14:PHPAST66:Cast Spacing
+~~~~~~~~~~
+<?php
+
+echo (float)0;
+echo (int)1;
+echo (string)2;
+echo (string)(5+6);

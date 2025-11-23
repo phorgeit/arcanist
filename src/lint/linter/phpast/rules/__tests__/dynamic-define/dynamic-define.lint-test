@@ -1,0 +1,9 @@
+<?php
+
+define('PONY', 'cute');
+define($pony, 'cute');
+define('PONY', $cute);
+define($pony, $cute);
+~~~~~~~~~~
+error:4:8:PHPAST12:Dynamic `define`
+error:6:8:PHPAST12:Dynamic `define`

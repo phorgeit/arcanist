@@ -1,0 +1,24 @@
+<?php
+
+$anonymous_readonly = new readonly class() {
+  public const string CONSTANT_STRING = 'typed';
+};
+
+class Test {
+  public const int INTEGER = 5;
+}
+
+static $variable = array_fuse($a);
+
+~~~~~~~~~~
+error:3:27:PHPAST45:PHP Compatibility
+error:4:16:PHPAST45:PHP Compatibility
+error:8:16:PHPAST45:PHP Compatibility
+error:11:20:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "8.2.0"
+  }
+}

@@ -1,0 +1,32 @@
+<?php phpinfo() ?>
+
+<?php
+phpinfo();
+?>
+
+<?php
+
+echo 'Not using strict types';
+?>
+
+<?php declare(strict_types=1);
+
+echo 'Using strict types';
+~~~~~~~~~~
+advice:4:1:PHPAST81:Newline After PHP Open Tag
+~~~~~~~~~~
+<?php phpinfo() ?>
+
+<?php
+
+phpinfo();
+?>
+
+<?php
+
+echo 'Not using strict types';
+?>
+
+<?php declare(strict_types=1);
+
+echo 'Using strict types';

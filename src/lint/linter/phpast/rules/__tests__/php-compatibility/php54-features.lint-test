@@ -1,0 +1,43 @@
+<?php
+
+f()[0];
+    m()[0];
+
+// The check above should be this, see T4334.
+// $o->m()[0];
+
+final class SomeClass extends Phobject {
+  public function someMethod() {
+    return function () {
+      $this->someOtherMethod();
+    };
+  }
+
+  public static function someStaticMethod() {
+    return function () {
+      self::someOtherMethod();
+    };
+  }
+}
+
+0b1;
+
+[];
+
+(new Test)->method();
+
+~~~~~~~~~~
+error:3:5:PHPAST45:PHP Compatibility
+error:4:9:PHPAST45:PHP Compatibility
+error:12:7:PHPAST45:PHP Compatibility
+error:18:7:PHPAST45:PHP Compatibility
+error:23:1:PHPAST45:PHP Compatibility
+error:25:1:PHPAST45:PHP Compatibility
+error:27:1:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "5.3.0"
+  }
+}

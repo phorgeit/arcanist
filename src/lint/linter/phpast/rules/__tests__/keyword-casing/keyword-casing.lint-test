@@ -1,0 +1,104 @@
+<?php
+
+true;
+false;
+null;
+True;
+False;
+NULL;
+nUlL;
+array();
+Array();
+
+function t(null|object $var): iterable {}
+funCTION t(NULL|ObjecT $var): ITERable {}
+
+new C();
+NeW C();
+
+echo __file__;
+
+CLASS Test Extends Phobject {
+  protected CONst PRIVATE = 4;
+
+  pUBLIC function __construct(STRing|Stringable $desc): VOID {}
+
+  public static function s(INT $offset): StatiC {}
+
+  private function THROW(Throwable&Exception $ex): NEVER {}
+
+  private function ARRAY() {}
+}
+
+ENUM Backed : STriNG {
+  cAse TEST = 'true';
+}
+
+$var->ARRAY();
+$var->THROW();
+echo Test::PRIVATE;
+~~~~~~~~~~
+warning:6:1:PHPAST40:Keyword Conventions
+warning:7:1:PHPAST40:Keyword Conventions
+warning:8:1:PHPAST40:Keyword Conventions
+warning:9:1:PHPAST40:Keyword Conventions
+warning:11:1:PHPAST40:Keyword Conventions
+warning:14:1:PHPAST40:Keyword Conventions
+warning:14:12:PHPAST40:Keyword Conventions
+warning:14:17:PHPAST40:Keyword Conventions
+warning:14:31:PHPAST40:Keyword Conventions
+warning:17:1:PHPAST40:Keyword Conventions
+warning:19:6:PHPAST40:Keyword Conventions
+warning:21:1:PHPAST40:Keyword Conventions
+warning:21:12:PHPAST40:Keyword Conventions
+warning:22:13:PHPAST40:Keyword Conventions
+warning:24:3:PHPAST40:Keyword Conventions
+warning:24:3:PHPAST40:Keyword Conventions
+warning:24:31:PHPAST40:Keyword Conventions
+warning:24:57:PHPAST40:Keyword Conventions
+warning:26:28:PHPAST40:Keyword Conventions
+warning:26:42:PHPAST40:Keyword Conventions
+warning:28:52:PHPAST40:Keyword Conventions
+warning:33:1:PHPAST40:Keyword Conventions
+warning:33:15:PHPAST40:Keyword Conventions
+warning:34:3:PHPAST40:Keyword Conventions
+~~~~~~~~~~
+<?php
+
+true;
+false;
+null;
+true;
+false;
+null;
+null;
+array();
+array();
+
+function t(null|object $var): iterable {}
+function t(null|object $var): iterable {}
+
+new C();
+new C();
+
+echo __FILE__;
+
+class Test extends Phobject {
+  protected const PRIVATE = 4;
+
+  public function __construct(string|Stringable $desc): void {}
+
+  public static function s(int $offset): static {}
+
+  private function THROW(Throwable&Exception $ex): never {}
+
+  private function ARRAY() {}
+}
+
+enum Backed : string {
+  case TEST = 'true';
+}
+
+$var->ARRAY();
+$var->THROW();
+echo Test::PRIVATE;

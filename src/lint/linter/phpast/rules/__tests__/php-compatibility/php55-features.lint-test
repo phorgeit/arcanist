@@ -1,0 +1,36 @@
+<?php
+
+function g() {
+  yield 1;
+}
+
+try {
+  $generator = g();
+} finally {
+  unset($generator);
+}
+
+foreach (array() as list($a, $b)) {}
+
+if (empty(g())) {
+  // This branch will never be reached.
+}
+
+echo array(1, 2, 3)[0];
+
+$class = Test::class;
+
+~~~~~~~~~~
+error:4:3:PHPAST45:PHP Compatibility
+error:9:3:PHPAST45:PHP Compatibility
+error:13:21:PHPAST45:PHP Compatibility
+error:15:11:PHPAST45:PHP Compatibility
+error:19:21:PHPAST45:PHP Compatibility
+error:21:10:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "5.4.0"
+  }
+}

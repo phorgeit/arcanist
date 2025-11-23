@@ -1,0 +1,35 @@
+<?php
+
+[$a, $b] = array('a', 'b');
+
+function nullable(?string $str = 'test') {}
+
+class InvisibleConstant {
+  private const INVISIBLE = 'invisible';
+
+  public function iterate(iterable $i): iterable {}
+}
+
+try {
+  throw new ParseError();
+} catch (Throwable | Exception $ex) {
+  echo $ex->getMessage();
+}
+
+list('a' => $a) = array('a' => 1, 'b' => 2);
+
+~~~~~~~~~~
+error:3:1:PHPAST45:PHP Compatibility
+error:5:19:PHPAST45:PHP Compatibility
+error:8:3:PHPAST45:PHP Compatibility
+error:10:27:PHPAST45:PHP Compatibility
+error:10:41:PHPAST45:PHP Compatibility
+error:15:10:PHPAST45:PHP Compatibility
+error:19:6:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "7.0.0"
+  }
+}

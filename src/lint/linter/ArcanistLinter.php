@@ -119,6 +119,7 @@ abstract class ArcanistLinter extends Phobject {
 
 
   /**
+   * @return ArcanistLintEngine
    * @task state
    */
   final protected function getEngine() {

@@ -1,0 +1,13 @@
+<?php
+
+chroot('/tmp');
+~~~~~~~~~~
+error:3:1:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "5.2.3",
+    "phpast.php-version.windows": "5.3.0"
+  }
+}

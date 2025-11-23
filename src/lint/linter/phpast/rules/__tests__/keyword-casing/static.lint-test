@@ -1,0 +1,25 @@
+<?php
+
+class Foo extends Bar {
+  public static function doSomething() {
+    return STATIC::doSomethingElse();
+  }
+
+  public static function doSomethingElse() {
+    return static::doSomething();
+  }
+}
+~~~~~~~~~~
+warning:5:12:PHPAST40:Keyword Conventions
+~~~~~~~~~~
+<?php
+
+class Foo extends Bar {
+  public static function doSomething() {
+    return static::doSomethingElse();
+  }
+
+  public static function doSomethingElse() {
+    return static::doSomething();
+  }
+}
