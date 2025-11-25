@@ -169,7 +169,13 @@ final class PhutilPHPParserLibrary extends Phobject {
       return false;
     }
 
-    require $lib.'/'.str_replace('\\', '/', $classname).'.php';
+    $path = $lib.'/'.str_replace('\\', '/', $classname).'.php';
+
+    if (!Filesystem::pathExists($path)) {
+      return false;
+    }
+
+    require $path;
 
     return true;
   }
