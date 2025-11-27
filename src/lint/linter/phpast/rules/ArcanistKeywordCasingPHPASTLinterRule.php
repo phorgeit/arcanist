@@ -69,7 +69,6 @@ final class ArcanistKeywordCasingPHPASTLinterRule
       T_FUNCTION,
       T_GLOBAL,
       T_GOTO,
-      T_HALT_COMPILER,
       T_IF,
       T_IMPLEMENTS,
       T_INCLUDE,
