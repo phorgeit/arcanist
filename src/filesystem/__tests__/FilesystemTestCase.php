@@ -211,11 +211,98 @@ final class FilesystemTestCase extends PhutilTestCase {
       $caught = null;
       try {
         Filesystem::readRandomInteger($min, $max);
-      } catch (Exception $ex) {
+      } catch (Throwable $ex) {
         $caught = $ex;
       }
 
       $this->assertTrue($caught instanceof Exception);
+    }
+  }
+
+
+  public function testNormalizeVirtualPath() {
+    $cls = new ReflectionClass(Filesystem::class);
+    $normalize = $cls->getMethod('normalizeVirtualPath');
+    $normalize->setAccessible(true);
+
+    $valids = array(
+      '/a/b/c/../d/e//./f' => 'a/b/d/e/f',
+      'x/' => 'x',
+      '///' => '',
+      '' => '',
+      '.foo/bar/..baz///' => '.foo/bar/..baz',
+    );
+
+    foreach ($valids as $input => $expected) {
+      $input = str_replace('/', DIRECTORY_SEPARATOR, $input);
+      $expected = str_replace('/', DIRECTORY_SEPARATOR, $expected);
+      $actual = $normalize->invoke(null, $input);
+
+      $this->assertEqual($expected, $actual);
+    }
+
+    $invalids = array(
+      'foo/bar/../baz/../../../run',
+      '/../',
+    );
+
+    foreach ($invalids as $input) {
+      $caught = null;
+      try {
+        $input = str_replace('/', DIRECTORY_SEPARATOR, $input);
+        $normalize->invoke(null, $input);
+      } catch (Throwable $ex) {
+        $caught = $ex;
+      }
+      $this->assertCaught(FilesystemException::class, $caught);
+    }
+
+  }
+
+  public function testParsePharPath() {
+
+    if (phutil_is_windows()) {
+      $this->assertSkipped(
+        pht("I'm not sure what valid inputs look like in Windows."));
+    }
+
+
+    $cls = new ReflectionClass(Filesystem::class);
+    $parser = $cls->getMethod('parsePharUri');
+    $parser->setAccessible(true);
+
+    $p = 'phar://';
+
+    $valid_cases = array(
+      $p.'/foo/bar.phar/' => array('/foo/bar.phar', '/'),
+      $p.'/foo/bar.phar/x/y/' => array('/foo/bar.phar', '/x/y'),
+      $p.'relative/archive.phar/my.file' =>
+        array('relative/archive.phar', '/my.file'),
+    );
+
+    foreach ($valid_cases as $input => $expected) {
+      $actual = $parser->invoke(null, $input);
+      $this->assertEqual($expected, $actual);
+    }
+
+    $invalid_cases = array(
+      $p,
+      $p.'/',
+      '/foo.phar/bar',
+      'baz.phar',
+    );
+
+    foreach ($invalid_cases as $input) {
+      $caught = null;
+      try {
+        $parser->invoke(null, $input);
+      } catch (Throwable $ex) {
+        $caught = $ex;
+      }
+      $this->assertCaught(
+        FilesystemException::class,
+        $caught,
+        "for input {$input}");
     }
   }
 
