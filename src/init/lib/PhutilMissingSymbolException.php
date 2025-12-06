@@ -9,7 +9,7 @@ final class PhutilMissingSymbolException extends Exception {
       '%s'.
       "\n\n".
       'If you are not a developer, this almost always means that a library '.
-      'is out of date. For example, you may have upgraded "phabricator/" '.
+      'is out of date. For example, you may have upgraded "phorge/" '.
       'without upgrading "arcanist/", or vice versa. It might also mean '.
       'that you need to restart Apache or PHP-FPM. Make sure all libraries '.
       'are up to date and all services have been restarted.'.
