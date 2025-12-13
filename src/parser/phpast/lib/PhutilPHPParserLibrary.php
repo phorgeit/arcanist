@@ -8,7 +8,7 @@ final class PhutilPHPParserLibrary extends Phobject {
    * This is the version that would be obtained by downloading and including an
    * up-to-date PHP-parser. The //actual// PHP-parser version may vary.
    */
-  const EXPECTED_VERSION_LEGACY = '4.19.4';
+  const EXPECTED_VERSION_LEGACY = '4.19.5';
 
   /**
    * The expected PHP-Parser version for PHP >= 7.4.
@@ -16,7 +16,7 @@ final class PhutilPHPParserLibrary extends Phobject {
    * This is the version that would be obtained by downloading and including an
    * up-to-date PHP-parser. The //actual// PHP-parser version may vary.
    */
-  const EXPECTED_VERSION = '5.6.1';
+  const EXPECTED_VERSION = '5.7.0';
 
   const REPO = 'https://github.com/nikic/PHP-Parser';
 
@@ -24,14 +24,14 @@ final class PhutilPHPParserLibrary extends Phobject {
    * The expected md5 hash of the PHP-parser packages listed above.
    */
   private static $hashes = array(
-    // v4.19.4.tar.gz
-    '4ad9df92641d07d21f5d912766b9ca7d',
-    // v4.19.4.zip
-    '97cc11eac5860d3fcf1f40ac89c925d7',
-    // v5.6.1.tar.gz
-    '5ad529d168cb0f57e4fb396d22772d99',
-    // v5.6.1.zip
-    '6733ece8defe73738a9b140ffb148d85',
+    // v4.19.5.tar.gz
+    '12debc62a3f7588c182f0d02ba07996e',
+    // v4.19.5.zip
+    '06a986aeff2a08b615624421de64c4c4',
+    // v5.7.0.tar.gz
+    'f997f0fb2168894b99f1b959ade13eae',
+    // v5.7.0.zip
+    '1ab96406751d61afa922a112895c9f24',
   );
 
   private static $version;

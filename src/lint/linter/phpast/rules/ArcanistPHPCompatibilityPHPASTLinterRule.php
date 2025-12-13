@@ -1325,9 +1325,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
     foreach ($parameters as $parameter) {
       // Parameters marked final are promoted properties,
       // but that functionality is only available starting PHP 8.5.
-      if (
-        $parameter->isPromoted() &&
-        !($parameter->flags & PhpParser\Modifiers::FINAL)) {
+      if ($parameter->isPromoted() && !$parameter->isFinal()) {
         $this->raiseLintAtNode(
           $parameter,
           pht('Promoted properties are not available before PHP 8.0.'));
@@ -1941,7 +1939,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
     $parameters = $ast->findNodesOfKind(PhpParser\Node\Param::class);
 
     foreach ($parameters as $parameter) {
-      if ($parameter->flags & PhpParser\Modifiers::FINAL) {
+      if ($parameter->isFinal()) {
         $this->raiseLintAtNode(
           $parameter,
           pht('Final property promotion is not available before PHP 8.5.'));
