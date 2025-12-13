@@ -1,0 +1,80 @@
+<?php
+
+class Test {
+
+  public function single_line(array $a, string $b) {}
+
+  public function multi_line(
+    array $a,
+    string $b) {}
+
+  public function multi_line_single(
+    array $a, string $b, int $c) {}
+
+  public function multi_line_partly(
+    array $a,
+    string $b, int $c) {}
+
+  public function multi_line_partly(
+    array $a,
+    string $b,
+    int $c) {}
+
+  public function missing_blank_line(
+    $a,
+    $b) {
+    $this->single_line($a, $b);
+  }
+
+  public function single_parameter(
+    $a) {
+    $this->single_line($a, '');
+  }
+
+}
+~~~~~~~~~~
+warning:12:14:PHPAST139:Parameter Alignment
+warning:12:25:PHPAST139:Parameter Alignment
+warning:16:15:PHPAST139:Parameter Alignment
+warning:25:10:PHPAST139:Parameter Alignment
+warning:30:10:PHPAST139:Parameter Alignment
+~~~~~~~~~~
+<?php
+
+class Test {
+
+  public function single_line(array $a, string $b) {}
+
+  public function multi_line(
+    array $a,
+    string $b) {}
+
+  public function multi_line_single(
+    array $a,
+    string $b,
+    int $c) {}
+
+  public function multi_line_partly(
+    array $a,
+    string $b,
+    int $c) {}
+
+  public function multi_line_partly(
+    array $a,
+    string $b,
+    int $c) {}
+
+  public function missing_blank_line(
+    $a,
+    $b) {
+
+    $this->single_line($a, $b);
+  }
+
+  public function single_parameter(
+    $a) {
+
+    $this->single_line($a, '');
+  }
+
+}

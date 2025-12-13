@@ -27,6 +27,8 @@ final class ArcanistPhutilPHPASTLinterStandard
           'and makes debugging more difficult.',
           'eval'),
        ),
+      'phpast.array-style' => 'long',
+      'phpast.list-style' => 'list',
       'phpast.php-version' => '7.2.25',
       'phpast.php-version.windows' => '7.2.25',
       'phpast.dynamic-string.classes' => array(

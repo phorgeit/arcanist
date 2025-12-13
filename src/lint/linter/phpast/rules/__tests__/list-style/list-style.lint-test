@@ -1,0 +1,17 @@
+<?php
+
+list($a, $b, $c) = array(1, 2, 3);
+[$a, $b, $c] = array(1, 2, 3);
+~~~~~~~~~~
+advice:4:1:PHPAST137:List Style
+~~~~~~~~~~
+<?php
+
+list($a, $b, $c) = array(1, 2, 3);
+list($a, $b, $c) = array(1, 2, 3);
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.list-style": "list"
+  }
+}

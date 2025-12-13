@@ -1,0 +1,59 @@
+<?php
+
+class Test {
+  public function foo() {}
+  private function bar() {}
+  /**
+   * Foo
+   */
+  protected function baz() {
+    return false;
+  }
+}
+
+trait Foo {
+
+  private function bar() {}
+}
+
+interface Bar {
+  public function baz();
+}
+~~~~~~~~~~
+warning:3:13:PHPAST138:Method Spacing
+warning:4:27:PHPAST138:Method Spacing
+warning:5:28:PHPAST138:Method Spacing
+warning:11:4:PHPAST138:Method Spacing
+warning:16:28:PHPAST138:Method Spacing
+warning:16:28:PHPAST138:Method Spacing
+warning:19:16:PHPAST138:Method Spacing
+warning:20:25:PHPAST138:Method Spacing
+~~~~~~~~~~
+<?php
+
+class Test {
+
+  public function foo() {}
+
+  private function bar() {}
+
+  /**
+   * Foo
+   */
+  protected function baz() {
+    return false;
+  }
+
+}
+
+trait Foo {
+
+  private function bar() {}
+
+}
+
+interface Bar {
+
+  public function baz();
+
+}
