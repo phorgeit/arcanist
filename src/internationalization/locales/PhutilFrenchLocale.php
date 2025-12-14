@@ -13,4 +13,12 @@ final class PhutilFrenchLocale extends PhutilLocale {
     return pht('French (France)');
   }
 
+  public function selectPluralVariant($variant, array $translations) {
+    if ($variant == 0 || $variant == 1) {
+      return head($translations);
+    } else {
+      return last($translations);
+    }
+  }
+
 }
