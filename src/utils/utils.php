@@ -158,6 +158,9 @@ function mpull(array $list, $method, $key_method = null) {
     } else {
       $value = $object;
     }
+    // PHP 8.5 complains about null set as array offset; previous PHP versions
+    // cast null array keys to an empty string anyway.
+    $key = $key ?? '';
     $result[$key] = $value;
   }
   return $result;
@@ -233,6 +236,9 @@ function ppull(array $list, $property, $key_property = null) {
     } else {
       $value = $object;
     }
+    // PHP 8.5 complains about null set as array offset; previous PHP versions
+    // cast null array keys to an empty string anyway.
+    $key = $key ?? '';
     $result[$key] = $value;
   }
   return $result;
@@ -282,6 +288,9 @@ function ipull(array $list, $index, $key_index = null) {
     } else {
       $value = $array;
     }
+    // PHP 8.5 complains about null set as array offset; previous PHP versions
+    // cast null array keys to an empty string anyway.
+    $key = $key ?? '';
     $result[$key] = $value;
   }
   return $result;
