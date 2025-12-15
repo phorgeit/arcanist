@@ -39,7 +39,11 @@ function id($x) {
  *                  $default is returned without raising a warning.
  */
 function idx(array $array, $key, $default = null) {
-  // isset() is a micro-optimization - it is fast but fails for null values.
+  // PHP 8.5 complains about null set as array offset; previous PHP versions
+  // cast null array keys to an empty string anyway.
+  $key = $key ?? '';
+
+  // isset() is a micro-optimization - it is fast but fails for empty values.
   if (isset($array[$key])) {
     return $array[$key];
   }
