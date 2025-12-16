@@ -30,10 +30,19 @@ final class ArcanistPHPASTLinter extends ArcanistFutureLinter {
   }
 
   public function canRun() {
+    $library_version = PhutilPHPParserLibrary::getVersion();
+
     // Older versions of PHP-Parser do not provide easy access
     // to the token stream.
     // This means this linter is effectively PHP >= 7.4
-    return version_compare(PhutilPHPParserLibrary::getVersion(), '5.0.0', '>=');
+    if ($library_version) {
+      return version_compare($library_version, '5.0.0', '>=');
+    } else {
+      // If the library isn't available, we can predict which version will be
+      // downloaded.
+      // Only PHP 7.4 and newer download the new version of PHP-Parser.
+      return PHP_VERSION_ID >= 70400;
+    }
   }
 
   public function getCacheVersion() {
