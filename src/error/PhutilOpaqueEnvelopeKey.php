@@ -36,7 +36,7 @@ final class PhutilOpaqueEnvelopeKey extends Phobject {
       // Phabricator on systems where we can't read it.
       self::$key = '';
       for ($ii = 0; $ii < 8; $ii++) {
-        self::$key .= md5(mt_rand(), $raw_output = true);
+        self::$key .= md5((string)mt_rand(), $raw_output = true);
       }
     }
     return self::$key;

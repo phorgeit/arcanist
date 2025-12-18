@@ -1,0 +1,39 @@
+<?php
+
+namespace PHP70;
+
+use Nested\Name\Space\{Test, TestTwo};
+
+function t(string $str, int $i, float $f, bool $b): array {}
+
+$is_unset = $unset ?? true;
+$space = 5 <=> 6;
+
+$anonymous = new class() {};
+
+function doubleRewindableGenerator(Generator $generator): \Generator {
+  yield from $generator;
+  $generator->rewind();
+  yield from $generator;
+}
+
+~~~~~~~~~~
+error:5:1:PHPAST45:PHP Compatibility
+error:7:12:PHPAST45:PHP Compatibility
+error:7:25:PHPAST45:PHP Compatibility
+error:7:33:PHPAST45:PHP Compatibility
+error:7:43:PHPAST45:PHP Compatibility
+error:7:53:PHPAST45:PHP Compatibility
+error:9:13:PHPAST45:PHP Compatibility
+error:10:10:PHPAST45:PHP Compatibility
+error:12:18:PHPAST45:PHP Compatibility
+error:14:59:PHPAST45:PHP Compatibility
+error:15:3:PHPAST45:PHP Compatibility
+error:17:3:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "5.6.0"
+  }
+}

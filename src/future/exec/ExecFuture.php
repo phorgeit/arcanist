@@ -8,7 +8,7 @@
  * explanation of futures. When an ExecFuture resolves, it returns the exit
  * code, stdout and stderr of the process it executed.
  *
- * ExecFuture is the core command execution implementation in libphutil, but is
+ * ExecFuture is the core command execution implementation in Arcanist, but is
  * exposed through a number of APIs. See @{article:Command Execution} for more
  * discussion about executing system commands.
  *
@@ -38,7 +38,6 @@ final class ExecFuture extends PhutilExecutableFuture {
   private $stdoutSizeLimit = PHP_INT_MAX;
   private $stderrSizeLimit = PHP_INT_MAX;
 
-  private $profilerCallID;
   private $killedByTimeout;
 
   private $windowsStdoutTempFile = null;
@@ -188,8 +187,8 @@ final class ExecFuture extends PhutilExecutableFuture {
    * NOTE: If you call @{method:discardBuffers}, all the stdout/stderr data
    * will be thrown away and the cursors will be reset.
    *
-   * @return pair <$stdout, $stderr> pair with new output since the last call
-   *              to this method.
+   * @return array A pair of <$stdout, $stderr> with new output since the last
+   *               call to this method.
    * @task interact
    */
   public function read() {
@@ -331,9 +330,7 @@ final class ExecFuture extends PhutilExecutableFuture {
    *
    *   list($stdout, $stderr) = $future->resolvex();
    *
-   * @param  float Optional timeout after which resolution will pause and
-   *               execution will return to the caller.
-   * @return pair  <$stdout, $stderr> pair.
+   * @return array A pair of <$stdout, $stderr>.
    * @task resolve
    */
   public function resolvex() {
@@ -346,8 +343,6 @@ final class ExecFuture extends PhutilExecutableFuture {
    * @{method:resolvex}, but also throws if stderr is nonempty, or stdout is not
    * valid JSON. Returns a PHP array, decoded from the JSON command output.
    *
-   * @param  float Optional timeout after which resolution will pause and
-   *               execution will return to the caller.
    * @return array PHP array, decoded from JSON command output.
    * @task resolve
    */
@@ -384,7 +379,7 @@ final class ExecFuture extends PhutilExecutableFuture {
   /**
    * Resolve the process by abruptly terminating it.
    *
-   * @return list List of <err, stdout, stderr> results.
+   * @return array List of <err, stdout, stderr> results.
    * @task resolve
    */
   public function resolveKill() {
@@ -418,6 +413,9 @@ final class ExecFuture extends PhutilExecutableFuture {
     $this->setResult($result);
   }
 
+  /**
+   * @return array A pair of <$stdout, $stderr>.
+   */
   private function raiseResultError($result) {
     list($err, $stdout, $stderr) = $result;
 
@@ -452,7 +450,7 @@ final class ExecFuture extends PhutilExecutableFuture {
   /**
    * Provides read sockets to the future core.
    *
-   * @return list List of read sockets.
+   * @return array List of read sockets.
    * @task internal
    */
   public function getReadSockets() {
@@ -471,7 +469,7 @@ final class ExecFuture extends PhutilExecutableFuture {
   /**
    * Provides write sockets to the future core.
    *
-   * @return list List of write sockets.
+   * @return array List of write sockets.
    * @task internal
    */
   public function getWriteSockets() {
@@ -599,7 +597,7 @@ final class ExecFuture extends PhutilExecutableFuture {
       $cwd = $this->getCWD();
 
       // NOTE: See note above about Phage.
-      if (class_exists('PhutilErrorTrap')) {
+      if (class_exists(PhutilErrorTrap::class)) {
         $trap = new PhutilErrorTrap();
       } else {
         $trap = null;
@@ -909,7 +907,7 @@ final class ExecFuture extends PhutilExecutableFuture {
   /**
    * Execute `proc_get_status()`, but avoid pitfalls.
    *
-   * @return dict Process status.
+   * @return array Process status.
    * @task internal
    */
   private function procGetStatus() {

@@ -5,8 +5,11 @@ final class ArcanistHardpointRequestList
 
   private $requests;
 
+  /**
+   * @param array<ArcanistHardpointRequest> $requests
+   */
   public static function newFromRequests(array $requests) {
-    assert_instances_of($requests, 'ArcanistHardpointRequest');
+    assert_instances_of($requests, ArcanistHardpointRequest::class);
 
     $object = new self();
     $object->requests = $requests;

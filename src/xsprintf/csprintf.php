@@ -41,7 +41,7 @@ function csprintf($pattern /* , ... */) {
  * Version of @{function:csprintf} that takes a vector of arguments.
  *
  * @param  string  $pattern sprintf()-style format string.
- * @param  list    $argv List of zero or more arguments to csprintf().
+ * @param  array   $argv List of zero or more arguments to csprintf().
  * @return PhutilCommandString  Formatted string, escaped appropriately for
  *   shell contexts.
  */
@@ -121,7 +121,7 @@ function xsprintf_command($userdata, &$pattern, &$pos, &$value, &$length) {
     case 'P':
       if (!($value instanceof PhutilOpaqueEnvelope)) {
         throw new InvalidArgumentException(
-          pht('Expected %s for %%P conversion.', 'PhutilOpaqueEnvelope'));
+          pht('Expected %s for %%P conversion.', PhutilOpaqueEnvelope::class));
       }
       if ($is_unmasked) {
         $value = $value->openEnvelope();

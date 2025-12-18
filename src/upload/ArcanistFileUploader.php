@@ -87,7 +87,7 @@ final class ArcanistFileUploader extends Phobject {
    * upload) or a list of errors. See @{class:ArcanistFileDataRef} for
    * details.
    *
-   * @return map<string, ArcanistFileDataRef> Files with results populated.
+   * @return array<string, ArcanistFileDataRef> Files with results populated.
    * @task upload
    */
   public function uploadFiles() {

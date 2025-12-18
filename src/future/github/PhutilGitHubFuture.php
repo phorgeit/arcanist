@@ -58,8 +58,6 @@ final class PhutilGitHubFuture extends FutureProxy {
       $future = new HTTPSFuture($uri);
       $future->setData($this->params);
       $future->addHeader('Authorization', 'token '.$this->accessToken);
-      // NOTE: GitHub requires a 'User-Agent' header.
-      $future->addHeader('User-Agent', __CLASS__);
       $future->setMethod($this->method);
 
       foreach ($this->headers as $header) {

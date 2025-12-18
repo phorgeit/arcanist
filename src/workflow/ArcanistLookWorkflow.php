@@ -28,7 +28,7 @@ EOTEXT
     );
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     echo tsprintf(
       "%!\n\n",
       pht(

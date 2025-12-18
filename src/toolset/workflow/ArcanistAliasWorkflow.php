@@ -91,7 +91,7 @@ EOTEXT
     );
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $argv = $this->getArgument('argv');
 
     $is_list = false;
@@ -187,8 +187,11 @@ EOTEXT
     return $source_list->getConfigFromScopes($key, array($scope));
   }
 
+  /**
+   * @param array<ArcanistAlias> $aliases
+   */
   private function writeAliases(array $aliases) {
-    assert_instances_of($aliases, 'ArcanistAlias');
+    assert_instances_of($aliases, ArcanistAlias::class);
 
     $key = $this->getAliasesConfigKey();
     $scope = $this->getEditScope();

@@ -24,8 +24,11 @@ final class ArcanistPromptsConfigOption
     return $responses;
   }
 
+  /**
+   * @param array<ArcanistConfigurationSourceValue> $list
+   */
   protected function didReadStorageValueList(array $list) {
-    assert_instances_of($list, 'ArcanistConfigurationSourceValue');
+    assert_instances_of($list, ArcanistConfigurationSourceValue::class);
 
     $results = array();
     foreach ($list as $spec) {

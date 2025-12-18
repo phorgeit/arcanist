@@ -1,0 +1,32 @@
+<?php
+
+final class MyClass extends SomeOtherClass {
+  public function __construct() {
+    parent::__construct();
+  }
+
+  public function uselessMethod($x, array $y) {
+    return parent::uselessMethod($x, $y);
+  }
+
+  public function usefulMethod($x, array $y) {
+    return parent::usefulMethod($x, null);
+  }
+
+  public function anotherMethod($x, &$y) {
+    return parent::anotherMethod($x, $y);
+  }
+
+  public function usefulMethodWithDefaultValue($x = null) {
+    return parent::usefulMethodWithDefaultValue($x);
+  }
+
+  public function uselessYieldFromMethod($x, $y) {
+    yield from parent::uselessYieldFromMethod($x, $y);
+  }
+}
+~~~~~~~~~~
+advice:4:3:PHPAST63:Useless Overriding Method
+advice:8:3:PHPAST63:Useless Overriding Method
+advice:16:3:PHPAST63:Useless Overriding Method
+advice:24:3:PHPAST63:Useless Overriding Method

@@ -1,0 +1,19 @@
+<?php
+
+new Foo;
+new Bar();
+new Foo\Bar;
+new class {};
+new ($var.$var);
+~~~~~~~~~~
+advice:3:5:PHPAST49:Constructor Parentheses
+advice:5:5:PHPAST49:Constructor Parentheses
+advice:7:1:PHPAST49:Constructor Parentheses
+~~~~~~~~~~
+<?php
+
+new Foo();
+new Bar();
+new Foo\Bar();
+new class {};
+new ($var.$var)();

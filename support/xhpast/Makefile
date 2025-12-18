@@ -1,5 +1,5 @@
 BISONFLAGS = --verbose --name-prefix xhpast
-CPPFLAGS   = -fPIC -Wall
+CPPFLAGS   += $(CXXFLAGS) -fPIC -Wall
 FLEXFLAGS  = -CFr
 XHPAST_VERSION := $(shell ./bin/xhpast-generate-version.php)
 

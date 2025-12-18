@@ -50,7 +50,7 @@ EOHELP
       ->setHelp($help);
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $api = $this->getRepositoryAPI();
 
     $work_engine = $api->getWorkEngine();

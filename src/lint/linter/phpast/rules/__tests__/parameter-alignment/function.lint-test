@@ -1,0 +1,72 @@
+<?php
+
+function single_line(array $a, string $b) {}
+
+function multi_line(
+  array $a,
+  string $b) {}
+
+function multi_line_single(
+  array $a, string $b, int $c) {}
+
+function multi_line_partly(
+  array $a,
+  string $b, int $c) {}
+
+function multi_line_partly(array $a,
+  string $b, int $c) {}
+
+function missing_blank_line(
+  $a,
+  $b) {
+  return single_line($a, $b);
+}
+
+function single_parameter(
+  $a) {
+  return single_line($a, '');
+}
+~~~~~~~~~~
+warning:10:12:PHPAST139:Parameter Alignment
+warning:10:23:PHPAST139:Parameter Alignment
+warning:14:13:PHPAST139:Parameter Alignment
+warning:16:28:PHPAST139:Parameter Alignment
+warning:17:13:PHPAST139:Parameter Alignment
+warning:21:8:PHPAST139:Parameter Alignment
+warning:26:8:PHPAST139:Parameter Alignment
+~~~~~~~~~~
+<?php
+
+function single_line(array $a, string $b) {}
+
+function multi_line(
+  array $a,
+  string $b) {}
+
+function multi_line_single(
+  array $a,
+  string $b,
+  int $c) {}
+
+function multi_line_partly(
+  array $a,
+  string $b,
+  int $c) {}
+
+function multi_line_partly(
+  array $a,
+  string $b,
+  int $c) {}
+
+function missing_blank_line(
+  $a,
+  $b) {
+
+  return single_line($a, $b);
+}
+
+function single_parameter(
+  $a) {
+
+  return single_line($a, '');
+}

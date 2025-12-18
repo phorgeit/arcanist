@@ -7,7 +7,7 @@ final class ArcanistSimpleSymbolRefInspector
 
   protected function newInspectors() {
     $refs = id(new PhutilClassMapQuery())
-      ->setAncestorClass('ArcanistSimpleSymbolRef')
+      ->setAncestorClass(ArcanistSimpleSymbolRef::class)
       ->execute();
 
     $inspectors = array();

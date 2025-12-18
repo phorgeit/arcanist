@@ -73,7 +73,8 @@ final class PhutilErrorHandler extends Phobject {
   }
 
   /**
-   * Deprecated - use `addErrorListener`.
+   * This method has been deprecated, use @{method:addErrorListener} instead.
+   * @deprecated
    */
   public static function setErrorListener($listener) {
     self::addErrorListener($listener);
@@ -179,7 +180,7 @@ final class PhutilErrorHandler extends Phobject {
    * @param string $str Error message.
    * @param string $file File where the error occurred.
    * @param int $line Line on which the error occurred.
-   * @param wild $ctx (optional) Error context information.
+   * @param mixed $ctx (optional) Error context information.
    * @return void
    * @task internal
    */
@@ -300,7 +301,7 @@ final class PhutilErrorHandler extends Phobject {
   /**
    * Output a stacktrace to the PHP error log.
    *
-   * @param trace $trace A stacktrace, e.g. from debug_backtrace();
+   * @param array $trace A stacktrace, e.g. from debug_backtrace();
    * @return void
    * @task internal
    */
@@ -315,7 +316,7 @@ final class PhutilErrorHandler extends Phobject {
   /**
    * Format a stacktrace for output.
    *
-   * @param trace $trace A stacktrace, e.g. from debug_backtrace();
+   * @param array $trace A stacktrace, e.g. from debug_backtrace();
    * @return string Human-readable trace.
    * @task internal
    */
@@ -379,8 +380,8 @@ final class PhutilErrorHandler extends Phobject {
    * log.
    *
    * @param string $event Event type constant.
-   * @param wild $value Event value.
-   * @param dict $metadata Event metadata.
+   * @param mixed $value Event value.
+   * @param array $metadata Event metadata.
    * @return void
    * @task internal
    */
@@ -504,14 +505,17 @@ final class PhutilErrorHandler extends Phobject {
         $try_file = $try_path.'/.git/HEAD';
         if (@file_exists($try_file)) {
           $head = @file_get_contents($try_file);
-          $matches = null;
-          if (preg_match('(^ref: refs/heads/(.*)$)', trim($head), $matches)) {
-            $libinfo[$library]['head'] = trim($matches[1]);
-            $get_refs[] = trim($matches[1]);
-          } else {
-            $libinfo[$library]['head'] = trim($head);
+          if ($head) {
+            $matches = null;
+            if (preg_match('(^ref: refs/heads/(.*)$)', trim($head),
+                $matches)) {
+              $libinfo[$library]['head'] = trim($matches[1]);
+              $get_refs[] = trim($matches[1]);
+            } else {
+              $libinfo[$library]['head'] = trim($head);
+            }
+            break;
           }
-          break;
         }
       }
 
@@ -557,7 +561,7 @@ final class PhutilErrorHandler extends Phobject {
    * origins and has been aggregated or proxied.
    *
    * @param Exception|Throwable $ex Exception to retrieve a trace for.
-   * @return list<wild> List of stack frames.
+   * @return array<array<string>> List of stack frames.
    */
   public static function getExceptionTrace($ex) {
     $id = 1;

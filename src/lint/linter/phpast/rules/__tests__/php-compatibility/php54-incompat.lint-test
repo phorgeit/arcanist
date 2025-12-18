@@ -1,0 +1,20 @@
+<?php
+
+break;
+break 0;
+break 1;
+break 1 + foo() * $bar;
+continue;
+continue 0;
+continue 1;
+continue 1 + foo() * $bar;
+~~~~~~~~~~
+error:6:7:PHPAST45:PHP Compatibility
+error:10:10:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "5.4.0"
+  }
+}

@@ -85,7 +85,7 @@ final class PhutilDeferredLog extends Phobject {
    * When the log is written, the "%T" and "%u" variables will be replaced with
    * the values you provide.
    *
-   * @param dict  $map Map of variables to values.
+   * @param array $map Map of variables to values.
    * @return $this
    * @task log
    */
@@ -99,9 +99,9 @@ final class PhutilDeferredLog extends Phobject {
    * Get existing log data.
    *
    * @param   string  $key Log data key.
-   * @param   wild    $default (optional) Default to return if data does not
+   * @param   mixed   $default (optional) Default to return if data does not
    *   exist.
-   * @return  wild    Data, or default if data does not exist.
+   * @return  mixed   Data, or default if data does not exist.
    * @task log
    */
   public function getData($key, $default = null) {

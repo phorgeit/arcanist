@@ -60,6 +60,18 @@ final class ArcanistInvalidDefaultParameterXHPASTLinterRule
               'null'));
           break;
 
+        case 'bool':
+          if ($this->isBool($default)) {
+            break;
+          }
+
+          $this->raiseLintAtNode(
+            $default,
+            pht(
+              'Default value for parameters with bool type hint '.
+              'can only be true or false.'));
+          break;
+
         default:
           // Class/interface parameter.
           if ($default_is_null) {
@@ -75,6 +87,21 @@ final class ArcanistInvalidDefaultParameterXHPASTLinterRule
           break;
       }
     }
+  }
+
+  /**
+   * Check if a XPASTNode is a boolean.
+   *
+   * @param XHPASTNode $node
+   * @return bool
+   */
+  private function isBool(XHPASTNode $node) {
+    if ($node->getTypeName() !== 'n_SYMBOL_NAME') {
+      return false;
+    }
+
+    $value = $node->getConcreteString();
+    return $value === 'true' || $value === 'false';
   }
 
 }

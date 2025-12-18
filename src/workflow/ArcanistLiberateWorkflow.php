@@ -28,6 +28,9 @@ EOTEXT
       $this->newWorkflowArgument('clean')
         ->setHelp(
           pht('Perform a clean rebuild, ignoring caches. Thorough, but slow.')),
+      $this->newWorkflowArgument('alternative-parser')
+        ->setHelp(
+          pht('Use PHP-Parser instead of XHPAST.')),
       $this->newWorkflowArgument('argv')
         ->setWildcard(true)
         ->setIsPathArgument(true),
@@ -44,7 +47,7 @@ EOTEXT
   }
 
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $log = $this->getLogEngine();
 
     $argv = $this->getArgument('argv');
@@ -58,9 +61,14 @@ EOTEXT
         pht('SCAN'),
         pht('Searching for libraries in the current working directory...'));
 
-      $init_files = id(new FileFinder(getcwd()))
-        ->withPath('*/__phutil_library_init__.php')
-        ->find();
+      $cwd = getcwd();
+      $init_files = null;
+
+      if ($cwd) {
+        $init_files = id(new FileFinder($cwd))
+          ->withPath('*/__phutil_library_init__.php')
+          ->find();
+      }
 
       if (!$init_files) {
         throw new ArcanistUsageException(
@@ -161,6 +169,9 @@ EOTEXT
     if ($this->getArgument('clean')) {
       $argv[] = '--drop-cache';
     }
+    if ($this->getArgument('alternative-parser')) {
+      $argv[] = '--alternative-parser';
+    }
 
     return phutil_passthru(
       'php -f %R -- %Ls %R',
@@ -174,7 +185,7 @@ EOTEXT
       if (!is_dir($path)) {
         throw new ArcanistUsageException(
           pht(
-            'Provide a directory to create or update a libphutil library in.'));
+            'Provide a directory to create or update a library in.'));
       }
       return;
     }
@@ -205,7 +216,7 @@ EOTEXT
       return 0;
     }
 
-    echo pht("Creating new libphutil library in '%s'.", $path)."\n";
+    echo pht("Creating new library in '%s'.", $path)."\n";
 
     do {
       echo pht('Choose a name for the new library.')."\n";

@@ -86,7 +86,7 @@ EOTEXT
     );
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $log = $this->getLogEngine();
 
     $argv = $this->getArgument('argv');
@@ -194,7 +194,7 @@ EOTEXT
     $file = $spec['file'];
     $home = getenv('HOME');
 
-    if (!strlen($home)) {
+    if (!$home || !phutil_nonempty_string($home)) {
       throw new PhutilArgumentUsageException(
         pht(
           'The "HOME" environment variable is not defined, so this workflow '.
@@ -343,7 +343,7 @@ EOTEXT
       pht('Detecting current shell...'));
 
     $shell_env = getenv('SHELL');
-    if (!strlen($shell_env)) {
+    if (!$shell_env || !phutil_nonempty_string($shell_env)) {
       $log->writeWarning(
         pht('SHELL'),
         pht(

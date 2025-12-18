@@ -7,7 +7,6 @@ final class ArcanistCommitRef
   private $treeHash;
   private $commitEpoch;
   private $authorEpoch;
-  private $upstream;
 
   const HARDPOINT_MESSAGE = 'message';
   const HARDPOINT_UPSTREAM = 'upstream';

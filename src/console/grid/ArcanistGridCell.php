@@ -5,8 +5,6 @@ final class ArcanistGridCell
 
   private $key;
   private $content;
-  private $contentWidth;
-  private $contentHeight;
 
   public function setKey($key) {
     $this->key = $key;

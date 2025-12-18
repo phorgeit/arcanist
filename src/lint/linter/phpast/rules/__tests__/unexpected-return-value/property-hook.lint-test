@@ -1,0 +1,11 @@
+<?php
+class SomeClass {
+  public string $property {
+    get => lcfirst($this->property);
+    set {
+      return strtolower($value);
+    }
+  }
+}
+~~~~~~~~~~
+warning:6:7:PHPAST92:Unexpected `return` Value

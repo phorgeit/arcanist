@@ -1,0 +1,15 @@
+<?php
+
+csprintf('x');
+csprintf($x);
+~~~~~~~~~~
+error:4:1:PHPAST86:Unsafe Usage of Dynamic String
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.dynamic-string.functions": {
+      "csprintf": 0
+    }
+  }
+}

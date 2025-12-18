@@ -78,7 +78,7 @@ final class PhutilSystem extends Phobject {
    * returned from this method will vary from system to system and the numbers
    * themselves may be only roughly accurate.
    *
-   * @return map<string, wild> Dictionary of memory information.
+   * @return array{total:int,free:int} Dictionary of memory information.
    * @task memory
    */
   public static function getSystemMemoryInformation() {
@@ -107,7 +107,7 @@ final class PhutilSystem extends Phobject {
    * information on Linux.
    *
    * @param string $data Raw `/proc/meminfo`.
-   * @return map<string, wild> Parsed memory information.
+   * @return array{total:int,free:int} Parsed memory information.
    * @task memory
    */
   public static function parseMemInfo($data) {
@@ -160,7 +160,7 @@ final class PhutilSystem extends Phobject {
    * information on Mac OS X.
    *
    * @param string $data Raw `vm_stat` output.
-   * @return map<string, wild> Parsed memory information.
+   * @return array{total:int,free:int} Parsed memory information.
    * @task memory
    */
   public static function parseVMStat($data) {
@@ -213,10 +213,10 @@ final class PhutilSystem extends Phobject {
     // bunch of disk cache. So these numbers aren't totally reliable and they
     // aren't directly comparable to the /proc/meminfo numbers.
 
-    $free = $map['Pages free'];
-    $active = $map['Pages active'];
-    $inactive = $map['Pages inactive'];
-    $wired = $map['Pages wired down'];
+    $free = (int)$map['Pages free'];
+    $active = (int)$map['Pages active'];
+    $inactive = (int)$map['Pages inactive'];
+    $wired = (int)$map['Pages wired down'];
 
     return array(
       'total' => ($free + $active + $inactive + $wired) * $page_size,

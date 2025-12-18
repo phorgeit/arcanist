@@ -15,7 +15,7 @@
  * library components on other copies of themselves are expected to fail.)
  *
  * To resolve this, you need to make sure your program loads no more than one
- * copy of each libphutil library, but exactly how you approach this depends on
+ * copy of each Arcanist library, but exactly how you approach this depends on
  * why it's happening in the first place.
  *
  * @task info Getting Exception Information

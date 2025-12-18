@@ -1,0 +1,19 @@
+<?php
+use A;
+use B as B;
+use C as D;
+use E\F as F;
+use G\H as I;
+use J\{K as K, L};
+~~~~~~~~~~
+warning:3:5:PHPAST99:Unnecessary Symbol Alias
+warning:5:5:PHPAST99:Unnecessary Symbol Alias
+warning:7:8:PHPAST99:Unnecessary Symbol Alias
+~~~~~~~~~~
+<?php
+use A;
+use B;
+use C as D;
+use E\F;
+use G\H as I;
+use J\{K, L};

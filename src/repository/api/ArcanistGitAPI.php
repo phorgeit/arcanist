@@ -20,7 +20,7 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
   protected function buildLocalFuture(array $argv) {
     $argv[0] = 'git '.$argv[0];
 
-    return newv('ExecFuture', $argv)
+    return newv(ExecFuture::class, $argv)
       ->setCWD($this->getPath());
   }
 
@@ -42,7 +42,7 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
 
     $args[0] = $git.' '.$args[0];
 
-    return newv('PhutilExecPassthru', $args)
+    return newv(PhutilExecPassthru::class, $args)
       ->setCWD($this->getPath());
   }
 
@@ -404,7 +404,7 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
 
   /**
    * Translates a symbolic commit (like "HEAD^") to a commit identifier.
-   * @param string_symbol $symbolic_commit commit.
+   * @param string $symbolic_commit commit.
    * @return string the commit SHA.
    */
   private function resolveCommit($symbolic_commit) {
@@ -1056,7 +1056,7 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
   /**
    * Returns names of all the branches in the current repository.
    *
-   * @return list<dict<string, string>> Dictionary of branch information.
+   * @return array<array<string, string>> Dictionary of branch information.
    */
   private function getAllBranches() {
     $field_list = array(
@@ -1423,6 +1423,7 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
                 $source));
             return 'HEAD^';
         }
+        break;
       default:
         return null;
     }

@@ -559,10 +559,13 @@ function phutil_symbols_get_builtins() {
   $funcs = get_defined_functions();
   $builtin['functions']  = $funcs['internal'];
 
-  $compat = json_decode(
-    file_get_contents(
-      dirname(__FILE__).'/../../resources/php/symbol-information.json'),
-    true);
+  $file_content = file_get_contents(
+      dirname(__FILE__).'/../../resources/php/symbol-information.json');
+  if ($file_content) {
+    $compat = json_decode($file_content, true);
+  } else {
+    throw new Exception(pht('Symbol Information file does not exist!'));
+  }
 
   foreach (array('functions', 'classes', 'interfaces') as $type) {
     // Developers may not have every extension that a library potentially uses

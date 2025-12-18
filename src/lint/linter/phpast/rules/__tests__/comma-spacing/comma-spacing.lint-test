@@ -1,0 +1,11 @@
+<?php
+
+f(1,2);
+$var = "{$n_off},{$n_len}";
+~~~~~~~~~~
+warning:3:4:PHPAST135:Space Around Comma
+~~~~~~~~~~
+<?php
+
+f(1, 2);
+$var = "{$n_off},{$n_len}";

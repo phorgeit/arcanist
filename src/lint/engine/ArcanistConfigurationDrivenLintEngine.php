@@ -142,7 +142,7 @@ final class ArcanistConfigurationDrivenLintEngine extends ArcanistLintEngine {
 
   private function loadAvailableLinters() {
     return id(new PhutilClassMapQuery())
-      ->setAncestorClass('ArcanistLinter')
+      ->setAncestorClass(ArcanistLinter::class)
       ->setUniqueMethod('getLinterConfigurationName', true)
       ->execute();
   }

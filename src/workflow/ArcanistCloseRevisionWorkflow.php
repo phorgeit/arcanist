@@ -152,10 +152,17 @@ EOTEXT
             'Closing revision "%s"...',
             $revision_display));
 
-        $conduit->callMethodSynchronous(
-          'differential.close',
+        $transactions = array(
           array(
-            'revisionID' => $revision_id,
+            'type' => 'close',
+            'value' => true,
+          ),
+        );
+        $conduit->callMethodSynchronous(
+          'differential.revision.edit',
+          array(
+            'transactions' => $transactions,
+            'objectIdentifier' => $revision_id,
           ));
 
         $this->writeOkay(

@@ -74,8 +74,11 @@ final class ArcanistMercurialLandEngine
     return array($commit);
   }
 
+  /**
+   * @param array<ArcanistLandSymbol> $symbols
+   */
   protected function resolveSymbols(array $symbols) {
-    assert_instances_of($symbols, 'ArcanistLandSymbol');
+    assert_instances_of($symbols, ArcanistLandSymbol::class);
     $api = $this->getRepositoryAPI();
 
     $marker_types = array(
@@ -151,8 +154,11 @@ final class ArcanistMercurialLandEngine
     }
   }
 
+  /**
+   * @param array<ArcanistLandSymbol> $symbols
+   */
   protected function selectOntoRemote(array $symbols) {
-    assert_instances_of($symbols, 'ArcanistLandSymbol');
+    assert_instances_of($symbols, ArcanistLandSymbol::class);
     $api = $this->getRepositoryAPI();
 
     $remote = $this->newOntoRemote($symbols);
@@ -172,8 +178,11 @@ final class ArcanistMercurialLandEngine
     return $remote;
   }
 
+  /**
+   * @param array<ArcanistLandSymbol> $symbols
+   */
   private function newOntoRemote(array $symbols) {
-    assert_instances_of($symbols, 'ArcanistLandSymbol');
+    assert_instances_of($symbols, ArcanistLandSymbol::class);
     $api = $this->getRepositoryAPI();
     $log = $this->getLogEngine();
 
@@ -216,8 +225,11 @@ final class ArcanistMercurialLandEngine
     return $default_remote;
   }
 
+  /**
+   * @param array<ArcanistLandSymbol> $symbols
+   */
   protected function selectOntoRefs(array $symbols) {
-    assert_instances_of($symbols, 'ArcanistLandSymbol');
+    assert_instances_of($symbols, ArcanistLandSymbol::class);
     $log = $this->getLogEngine();
 
     $onto = $this->getOntoArguments();
@@ -693,8 +705,12 @@ final class ArcanistMercurialLandEngine
     return $target_marker->getCommitHash();
   }
 
+  /**
+   * @param string $into_commit
+   * @param array<ArcanistLandSymbol> $symbols
+   */
   protected function selectCommits($into_commit, array $symbols) {
-    assert_instances_of($symbols, 'ArcanistLandSymbol');
+    assert_instances_of($symbols, ArcanistLandSymbol::class);
     $api = $this->getRepositoryAPI();
 
     $commit_map = array();
@@ -1085,9 +1101,11 @@ final class ArcanistMercurialLandEngine
     }
   }
 
-
+  /**
+   * @param array<ArcanistLandCommitSet> $sets
+   */
   protected function pruneBranches(array $sets) {
-    assert_instances_of($sets, 'ArcanistLandCommitSet');
+    assert_instances_of($sets, ArcanistLandCommitSet::class);
     $api = $this->getRepositoryAPI();
     $log = $this->getLogEngine();
 

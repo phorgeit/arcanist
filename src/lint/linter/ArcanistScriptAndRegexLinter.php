@@ -324,9 +324,9 @@ final class ArcanistScriptAndRegexLinter extends ArcanistLinter {
   /**
    * Get the line and character of the message from the regex match.
    *
-   * @param dict $match Captured groups from regex.
+   * @param array $match Captured groups from regex.
    * @param string $path
-   * @return pair<int|null,int|null> Line and character of the message.
+   * @return array<int|null,int|null> Line and character of the message.
    *
    * @task parse
    */
@@ -363,8 +363,8 @@ final class ArcanistScriptAndRegexLinter extends ArcanistLinter {
    * a nonempty severity name group like 'error', or a group called 'severity'
    * with a valid name.
    *
-   * @param dict $match Captured groups from regex.
-   * @return const  @{class:ArcanistLintSeverity} constant.
+   * @param array $match Captured groups from regex.
+   * @return string @{class:ArcanistLintSeverity} constant.
    *
    * @task parse
    */

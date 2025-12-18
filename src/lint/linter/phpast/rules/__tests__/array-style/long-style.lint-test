@@ -1,0 +1,23 @@
+<?php
+
+array(1, 2, 3);
+[1, 2, 3];
+array([]);
+[array()];
+~~~~~~~~~~
+advice:4:1:PHPAST136:Array Style
+advice:5:7:PHPAST136:Array Style
+advice:6:1:PHPAST136:Array Style
+~~~~~~~~~~
+<?php
+
+array(1, 2, 3);
+array(1, 2, 3);
+array(array());
+array(array());
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.array-style": "long"
+  }
+}

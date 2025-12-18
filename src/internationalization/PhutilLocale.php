@@ -46,7 +46,7 @@ abstract class PhutilLocale extends Phobject {
    * rule with two gender variants, listed in "<male, female>" order.
    *
    * @param string $variant `PhutilPerson` gender constant.
-   * @param list<wild> $translations List of variants.
+   * @param array<mixed> $translations List of variants.
    * @return string Variant for use.
    */
   public function selectGenderVariant($variant, array $translations) {
@@ -63,7 +63,7 @@ abstract class PhutilLocale extends Phobject {
    * rule with two plural variants, listed in "<singular, plural>" order.
    *
    * @param int $variant Plurality of the value.
-   * @param list<wild> $translations List of variants.
+   * @param array<mixed> $translations List of variants.
    * @return string Variant for use.
    */
   public function selectPluralVariant($variant, array $translations) {
@@ -123,7 +123,7 @@ abstract class PhutilLocale extends Phobject {
    *
    * @param string $raw_pattern The raw input pattern.
    * @param string $translated_pattern The selected translation pattern.
-   * @param list<wild> $args The raw input arguments.
+   * @param array<mixed> $args The raw input arguments.
    * @param string $result_text The translated string.
    * @return string Post-processed translation string.
    */
@@ -139,7 +139,7 @@ abstract class PhutilLocale extends Phobject {
   /**
    * Load all available locales.
    *
-   * @return map<string, PhutilLocale> Map from codes to locale objects.
+   * @return array<string, PhutilLocale> Map from codes to locale objects.
    */
   public static function loadAllLocales() {
     static $locales;
@@ -216,9 +216,9 @@ abstract class PhutilLocale extends Phobject {
   /**
    * Recursively check locale fallbacks for cycles.
    *
-   * @param map<string, PhutilLocale> $map Map of locales.
+   * @param array<string, PhutilLocale> $map Map of locales.
    * @param PhutilLocale $locale Current locale.
-   * @param map<string, string> $seen Map of visited locales.
+   * @param array<string, string> $seen Map of visited locales.
    * @return void
    */
   private static function checkLocaleFallback(

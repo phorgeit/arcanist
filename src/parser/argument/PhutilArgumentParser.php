@@ -72,7 +72,6 @@ final class PhutilArgumentParser extends Phobject {
   private $argv;
   private $specs = array();
   private $results = array();
-  private $parsed;
 
   private $tagline;
   private $synopsis;
@@ -95,7 +94,8 @@ final class PhutilArgumentParser extends Phobject {
    *
    *   $args = new PhutilArgumentParser($argv);
    *
-   * @param list $argv Argument vector to parse, generally the $argv global.
+   * @param array<string> $argv Argument vector to parse, generally the $argv
+   *   global.
    * @task parse
    */
   public function __construct(array $argv) {
@@ -111,7 +111,7 @@ final class PhutilArgumentParser extends Phobject {
    * @{method:getUnconsumedArgumentVector}. Doing a partial parse can make it
    * easier to share common flags across scripts or workflows.
    *
-   * @param   list  $specs List of argument specs, see
+   * @param   array $specs List of argument specs, see
    *                @{class:PhutilArgumentSpecification}.
    * @param bool $initial_only (optional) Require flags appear before any
    *             non-flag arguments.
@@ -311,7 +311,7 @@ final class PhutilArgumentParser extends Phobject {
    * user-friendly error. You can also use @{method:printUsageException} to
    * render the exception in a user-friendly way.
    *
-   * @param   list  $specs List of argument specs, see
+   * @param   array $specs List of argument specs, see
    *                @{class:PhutilArgumentSpecification}.
    * @return  $this
    * @task parse
@@ -347,7 +347,7 @@ final class PhutilArgumentParser extends Phobject {
    * Parse and consume a list of arguments, raising a user-friendly error if
    * anything remains. See also @{method:parseFull} and @{method:parsePartial}.
    *
-   * @param   list  $specs List of argument specs, see
+   * @param   array $specs List of argument specs, see
    *                @{class:PhutilArgumentSpecification}.
    * @return  $this
    * @task parse
@@ -368,7 +368,7 @@ final class PhutilArgumentParser extends Phobject {
    *
    * See @{class:PhutilArgumentWorkflow} for details on using workflows.
    *
-   * @param   list  $workflows List of argument specs, see
+   * @param   array $workflows List of argument specs, see
    *                @{class:PhutilArgumentSpecification}.
    * @return  $this
    * @task parse
@@ -392,14 +392,15 @@ final class PhutilArgumentParser extends Phobject {
    *
    * See @{class:PhutilArgumentWorkflow} for details on using workflows.
    *
-   * @param list $workflows List of @{class:PhutilArgumentWorkflow}s.
-   * @return PhutilArgumentWorkflow|no  Returns the chosen workflow if it is
+   * @param array<PhutilArgumentWorkflow> $workflows List of
+   *                                      @{class:PhutilArgumentWorkflow}s.
+   * @return PhutilArgumentWorkflow|int Returns the chosen workflow if it is
    *                                    not executable, or executes it and
    *                                    exits with a return code if it is.
    * @task parse
    */
   public function parseWorkflowsFull(array $workflows) {
-    assert_instances_of($workflows, 'PhutilArgumentWorkflow');
+    assert_instances_of($workflows, PhutilArgumentWorkflow::class);
 
     // Clear out existing workflows. We need to do this to permit the
     // construction of sub-workflows.

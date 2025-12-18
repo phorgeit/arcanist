@@ -353,7 +353,7 @@ EOTEXT
    * invalid format.
    *
    * @param ArcanistUnitTestEngine $engine The engine.
-   * @param wild $results Results from the engine.
+   * @param mixed $results Results from the engine.
    */
   private function validateUnitEngineResults(
     ArcanistUnitTestEngine $engine,
@@ -366,7 +366,7 @@ EOTEXT
           'run (with method "%s"). Expected a list of "%s" objects as results.',
           get_class($engine),
           'run()',
-          'ArcanistUnitTestResult'));
+          ArcanistUnitTestResult::class));
     }
 
     foreach ($results as $key => $result) {
@@ -378,7 +378,7 @@ EOTEXT
             'results, but value with key "%s" is not valid.',
             get_class($engine),
             'run()',
-            'ArcanistUnitTestResult',
+            ArcanistUnitTestResult::class,
             $key));
       }
     }

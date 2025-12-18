@@ -101,7 +101,12 @@ final class ArcanistDifferentialCommitMessage extends Phobject {
     $fields = array_filter($this->fields);
     ksort($fields);
     $fields = json_encode($fields);
-    return md5($fields);
+    if ($fields) {
+      return md5($fields);
+    }
+    throw new ArcanistUsageException(
+      pht(
+        'Unable to get checksum.'));
   }
 
   public function getTransactions() {

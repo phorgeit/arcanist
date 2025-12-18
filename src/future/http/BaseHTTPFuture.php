@@ -20,6 +20,12 @@
  */
 abstract class BaseHTTPFuture extends Future {
 
+  /**
+   * Default User-Agent for HTTP requests.
+   * @var ?string
+   */
+  private static $defaultUserAgent = null;
+
   private $method   = 'GET';
   private $timeout  = 300.0;
   private $headers  = array();
@@ -295,7 +301,7 @@ abstract class BaseHTTPFuture extends Future {
    * Exception-oriented @{method:resolve}. Throws if the status indicates an
    * error occurred.
    *
-   * @return tuple  HTTP request result <body, headers> tuple.
+   * @return array HTTP request result <body, headers> tuple.
    * @task resolve
    */
   final public function resolvex() {
@@ -317,7 +323,7 @@ abstract class BaseHTTPFuture extends Future {
    * Parse a raw HTTP response into a <status, body, headers> tuple.
    *
    * @param string $raw_response Raw HTTP response.
-   * @return tuple Valid resolution tuple.
+   * @return array Valid resolution tuple.
    * @task internal
    */
   protected function parseRawHTTPResponse($raw_response) {
@@ -394,7 +400,7 @@ abstract class BaseHTTPFuture extends Future {
    * Parse an HTTP header block.
    *
    * @param string $head_raw Raw HTTP headers.
-   * @return list List of HTTP header tuples.
+   * @return array List of HTTP header tuples.
    * @task internal
    */
   protected function parseHeaders($head_raw) {
@@ -423,7 +429,7 @@ abstract class BaseHTTPFuture extends Future {
   /**
    * Find value of the first header with given name.
    *
-   * @param list $headers List of headers from `resolve()`.
+   * @param array $headers List of headers from `resolve()`.
    * @param string $search Case insensitive header name.
    * @return string|null Value of the header or null if not found.
    * @task resolve
@@ -444,7 +450,7 @@ abstract class BaseHTTPFuture extends Future {
    * Build a result tuple indicating a parse error resulting from a malformed
    * HTTP response.
    *
-   * @return tuple Valid resolution tuple.
+   * @return array Valid resolution tuple.
    * @task internal
    */
   protected function buildMalformedResult($raw_response) {
@@ -455,6 +461,33 @@ abstract class BaseHTTPFuture extends Future {
       HTTPFutureParseResponseStatus::ERROR_MALFORMED_RESPONSE,
       $raw_response);
     return array($status, $body, $headers);
+  }
+
+
+/* -(  Configuring global options  )----------------------------------------- */
+
+
+  /**
+   * Get default user-agent in use.
+   *
+   * @return string Default User-Agent to use
+   * @task config
+   */
+  final public static function getDefaultUserAgent() {
+    if (self::$defaultUserAgent === null) {
+      self::$defaultUserAgent = PlatformSymbols::getPlatformClientName().'/1.0';
+    }
+    return self::$defaultUserAgent;
+  }
+
+  /**
+   * Set a default user-agent to use.
+   *
+   * @param string $ua Default User-Agent to use
+   * @task config
+   */
+  final public static function setDefaultUserAgent($ua) {
+    self::$defaultUserAgent = $ua;
   }
 
 }

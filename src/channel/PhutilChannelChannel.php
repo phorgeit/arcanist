@@ -7,6 +7,11 @@
  * semantics with @{class:PhutilProtocolChannel}).
  *
  * The implementation of this class is entirely uninteresting.
+ *
+ * @template TRead
+ * @template TWrite
+ *
+ * @extends PhutilChannel<TRead,TWrite>
  */
 abstract class PhutilChannelChannel extends PhutilChannel {
 

@@ -1,0 +1,18 @@
+<?php
+
+class A extends Phobject {}
+abstract class B extends Phobject {}
+final class C extends Phobject {}
+
+/**
+ * @concrete-extensible
+ */
+class D extends Phobject {}
+
+final class N extends Phobject {
+  public function a() {
+    return new class() {};
+  }
+}
+~~~~~~~~~~
+disabled:3:7:PHPAST87:Class Not `abstract` Or `final`

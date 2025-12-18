@@ -9,6 +9,9 @@
  * @task io       Reading and Writing
  * @task protocol Protocol Implementation
  * @task wait     Waiting for Activity
+ *
+ * @template TRead
+ * @template TWrite
  */
 abstract class PhutilProtocolChannel extends PhutilChannelChannel {
 
@@ -21,7 +24,7 @@ abstract class PhutilProtocolChannel extends PhutilChannelChannel {
   /**
    * Read a message from the channel, if a message is available.
    *
-   * @return wild A message, or null if no message is available.
+   * @return TRead|null A message, or null if no message is available.
    *
    * @task io
    */
@@ -46,7 +49,7 @@ abstract class PhutilProtocolChannel extends PhutilChannelChannel {
   /**
    * Write a message to the channel.
    *
-   * @param wild   $message Some message.
+   * @param TWrite   $message Some message.
    * @return $this
    *
    * @task io
@@ -61,7 +64,7 @@ abstract class PhutilProtocolChannel extends PhutilChannelChannel {
    * Add a message to the queue. While you normally do not need to do this,
    * you can use it to inject out-of-band messages.
    *
-   * @param wild   $message Some message.
+   * @param TWrite   $message Some message.
    * @return $this
    *
    * @task io
@@ -78,7 +81,7 @@ abstract class PhutilProtocolChannel extends PhutilChannelChannel {
   /**
    * Encode a message for transmission.
    *
-   * @param   wild    $message Some message.
+   * @param   TWrite    $message Some message.
    * @return  string  The message serialized into a wire format for
    *                  transmission.
    *
@@ -101,7 +104,7 @@ abstract class PhutilProtocolChannel extends PhutilChannelChannel {
    * to process incoming data in small chunks.
    *
    * @param   string      $data One or more bytes from the underlying channel.
-   * @return  list<wild>  Zero or more parsed messages.
+   * @return  array<TRead> List of zero or more parsed messages.
    *
    * @task protocol
    */
@@ -114,7 +117,7 @@ abstract class PhutilProtocolChannel extends PhutilChannelChannel {
   /**
    * Wait for a message, blocking until one is available.
    *
-   * @return wild A message.
+   * @return TRead A message.
    *
    * @task wait
    */

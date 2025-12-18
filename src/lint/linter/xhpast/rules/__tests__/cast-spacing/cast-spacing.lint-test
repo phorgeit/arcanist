@@ -1,6 +1,6 @@
 <?php
 
-echo (double)0;
+echo (float)0;
 echo (int) 1;
 echo (string)  2;
 ~~~~~~~~~~
@@ -9,6 +9,6 @@ advice:5:14:XHP66:Cast Spacing
 ~~~~~~~~~~
 <?php
 
-echo (double)0;
+echo (float)0;
 echo (int)1;
 echo (string)2;

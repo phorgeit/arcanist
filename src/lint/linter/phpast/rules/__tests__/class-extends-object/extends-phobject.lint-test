@@ -1,0 +1,10 @@
+<?php
+
+abstract class A extends Phobject {}
+final class B extends A {}
+final class C {}
+
+$anonymous = new class() {};
+~~~~~~~~~~
+disabled:5:1:PHPAST88:Class Not Extending `Phobject`
+disabled:7:18:PHPAST88:Class Not Extending `Phobject`

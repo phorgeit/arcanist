@@ -1,0 +1,40 @@
+<?php
+
+array($x => $y);
+array($x=>$y);
+array($x =>$y);
+array($x=> $y);
+
+array(
+  $x => $y,
+);
+array(
+  $x =>
+    $y,
+);
+array(
+  $x=>$y,
+);
+~~~~~~~~~~
+warning:4:9:PHPAST27:Space Around Binary Operator
+warning:5:10:PHPAST27:Space Around Binary Operator
+warning:6:9:PHPAST27:Space Around Binary Operator
+warning:16:5:PHPAST27:Space Around Binary Operator
+~~~~~~~~~~
+<?php
+
+array($x => $y);
+array($x => $y);
+array($x => $y);
+array($x => $y);
+
+array(
+  $x => $y,
+);
+array(
+  $x =>
+    $y,
+);
+array(
+  $x => $y,
+);

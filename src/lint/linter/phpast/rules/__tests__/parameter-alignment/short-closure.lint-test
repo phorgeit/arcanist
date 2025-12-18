@@ -1,0 +1,24 @@
+<?php
+
+function short_closures() {
+  $c1 = fn ($a, $b) => null;
+  $c2 = fn (
+    $a, $b) => null;
+  $c3 = fn (
+    $a,
+    $b) => null;
+}
+~~~~~~~~~~
+warning:6:8:PHPAST139:Parameter Alignment
+~~~~~~~~~~
+<?php
+
+function short_closures() {
+  $c1 = fn ($a, $b) => null;
+  $c2 = fn (
+    $a,
+    $b) => null;
+  $c3 = fn (
+    $a,
+    $b) => null;
+}

@@ -1,0 +1,15 @@
+<?php
+
+define('CASE_INSENSITIVE', false, false);
+define('CASE_SENSITIVE', true, true);
+define('DEFAULT_SENSITIVE', null);
+
+~~~~~~~~~~
+error:4:32:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "8.0.0"
+  }
+}

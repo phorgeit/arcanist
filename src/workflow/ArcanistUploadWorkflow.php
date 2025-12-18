@@ -38,7 +38,7 @@ EOTEXT
     );
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     if (!$this->getArgument('paths')) {
       throw new PhutilArgumentUsageException(
         pht('Specify one or more paths to files you want to upload.'));

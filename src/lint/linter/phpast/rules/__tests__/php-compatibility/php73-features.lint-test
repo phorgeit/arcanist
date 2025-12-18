@@ -1,0 +1,29 @@
+<?php
+
+$doc = <<<INDENTED
+  This is indented text, that will have the indentation stripped.
+  INDENTED;
+
+
+$doc .= <<<'INDENTED'
+  This is indented text, that will have the indentation stripped.
+  INDENTED;
+
+[&$a, $b] = array($doc, '');
+
+array_combine(
+  array(),
+  array(),);
+
+~~~~~~~~~~
+error:3:8:PHPAST45:PHP Compatibility
+error:8:9:PHPAST45:PHP Compatibility
+error:12:2:PHPAST45:PHP Compatibility
+error:16:10:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "7.2.0"
+  }
+}

@@ -3,7 +3,6 @@
 final class ConduitFuture extends FutureProxy {
 
   private $client;
-  private $engine;
   private $conduitMethod;
 
   public function setClient(ConduitClient $client, $method) {

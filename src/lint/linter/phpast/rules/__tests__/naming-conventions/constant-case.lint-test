@@ -1,0 +1,12 @@
+<?php
+
+define('foo', 'bar');
+const bar = 'baz';
+
+class Foo {
+  const bar = 'baz';
+}
+~~~~~~~~~~
+warning:3:8:PHPAST9:Naming Conventions
+warning:4:7:PHPAST9:Naming Conventions
+warning:7:9:PHPAST9:Naming Conventions

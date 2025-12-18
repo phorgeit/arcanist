@@ -32,7 +32,7 @@
  * The **library** and **where** keys show where the symbol is defined. The
  * **type** and **name** keys identify the symbol itself.
  *
- * NOTE: This class must not use libphutil functions, including @{function:id}
+ * NOTE: This class must not use Arcanist functions, including @{function:id}
  * and @{function:idx}.
  *
  * @task config   Configuring the Query
@@ -161,9 +161,9 @@ final class PhutilSymbolLoader {
    * Execute the query and select matching symbols, then load them so they can
    * be used.
    *
-   * @return dict A dictionary of matching symbols. See top-level class
-   *              documentation for details. These symbols will be loaded
-   *              and available.
+   * @return array A dictionary of matching symbols. See top-level class
+   *               documentation for details. These symbols will be loaded
+   *               and available.
    *
    * @task load
    */
@@ -198,7 +198,7 @@ final class PhutilSymbolLoader {
     foreach ($libraries as $library) {
       $map = $bootloader->getLibraryMap($library);
       foreach ($types as $type) {
-        if ($type == 'interface') {
+        if ($type == 'interface' || $type == 'enum' || $type == 'trait') {
           $lookup_map = $map['class'];
         } else {
           $lookup_map = $map[$type];
@@ -292,7 +292,7 @@ final class PhutilSymbolLoader {
 
       if ($caught) {
         // NOTE: We try to load everything even if we fail to load something,
-        // primarily to make it possible to remove functions from a libphutil
+        // primarily to make it possible to remove functions from an Arcanist
         // library without breaking library startup.
         if ($should_continue) {
           // We may not have `pht()` yet.
@@ -331,8 +331,8 @@ final class PhutilSymbolLoader {
    * of the symbols and don't plan to use them; otherwise, use
    * @{method:selectAndLoadSymbols}.
    *
-   * @return dict A dictionary of matching symbols. See top-level class
-   *              documentation for details.
+   * @return array A dictionary of matching symbols. See top-level class
+   *               documentation for details.
    *
    * @task load
    */
@@ -356,8 +356,8 @@ final class PhutilSymbolLoader {
    * This method implicitly restricts the query to match only concrete
    * classes.
    *
-   * @param  list<wild>           $argv List of constructor arguments.
-   * @return map<string, object>  Map of class names to constructed objects.
+   * @param  array<mixed>           $argv List of constructor arguments.
+   * @return array<string, object>  Map of class names to constructed objects.
    */
   public function loadObjects(array $argv = array()) {
     $symbols = $this
@@ -399,9 +399,15 @@ final class PhutilSymbolLoader {
 
 
   private static function classLikeExists($name) {
-    return class_exists($name, false) ||
-           interface_exists($name, false) ||
-           trait_exists($name, false);
+    $exists = class_exists($name, false) ||
+      interface_exists($name, false) ||
+      trait_exists($name, false);
+
+    if (PHP_VERSION < 80100) {
+      return $exists;
+    }
+
+    return $exists || enum_exists($name, false);
   }
 
   /**
@@ -438,7 +444,7 @@ final class PhutilSymbolLoader {
       }
     } else {
       if (!self::classLikeExists($name)) {
-        $load_failed = pht('class or interface');
+        $load_failed = pht('class, interface, trait or enum');
       }
     }
 

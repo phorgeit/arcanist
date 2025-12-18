@@ -59,8 +59,8 @@ final class AASTNodeList
   }
 
   public static function newFromTreeAndNodes(AASTTree $tree, array $nodes) {
-    // We could do `assert_instances_of($nodes, 'AASTNode')` here, but doing
-    // so imposes an observable performance penalty for linting.
+    // We could do `assert_instances_of($nodes, AASTNode::class)` here, but
+    // doing so imposes an observable performance penalty for linting.
 
     $obj = new AASTNodeList();
     $obj->tree = $tree;

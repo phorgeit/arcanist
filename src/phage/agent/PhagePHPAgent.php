@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Phage is a prototype parallel shell tool, like HyperShell.
+ * Phage is exposed as a wrapper around `bin/remote`.
+ * See https://web.archive.org/web/20241004053014/https://secure.phabricator.com/w/phacility_cluster/phage/
+ * or https://web.archive.org/web/20250423050457/https://secure.phabricator.com/T2794
+ */
 final class PhagePHPAgent extends Phobject {
 
   private $stdin;
@@ -91,7 +97,7 @@ final class PhagePHPAgent extends Phobject {
 
         $timeout = $spec['timeout'];
         if ($timeout) {
-          $future->setTimeout(ceil($timeout));
+          $future->setTimeout((int)ceil($timeout));
         }
 
         $future->setFutureKey($key);

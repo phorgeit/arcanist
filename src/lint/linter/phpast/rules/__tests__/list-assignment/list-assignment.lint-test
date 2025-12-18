@@ -1,0 +1,13 @@
+<?php
+
+list($x, $y, , ,) = array();
+list($x, $y, , , $z) = array();
+~~~~~~~~~~
+warning:3:12:PHPAST77:List Assignment
+warning:3:14:PHPAST77:List Assignment
+warning:3:16:PHPAST77:List Assignment
+~~~~~~~~~~
+<?php
+
+list($x, $y  ) = array();
+list($x, $y, , , $z) = array();

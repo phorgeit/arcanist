@@ -292,7 +292,7 @@ EOTEXT
     return 50;
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $working_copy = $this->getWorkingCopy();
     $repository_api = $working_copy->getRepositoryAPI();
 

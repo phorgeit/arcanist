@@ -1,0 +1,17 @@
+<?php
+
+echo pht(
+  'Base commit ruleset to invoke when determining the start of a '.
+  'commit range. See "Arcanist User Guide: Commit Ranges" for '.
+  'details.');
+
+echo not_pht(
+  'Base commit ruleset to invoke when determining the start of a '.
+  'commit range. See "Arcanist User Guide: Commit Ranges" for '.
+  'details.');
+
+echo pht(
+  'This message does not mention %s in this string.',
+  PlatformSymbols::getPlatformClientName());
+~~~~~~~~~~
+warning:4:3:PHPAST134:Use of Product Name Literal

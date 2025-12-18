@@ -40,6 +40,10 @@ $args->parse(
         'Use faster but less readable serialization for "--show".'),
     ),
     array(
+      'name'      => 'alternative-parser',
+      'help'      => pht('Use PHP-parser for parsing instead of XHPAST.'),
+    ),
+    array(
       'name'      => 'root',
       'wildcard'  => true,
     ),
@@ -53,6 +57,7 @@ $root = Filesystem::resolvePath(head($root));
 
 $builder = new PhutilLibraryMapBuilder($root);
 $builder->setSubprocessLimit($args->getArg('limit'));
+$builder->setAlternativeParser($args->getArg('alternative-parser'));
 
 if ($args->getArg('drop-cache')) {
   $builder->dropSymbolCache();

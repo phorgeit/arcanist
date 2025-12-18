@@ -55,7 +55,7 @@ EOTEXT
   }
 
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $file_symbols = $this->getArgument('argv');
 
     if (!$file_symbols) {

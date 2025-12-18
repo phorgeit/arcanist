@@ -1,0 +1,24 @@
+<?php
+
+list() = $array;
+var_dump(1 >> -1);
+var_dump(1 << -1);
+$var <<= -1;
+$var >>= -1;
+
+// This makes no sense, but is technically valid.
+var_dump(1 >> -(-1));
+
+~~~~~~~~~~
+error:3:1:PHPAST45:PHP Compatibility
+error:4:15:PHPAST45:PHP Compatibility
+error:5:15:PHPAST45:PHP Compatibility
+error:6:10:PHPAST45:PHP Compatibility
+error:7:10:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "7.0.0"
+  }
+}

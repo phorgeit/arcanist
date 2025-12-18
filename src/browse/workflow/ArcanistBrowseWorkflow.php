@@ -58,7 +58,7 @@ EOTEXT
     );
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $targets = $this->getArgument('targets');
     $targets = array_fuse($targets);
 
@@ -100,10 +100,37 @@ EOTEXT
       $ref->setTypes($types);
     }
 
+    // Some software like Subversion does not really support a branch.
+    // We must inform every "ref" (ArcanistRepositoryRef) about this support,
+    // since they generate the destination URI also thanks to this info.
+    $api_supports_branches = null;
+    if ($this->hasRepositoryAPI()) {
+      $api_supports_branches = $this->getRepositoryAPI()->supportsBranches();
+      foreach ($refs as $ref) {
+        $ref->setBranchSupported($api_supports_branches);
+      }
+    }
+
+    // Allow users to specify a (different) remote branch in which the file is
+    // opened on the web (if branches are supported by the VCS).
     $branch = $this->getArgument('branch');
     if ($branch) {
-      foreach ($refs as $ref) {
-        $ref->setBranch($branch);
+      if ($api_supports_branches) {
+        foreach ($refs as $ref) {
+          $ref->setBranch($branch);
+        }
+      } else {
+        // Dear Subversion users,
+        // we have a vague idea about what "--branch" should do in your context,
+        // and that idea makes no sense at the moment. Nothing personal!
+        // https://we.phorge.it/T15541
+        $this->writeWarn(
+          pht('BRANCH OPTION NOT AVAILABLE'),
+          pht(
+            'Argument "--branch" for "arc browse" is not available '.
+            'in your software version control. For example, in SVN, '.
+            'a branch is just a directory with a special meaning for '.
+            'your team. Please omit the "--branch" argument.'));
       }
     }
 

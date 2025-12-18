@@ -290,7 +290,9 @@ abstract class ArcanistLintEngine extends Phobject {
   }
 
   /**
-   * @param dict<string path, dict<string version, list<dict message>>>
+   * @param array<string,array<string,array<string>>> $results
+   *   Array of format
+   *     <string path, array<string version,list<array message>>>
    *   $results
    * @return $this
    */
@@ -421,9 +423,9 @@ abstract class ArcanistLintEngine extends Phobject {
    * times.
    *
    * @param string  $key Resource identifier.
-   * @param wild    $default (optional) Default value to return if resource
+   * @param mixed   $default (optional) Default value to return if resource
    *                does not exist.
-   * @return wild   Resource, or default value if not present.
+   * @return mixed  Resource, or default value if not present.
    */
   public function getLinterResource($key, $default = null) {
     return idx($this->linterResources, $key, $default);
@@ -436,7 +438,7 @@ abstract class ArcanistLintEngine extends Phobject {
    * See @{method:getLinterResource} for a description of this mechanism.
    *
    * @param string $key Resource identifier.
-   * @param wild   $value Resource.
+   * @param mixed  $value Resource.
    * @return $this
    */
   public function setLinterResource($key, $value) {
@@ -444,9 +446,11 @@ abstract class ArcanistLintEngine extends Phobject {
     return $this;
   }
 
-
+  /**
+   * @param array<ArcanistLinter> $linters
+   */
   private function getRunnableLinters(array $linters) {
-    assert_instances_of($linters, 'ArcanistLinter');
+    assert_instances_of($linters, ArcanistLinter::class);
 
     // TODO: The canRun() mechanism is only used by one linter, and just
     // silently disables the linter. Almost every other linter handles this
@@ -464,8 +468,11 @@ abstract class ArcanistLintEngine extends Phobject {
     return $runnable;
   }
 
+  /**
+   * @param array<ArcanistLinter> $runnable
+   */
   private function executeLinters(array $runnable) {
-    assert_instances_of($runnable, 'ArcanistLinter');
+    assert_instances_of($runnable, ArcanistLinter::class);
 
     $all_paths = $this->getPaths();
     $path_chunks = array_chunk($all_paths, 32, $preserve_keys = true);
@@ -478,9 +485,12 @@ abstract class ArcanistLintEngine extends Phobject {
     return array_mergev($exception_lists);
   }
 
-
+  /**
+   * @param array<ArcanistLinter> $runnable
+   * @param array $path_list
+   */
   private function executeLintersOnChunk(array $runnable, array $path_list) {
-    assert_instances_of($runnable, 'ArcanistLinter');
+    assert_instances_of($runnable, ArcanistLinter::class);
 
     $path_map = array_fuse($path_list);
 

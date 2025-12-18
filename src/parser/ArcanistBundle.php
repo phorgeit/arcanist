@@ -659,8 +659,12 @@ final class ArcanistBundle extends Phobject {
     return $cur_path;
   }
 
+  /**
+   * @param array<ArcanistDiffHunk> $hunks
+   * @param $eol
+   */
   private function buildHunkChanges(array $hunks, $eol) {
-    assert_instances_of($hunks, 'ArcanistDiffHunk');
+    assert_instances_of($hunks, ArcanistDiffHunk::class);
     $result = array();
     foreach ($hunks as $hunk) {
       $small_hunks = $this->breakHunkIntoSmallHunks($hunk);

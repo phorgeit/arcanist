@@ -1,0 +1,11 @@
+<?php
+namespace SomeNamespace;
+use A\B\C;
+use \X\Y\Z;
+~~~~~~~~~~
+warning:4:5:PHPAST97:`use` Statement Namespace Prefix
+~~~~~~~~~~
+<?php
+namespace SomeNamespace;
+use A\B\C;
+use X\Y\Z;

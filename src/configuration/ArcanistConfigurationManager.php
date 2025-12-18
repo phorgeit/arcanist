@@ -51,8 +51,8 @@ final class ArcanistConfigurationManager extends Phobject {
    * The precedence is runtime > local > project > user > system
    *
    * @param string $key Key to read.
-   * @param wild   $default (optional) Default value if key is not found.
-   * @return wild  Value, or default value if not found.
+   * @param mixed  $default (optional) Default value if key is not found.
+   * @return mixed Value, or default value if not found.
    *
    * @task config
    */
@@ -136,7 +136,7 @@ final class ArcanistConfigurationManager extends Phobject {
    * config values.
    *
    * @param string  $key Key to set.
-   * @param wild    $value The value of the key.
+   * @param mixed   $value The value of the key.
    *
    * @task config
    */

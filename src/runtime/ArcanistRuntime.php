@@ -236,7 +236,7 @@ final class ArcanistRuntime {
         'curl_init' => array(
           'text',
           "You need to install the cURL PHP extension, maybe with ".
-          "'apt-get install php5-curl' or 'yum install php53-curl' or ".
+          "'apt-get install php-curl' or 'dnf install php-curl' or ".
           "something similar.",
         ),
         'json_decode' => array('flag', '--without-json'),
@@ -258,14 +258,15 @@ final class ArcanistRuntime {
         phpinfo(INFO_GENERAL);
         $info = ob_get_clean();
         $matches = null;
-        if (preg_match('/^Configure Command =>\s*(.*?)$/m', $info, $matches)) {
+        if ($info !== false &&
+            preg_match('/^Configure Command =>\s*(.*?)$/m', $info, $matches)) {
           $config = $matches[1];
         }
       }
 
       list($what, $which) = $resolution;
 
-      if ($what == 'flag' && strpos($config, $which) !== false) {
+      if ($what == 'flag' && $config && strpos($config, $which) !== false) {
         $show_config = true;
         $problems[] = sprintf(
           'The build of PHP you are running was compiled with the configure '.
@@ -403,8 +404,8 @@ final class ArcanistRuntime {
     //     check out a library alongside a working copy and reference it.
     //     If we haven't resolved yet, "library/src" will try to resolve to
     //     "../library/src" if it exists.
-    //  3. Using normal libphutil resolution rules. Generally, this means
-    //     that it checks for libraries next to libphutil, then libraries
+    //  3. Using normal Arcanist resolution rules. Generally, this means
+    //     that it checks for libraries next to Arcanist, then libraries
     //     in the PHP include_path.
     //
     // Note that absolute paths will just resolve absolutely through rule (1).
@@ -532,7 +533,7 @@ final class ArcanistRuntime {
 
   private function newWorkflows(ArcanistToolset $toolset) {
     $workflows = id(new PhutilClassMapQuery())
-      ->setAncestorClass('ArcanistWorkflow')
+      ->setAncestorClass(ArcanistWorkflow::class)
       ->setContinueOnFailure(true)
       ->execute();
 
@@ -572,8 +573,12 @@ final class ArcanistRuntime {
     return $this->logEngine;
   }
 
+  /**
+   * @param array<ArcanistAliasEffect> $effects
+   * @param array<string> $argv
+   */
   private function applyAliasEffects(array $effects, array $argv) {
-    assert_instances_of($effects, 'ArcanistAliasEffect');
+    assert_instances_of($effects, ArcanistAliasEffect::class);
 
     $log = $this->getLogEngine();
 

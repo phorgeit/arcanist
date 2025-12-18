@@ -12,6 +12,7 @@
  * @task directory   Directories
  * @task file        Files
  * @task path        Paths
+ * @task phar        PHAR files
  * @task exec        Executables
  * @task assert      Assertions
  */
@@ -141,7 +142,7 @@ final class Filesystem extends Phobject {
           $path,
           pht('Unable to move %s to %s.', $temp, $path));
       }
-    } catch (Exception $e) {
+    } catch (Throwable $e) {
       // Make best effort to remove temp file
       unlink($temp);
       throw $e;
@@ -443,84 +444,8 @@ final class Filesystem extends Phobject {
       throw new Exception(pht('You must generate at least 1 byte of entropy.'));
     }
 
-    // Under PHP 7.2.0 and newer, we have a reasonable builtin. For older
-    // versions, we fall back to various sources which have a roughly similar
-    // effect.
-    if (function_exists('random_bytes')) {
-      return random_bytes($number_of_bytes);
-    }
-
-    // Try to use `openssl_random_pseudo_bytes()` if it's available. This source
-    // is the most widely available source, and works on Windows/Linux/OSX/etc.
-
-    if (function_exists('openssl_random_pseudo_bytes')) {
-      $strong = true;
-      $data = openssl_random_pseudo_bytes($number_of_bytes, $strong);
-
-      if (!$strong) {
-        // NOTE: This indicates we're using a weak random source. This is
-        // probably OK, but maybe we should be more strict here.
-      }
-
-      if ($data === false) {
-        throw new Exception(
-          pht(
-            '%s failed to generate entropy!',
-            'openssl_random_pseudo_bytes()'));
-      }
-
-      if (strlen($data) != $number_of_bytes) {
-        throw new Exception(
-          pht(
-            '%s returned an unexpected number of bytes (got %s, expected %s)!',
-            'openssl_random_pseudo_bytes()',
-            new PhutilNumber(strlen($data)),
-            new PhutilNumber($number_of_bytes)));
-      }
-
-      return $data;
-    }
-
-
-    // Try to use `/dev/urandom` if it's available. This is usually available
-    // on non-Windows systems, but some PHP config (open_basedir) and chrooting
-    // may limit our access to it.
-
-    $urandom = @fopen('/dev/urandom', 'rb');
-    if ($urandom) {
-      $data = @fread($urandom, $number_of_bytes);
-      @fclose($urandom);
-      if (strlen($data) != $number_of_bytes) {
-        throw new FilesystemException(
-          '/dev/urandom',
-          pht('Failed to read random bytes!'));
-      }
-      return $data;
-    }
-
-    // (We might be able to try to generate entropy here from a weaker source
-    // if neither of the above sources panned out, see some discussion in
-    // T4153.)
-
-    // We've failed to find any valid entropy source. Try to fail in the most
-    // useful way we can, based on the platform.
-
-    if (phutil_is_windows()) {
-      throw new Exception(
-        pht(
-          '%s requires the PHP OpenSSL extension to be installed and enabled '.
-          'to access an entropy source. On Windows, this extension is usually '.
-          'installed but not enabled by default. Enable it in your "php.ini".',
-          __METHOD__.'()'));
-    }
-
-    throw new Exception(
-      pht(
-        '%s requires the PHP OpenSSL extension or access to "%s". Install or '.
-        'enable the OpenSSL extension, or make sure "%s" is accessible.',
-        __METHOD__.'()',
-        '/dev/urandom',
-        '/dev/urandom'));
+    // Since PHP 7.2.0, we have a reasonable builtin:
+    return random_bytes($number_of_bytes);
   }
 
 
@@ -788,7 +713,7 @@ final class Filesystem extends Phobject {
 
     $tries = 3;
     do {
-      $dir = $base.substr(base_convert(md5(mt_rand()), 16, 36), 0, 16);
+      $dir = $base.substr(base_convert(md5((string)mt_rand()), 16, 36), 0, 16);
       try {
         self::createDirectory($dir, $umask);
         break;
@@ -856,7 +781,7 @@ final class Filesystem extends Phobject {
    *
    * @param  string        $path Path, absolute or relative to PWD.
    * @param  string        $root (optional) The root directory.
-   * @return list<string>  List of parent paths, including the provided path.
+   * @return array<string> List of parent paths, including the provided path.
    * @task   directory
    */
   public static function walkToRoot($path, $root = null) {
@@ -932,6 +857,11 @@ final class Filesystem extends Phobject {
    * @return bool
    */
   public static function isAbsolutePath($path) {
+    if (self::isPharPath($path)) {
+      list($archive_path) = self::parsePharUri($path);
+      return self::isAbsolutePath($archive_path);
+    }
+
     if (phutil_is_windows()) {
       return (bool)preg_match('/^[A-Za-z]+:/', $path);
     } else {
@@ -940,9 +870,124 @@ final class Filesystem extends Phobject {
   }
 
   /**
+   * @return bool
+   *
+   * @task phar
+   */
+  public static function isPharPath($path) {
+    if ($path == null) {
+      return false;
+    }
+    return !strncmp($path, 'phar://', 7);
+  }
+
+  /**
+   *
+   * @task phar
+   */
+  private static function parsePharUri($path) {
+    static $valid_extensions = null;
+    if ($valid_extensions === null) {
+      $valid_extensions = array(
+        '.phar',
+        '.phar.tar',
+        '.phar.zip',
+      );
+    }
+
+    if (!self::isPharPath($path) || strlen($path) <= 7) {
+      throw new FilesystemException(
+        $path,
+        pht(
+          'Unable to parse path as PHAR file. PHAR file paths must be '.
+          'prefixed with `%s` and include a segment with one of these '.
+          'extensions (case-sensitive): %s',
+          'phar://',
+          implode(', ', $valid_extensions)));
+    }
+
+    $parts = self::splitPath(substr($path, 7));
+
+    $archive_name = array();
+
+    if ($path[7] === DIRECTORY_SEPARATOR) {
+      $archive_name[] = '';
+    }
+
+    $found = false;
+    while ($parts && !$found) {
+      $part = array_shift($parts);
+      $archive_name[] = $part;
+      foreach ($valid_extensions as $extension) {
+        // str_ends_with only exists in 8.0, but we already refuse to consider
+        // phar files on anything earlier than that.
+        if (str_ends_with($part, $extension)) {
+          $inner = $parts;
+          $found = true;
+          break;
+        }
+      }
+    }
+
+    if (!$found) {
+      throw new FilesystemException(
+        $path,
+        pht(
+          'Unable to parse path as PHAR file. PHAR file paths must include a '.
+          'segment with one of these extensions (case-sensitive): %s',
+          implode(', ', $valid_extensions)));
+    }
+
+    $archive_name = implode(DIRECTORY_SEPARATOR, $archive_name);
+    // the inner-path always starts relative to the archive
+    $inner = DIRECTORY_SEPARATOR.implode(DIRECTORY_SEPARATOR, $inner);
+
+    return array(
+      $archive_name,
+      $inner,
+    );
+  }
+
+  /**
+   * @task phar
+   */
+  private static function guardPharFiles($path) {
+    static $php_version_good = null;
+    if ($php_version_good === null) {
+      $min_version = '8.0';
+      $cur_version = phpversion();
+      if (version_compare($cur_version, $min_version, '<')) {
+        $php_version_good = false;
+      } else {
+        $php_version_good = true;
+      }
+    }
+    if ($php_version_good) {
+      return;
+    }
+    if ($path === null) {
+      return;
+    }
+
+    if (self::isPharPath($path)) {
+      throw new FilesystemException(
+        $path,
+        pht(
+          'PHP versions older then %s have known security vulnerabilities '.
+          'when considering PHAR files; Refusing to inspect file %s. See %s',
+          $min_version,
+          $path,
+          'https://wiki.php.net/rfc/phar_stop_autoloading_metadata'));
+    }
+  }
+
+  /**
    * Canonicalize a path by resolving it relative to some directory (by
    * default PWD), following parent symlinks and removing artifacts. If the
    * path is itself a symlink it is left unresolved.
+   *
+   * If the path is inside a PHAR file, canonicalize the path to the PHAR file
+   * and the internal part separately.
    *
    * @param  string    $path Path, absolute or relative to PWD.
    * @return string    $relative_to (optional) Canonical, absolute path.
@@ -950,6 +995,38 @@ final class Filesystem extends Phobject {
    * @task   path
    */
   public static function resolvePath($path, $relative_to = null) {
+    self::guardPharFiles($path);
+    self::guardPharFiles($relative_to);
+
+    $path_is_phar = self::isPharPath($path);
+    $relative_is_phar = self::isPharPath($relative_to);
+
+    if ($path_is_phar && $relative_is_phar) {
+      throw new FilesystemException(
+        $path,
+        pht(
+          "Can't resolve a PHAR path relative to another PHAR path. ".
+          'Trying to resolve path `%s` relative to `%s` .',
+          $path,
+          $relative_to));
+    }
+
+    if ($path_is_phar) {
+      list($archive_path, $inner_path) = self::parsePharUri($path);
+      $archive_path = self::resolvePath($archive_path, $relative_to);
+      $inner_path = self::normalizeVirtualPath($inner_path);
+      return 'phar://'.$archive_path.DIRECTORY_SEPARATOR.$inner_path;
+    }
+
+    if ($relative_is_phar) {
+      list($archive_path, $inner_path) = self::parsePharUri($relative_to);
+      $archive_path = self::resolvePath($archive_path);
+      $inner_path = self::normalizeVirtualPath(
+        $inner_path.DIRECTORY_SEPARATOR.$path);
+      return 'phar://'.$archive_path.DIRECTORY_SEPARATOR.$inner_path;
+    }
+
+
     $is_absolute = self::isAbsolutePath($path);
 
     if (!$is_absolute) {
@@ -976,19 +1053,12 @@ final class Filesystem extends Phobject {
     // or something crazy like that. Try to resolve a parent so we at least
     // cover the nonexistent file case.
 
-    // We're also normalizing path separators to whatever is normal for the
-    // environment.
+    $parts = self::splitPath($path);
 
+    // Normalize the directory separators in the path. If we find a
+    // parent below, we'll overwrite this with a better resolved path.
     if (phutil_is_windows()) {
-      $parts = trim($path, '/\\');
-      $parts = preg_split('([/\\\\])', $parts);
-
-      // Normalize the directory separators in the path. If we find a parent
-      // below, we'll overwrite this with a better resolved path.
       $path = str_replace('/', '\\', $path);
-    } else {
-      $parts = trim($path, '/');
-      $parts = explode('/', $parts);
     }
 
     while ($parts) {
@@ -1006,6 +1076,61 @@ final class Filesystem extends Phobject {
     }
 
     return $path;
+  }
+
+  /**
+   * Split a path to its parts along the directory-separator, and normalize it.
+   *
+   * @return string[]
+   */
+  private static function splitPath($path) {
+    if (phutil_is_windows()) {
+      $parts = trim($path, '/\\');
+      $parts = preg_split('([/\\\\])', $parts);
+      return $parts;
+    }
+
+    $parts = trim($path, '/');
+    $parts = explode('/', $parts);
+    return $parts;
+  }
+
+  /**
+   * Remove all references to `/./`, `/../`, etcetera for a path that doesn't
+   * exist.
+   * Doesn't resolve any symlinks.
+   *
+   * Throws an exception if the resolved path goes higher then root.
+   *
+   * @return string
+   */
+  private static function normalizeVirtualPath($path) {
+    // realpath doesn't work on missing/virtual paths, but we still need to
+    // prevent some paths such as '/../../../etc/hosts'.
+
+    $parts = self::splitPath($path);
+    $built = array();
+
+    foreach ($parts as $part) {
+      switch ($part) {
+        case '':
+        case '.':
+          break;
+        case '..':
+          if (count($built) <= 0) {
+            throw new FilesystemException(
+              $path,
+              pht('Trying to resolve a path that goes higher then root'));
+          }
+          array_pop($built);
+          break;
+        default:
+          $built[] = $part;
+          break;
+      }
+    }
+
+    return implode(DIRECTORY_SEPARATOR, $built);
   }
 
   /**

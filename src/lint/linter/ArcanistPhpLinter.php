@@ -88,10 +88,10 @@ final class ArcanistPhpLinter extends ArcanistExternalLinter {
   protected function getLintCodeFromLinterConfigurationKey($code) {
     switch (phutil_utf8_strtolower($code)) {
       case 'parse':
-        return self::LINT_PARSE_ERROR;
+        return (string)self::LINT_PARSE_ERROR;
 
       case 'fatal':
-        return self::LINT_FATAL_ERROR;
+        return (string)self::LINT_FATAL_ERROR;
 
       default:
         throw new Exception(pht('Unrecognized lint message code: "%s"', $code));

@@ -939,8 +939,11 @@ final class ArcanistGitLandEngine
         'same state as before.'));
   }
 
+  /**
+   * @param array<ArcanistLandSymbol> $symbols
+   */
   protected function resolveSymbols(array $symbols) {
-    assert_instances_of($symbols, 'ArcanistLandSymbol');
+    assert_instances_of($symbols, ArcanistLandSymbol::class);
     $api = $this->getRepositoryAPI();
 
     foreach ($symbols as $symbol) {
@@ -1032,8 +1035,11 @@ final class ArcanistGitLandEngine
     }
   }
 
+  /**
+   * @param array<ArcanistLandSymbol> $symbols
+   */
   protected function selectOntoRefs(array $symbols) {
-    assert_instances_of($symbols, 'ArcanistLandSymbol');
+    assert_instances_of($symbols, ArcanistLandSymbol::class);
     $log = $this->getLogEngine();
 
     $onto = $this->getOntoArguments();
@@ -1137,8 +1143,11 @@ final class ArcanistGitLandEngine
     return array($default_onto);
   }
 
+  /**
+   * @param array<ArcanistLandSymbol> $symbols
+   */
   protected function selectOntoRemote(array $symbols) {
-    assert_instances_of($symbols, 'ArcanistLandSymbol');
+    assert_instances_of($symbols, ArcanistLandSymbol::class);
     $remote = $this->newOntoRemote($symbols);
 
     $api = $this->getRepositoryAPI();
@@ -1175,8 +1184,11 @@ final class ArcanistGitLandEngine
     return $remote;
   }
 
+  /**
+   * @param array<ArcanistLandSymbol> $onto_symbols
+   */
   private function newOntoRemote(array $onto_symbols) {
-    assert_instances_of($onto_symbols, 'ArcanistLandSymbol');
+    assert_instances_of($onto_symbols, ArcanistLandSymbol::class);
     $log = $this->getLogEngine();
 
     $remote = $this->getOntoRemoteArgument();
@@ -1538,8 +1550,12 @@ final class ArcanistGitLandEngine
     }
   }
 
-  protected function selectCommits($into_commit, array $symbols) {
-    assert_instances_of($symbols, 'ArcanistLandSymbol');
+   /**
+    * @param string $into_commit
+    * @param array<ArcanistLandSymbol> $symbols
+    */
+   protected function selectCommits($into_commit, array $symbols) {
+    assert_instances_of($symbols, ArcanistLandSymbol::class);
     $api = $this->getRepositoryAPI();
 
     $commit_map = array();

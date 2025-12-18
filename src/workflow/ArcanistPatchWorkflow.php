@@ -366,7 +366,7 @@ EOTEXT
         case self::SOURCE_PATCH:
           if ($param == '-') {
             $patch = @file_get_contents('php://stdin');
-            if (!strlen($patch)) {
+            if (!$patch || !phutil_nonempty_string($patch)) {
               throw new ArcanistUsageException(
                 pht('Failed to read patch from stdin!'));
             }

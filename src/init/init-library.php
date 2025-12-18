@@ -25,10 +25,10 @@ function __phutil_autoload($class_name) {
     if (!$symbols) {
       throw new PhutilMissingSymbolException(
         $class_name,
-        'class or interface',
+        'class, interface, trait or enum',
         sprintf(
-          'The class or interface "%s" is not defined in the library '.
-          'map of any loaded library.',
+          'The class, interface, trait or enum "%s" is not defined '.
+          'in the library map of any loaded library.',
           $class_name));
     }
   } catch (PhutilMissingSymbolException $ex) {
@@ -45,6 +45,7 @@ function __phutil_autoload($class_name) {
         case 'method_exists':
         case 'property_exists':
         case 'trait_exists':
+        case 'enum_exists':
           $should_throw = false;
           break;
       }

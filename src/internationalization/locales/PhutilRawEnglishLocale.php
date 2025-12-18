@@ -18,4 +18,8 @@ final class PhutilRawEnglishLocale extends PhutilLocale {
     return true;
   }
 
+  public function getFallbackLocaleCode() {
+    return null;
+  }
+
 }

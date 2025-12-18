@@ -430,7 +430,7 @@ function phutil_utf8_is_cjk($string) {
  * @param string $string A valid utf-8 string.
  * @param int|null $byte_limit (optional) Stop processing after examining this
  *   many bytes.
- * @return list  A list of characters in the string.
+ * @return array<string> A list of characters in the string.
  */
 function phutil_utf8v($string, $byte_limit = null) {
   $string = phutil_string_cast($string);
@@ -494,7 +494,7 @@ function phutil_utf8v($string, $byte_limit = null) {
  * Split a UTF-8 string into an array of codepoints (as integers).
  *
  * @param   string  $string A valid UTF-8 string.
- * @return  list    A list of codepoints, as integers.
+ * @return  array<int>   A list of codepoints, as integers.
  */
 function phutil_utf8v_codepoints($string) {
   $str_v = phutil_utf8v($string);
@@ -574,9 +574,9 @@ function phutil_utf8_encode_codepoint($codepoint) {
 /**
  * Hard-wrap a block of UTF-8 text with embedded HTML tags and entities.
  *
- * @param   string $string An HTML string with tags and entities.
- * @param   int    $width Width of the hard-wrapped lines
- * @return  list   List of hard-wrapped lines.
+ * @param   string        $string An HTML string with tags and entities.
+ * @param   int           $width Width of the hard-wrapped lines.
+ * @return  array<string> List of hard-wrapped lines.
  */
 function phutil_utf8_hard_wrap_html($string, $width) {
   $break_here = array();
@@ -630,9 +630,9 @@ function phutil_utf8_hard_wrap_html($string, $width) {
 /**
   * Hard-wrap a block of UTF-8 text with no embedded HTML tags and entities.
   *
-  * @param string $string A non HTML string
-  * @param int $width Width of the hard-wrapped lines
-  * @return list List of hard-wrapped lines.
+  * @param string $string A non HTML string.
+  * @param int $width Width of the hard-wrapped lines.
+  * @return array<string> List of hard-wrapped lines.
   */
 function phutil_utf8_hard_wrap($string, $width) {
   $result = array();
@@ -836,7 +836,7 @@ function phutil_utf8_strtoupper($str) {
  * @{function:strtr}.
  *
  * @param   string              $str UTF-8 input string.
- * @param   map<string, string> $map Map of characters to replace.
+ * @param   array<string, string> $map Map of characters to replace.
  * @return  string              Input with translated characters.
  */
 function phutil_utf8_strtr($str, array $map) {
@@ -885,7 +885,7 @@ function phutil_utf8_is_combining_character($character) {
  * are not split.
  *
  * @param string $string A valid utf-8 string.
- * @return list  A list of characters in the string.
+ * @return array<string> A list of characters in the string.
  */
 function phutil_utf8v_combined($string) {
   $components = phutil_utf8v($string);
@@ -899,8 +899,9 @@ function phutil_utf8v_combined($string) {
  * This is a low-level method which can allow other operations to do less work.
  * If you have a string, call @{method:phutil_utf8v_combined} instead.
  *
- * @param list $characters List of UTF-8 characters.
- * @return list List of UTF-8 strings with combining characters merged.
+ * @param array<string> $characters List of UTF-8 characters.
+ * @return array<string> List of UTF-8 strings with combining characters
+ *   merged.
  */
 function phutil_utf8v_combine_characters(array $characters) {
   if (!$characters) {

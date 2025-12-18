@@ -139,7 +139,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
    * A file may be in several states. Not all states are possible with all
    * version control systems.
    *
-   * @return map<string, bitmask> Map of paths, see above.
+   * @return array<string, string> Map of paths to bitmasks with status.
    * @task status
    */
   final public function getUncommittedStatus() {
@@ -227,7 +227,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
    *
    * See @{method:getUncommittedStatus} for a description of the return value.
    *
-   * @return map<string, bitmask> Map from paths to status.
+   * @return array<string, string> Map from paths to bitmasks with status.
    * @task status
    */
   final public function getCommitRangeStatus() {
@@ -247,7 +247,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
    *
    * See @{method:getUncommittedStatus} for a description of the return value.
    *
-   * @return map<string, bitmask> Map from paths to status.
+   * @return array<string, string> Map from paths to bitmasks with status.
    * @task status
    */
   final public function getWorkingCopyStatus() {
@@ -298,7 +298,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
   /**
    * Fetches the original file data for each path provided.
    *
-   * @return map<string, string> Map from path to file data.
+   * @return array<string, string> Map from path to file data.
    */
   public function getBulkOriginalFileData($paths) {
     $filedata = array();
@@ -312,7 +312,7 @@ abstract class ArcanistRepositoryAPI extends Phobject {
   /**
    * Fetches the current file data for each path provided.
    *
-   * @return map<string, string> Map from path to file data.
+   * @return array<string, string> Map from path to file data.
    */
   public function getBulkCurrentFileData($paths) {
     $filedata = array();
@@ -566,6 +566,20 @@ abstract class ArcanistRepositoryAPI extends Phobject {
 
 
 /* -(  Base Commits  )------------------------------------------------------- */
+
+  /**
+   * In Subversion the concept of a "branch" is instead represented by
+   * subfolders within the SVN repository on your local filesystem,
+   * like "trunk/", "tags/", "branches/".
+   *
+   * @return bool True if the branch is supported by this API.
+   */
+  public function supportsBranches() {
+    // Assume a decent default.
+    // In the future we may want to make this method abstract. But not now,
+    // to avoid breaking changes in alien class extensions.
+    return true;
+  }
 
   abstract public function supportsCommitRanges();
 

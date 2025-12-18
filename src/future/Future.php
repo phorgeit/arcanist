@@ -4,6 +4,8 @@
  * A 'future' or 'promise' is an object which represents the result of some
  * pending computation. For a more complete overview of futures, see
  * @{article:Using Futures}.
+ *
+ * @template T
  */
 abstract class Future extends Phobject {
 
@@ -30,7 +32,7 @@ abstract class Future extends Phobject {
    * Resolve a future and return its result, blocking until the result is ready
    * if necessary.
    *
-   * @return wild Future result.
+   * @return T Future result.
    */
   public function resolve() {
     $args = func_get_args();
@@ -74,7 +76,7 @@ abstract class Future extends Phobject {
     // ServiceProfiler into the Phage agent. Normally, this class is always
     // available.
 
-    if (!class_exists('PhutilServiceProfiler')) {
+    if (!class_exists(PhutilServiceProfiler::class)) {
       return;
     }
 
@@ -118,7 +120,7 @@ abstract class Future extends Phobject {
    * the resolve loop do a `select()`. If you do not return sockets in either
    * case, you'll get a busy wait.
    *
-   * @return list  A list of sockets which we expect to become readable.
+   * @return array  A list of sockets which we expect to become readable.
    */
   public function getReadSockets() {
     return array();
@@ -129,7 +131,7 @@ abstract class Future extends Phobject {
    * Retrieve a list of sockets which we can wait to become writable while a
    * future is resolving. See @{method:getReadSockets}.
    *
-   * @return list  A list of sockets which we expect to become writable.
+   * @return array  A list of sockets which we expect to become writable.
    */
   public function getWriteSockets() {
     return array();
@@ -170,7 +172,7 @@ abstract class Future extends Phobject {
   /**
    * Retrieve the final result of the future.
    *
-   * @return wild Final resolution of this future.
+   * @return T Final resolution of this future.
    */
   final protected function getResult() {
     if (!$this->hasResult()) {

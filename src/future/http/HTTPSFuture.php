@@ -11,7 +11,6 @@ final class HTTPSFuture extends BaseHTTPFuture {
   private static $globalCABundle;
 
   private $handle;
-  private $profilerCallID;
   private $cabundle;
   private $followLocation = true;
   private $responseBuffer = '';
@@ -33,8 +32,8 @@ final class HTTPSFuture extends BaseHTTPFuture {
    * Create a temp file containing an SSL cert, and use it for this session.
    *
    * This allows us to do host-specific SSL certificates in whatever client
-   * is using libphutil. e.g. in Arcanist, you could add an "ssl_cert" key
-   * to a specific host in ~/.arcrc and use that.
+   * might be using Arcanist, you could add an "ssl_cert" key to a specific
+   * host in ~/.arcrc and use that.
    *
    * cURL needs this to be a file, it doesn't seem to be able to handle a string
    * which contains the cert. So we make a temporary file and store it there.
@@ -301,6 +300,7 @@ final class HTTPSFuture extends BaseHTTPFuture {
 
       $saw_expect = false;
       $saw_accept = false;
+      $saw_useragent = false;
       for ($ii = 0; $ii < count($headers); $ii++) {
         list($name, $value) = $headers[$ii];
         $headers[$ii] = $name.': '.$value;
@@ -309,6 +309,9 @@ final class HTTPSFuture extends BaseHTTPFuture {
         }
         if (!strcasecmp($name, 'Accept-Encoding')) {
           $saw_accept = true;
+        }
+        if (!strcasecmp($name, 'User-Agent')) {
+          $saw_useragent = true;
         }
       }
       if (!$saw_expect) {
@@ -378,8 +381,8 @@ final class HTTPSFuture extends BaseHTTPFuture {
       //   curl.cainfo).
       // - Otherwise, try using curl.cainfo. If it's set explicitly, it's
       //   probably reasonable to try using it before we fall back to what
-      //   libphutil ships with.
-      // - Lastly, try the default that libphutil ships with. If it doesn't
+      //   Arcanist ships with.
+      // - Lastly, try the default that Arcanist ships with. If it doesn't
       //   work, give up and yell at the user.
 
       if (!$this->getCABundle()) {
@@ -420,13 +423,24 @@ final class HTTPSFuture extends BaseHTTPFuture {
       curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, $verify_host);
       curl_setopt($curl, CURLOPT_SSLVERSION, 0);
 
-      // See T13391. Recent versions of cURL default to "HTTP/2" on some
-      // connections, but do not support HTTP/2 proxies. Until HTTP/2
-      // stabilizes, force HTTP/1.1 explicitly.
-      curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+      // See https://secure.phabricator.com/T13391 and
+      // https://we.phorge.it/T16182 - 2019 versions of cURL defaulted to
+      // "HTTP/2" on some connections but did not support HTTP/2 proxies.
+      // cURL 8.4.0 (October 2023) unified the HTTP/1.1 and HTTP/2 proxy
+      // code. Force HTTP/1.1 explicitly on older cURL versions.
+      $curl_version = curl_version();
+      $version = idx($curl_version, 'version');
+      if (version_compare($version, '8.4.0', '<')) {
+        curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+      }
 
       if ($proxy) {
         curl_setopt($curl, CURLOPT_PROXY, (string)$proxy);
+      }
+
+      if (!$saw_useragent) {
+        curl_setopt($curl, CURLOPT_USERAGENT,
+          parent::getDefaultUserAgent().' cURL/'.$version);
       }
 
       foreach ($this->curlOptions as $curl_option) {
@@ -552,9 +566,7 @@ final class HTTPSFuture extends BaseHTTPFuture {
 
     // NOTE: We want to use keepalive if possible. Return the handle to a
     // pool for the domain; don't close it.
-    if ($this->shouldReuseHandles()) {
-      self::$pool[$domain][] = $curl;
-    }
+    self::$pool[$domain][] = $curl;
 
     if ($is_download) {
       if ($this->downloadHandle) {
@@ -654,7 +666,7 @@ final class HTTPSFuture extends BaseHTTPFuture {
   /**
    * Produces a value safe to pass to `CURLOPT_POSTFIELDS`.
    *
-   * @return wild   Some value, suitable for use in `CURLOPT_POSTFIELDS`.
+   * @return mixed   Some value, suitable for use in `CURLOPT_POSTFIELDS`.
    */
   private function formatRequestDataForCURL() {
     // We're generating a value to hand to cURL as CURLOPT_POSTFIELDS. The way
@@ -753,14 +765,7 @@ final class HTTPSFuture extends BaseHTTPFuture {
       Filesystem::writeFile($tmp, $info['data']);
       $this->temporaryFiles[] = $tmp;
 
-      // In 5.5.0 and later, we can use CURLFile. Prior to that, we have to
-      // use this "@" stuff.
-
-      if (class_exists('CURLFile', false)) {
-        $file_value = new CURLFile((string)$tmp, $info['mime'], $info['name']);
-      } else {
-        $file_value = '@'.(string)$tmp;
-      }
+      $file_value = new CURLFile((string)$tmp, $info['mime'], $info['name']);
 
       $data[$name] = $file_value;
     }
@@ -784,18 +789,6 @@ final class HTTPSFuture extends BaseHTTPFuture {
     }
 
     if ($is_query_string) {
-      if (version_compare(phpversion(), '5.2.0', '<')) {
-        throw new Exception(
-          pht(
-            'Attempting to make an HTTP request, but query string data begins '.
-            'with "%s". Prior to PHP 5.2.0 this reads files off disk, which '.
-            'creates a wide attack window for security vulnerabilities. '.
-            'Upgrade PHP or avoid making cURL requests which begin with "%s".',
-            '@',
-            '@'));
-      }
-
-      // This is safe if we're on PHP 5.2.0 or newer.
       return;
     }
 
@@ -817,7 +810,7 @@ final class HTTPSFuture extends BaseHTTPFuture {
 
     $osx_version = PhutilExecutionEnvironment::getOSXVersion();
     if ($osx_version) {
-      if (version_compare($osx_version, 14, '>=')) {
+      if (version_compare($osx_version, '14', '>=')) {
         return false;
       }
     }
@@ -847,20 +840,6 @@ final class HTTPSFuture extends BaseHTTPFuture {
     $bytes = substr($this->rawBody, $this->rawBodyPos, $len);
     $this->rawBodyPos += $len;
     return $bytes;
-  }
-
-  private function shouldReuseHandles() {
-    $curl_version = curl_version();
-    $version = idx($curl_version, 'version');
-
-    // NOTE: cURL 7.43.0 has a bug where the POST body length is not recomputed
-    // properly when a handle is reused. For this version of cURL, disable
-    // handle reuse and accept a small performance penalty. See T8654.
-    if ($version == '7.43.0') {
-      return false;
-    }
-
-    return true;
   }
 
   private function isDownload() {

@@ -90,7 +90,7 @@ final class ArcanistFilesystemAPI
   }
 
   protected function buildLocalFuture(array $argv) {
-    $future = newv('ExecFuture', $argv);
+    $future = newv(ExecFuture::class, $argv);
     $future->setCWD($this->getPath());
     return $future;
   }

@@ -1,0 +1,17 @@
+<?php
+
+namespace TriStateArea;
+
+final class Platypus {
+  public function platypus() {
+    // This method need not be renamed to __construct().
+  }
+}
+~~~~~~~~~~
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "7.4.0"
+  }
+}

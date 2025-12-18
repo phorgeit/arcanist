@@ -28,8 +28,8 @@ class PhutilAggregateException extends Exception {
   private $exceptions = array();
 
   public function __construct($message, array $other_exceptions) {
-    // We don't call assert_instances_of($other_exceptions, 'Exception') to not
-    // throw another exception in this exception.
+    // We don't call assert_instances_of($other_exceptions, Exception::class)
+    // to not throw another exception in this exception.
 
     $this->exceptions = $other_exceptions;
 

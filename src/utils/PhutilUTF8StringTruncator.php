@@ -226,6 +226,7 @@ final class PhutilUTF8StringTruncator extends Phobject {
       '('   => true,
       ','   => true,
       '-'   => true,
+      '#'   => true,
     );
 
     // If we encounter these, shorten to this character exactly without

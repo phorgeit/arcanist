@@ -1,0 +1,12 @@
+<?php
+
+'a'.'b';
+'a' + 'b';
+'a' + $x;
+$x + $y + $z + 'q' + 0;
+$x + 'y' + $z + 'q';
+~~~~~~~~~~
+error:4:1:PHPAST21:Not String Concatenation
+error:5:1:PHPAST21:Not String Concatenation
+error:6:1:PHPAST21:Not String Concatenation
+error:7:1:PHPAST21:Not String Concatenation

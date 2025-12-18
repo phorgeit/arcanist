@@ -8,8 +8,11 @@ final class ArcanistGridView
 
   private $displayWidths = array();
 
+  /**
+   * @param array<ArcanistGridColumn> $columns
+   */
   public function setColumns(array $columns) {
-    assert_instances_of($columns, 'ArcanistGridColumn');
+    assert_instances_of($columns, ArcanistGridColumn::class);
     $this->columns = mpull($columns, null, 'getKey');
     return $this;
   }
@@ -27,8 +30,11 @@ final class ArcanistGridView
     return $column;
   }
 
+  /**
+   * @param array<ArcanistGridCell> $cells
+   */
   public function newRow(array $cells) {
-    assert_instances_of($cells, 'ArcanistGridCell');
+    assert_instances_of($cells, ArcanistGridCell::class);
 
     $row = id(new ArcanistGridRow())
       ->setCells($cells);

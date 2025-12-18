@@ -4,7 +4,7 @@
 /**
  * Base class for locks, like file locks.
  *
- * libphutil provides a concrete lock in @{class:PhutilFileLock}.
+ * Arcanist provides a concrete lock in @{class:PhutilFileLock}.
  *
  *   $lock->lock();
  *     do_contentious_things();

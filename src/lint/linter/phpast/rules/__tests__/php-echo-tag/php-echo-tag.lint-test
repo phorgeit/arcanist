@@ -1,0 +1,4 @@
+<?= phpversion();
+
+~~~~~~~~~~
+error:1:1:PHPAST7:Use of Echo Tag `<?=`

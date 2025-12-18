@@ -1,0 +1,17 @@
+<?php
+
+eval('evil code');
+custom_evil_function();
+~~~~~~~~~~
+error:3:1:PHPAST51:Use of Blacklisted Function
+error:4:1:PHPAST51:Use of Blacklisted Function
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.blacklisted.function": {
+      "eval": "Evil function",
+      "custom_evil_function": "Also bad"
+    }
+  }
+}

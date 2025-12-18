@@ -18,7 +18,7 @@ final class ArcanistMercurialParser extends Phobject {
    * particular, this will parse copy sources as per "hg status -C".
    *
    * @param string $stdout The stdout from running an "hg status" command.
-   * @return dict Map of paths to status dictionaries.
+   * @return array Map of paths to status dictionaries.
    * @task parse
    */
   public static function parseMercurialStatusDetails($stdout) {
@@ -97,7 +97,7 @@ final class ArcanistMercurialParser extends Phobject {
    * @{method:parseMercurialStatusDetails}.
    *
    * @param string $stdout The stdout from running an "hg status" command.
-   * @return dict Map of paths to ArcanistRepositoryAPI status flags.
+   * @return array Map of paths to ArcanistRepositoryAPI status flags.
    * @task parse
    */
   public static function parseMercurialStatus($stdout) {
@@ -111,7 +111,7 @@ final class ArcanistMercurialParser extends Phobject {
    * and other similar commands. This assumes "--style default".
    *
    * @param string $stdout The stdout from running an "hg log" command.
-   * @return list List of dictionaries with commit information.
+   * @return array List of dictionaries with commit information.
    * @task parse
    */
   public static function parseMercurialLog($stdout) {
@@ -195,7 +195,7 @@ final class ArcanistMercurialParser extends Phobject {
    * Parse the output of "hg branches".
    *
    * @param string $stdout The stdout from running an "hg branches" command.
-   * @return list A list of dictionaries with branch information.
+   * @return array A list of dictionaries with branch information.
    * @task parse
    */
   public static function parseMercurialBranches($stdout) {

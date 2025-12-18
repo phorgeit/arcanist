@@ -1,0 +1,26 @@
+<?php
+
+(void)strtolower('');
+
+class Test {
+  public private(set) static $cache = array();
+
+  public function __construct(final string $string = '') {}
+}
+
+$numberOfAdmins = getUsers()
+  |> (fn ($list) => array_filter($list, isAdmin(...)))
+  |> count(...);
+
+~~~~~~~~~~
+error:3:1:PHPAST45:PHP Compatibility
+error:6:3:PHPAST45:PHP Compatibility
+error:8:31:PHPAST45:PHP Compatibility
+error:11:19:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "8.4.0"
+  }
+}

@@ -1,0 +1,11 @@
+<?php
+
+class SomeClass {
+  public function foo() {}
+  final private function wuff() {}
+  private final function fizz() {}
+  final protected function fine() {}
+}
+~~~~~~~~~~
+error:5:3:PHPAST72:Invalid Modifiers
+error:6:3:PHPAST72:Invalid Modifiers

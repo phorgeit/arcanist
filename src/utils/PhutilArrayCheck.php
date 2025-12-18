@@ -7,9 +7,6 @@ final class PhutilArrayCheck
   private $uniqueMethod;
   private $context;
 
-  private $object;
-  private $method;
-
   public function setInstancesOf($instances_of) {
     $this->instancesOf = $instances_of;
     return $this;

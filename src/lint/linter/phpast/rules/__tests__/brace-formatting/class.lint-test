@@ -1,0 +1,21 @@
+<?php
+
+class SomeClass {}
+class SomeOtherClass{}
+class YetAnotherClass extends SomeClass{}
+
+$anonymous = new class () {};
+$other_anonymous = new class(){};
+~~~~~~~~~~
+warning:4:21:PHPAST24:Brace Placement
+warning:5:40:PHPAST24:Brace Placement
+warning:8:31:PHPAST24:Brace Placement
+~~~~~~~~~~
+<?php
+
+class SomeClass {}
+class SomeOtherClass {}
+class YetAnotherClass extends SomeClass {}
+
+$anonymous = new class () {};
+$other_anonymous = new class() {};

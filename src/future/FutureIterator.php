@@ -52,11 +52,11 @@ final class FutureIterator
   /**
    * Create a new iterator over a list of futures.
    *
-   * @param list $futures List of @{class:Future}s to resolve.
+   * @param array<Future> $futures List of @{class:Future}s to resolve.
    * @task basics
    */
   public function __construct(array $futures) {
-    assert_instances_of($futures, 'Future');
+    assert_instances_of($futures, Future::class);
 
     foreach ($futures as $map_key => $future) {
       $future->setFutureKey($map_key);
@@ -417,8 +417,8 @@ final class FutureIterator
   /**
    * Wait for activity on one of several sockets.
    *
-   * @param  list  $read_list List of sockets expected to become readable.
-   * @param  list  $write_list List of sockets expected to become writable.
+   * @param  array  $read_list List of sockets expected to become readable.
+   * @param  array  $write_list List of sockets expected to become writable.
    * @param  float $timeout (optional) Timeout, in seconds.
    * @return void
    */

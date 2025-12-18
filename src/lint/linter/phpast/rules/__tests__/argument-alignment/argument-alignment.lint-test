@@ -1,0 +1,148 @@
+<?php
+
+foo();
+foo($a, $b);
+foo(
+  $a,
+  $b);
+foo(
+  $a, $b);
+foo($a,
+  $b);
+
+Foo::bar();
+Foo::bar($a, $b);
+Foo::bar(
+  $a,
+  $b);
+Foo::bar(
+  $a, $b);
+Foo::bar($a,
+  $b);
+
+$foo->bar();
+$foo->bar($a, $b);
+$foo->bar(
+  $a,
+  $b);
+$foo->bar(
+  $a, $b);
+$foo->bar($a,
+  $b);
+
+$foo?->bar();
+$foo?->bar($a, $b);
+$foo?->bar(
+  $a,
+  $b);
+$foo?->bar(
+  $a, $b);
+$foo?->bar($a,
+  $b);
+
+new Bar();
+new Bar($a, $b);
+new Bar(
+  $a,
+  $b);
+new Bar(
+  $a, $b);
+new Bar($a,
+  $b);
+
+new class() {};
+new class($a, $b) {};
+new class(
+  $a,
+  $b) {};
+new class(
+  $a, $b) {};
+new class($a,
+  $b) {};
+~~~~~~~~~~
+warning:9:6:PHPAST140:Argument Alignment
+warning:10:5:PHPAST140:Argument Alignment
+warning:19:6:PHPAST140:Argument Alignment
+warning:20:10:PHPAST140:Argument Alignment
+warning:29:6:PHPAST140:Argument Alignment
+warning:30:11:PHPAST140:Argument Alignment
+warning:39:6:PHPAST140:Argument Alignment
+warning:40:12:PHPAST140:Argument Alignment
+warning:49:6:PHPAST140:Argument Alignment
+warning:50:9:PHPAST140:Argument Alignment
+warning:59:6:PHPAST140:Argument Alignment
+warning:60:11:PHPAST140:Argument Alignment
+~~~~~~~~~~
+<?php
+
+foo();
+foo($a, $b);
+foo(
+  $a,
+  $b);
+foo(
+  $a,
+  $b);
+foo(
+  $a,
+  $b);
+
+Foo::bar();
+Foo::bar($a, $b);
+Foo::bar(
+  $a,
+  $b);
+Foo::bar(
+  $a,
+  $b);
+Foo::bar(
+  $a,
+  $b);
+
+$foo->bar();
+$foo->bar($a, $b);
+$foo->bar(
+  $a,
+  $b);
+$foo->bar(
+  $a,
+  $b);
+$foo->bar(
+  $a,
+  $b);
+
+$foo?->bar();
+$foo?->bar($a, $b);
+$foo?->bar(
+  $a,
+  $b);
+$foo?->bar(
+  $a,
+  $b);
+$foo?->bar(
+  $a,
+  $b);
+
+new Bar();
+new Bar($a, $b);
+new Bar(
+  $a,
+  $b);
+new Bar(
+  $a,
+  $b);
+new Bar(
+  $a,
+  $b);
+
+new class() {};
+new class($a, $b) {};
+new class(
+  $a,
+  $b) {};
+new class(
+  $a,
+  $b) {};
+new class(
+  $a,
+  $b) {};

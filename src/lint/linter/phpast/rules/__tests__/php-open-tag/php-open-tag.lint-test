@@ -1,0 +1,11 @@
+garbage garbage
+<?php
+
+?>
+~~~~~~~~~~
+error:1:1:PHPAST15:Expected Open Tag
+~~~~~~~~~~
+garbage garbage
+<?php
+
+?>

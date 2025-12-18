@@ -3,7 +3,7 @@
 /**
  * Load a map of concrete subclasses of some abstract parent class.
  *
- * libphutil is extensively modular through runtime introspection of class
+ * Arcanist is extensively modular through runtime introspection of class
  * maps. This method makes querying class maps easier.
  *
  * There are several common patterns used with modular class maps:
@@ -174,7 +174,7 @@ final class PhutilClassMapQuery extends Phobject {
   /**
    * Execute the query as configured.
    *
-   * @return map<string, object> Realized class map.
+   * @return array<string, object> Realized class map.
    * @task exec
    */
   public function execute() {
@@ -204,7 +204,7 @@ final class PhutilClassMapQuery extends Phobject {
    *
    * This method is used to fill the cache.
    *
-   * @return map<string, object> Realized class map.
+   * @return array<string, object> Realized class map.
    * @task exec
    */
   private function loadMap() {
@@ -301,7 +301,7 @@ final class PhutilClassMapQuery extends Phobject {
 
         // Since we may be early in the stack, use a string to avoid triggering
         // autoload in old versions of PHP.
-        $vector_class = 'PhutilSortVector';
+        $vector_class = PhutilSortVector::class;
         if ($item instanceof $vector_class) {
           $map = msortv($map, $sort);
         } else {

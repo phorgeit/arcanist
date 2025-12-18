@@ -184,7 +184,7 @@ final class ArcanistLintMessage extends Phobject {
   }
 
   /**
-   * @param dict $locations Keys 'path', 'line', 'char', 'original'.
+   * @param array $locations Keys 'path', 'line', 'char', 'original'.
    */
   public function setOtherLocations(array $locations) {
     assert_instances_of($locations, 'array');
@@ -250,6 +250,9 @@ final class ArcanistLintMessage extends Phobject {
     return $this->granularity;
   }
 
+  /**
+   * @param array<ArcanistLintMessage> $messages
+   */
   public function setDependentMessages(array $messages) {
     assert_instances_of($messages, __CLASS__);
     $this->dependentMessages = $messages;

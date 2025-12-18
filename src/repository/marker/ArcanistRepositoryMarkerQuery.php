@@ -6,8 +6,6 @@ abstract class ArcanistRepositoryMarkerQuery
   private $isActive;
   private $markerTypes;
   private $names;
-  private $commitHashes;
-  private $ancestorCommitHashes;
   private $remotes;
   private $isRemoteCache = false;
 
@@ -21,8 +19,11 @@ abstract class ArcanistRepositoryMarkerQuery
     return $this;
   }
 
+  /**
+   * @param array<ArcanistRemoteRef> $remotes
+   */
   final public function withRemotes(array $remotes) {
-    assert_instances_of($remotes, 'ArcanistRemoteRef');
+    assert_instances_of($remotes, ArcanistRemoteRef::class);
     $this->remotes = $remotes;
     return $this;
   }

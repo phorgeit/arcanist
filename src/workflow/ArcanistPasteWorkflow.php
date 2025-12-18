@@ -46,7 +46,7 @@ EOTEXT
     );
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $set_language = $this->getArgument('lang');
     $set_title = $this->getArgument('title');
     $is_browse = $this->getArgument('browse');

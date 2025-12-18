@@ -1,0 +1,140 @@
+<?php
+
+function closure() {
+  $c1 = function (string $a, int $b, array $c) {};
+
+  $c2 = function (
+    string $a,
+    int $b,
+    array $c) {};
+
+  $c3 = function (
+    string $a, int $b, array $c) {};
+
+  $c4 = function (
+    string $a,
+    int $b, array $c) {};
+
+  $c5 = function () use ($c1, $c2) {};
+
+  $c6 = function () use (
+    $c1, $c2) {};
+
+  $c7 = function () use (
+    $c1,
+    $c2) {};
+
+  $c8 = function () use ($c1,
+    $c2) {};
+
+  $c9 = function (
+    $a, $b, $c) use (
+    $d1, $d2) {};
+
+  $c10 = function (
+    $a,
+    $b) use (
+    $c,
+    $d) {
+    return $c();
+  };
+
+  $c11 = function (
+    $a,
+    $b) {
+    return $a();
+  };
+
+  $c12 = function (
+    $a) {
+    return $a();
+  };
+
+  $c13 = function () use (
+    $a) {
+    return $a();
+  };
+}
+~~~~~~~~~~
+warning:12:15:PHPAST139:Parameter Alignment
+warning:12:23:PHPAST139:Parameter Alignment
+warning:16:12:PHPAST139:Parameter Alignment
+warning:21:9:PHPAST139:Parameter Alignment
+warning:27:26:PHPAST139:Parameter Alignment
+warning:31:8:PHPAST139:Parameter Alignment
+warning:31:12:PHPAST139:Parameter Alignment
+warning:32:9:PHPAST139:Parameter Alignment
+warning:38:10:PHPAST139:Parameter Alignment
+warning:44:10:PHPAST139:Parameter Alignment
+warning:49:10:PHPAST139:Parameter Alignment
+warning:54:10:PHPAST139:Parameter Alignment
+~~~~~~~~~~
+<?php
+
+function closure() {
+  $c1 = function (string $a, int $b, array $c) {};
+
+  $c2 = function (
+    string $a,
+    int $b,
+    array $c) {};
+
+  $c3 = function (
+    string $a,
+    int $b,
+    array $c) {};
+
+  $c4 = function (
+    string $a,
+    int $b,
+    array $c) {};
+
+  $c5 = function () use ($c1, $c2) {};
+
+  $c6 = function () use (
+    $c1,
+    $c2) {};
+
+  $c7 = function () use (
+    $c1,
+    $c2) {};
+
+  $c8 = function () use (
+    $c1,
+    $c2) {};
+
+  $c9 = function (
+    $a,
+    $b,
+    $c) use (
+    $d1,
+    $d2) {};
+
+  $c10 = function (
+    $a,
+    $b) use (
+    $c,
+    $d) {
+
+    return $c();
+  };
+
+  $c11 = function (
+    $a,
+    $b) {
+
+    return $a();
+  };
+
+  $c12 = function (
+    $a) {
+
+    return $a();
+  };
+
+  $c13 = function () use (
+    $a) {
+
+    return $a();
+  };
+}

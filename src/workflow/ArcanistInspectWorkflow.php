@@ -28,7 +28,7 @@ EOTEXT
     );
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $is_explore = $this->getArgument('explore');
     $objects = $this->getArgument('objects');
 

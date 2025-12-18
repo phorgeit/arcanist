@@ -1,0 +1,11 @@
+<?php
+
+$x ++;
+$y--;
+~~~~~~~~~~
+warning:3:3:PHPAST75:Space Before Unary Postfix Operator
+~~~~~~~~~~
+<?php
+
+$x++;
+$y--;

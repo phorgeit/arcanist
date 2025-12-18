@@ -291,7 +291,7 @@ final class FileFinder extends Phobject {
       $command[] = '-print0';
 
       array_unshift($args, implode(' ', $command));
-      list($stdout) = newv('ExecFuture', $args)
+      list($stdout) = newv(ExecFuture::class, $args)
         ->setCWD($this->root)
         ->resolvex();
 

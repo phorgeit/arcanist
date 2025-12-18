@@ -51,13 +51,13 @@ abstract class ArcanistWorkflow extends Phobject {
   private $userName;
   private $repositoryAPI;
   private $configurationManager;
+  /** @var array|PhutilArgumentParser */
   private $arguments = array();
   private $command;
 
   private $stashed;
   private $shouldAmend;
 
-  private $projectInfo;
   private $repositoryInfo;
   private $repositoryReasons;
   private $repositoryRef;
@@ -117,7 +117,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
   public function newPhutilWorkflow() {
     $arguments = $this->getWorkflowArguments();
-    assert_instances_of($arguments, 'ArcanistWorkflowArgument');
+    assert_instances_of($arguments, ArcanistWorkflowArgument::class);
 
     $specs = mpull($arguments, 'getPhutilSpecification');
 
@@ -224,7 +224,7 @@ abstract class ArcanistWorkflow extends Phobject {
     $runtime->pushWorkflow($this);
 
     try {
-      $err = $this->runWorkflow($args);
+      $err = $this->runWorkflow();
     } catch (Exception $ex) {
       $caught = $ex;
     }
@@ -260,6 +260,15 @@ abstract class ArcanistWorkflow extends Phobject {
   }
 
   /**
+   * Modern workflow main method. Must be implemented in child classes.
+   *
+   * @return int exit code
+   */
+  protected function runWorkflow() {
+    throw new PhutilMethodNotImplementedException();
+  }
+
+  /**
    * Finalizes any cleanup operations that need to occur regardless of
    * whether the command succeeded or failed.
    */
@@ -290,7 +299,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * @return string  10-space indented help to use the command.
    */
   public function getCommandHelp() {
-    return null;
+    return '';
   }
 
   public function supportsToolset(ArcanistToolset $toolset) {
@@ -407,7 +416,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * NOTE: You can not call this method after calling
    * @{method:authenticateConduit}.
    *
-   * @param dict  $credentials A credential dictionary, see
+   * @param array  $credentials A credential dictionary, see
    *   @{method:authenticateConduit}.
    * @return $this
    * @task conduit
@@ -646,13 +655,13 @@ abstract class ArcanistWorkflow extends Phobject {
 
 
   /**
-   * Get the established @{class@libphutil:ConduitClient} in order to make
+   * Get the established @{class@arcanist:ConduitClient} in order to make
    * Conduit method calls. Before the client is available it must be connected,
    * either implicitly by making @{method:requireConduit} or
    * @{method:requireAuthentication} return true, or explicitly by calling
    * @{method:establishConduit} or @{method:authenticateConduit}.
    *
-   * @return @{class@libphutil:ConduitClient} Live conduit client.
+   * @return ConduitClient Live conduit client.
    * @task conduit
    */
   final public function getConduit() {
@@ -769,9 +778,16 @@ abstract class ArcanistWorkflow extends Phobject {
   }
 
   final public function getArgument($key, $default = null) {
+
     // TOOLSETS: Remove this legacy code.
     if (is_array($this->arguments)) {
       return idx($this->arguments, $key, $default);
+    }
+    if ($default !== null) {
+      $msg = pht('Warning - legacy default value ignored');
+      phlog($msg);
+      $console = PhutilConsole::getConsole();
+      $console->writeErr($msg);
     }
 
     return $this->arguments->getArg($key);
@@ -1002,7 +1018,7 @@ abstract class ArcanistWorkflow extends Phobject {
   }
 
   final protected function shouldRequireCleanUntrackedFiles() {
-    return empty($this->arguments['allow-untracked']);
+    return empty($this->getArgument('allow-untracked'));
   }
 
   final public function setCommitMode($mode) {
@@ -1416,10 +1432,11 @@ abstract class ArcanistWorkflow extends Phobject {
    * change list is meaningless (for example, because the path is a directory
    * or binary file).
    *
-   * @param string      $path Path within the repository.
-   * @param string      $mode Change selection mode (see ArcanistDiffHunk).
-   * @return list|null  List of changed line numbers, or null to indicate that
-   *                    the path is not a line-oriented text file.
+   * @param string            $path Path within the repository.
+   * @param string            $mode Change selection mode (see
+   *                          @{class:ArcanistDiffHunk}).
+   * @return array<int>|null  List of changed line numbers, or null to indicate
+   *                          that the path is not a line-oriented text file.
    */
   final protected function getChangedLines($path, $mode) {
     $repository_api = $this->getRepositoryAPI();
@@ -1519,7 +1536,8 @@ abstract class ArcanistWorkflow extends Phobject {
 
   /**
    * @param string|null $revision_id
-   * @return string
+   * @return string|null Revision ID without monogram. Null only if an error
+   *   occurred.
    */
   final protected function normalizeRevisionID($revision_id) {
     if ($revision_id === null) {
@@ -1621,12 +1639,12 @@ abstract class ArcanistWorkflow extends Phobject {
    * This method takes the user's selections and returns the paths that the
    * workflow should act upon.
    *
-   * @param   list          $paths List of explicitly provided paths.
+   * @param   array<string> $paths List of explicitly provided paths.
    * @param   string|null   $rev Revision name, if provided.
-   * @param   mask          $omit_mask (optional) Mask of ArcanistRepositoryAPI
+   * @param   int           $omit_mask (optional) Mask of ArcanistRepositoryAPI
    *                        flags to exclude.
    *                        Defaults to ArcanistRepositoryAPI::FLAG_UNTRACKED.
-   * @return  list          List of paths the workflow should act on.
+   * @return  array<string> List of paths the workflow should act on.
    */
   final protected function selectPathsForWorkflow(
     array $paths,
@@ -1864,7 +1882,12 @@ abstract class ArcanistWorkflow extends Phobject {
           ? md5_file($path)
           : '');
       }
-      $this->repositoryVersion = md5(json_encode($versions));
+      $versions_json = json_encode($versions);
+      if ($versions_json) {
+        $this->repositoryVersion = md5($versions_json);
+      } else {
+        throw new Exception(pht('Could not encode repository versions!'));
+      }
     }
     return $this->repositoryVersion;
   }
@@ -1924,7 +1947,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * Phabricator repository corresponds to this working copy. Used by
    * `arc which` to explain the process to users.
    *
-   * @return list<string> Human-readable explanation of the repository
+   * @return array<string> Human-readable explanation of the repository
    *                      association process.
    *
    * @task phabrep
@@ -2072,7 +2095,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
     if (!$engine_class) {
       if (Filesystem::pathExists($working_copy->getProjectPath('.arclint'))) {
-        $engine_class = 'ArcanistConfigurationDrivenLintEngine';
+        $engine_class = ArcanistConfigurationDrivenLintEngine::class;
       }
     }
 
@@ -2086,7 +2109,7 @@ abstract class ArcanistWorkflow extends Phobject {
           '.arcconfig'));
     }
 
-    $base_class = 'ArcanistLintEngine';
+    $base_class = ArcanistLintEngine::class;
     if (!class_exists($engine_class) ||
         !is_subclass_of($engine_class, $base_class)) {
       throw new ArcanistUsageException(
@@ -2123,7 +2146,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
     if (!$engine_class) {
       if (Filesystem::pathExists($working_copy->getProjectPath('.arcunit'))) {
-        $engine_class = 'ArcanistConfigurationDrivenUnitTestEngine';
+        $engine_class = ArcanistConfigurationDrivenUnitTestEngine::class;
       }
     }
 
@@ -2137,7 +2160,7 @@ abstract class ArcanistWorkflow extends Phobject {
           '.arcconfig'));
     }
 
-    $base_class = 'ArcanistUnitTestEngine';
+    $base_class = ArcanistUnitTestEngine::class;
     if (!class_exists($engine_class) ||
         !is_subclass_of($engine_class, $base_class)) {
       throw new ArcanistUsageException(
@@ -2352,7 +2375,7 @@ abstract class ArcanistWorkflow extends Phobject {
   public function getPromptMap() {
     if ($this->promptMap === null) {
       $prompts = $this->newPrompts();
-      assert_instances_of($prompts, 'ArcanistPrompt');
+      assert_instances_of($prompts, ArcanistPrompt::class);
 
       // TODO: Move this somewhere modular.
 
@@ -2472,6 +2495,18 @@ abstract class ArcanistWorkflow extends Phobject {
     }
 
     return $this;
+  }
+
+
+  public function getWorkflowArguments() {
+    // TODO should be made abstract eventually.
+    throw new PhutilMethodNotImplementedException();
+  }
+
+  public function getWorkflowInformation() {
+    // should also maybe be `protected`?
+    // TODO should be made abstract eventually.
+    throw new PhutilMethodNotImplementedException();
   }
 
 }

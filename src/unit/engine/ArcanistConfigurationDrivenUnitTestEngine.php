@@ -178,7 +178,7 @@ final class ArcanistConfigurationDrivenUnitTestEngine
 
   private function loadAvailableTestEngines() {
     return id(new PhutilClassMapQuery())
-      ->setAncestorClass('ArcanistUnitTestEngine')
+      ->setAncestorClass(parent::class)
       ->setUniqueMethod('getEngineConfigurationName', true)
       ->execute();
   }

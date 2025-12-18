@@ -47,7 +47,7 @@ abstract class ArcanistLinterStandard extends Phobject {
    * Returns linter configuration which is passed to
    * @{method:ArcanistLinter::setLinterConfigurationValue}.
    *
-   * @return map<string, wild>
+   * @return array<string,mixed>
    */
   public function getLinterConfiguration() {
     return array();
@@ -88,7 +88,7 @@ abstract class ArcanistLinterStandard extends Phobject {
   /**
    * Load all linter standards.
    *
-   * @return list<ArcanistLinterStandard>
+   * @return array<ArcanistLinterStandard>
    */
   final public static function loadAllStandards() {
     return id(new PhutilClassMapQuery())
@@ -101,7 +101,7 @@ abstract class ArcanistLinterStandard extends Phobject {
    * Load all linter standards which support a specified linter.
    *
    * @param  ArcanistLinter $linter
-   * @return list<ArcanistLinterStandard>
+   * @return array<ArcanistLinterStandard>
    */
   final public static function loadAllStandardsForLinter(
     ArcanistLinter $linter) {

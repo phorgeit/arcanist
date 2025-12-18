@@ -16,15 +16,17 @@ final class ArcanistPhutilLibraryLinter extends ArcanistLinter {
   const LINT_NONCANONICAL_SYMBOL = 4;
 
   public function getInfoName() {
-    return pht('Phutil Library Linter');
+    return pht(
+      '%s Library Linter',
+      PlatformSymbols::getPlatformClientName());
   }
 
   public function getInfoDescription() {
     return pht(
-      'Make sure all the symbols used in a %s library are defined and known. '.
-      'This linter is specific to PHP source in %s libraries.',
-      'libphutil',
-      'libphutil');
+      'Make sure all the symbols used in an %s library are defined and '.
+      'known.  This linter is specific to PHP source in %s libraries.',
+      PlatformSymbols::getPlatformClientName(),
+      PlatformSymbols::getPlatformClientName());
   }
 
   public function getLinterName() {
@@ -70,7 +72,7 @@ final class ArcanistPhutilLibraryLinter extends ArcanistLinter {
     $libraries  = $bootloader->getAllLibraries();
 
     // Load all the builtin symbols first.
-    $builtin_map = PhutilLibraryMapBuilder::newBuiltinMap();
+    $builtin_map = PhutilLibraryMapBuilder::newBuiltinMap(false);
     $builtin_map = $builtin_map['have'];
 
     $normal_symbols = array();

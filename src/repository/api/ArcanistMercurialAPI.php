@@ -22,14 +22,14 @@ final class ArcanistMercurialAPI extends ArcanistRepositoryAPI {
   protected function buildLocalFuture(array $argv) {
     $argv[0] = self::ROOT_HG_COMMAND.$argv[0];
 
-    return $this->newConfiguredFuture(newv('ExecFuture', $argv));
+    return $this->newConfiguredFuture(newv(ExecFuture::class, $argv));
   }
 
   public function newPassthru($pattern /* , ... */) {
     $args = func_get_args();
     $args[0] = self::ROOT_HG_COMMAND.$args[0];
 
-    return $this->newConfiguredFuture(newv('PhutilExecPassthru', $args));
+    return $this->newConfiguredFuture(newv(PhutilExecPassthru::class, $args));
   }
 
   private function newConfiguredFuture(PhutilExecutableFuture $future) {
@@ -734,7 +734,7 @@ final class ArcanistMercurialAPI extends ArcanistRepositoryAPI {
    *
    * @param array $child_nodes The list of child changesets off the original
    *   commit.
-   * @param file  $tmp_file The file containing the new commit message.
+   * @param TempFile $tmp_file The file containing the new commit message.
    */
   private function amendNonHeadCommit($child_nodes, $tmp_file) {
     list($current) = $this->execxLocal(
@@ -860,6 +860,7 @@ final class ArcanistMercurialAPI extends ArcanistRepositoryAPI {
                   $source));
               return trim($outgoing_base);
             }
+            break;
           case 'amended':
             $text = $this->getCommitMessage('.');
             $message = ArcanistDifferentialCommitMessage::newFromRawCorpus(

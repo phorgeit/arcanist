@@ -26,6 +26,9 @@
  * @task  wait    Waiting for Activity
  * @task  update  Responding to Activity
  * @task  impl    Channel Implementation
+ *
+ * @template TRead = string
+ * @template TWrite = string
  */
 abstract class PhutilChannel extends Phobject {
 
@@ -48,7 +51,7 @@ abstract class PhutilChannel extends Phobject {
    *
    * The default implementation returns bytes.
    *
-   * @return wild  Data from the channel, normally bytes.
+   * @return TRead  Data from the channel, normally bytes.
    *
    * @task io
    */
@@ -65,7 +68,7 @@ abstract class PhutilChannel extends Phobject {
    *
    * The default implementation accepts bytes.
    *
-   * @param   wild $bytes Data to write to the channel, normally bytes.
+   * @param   TWrite  $bytes Data to write to the channel, normally bytes.
    * @return  $this
    *
    * @task io
@@ -90,8 +93,8 @@ abstract class PhutilChannel extends Phobject {
    * Wait for any activity on a list of channels. Convenience wrapper around
    * @{method:waitForActivity}.
    *
-   * @param   list<PhutilChannel>   $channels A list of channels to wait for.
-   * @param   dict                  $options (optional) Options, see above.
+   * @param   array<PhutilChannel>  $channels A list of channels to wait for.
+   * @param   array                 $options (optional) Options, see above.
    * @return  void
    *
    * @task wait
@@ -119,9 +122,10 @@ abstract class PhutilChannel extends Phobject {
    * NOTE: Extra streams must be //streams//, not //sockets//, because this
    * method uses `stream_select()`, not `socket_select()`.
    *
-   * @param list<PhutilChannel> $reads List of channels to wait for reads on.
-   * @param list<PhutilChannel> $writes List of channels to wait for writes on.
-   * @param   dict              $options (optional) Options, see above.
+   * @param array<PhutilChannel> $reads List of channels to wait for reads on.
+   * @param array<PhutilChannel> $writes List of channels to wait for writes
+   *                             on.
+   * @param array               $options (optional) Options, see above.
    * @return void
    *
    * @task wait
@@ -336,7 +340,7 @@ abstract class PhutilChannel extends Phobject {
   /**
    * Get sockets to select for reading.
    *
-   * @return list<stream> Read sockets.
+   * @return array<resource> List of read sockets.
    *
    * @task impl
    */
@@ -348,7 +352,7 @@ abstract class PhutilChannel extends Phobject {
   /**
    * Get sockets to select for writing.
    *
-   * @return list<stream> Write sockets.
+   * @return array<resource> List of write sockets.
    *
    * @task impl
    */

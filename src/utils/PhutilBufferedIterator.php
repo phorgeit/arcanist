@@ -11,6 +11,9 @@
  * @task impl     Methods to Implement
  * @task config   Configuration
  * @task iterator Iterator Implementation
+ *
+ * @template-covariant T
+ * @implements Iterator<T>
  */
 abstract class PhutilBufferedIterator extends Phobject implements Iterator {
 
@@ -38,7 +41,7 @@ abstract class PhutilBufferedIterator extends Phobject implements Iterator {
    *
    * If possible, you should use @{method:getPageSize} to choose a page size.
    *
-   * @return list<wild> List of results.
+   * @return array<T> List of results.
    * @task impl
    */
   abstract protected function loadPage();

@@ -1,0 +1,26 @@
+<?php
+
+namespace Test;
+
+use Nested\Name\Space\{Test, TestTwo,};
+
+function o(object $obj) {}
+
+class Factory {
+  public static function factory(string $class): object {}
+}
+
+$closure = function(object $o) {};
+
+~~~~~~~~~~
+error:5:37:PHPAST45:PHP Compatibility
+error:7:12:PHPAST45:PHP Compatibility
+error:10:50:PHPAST45:PHP Compatibility
+error:13:21:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "7.1.0"
+  }
+}

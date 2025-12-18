@@ -200,7 +200,7 @@ abstract class ArcanistRepositoryLocalState
    * in a non-stack manner, i.e. proper use involves only restoring stashes in
    * the reverse order they were saved.
    *
-   * @return wild  A reference object that refers to the changes which were
+   * @return mixed A reference object that refers to the changes which were
    *               saved. When restoring changes this should be passed to
    *               {@method:restoreStash()}.
    */
@@ -211,7 +211,7 @@ abstract class ArcanistRepositoryLocalState
   /**
    * Restores changes that were previously stashed by {@method:saveStash()}.
    *
-   * @param wild  $ref A reference object referring to which previously stashed
+   * @param mixed $ref A reference object referring to which previously stashed
    *              changes to restore, from invoking {@method:saveStash()}.
    */
   protected function restoreStash($ref) {

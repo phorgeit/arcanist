@@ -1,0 +1,70 @@
+<?php
+
+if ( $x ) {}
+f( );
+q(                      );
+g();
+if ($x) {} else if ( $y ) {}
+
+$obj->m(
+  $x,
+  $y,
+  $z);
+for ( $ii = 0; $ii < 1; $ii++ ) {}
+foreach ( $x as $y ) {}
+function q( $x ) {}
+final class X {
+  public function f( $y ) {}
+}
+foreach ( $z as $k => $v ) {}
+some_call( /* respect authorial intent */ $b,
+  $a // if comments are present
+  );
+
+function (  ) {};
+function r(  ): string {}
+~~~~~~~~~~
+warning:3:5:PHPAST25:Spaces Inside Parentheses
+warning:3:8:PHPAST25:Spaces Inside Parentheses
+warning:4:3:PHPAST25:Spaces Inside Parentheses
+warning:5:3:PHPAST25:Spaces Inside Parentheses
+warning:7:21:PHPAST25:Spaces Inside Parentheses
+warning:7:24:PHPAST25:Spaces Inside Parentheses
+warning:13:6:PHPAST25:Spaces Inside Parentheses
+warning:13:30:PHPAST25:Spaces Inside Parentheses
+warning:14:10:PHPAST25:Spaces Inside Parentheses
+warning:14:19:PHPAST25:Spaces Inside Parentheses
+warning:15:12:PHPAST25:Spaces Inside Parentheses
+warning:15:15:PHPAST25:Spaces Inside Parentheses
+warning:17:21:PHPAST25:Spaces Inside Parentheses
+warning:17:24:PHPAST25:Spaces Inside Parentheses
+warning:19:10:PHPAST25:Spaces Inside Parentheses
+warning:19:25:PHPAST25:Spaces Inside Parentheses
+warning:24:11:PHPAST25:Spaces Inside Parentheses
+warning:25:12:PHPAST25:Spaces Inside Parentheses
+~~~~~~~~~~
+<?php
+
+if ($x) {}
+f();
+q();
+g();
+if ($x) {} else if ($y) {}
+
+$obj->m(
+  $x,
+  $y,
+  $z);
+for ($ii = 0; $ii < 1; $ii++) {}
+foreach ($x as $y) {}
+function q($x) {}
+final class X {
+  public function f($y) {}
+}
+foreach ($z as $k => $v) {}
+some_call( /* respect authorial intent */ $b,
+  $a // if comments are present
+  );
+
+function () {};
+function r(): string {}

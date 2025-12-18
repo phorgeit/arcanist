@@ -52,7 +52,9 @@ $base_args->parsePartial(
     array(
       'name'    => 'load-phutil-library',
       'param'   => 'path',
-      'help'    => pht('Load a libphutil library.'),
+      'help'    => pht(
+                     'Load an %s library.',
+                     PlatformSymbols::getPlatformClientName()),
       'repeat'  => true,
     ),
     array(
@@ -479,11 +481,7 @@ try {
  * that exclude core functionality.
  */
 function sanity_check_environment() {
-  // NOTE: We don't have phutil_is_windows() yet here.
-  $is_windows = (DIRECTORY_SEPARATOR != '/');
-
-  // We use stream_socket_pair() which is not available on Windows earlier.
-  $min_version = ($is_windows ? '5.3.0' : '5.2.3');
+  $min_version = '7.2.25';
   $cur_version = phpversion();
   if (version_compare($cur_version, $min_version, '<')) {
     die_with_bad_php(
@@ -492,6 +490,8 @@ function sanity_check_environment() {
       "'{$min_version}'.");
   }
 
+  // NOTE: We don't have phutil_is_windows() yet here.
+  $is_windows = (DIRECTORY_SEPARATOR != '/');
   if ($is_windows) {
     $need_functions = array(
       'curl_init'     => array('builtin-dll', 'php_curl.dll'),
@@ -501,7 +501,7 @@ function sanity_check_environment() {
       'curl_init'     => array(
         'text',
         "You need to install the cURL PHP extension, maybe with ".
-        "'apt-get install php5-curl' or 'yum install php53-curl' or ".
+        "'apt-get install php-curl' or 'dnf install php-curl' or ".
         "something similar.",
       ),
       'json_decode'   => array('flag', '--without-json'),
@@ -523,7 +523,8 @@ function sanity_check_environment() {
       phpinfo(INFO_GENERAL);
       $info = ob_get_clean();
       $matches = null;
-      if (preg_match('/^Configure Command =>\s*(.*?)$/m', $info, $matches)) {
+      if ($info !== false &&
+          preg_match('/^Configure Command =>\s*(.*?)$/m', $info, $matches)) {
         $config = $matches[1];
       }
     }
@@ -531,7 +532,7 @@ function sanity_check_environment() {
     $generic = true;
     list($what, $which) = $resolution;
 
-    if ($what == 'flag' && strpos($config, $which) !== false) {
+    if ($what == 'flag' && $config && strpos($config, $which) !== false) {
       $show_config = true;
       $generic = false;
       $problems[] =
@@ -614,8 +615,8 @@ function arcanist_load_libraries(
     //     check out a library alongside a working copy and reference it.
     //     If we haven't resolved yet, "library/src" will try to resolve to
     //     "../library/src" if it exists.
-    //  3. Using normal libphutil resolution rules. Generally, this means
-    //     that it checks for libraries next to libphutil, then libraries
+    //  3. Using normal Arcanist resolution rules. Generally, this means
+    //     that it checks for libraries next to Arcanist, then libraries
     //     in the PHP include_path.
     //
     // Note that absolute paths will just resolve absolutely through rule (1).

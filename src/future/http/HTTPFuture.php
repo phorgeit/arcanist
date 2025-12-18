@@ -38,8 +38,6 @@ final class HTTPFuture extends BaseHTTPFuture {
   private $stateReady         = false;
   private $stateStartTime;
 
-  private $profilerCallID;
-
   public function setURI($uri) {
     $parts = parse_url($uri);
     if (!$parts) {
@@ -106,10 +104,6 @@ final class HTTPFuture extends BaseHTTPFuture {
 
   public function isWriteComplete() {
     return $this->stateWriteComplete;
-  }
-
-  private function getDefaultUserAgent() {
-    return __CLASS__.'/1.0';
   }
 
   public function isReady() {
@@ -179,7 +173,7 @@ final class HTTPFuture extends BaseHTTPFuture {
       return null;
     }
 
-    $ok = stream_set_blocking($socket, 0);
+    $ok = stream_set_blocking($socket, false);
     if (!$ok) {
       throw new Exception(pht('Failed to set stream nonblocking.'));
     }
@@ -266,7 +260,7 @@ final class HTTPFuture extends BaseHTTPFuture {
     if (!$this->getHeaders('User-Agent')) {
       $add_headers[] = array(
         'User-Agent',
-        $this->getDefaultUserAgent(),
+        parent::getDefaultUserAgent(),
       );
     }
 

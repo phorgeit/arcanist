@@ -1,0 +1,22 @@
+<?php
+
+$x = false;
+$y = true;
+
+$x and $y;
+$x && $y;
+$x or $y;
+$x || $y;
+~~~~~~~~~~
+advice:6:4:PHPAST58:Logical Operators
+advice:8:4:PHPAST58:Logical Operators
+~~~~~~~~~~
+<?php
+
+$x = false;
+$y = true;
+
+$x && $y;
+$x && $y;
+$x || $y;
+$x || $y;

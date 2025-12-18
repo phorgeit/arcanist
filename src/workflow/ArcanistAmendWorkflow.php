@@ -60,7 +60,7 @@ EOTEXT
     );
   }
 
-  public function runWorkflow() {
+  protected function runWorkflow() {
     $symbols = $this->getSymbolEngine();
 
     $is_show = $this->getArgument('show');

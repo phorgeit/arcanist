@@ -1,0 +1,62 @@
+<?php
+
+$a + $b;
+$a+$b;
+$a +$b;
+$a+ $b;
+$a = -$b;
+$a=-$b;
+$a-=$b;
+$a -=$b;
+$a-= $b;
+$a===$b;
+$a.$b;
+function x($n=null) {}
+function x($n = null) {}
+
+$y /* ! */ += // ?
+$z;
+$obj->method();
+Dog::bark();
+$prev = ($total == 1) ? $navids[0] : $navids[$total-1];
+$next = ($total == 1) ? $navids[0] : $navids[$current+1];
+if ($x instanceof z &&$w) {}
+if ($x instanceof z && $w) {}
+~~~~~~~~~~
+warning:4:3:PHPAST27:Space Around Binary Operator
+warning:5:4:PHPAST27:Space Around Binary Operator
+warning:6:3:PHPAST27:Space Around Binary Operator
+warning:8:3:PHPAST27:Space Around Binary Operator
+warning:9:3:PHPAST27:Space Around Binary Operator
+warning:10:4:PHPAST27:Space Around Binary Operator
+warning:11:3:PHPAST27:Space Around Binary Operator
+warning:12:3:PHPAST27:Space Around Binary Operator
+warning:14:14:PHPAST27:Space Around Binary Operator
+warning:21:52:PHPAST27:Space Around Binary Operator
+warning:22:54:PHPAST27:Space Around Binary Operator
+warning:23:21:PHPAST27:Space Around Binary Operator
+~~~~~~~~~~
+<?php
+
+$a + $b;
+$a + $b;
+$a + $b;
+$a + $b;
+$a = -$b;
+$a = -$b;
+$a -= $b;
+$a -= $b;
+$a -= $b;
+$a === $b;
+$a.$b;
+function x($n = null) {}
+function x($n = null) {}
+
+$y /* ! */ += // ?
+$z;
+$obj->method();
+Dog::bark();
+$prev = ($total == 1) ? $navids[0] : $navids[$total - 1];
+$next = ($total == 1) ? $navids[0] : $navids[$current + 1];
+if ($x instanceof z && $w) {}
+if ($x instanceof z && $w) {}

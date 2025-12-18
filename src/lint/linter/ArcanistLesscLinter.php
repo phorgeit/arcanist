@@ -159,7 +159,7 @@ final class ArcanistLesscLinter extends ArcanistExternalLinter {
             throw new RuntimeException(
               pht(
                 'Unrecognized lint message code "%s".',
-                $code));
+                $matches['name']));
         }
 
         $code = $this->getLintCodeFromLinterConfigurationKey($matches['name']);

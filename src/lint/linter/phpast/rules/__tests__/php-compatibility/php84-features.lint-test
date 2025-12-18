@@ -1,0 +1,32 @@
+<?php
+
+class Test {
+  public string $property {
+    get => lcfirst($this->property);
+    set => strtolower($value);
+  }
+
+  public private(set) $cache = array();
+
+  public function __construct(
+    string $hook {
+      get => lcfirst($this->hook);
+      set => strtolower($value);
+    }
+  ) {}
+}
+
+echo new Test()->property;
+
+~~~~~~~~~~
+error:4:3:PHPAST45:PHP Compatibility
+error:9:3:PHPAST45:PHP Compatibility
+error:12:5:PHPAST45:PHP Compatibility
+error:19:6:PHPAST45:PHP Compatibility
+~~~~~~~~~~
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "8.3.0"
+  }
+}

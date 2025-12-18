@@ -7,7 +7,7 @@ final class ArcanistGridRow
 
   public function setCells(array $cells) {
     $cells = id(new PhutilArrayCheck())
-      ->setInstancesOf('ArcanistGridCell')
+      ->setInstancesOf(ArcanistGridCell::class)
       ->setUniqueMethod('getKey')
       ->setContext($this, 'setCells')
       ->checkValue($cells);

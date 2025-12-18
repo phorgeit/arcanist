@@ -30,7 +30,7 @@ function phutil_get_library_name_for_root($path) {
 }
 
 function phutil_get_current_library_name() {
-  $caller = head(debug_backtrace(false));
+  $caller = head(debug_backtrace(0));
 
   $root = phutil_get_library_root_for_path($caller['file']);
   return phutil_get_library_name_for_root($root);
