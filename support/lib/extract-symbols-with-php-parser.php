@@ -10,7 +10,7 @@ require_once $root.'/support/init/init-script.php';
 
 $args = new PhutilArgumentParser($argv);
 $args->setTagline(pht('identify symbols in PHP source files'));
-$args->setSynopsis(<<<EOHELP
+$args->setSynopsis(pht(<<<EOHELP
     **extract-symbols-with-php-parser.php** [__options__] __path.php__
         Identify the symbols (classes, interfaces, traits, enums and functions)
         in PHP source files. Symbols are divided into "have" symbols
@@ -23,11 +23,11 @@ $args->setSynopsis(<<<EOHELP
 
         Symbols are reported in JSON on stdout.
 
-        This script is used internally by Arcanist to build maps of library
+        This script is used internally to build maps of library
         symbols.
 
 EOHELP
-);
+));
 
 $args->parseStandardArguments();
 $args->parse(

@@ -10,7 +10,7 @@ require_once $root.'/support/init/init-script.php';
 
 $args = new PhutilArgumentParser($argv);
 $args->setTagline(pht('identify symbols in a PHP source file'));
-$args->setSynopsis(<<<EOHELP
+$args->setSynopsis(pht(<<<EOHELP
     **extract-symbols.php** [__options__] __path.php__
         Identify the symbols (clases, functions and interfaces) in a PHP
         source file. Symbols are divided into "have" symbols (symbols the file
@@ -23,7 +23,7 @@ $args->setSynopsis(<<<EOHELP
 
         Symbols are reported in JSON on stdout.
 
-        This script is used internally by Arcanist to build maps of library
+        This script is used internally to build maps of library
         symbols.
 
         It would be nice to eventually implement this as a C++ xhpast binary,
@@ -31,7 +31,7 @@ $args->setSynopsis(<<<EOHELP
         (500ms+ for moderately large files).
 
 EOHELP
-);
+));
 $args->parseStandardArguments();
 $args->parse(
   array(

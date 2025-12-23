@@ -6,12 +6,12 @@ require_once $root.'/support/init/init-script.php';
 
 $args = new PhutilArgumentParser($argv);
 $args->setTagline(pht('rebuild the library map file'));
-$args->setSynopsis(<<<EOHELP
+$args->setSynopsis(pht(<<<EOHELP
     **rebuild-map.php** [__options__] __root__
         Rebuild the library map file for a libphutil library.
 
 EOHELP
-);
+));
 
 $args->parseStandardArguments();
 $args->parse(
