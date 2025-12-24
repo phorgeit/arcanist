@@ -896,7 +896,6 @@ final class ArcanistRuntime {
       $legacy[] = new ArcanistLintWorkflow();
       $legacy[] = new ArcanistListWorkflow();
       $legacy[] = new ArcanistPatchWorkflow();
-      $legacy[] = new ArcanistPasteWorkflow();
       $legacy[] = new ArcanistTasksWorkflow();
       $legacy[] = new ArcanistTodoWorkflow();
       $legacy[] = new ArcanistUnitWorkflow();
