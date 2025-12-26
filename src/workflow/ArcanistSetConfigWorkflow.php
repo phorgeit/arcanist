@@ -72,14 +72,19 @@ EOTEXT
     $console = PhutilConsole::getConsole();
 
     if (!$settings->getHelp($key)) {
-      $warning = tsprintf(
-        "**%s:** %s\n",
-        pht('Warning'),
-        pht(
-          'The configuration key "%s" is not recognized by arc. It may '.
-          'be misspelled or out of date.',
-          $key));
-      $console->writeErr('%s', $warning);
+      // It's not a legacy-workflow-recognized config setting; check if
+      // it's a toolset-recognized config setting before complaining
+      $map = id(new ArcanistConfigurationEngine())->newConfigOptionsMap();
+      if (!isset($map[$key])) {
+        $warning = tsprintf(
+          "**%s:** %s\n",
+          pht('Warning'),
+          pht(
+            'The configuration key "%s" is not recognized by arc. It may '.
+            'be misspelled or out of date.',
+            $key));
+        $console->writeErr('%s', $warning);
+      }
     }
 
     $old = null;

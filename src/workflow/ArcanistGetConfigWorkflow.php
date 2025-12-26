@@ -79,9 +79,14 @@ EOTEXT
       if ($verbose) {
         $help = $settings->getHelp($key);
         if (!$help) {
-          $help = pht(
-            '(This configuration value is not recognized by arc. It may '.
-            'be misspelled or out of date.)');
+          // It's not a legacy-workflow-recognized config setting; check if
+          // it's a toolset-recognized config setting before complaining
+          $map = id(new ArcanistConfigurationEngine())->newConfigOptionsMap();
+          if (!isset($map[$key])) {
+            $help = pht(
+              '(This configuration value is not recognized by arc. It may '.
+              'be misspelled or out of date.)');
+          }
         }
 
         $console->writeOut("%s\n\n", phutil_console_wrap($help, 4));
