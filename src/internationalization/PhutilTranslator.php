@@ -139,7 +139,12 @@ final class PhutilTranslator extends Phobject {
       }
     }
 
-    $result = vsprintf($translation, $args);
+    try {
+      $result = vsprintf($translation, $args);
+    } catch (ValueError $ex) {
+      // In PHP 8 vsprintf throws an exception; in PHP 7 it returns false
+      $result = false;
+    }
     if ($result === false) {
       // If vsprintf() fails (often because the translated string references
       // too many parameters), show the bad template with a note instead of
