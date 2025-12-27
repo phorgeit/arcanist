@@ -49,6 +49,9 @@ abstract class PhutilTranslation extends Phobject {
   public static function loadAllTranslations() {
     return id(new PhutilClassMapQuery())
       ->setAncestorClass(__CLASS__)
+      // Continue on failure so that `arc liberate` can still run
+      // if you delete a translation file
+      ->setContinueOnFailure(true)
       ->execute();
   }
 

@@ -10,6 +10,9 @@ abstract class ArcanistWorkingCopy
   public static function newFromWorkingDirectory($path) {
     $working_types = id(new PhutilClassMapQuery())
       ->setAncestorClass(__CLASS__)
+      // Continue on failure so that `arc liberate` can still run
+      // if you delete a working copy class file
+      ->setContinueOnFailure(true)
       ->execute();
 
     $paths = Filesystem::walkToRoot($path);

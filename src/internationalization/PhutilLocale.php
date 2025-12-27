@@ -147,6 +147,9 @@ abstract class PhutilLocale extends Phobject {
     if ($locales === null) {
       $objects = id(new PhutilClassMapQuery())
         ->setAncestorClass(__CLASS__)
+         // Continue on failure so that `arc liberate` can still run
+         // if you delete a locale file
+        ->setContinueOnFailure(true)
         ->execute();
 
       $locale_map = array();
