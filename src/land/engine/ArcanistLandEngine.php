@@ -486,7 +486,7 @@ abstract class ArcanistLandEngine
     if ($open_parents) {
       echo tsprintf(
         "\n%!\n%W\n\n",
-        pht('%s OPEN PARENT REVISION(S) ', phutil_count($open_parents)),
+        pht('%s OPEN PARENT REVISION(S)', phutil_count($open_parents)),
         pht(
           'The changes you are landing depend on %s open parent revision(s). '.
           'Usually, you should land parent revisions before landing the '.
