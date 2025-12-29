@@ -1675,7 +1675,7 @@ EOTEXT
               "%s\n\n",
               $message);
 
-            $list = id(new PhutilConsoleList());
+            $list = new PhutilConsoleList();
             foreach ($away as $spec) {
               $list->addItem(
                 pht(

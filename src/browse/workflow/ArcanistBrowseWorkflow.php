@@ -180,7 +180,7 @@ EOTEXT
 
       $is_single_ref = (count($refs) == 1);
 
-      $table = id(new PhutilConsoleTable());
+      $table = new PhutilConsoleTable();
 
       if ($is_single_ref) {
         $table->addColumn('pick', array('title' => pht('Pick')));

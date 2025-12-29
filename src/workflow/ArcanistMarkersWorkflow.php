@@ -137,7 +137,7 @@ abstract class ArcanistMarkersWorkflow
       $partition_lists[] = $row_lists;
     }
 
-    $grid = id(new ArcanistGridView());
+    $grid = new ArcanistGridView();
     $grid->newColumn('marker');
     $grid->newColumn('commits');
     $grid->newColumn('status');
