@@ -970,7 +970,7 @@ abstract class ArcanistLandEngine
           pht('AMBIGUOUS REVISION'),
           pht(
             'The revision associated with commit "%s" (an ancestor of: %s) '.
-            'is ambiguous. These %s revision(s) are associated with the '.
+            'is ambiguous. These %s revisions are associated with the '.
             'commit:',
             $display_hash,
             implode(', ', $raw_symbols),
@@ -1030,14 +1030,14 @@ abstract class ArcanistLandEngine
     if ($commit_count > $warn_limit) {
       if ($into_commit === null) {
         $message = pht(
-          'There are %s commit(s) reachable from the specified sources (%s). '.
+          'There are %s commits reachable from the specified sources (%s). '.
           'You are landing into the empty state, so all of these commits '.
           'will land:',
           new PhutilNumber($commit_count),
           $this->getDisplaySymbols($symbols));
       } else {
         $message = pht(
-          'There are %s commit(s) reachable from the specified sources (%s) '.
+          'There are %s commits reachable from the specified sources (%s) '.
           'that are not present in the repository state you are merging '.
           'into ("%s"). All of these commits will land:',
           new PhutilNumber($commit_count),

@@ -209,7 +209,7 @@ final class PhutilArrayCheck
         $this->raiseValueException(
           pht(
             'Expected method "%s->%s()" to return a unique key, got "%s" '.
-            'from %s object(s) at indexes: %s.',
+            'from %s objects at indexes: %s.',
             $class_display,
             $unique,
             $key,
