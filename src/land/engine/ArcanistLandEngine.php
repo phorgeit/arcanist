@@ -425,10 +425,10 @@ abstract class ArcanistLandEngine
         "\n%!\n%W\n\n",
         pht('%s REVISION(S) ARE NOT ACCEPTED', phutil_count($not_accepted)),
         pht(
-          'You are landing %s revision(s) which are not in state "Accepted", '.
-          'indicating that they have not been accepted by reviewers. '.
-          'Normally, you should land changes only once they have been '.
-          'accepted. These revisions are in the wrong state:',
+          'You are landing %s revision(s) which are not in the state '.
+          '"Accepted", indicating that they have not been accepted by '.
+          'reviewers. Normally, you should land changes only once they have '.
+          'been accepted. These revisions are in the wrong state:',
           phutil_count($not_accepted)));
 
       foreach ($not_accepted as $revision_ref) {

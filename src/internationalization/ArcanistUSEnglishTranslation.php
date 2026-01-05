@@ -158,16 +158,16 @@ final class ArcanistUSEnglishTranslation extends PhutilTranslation {
         'Land %s revision that is already published?',
         'Land %s revisions that are already published?',
       ),
-      'You are landing %s revision(s) which are not in state "Accepted", '.
+      'You are landing %s revision(s) which are not in the state "Accepted", '.
       'indicating that they have not been accepted by reviewers. '.
       'Normally, you should land changes only once they have been accepted. '.
       'These revisions are in the wrong state:' =>
       array(
-        'You are landing a revision which is not in state "Accepted", '.
+        'You are landing a revision which is not in the state "Accepted", '.
         'indicating that it has not been accepted by reviewers. '.
         'Normally, you should land changes only once they have been '.
         'accepted. This revision is in the wrong state:',
-        'You are landing %s revisions which are not in state "Accepted", '.
+        'You are landing %s revisions which are not in the state "Accepted", '.
         'indicating that they have not been accepted by reviewers. '.
         'Normally, you should land changes only once they have been .'.
         'accepted. These revisions are in the wrong state:',

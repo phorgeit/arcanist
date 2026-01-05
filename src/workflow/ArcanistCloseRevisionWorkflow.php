@@ -137,7 +137,7 @@ EOTEXT
           $this->writeWarn(
             pht('OPEN REVISION'),
             pht(
-              'Revision "%s" is not in state "Accepted", so it will '.
+              'Revision "%s" is not in the state "Accepted", so it will '.
               'be left open.',
               $object_name));
 
