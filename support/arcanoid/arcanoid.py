@@ -227,9 +227,13 @@ def main(stdscr):
         status.refresh()
         time.sleep(0.05)
 
+def plural(n):
+    return '' if n == 1 else 's'
+
 try:
     curses.wrapper(main)
-    print ('You destroyed %s blocks out of %s with %s deaths.' %
-        (Block.killed, Block.total, Ball.killed))
+    print ('You destroyed %s block%s out of %s with %s death%s.' %
+        (Block.killed, plural(Block.killed), Block.total,
+         Ball.killed, plural(Ball.killed)))
 except PowerOverwhelmingException as e:
     print (e)
