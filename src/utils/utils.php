@@ -326,10 +326,12 @@ function mgroup(array $list, $by /* , ... */) {
   $groups = array();
   foreach ($map as $group) {
     // Can't array_fill_keys() here because 'false' gets encoded wrong.
+    $group = $group ?? '';
     $groups[$group] = array();
   }
 
   foreach ($map as $key => $group) {
+    $group = $group ?? '';
     $groups[$group][$key] = $list[$key];
   }
 
