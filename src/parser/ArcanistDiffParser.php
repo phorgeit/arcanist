@@ -804,7 +804,7 @@ final class ArcanistDiffParser extends Phobject {
       // "git diff -b" ignores whitespace, but has an empty hunk target
       if (preg_match('@^diff --git .*$@', $line)) {
         $this->nextLine();
-        return null;
+        return;
       }
     }
 
