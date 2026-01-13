@@ -129,7 +129,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
         case 'trait_exists':
         case 'enum_exists':
         case 'defined':
-          $type = null;
+          $type = '';
           switch ($function_name) {
             case 'enum_exists':
             case 'class_exists':
