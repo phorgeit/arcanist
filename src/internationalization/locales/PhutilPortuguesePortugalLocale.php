@@ -14,13 +14,12 @@ final class PhutilPortuguesePortugalLocale extends PhutilLocale {
   }
 
   public function getFallbackLocaleCode() {
-    // Ideally this would be pt_BR but Phabricator does not support
-    // bidirectional fallbacks (pt_BR -> pt and pt -> pt_BR simultaneously)
-    // since Translatewiki calls pt_PT "Portugese" without a country
-    // it makes slightly more sense to fall back in the other direction
-    // In the mean time return `en_US` so users don't see Proto-English
-    // unncecessarily
-    return 'en_US';
+    // This has to return an array so as to disable
+    // recursive fallback processing and allow pt_PT and
+    // pt_BR to go both ways.
+    // Include en_US so if a string isn't translated into either variant
+    // it will display English plurals rather than proto-English
+    return array('pt_BR', 'en_US');
   }
 
 }

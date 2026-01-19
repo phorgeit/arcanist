@@ -56,6 +56,38 @@ abstract class PhutilTranslation extends Phobject {
   }
 
 
+  private static function getTranslationMapForLocaleNoFallback($locale_code) {
+    $translations = self::loadAllTranslations();
+
+    $results = array();
+    foreach ($translations as $translation) {
+      if ($translation->getLocaleCode() === $locale_code) {
+        $results += $translation->getFilteredTranslations();
+      }
+    }
+    return $results;
+  }
+
+  /**
+   * Return all translations as a nested array.
+   *
+   * @return array<string,array<string,string|array>>
+   *  List of available translations in the format
+       [language => [proto-English => translation ] ]
+   */
+  public static function getAllTranslations() {
+    $translations = self::loadAllTranslations();
+    $results = array();
+    foreach ($translations as $translation) {
+      $code = $translation->getLocaleCode();
+      if (!isset($results[$code])) {
+        $results[$code] = array();
+      }
+      $results[$code] += $translation->getFilteredTranslations();
+    }
+    return $results;
+ }
+
   /**
    * Load the complete translation map for a locale.
    *
@@ -68,20 +100,18 @@ abstract class PhutilTranslation extends Phobject {
   public static function getTranslationMapForLocale($locale_code) {
     $locale = PhutilLocale::loadLocale($locale_code);
 
-    $translations = self::loadAllTranslations();
-
-    $results = array();
-    foreach ($translations as $translation) {
-      if ($translation->getLocaleCode() == $locale_code) {
-        $results += $translation->getFilteredTranslations();
-      }
-    }
-
+    $results = self::getTranslationMapForLocaleNoFallback($locale_code);
     $fallback_code = $locale->getFallbackLocaleCode();
     if ($fallback_code !== null) {
-      $results += self::getTranslationMapForLocale($fallback_code);
+      if (is_array($fallback_code)) {
+        foreach ($fallback_code as $one_fallback) {
+          $results += self::getTranslationMapForLocaleNoFallback(
+            $one_fallback);
+        }
+      } else {
+        $results += self::getTranslationMapForLocale($fallback_code);
+     }
     }
-
     return $results;
   }
 
