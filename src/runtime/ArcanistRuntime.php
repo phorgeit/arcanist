@@ -16,19 +16,18 @@ final class ArcanistRuntime {
   private $workingCopy;
 
   public function execute(array $argv) {
-
+    // This is the top-level function for modern toolset Arcanist commands
+    // if it doesn't recognize the command, it passed the arguments through
+    // unchanged to `scripts/arcanist.php`, which then checks for legacy
+    // workflows.
     try {
       $this->checkEnvironment();
-    } catch (Exception $ex) {
+    } catch (Throwable $ex) {
       echo "CONFIGURATION ERROR\n\n";
       echo $ex->getMessage();
       echo "\n\n";
       return 1;
     }
-
-    PhutilTranslator::getInstance()
-      ->setLocale(PhutilLocale::loadLocale('en_US'))
-      ->setTranslations(PhutilTranslation::getTranslationMapForLocale('en_US'));
 
     $log = new ArcanistLogEngine();
     $this->logEngine = $log;
@@ -51,6 +50,8 @@ final class ArcanistRuntime {
   private function executeCore(array $argv) {
     $log = $this->getLogEngine();
 
+    // Note that this is duplicated in scripts/arcanist.php.
+    // Any changes made here should be made there too
     $config_args = array(
       array(
         'name' => 'library',
@@ -74,6 +75,9 @@ final class ArcanistRuntime {
       ),
     );
 
+    // Tell parseStandardArguments not to load the locale for now
+    // we load it after loading libraries below
+    PhutilArgumentParser::setLocaleCallback(function ($locale) {});
     $args = id(new PhutilArgumentParser($argv))
       ->parseStandardArguments();
 
@@ -107,6 +111,30 @@ final class ArcanistRuntime {
     // Do this before continuing since configuration can impact other
     // behaviors immediately and we want to catch any issues right away.
     $config->setConfigOptions($config_engine->newConfigOptionsMap());
+
+    // Set the locale first, so other config validation errors
+    // use it
+    $locale = $args->getArg('locale');
+    if (!$locale) {
+      $locale = $config->getConfig('locale');
+    }
+
+    try {
+      PhutilTranslator::getInstance()
+        ->setLocale(PhutilLocale::loadLocale($locale))
+        ->setTranslations(PhutilTranslation::getTranslationMapForLocale(
+          $locale));
+    } catch (Throwable $ex) {
+      $log->writeWarning(
+        pht('INVALID LOCALE'),
+        pht(
+        'Failed to set configured locale %s, using en_US locale',
+        $locale));
+      PhutilTranslator::getInstance()
+        ->setLocale(PhutilLocale::loadLocale('en_US'))
+        ->setTranslations(PhutilTranslation::getTranslationMapForLocale(
+          'en_US'));
+    }
     $config->validateConfiguration($this);
 
     $toolset = $this->newToolset($argv);
@@ -192,15 +220,10 @@ final class ArcanistRuntime {
 
       throw new PhutilArgumentUsageException(
         pht('Missing required "--" in argument list.'));
-    } catch (PhutilArgumentUsageException $usage_exception) {
-
-      // TODO: This is very, very hacky; we're trying to let errors like
-      // "you passed the wrong arguments" through but fall back to classic
-      // mode if the workflow itself doesn't exist.
-      if (!preg_match('/invalid command/i', $usage_exception->getMessage())) {
-        throw $usage_exception;
-      }
-
+    } catch (PhutilArgumentUsageInvalidCommandException $usage_exception) {
+      // It's not a toolset workflow. It might be a legacy workflow, so
+      // pass the command unchanged to `scripts/arcanist.php`
+      // which will parse args, apply, config, etc. all over again.
     }
 
     $arcanist_root = phutil_get_library_root('arcanist');
@@ -214,7 +237,6 @@ final class ArcanistRuntime {
 
     return $err;
   }
-
 
   /**
    * Perform some sanity checks against the possible diversity of PHP builds in
@@ -475,7 +497,7 @@ final class ArcanistRuntime {
 
       $executing_directory = dirname(dirname(__FILE__));
 
-      $log->writeWarn(
+      $log->writeWarning(
         pht('VERY META'),
         pht(
           'You are running one copy of this software (at path "%s") against '.
@@ -496,7 +518,7 @@ final class ArcanistRuntime {
       if (!phutil_console_confirm($prompt)) {
         throw $ex;
       }
-    } catch (Exception $ex) {
+    } catch (Throwable $ex) {
       $log->writeError(
         pht('LOAD ERROR'),
         pht(

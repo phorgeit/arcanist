@@ -128,6 +128,11 @@ final class ArcanistSettings extends Phobject {
         'help' => pht(
           'Configured command aliases. Use "arc alias" to define aliases.'),
       ),
+      'locale' => array(
+        'type' => 'string',
+        'default' => 'en_US',
+        'help' => pht('Configure a locale to print messages in.'),
+      ),
     );
 
     $settings = ArcanistSetting::getAllSettings();

@@ -84,6 +84,7 @@ final class PhutilArgumentParser extends Phobject {
   const PARSE_ERROR_CODE = 77;
 
   private static $traceModeEnabled = false;
+  private static $localeCallback = null;
 
 
 /* -(  Parsing Arguments  )-------------------------------------------------- */
@@ -561,6 +562,14 @@ final class PhutilArgumentParser extends Phobject {
             'help'  => pht('Start in remote console mode.'),
             'standard' => true,
           ),
+          array(
+            'name' => 'locale',
+            'param' => 'string',
+            'help' => pht(
+              'Override the configured locale and use this locale '.
+              'code instead.'),
+            'standard' => true,
+          ),
         ));
     } catch (PhutilArgumentUsageException $ex) {
       $this->printUsageException($ex);
@@ -605,6 +614,19 @@ final class PhutilArgumentParser extends Phobject {
       $server->setEnableLog(true);
       $console = PhutilConsole::newConsoleForServer($server);
       PhutilConsole::setConsole($console);
+    }
+
+    $locale = $this->getArg('locale');
+    if ($locale) {
+      if (self::$localeCallback) {
+        call_user_func(self::$localeCallback, $locale);
+      } else {
+        // No callback set, so load the locale normally
+        PhutilTranslator::getInstance()
+         ->setLocale(PhutilLocale::loadLocale($locale))
+         ->setTranslations(PhutilTranslation::getTranslationMapForLocale(
+           $locale));
+      }
     }
 
     return $this;
@@ -998,6 +1020,20 @@ final class PhutilArgumentParser extends Phobject {
     return self::$traceModeEnabled;
   }
 
+  /**
+    * Set a callback to use when parsing the `--locale` standard argument.
+    * This is necessary if you want to handle other arguments before loading
+    * the requested locale, or want your own record of the current locale.
+    * This is static so that a library that wants to do one of those things can
+    * set the callback up during initialization without having to modify every
+    * script that parses arguments.
+    *
+    * @param callable(string): void $callback
+    */
+  public static function setLocaleCallback($callback) {
+    self::$localeCallback = $callback;
+  }
+
   private function raiseUnknownWorkflow($flow, array $maybe) {
     if ($maybe) {
       sort($maybe);
@@ -1036,7 +1072,7 @@ final class PhutilArgumentParser extends Phobject {
           "{$binary} help"));
     }
 
-    throw new PhutilArgumentUsageException($message);
+    throw new PhutilArgumentUsageInvalidCommandException($message);
   }
 
   private function shouldAutocorrect() {

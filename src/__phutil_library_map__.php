@@ -898,6 +898,7 @@ phutil_register_library_map(array(
     'PhutilArgumentSpellingCorrector' => 'parser/argument/PhutilArgumentSpellingCorrector.php',
     'PhutilArgumentSpellingCorrectorTestCase' => 'parser/argument/__tests__/PhutilArgumentSpellingCorrectorTestCase.php',
     'PhutilArgumentUsageException' => 'parser/argument/exception/PhutilArgumentUsageException.php',
+    'PhutilArgumentUsageInvalidCommandException' => 'parser/argument/exception/PhutilArgumentUsageInvalidCommandException.php',
     'PhutilArgumentWorkflow' => 'parser/argument/workflow/PhutilArgumentWorkflow.php',
     'PhutilArray' => 'utils/PhutilArray.php',
     'PhutilArrayCheck' => 'utils/PhutilArrayCheck.php',
@@ -2191,6 +2192,7 @@ phutil_register_library_map(array(
     'PhutilArgumentSpellingCorrector' => 'Phobject',
     'PhutilArgumentSpellingCorrectorTestCase' => 'PhutilTestCase',
     'PhutilArgumentUsageException' => 'PhutilArgumentParserException',
+    'PhutilArgumentUsageInvalidCommandException' => 'PhutilArgumentUsageException',
     'PhutilArgumentWorkflow' => 'Phobject',
     'PhutilArray' => array(
       'Phobject',

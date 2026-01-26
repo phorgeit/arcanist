@@ -1,6 +1,12 @@
 #!/usr/bin/env php
 <?php
 
+
+// This is the top-level script for the legacy Arcanist commands
+// (such as `arc diff`). Modern toolset commands (such as `arc help`)
+// are managed by ArcanistRuntime.php instead. ArcanistRuntime.php
+// passed the command through unchanged to this script if it couldn't
+// find a modern workflow you wanted to execute.
 sanity_check_environment();
 
 require_once dirname(__FILE__).'/__init_script__.php';
@@ -45,9 +51,14 @@ arcanist_adjust_php_include_path();
 ini_set('memory_limit', -1);
 
 $original_argv = $argv;
+// Defer loading the requested locale until we've loaded libraries
+PhutilArgumentParser::setLocaleCallback(function ($locale) {});
 $base_args = new PhutilArgumentParser($argv);
 $base_args->parseStandardArguments();
 $base_args->parsePartial(
+  // Note that part of this array is duplicated in
+  // src/runtime/ArcanistRuntime.php
+  // Any changes made here should be made there too
   array(
     array(
       'name'    => 'load-phutil-library',
@@ -212,6 +223,25 @@ try {
       $lib_source = pht('the %s argument', '--config "load=[...]"'),
       $working_copy);
   }
+
+  // Apply the requested language settings
+  // This must be done after all libraries are loaded in case one of them
+  // defines locale or translation files
+  $locale = $base_args->getArg('locale');
+  if (!$locale) {
+    $locale = $configuration_manager->getConfigFromAnySource('locale');
+  }
+  try {
+    PhutilTranslator::getInstance()
+      ->setLocale(PhutilLocale::loadLocale($locale))
+      ->setTranslations(PhutilTranslation::getTranslationMapForLocale($locale));
+  } catch (Throwable $ex) {
+    // ArcanistRuntime.php already printed a warning to the user about the
+    // bogus locale, just ignore and use en_US
+    PhutilTranslator::getInstance()
+      ->setLocale(PhutilLocale::loadLocale('en_US'))
+      ->setTranslations(PhutilTranslation::getTranslationMapForLocale('en_US'));
+ }
 
   $user_config = $configuration_manager->readUserConfigurationFile();
   $config = new ArcanistConfiguration();
