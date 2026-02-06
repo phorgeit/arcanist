@@ -59,6 +59,10 @@ new class(
   $a, $b) {};
 new class($a,
   $b) {};
+
+$bar = id(new Foo())
+  ->setBaz($baz)
+  ->setFooBar($foo, $bar);
 ~~~~~~~~~~
 warning:9:6:PHPAST140:Argument Alignment
 warning:10:5:PHPAST140:Argument Alignment
@@ -146,3 +150,7 @@ new class(
 new class(
   $a,
   $b) {};
+
+$bar = id(new Foo())
+  ->setBaz($baz)
+  ->setFooBar($foo, $bar);
