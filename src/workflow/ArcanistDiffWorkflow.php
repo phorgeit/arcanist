@@ -2414,16 +2414,6 @@ EOTEXT
     $this->diffPropertyFutures = array();
   }
 
-  private function dispatchWillCreateRevisionEvent(array $fields) {
-    $event = $this->dispatchEvent(
-      ArcanistEventType::TYPE_REVISION_WILLCREATEREVISION,
-      array(
-        'specification' => $fields,
-      ));
-
-    return $event->getValue('specification');
-  }
-
   private function dispatchWillBuildEvent(array $fields) {
     $event = $this->dispatchEvent(
       ArcanistEventType::TYPE_DIFF_WILLBUILDMESSAGE,

@@ -137,8 +137,4 @@ EOTEXT
     return 0;
   }
 
-  private function writeStatus($line) {
-    $this->writeStatusMessage($line."\n");
-  }
-
 }
