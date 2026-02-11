@@ -15,5 +15,5 @@ void foo(char* str) {
     delete buf;
 }
 ~~~~~~~~~~
+warning:4:
 error:10:
-error:16:
