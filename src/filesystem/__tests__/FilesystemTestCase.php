@@ -223,7 +223,9 @@ final class FilesystemTestCase extends PhutilTestCase {
   public function testNormalizeVirtualPath() {
     $cls = new ReflectionClass(Filesystem::class);
     $normalize = $cls->getMethod('normalizeVirtualPath');
-    $normalize->setAccessible(true);
+    if (PHP_VERSION_ID < 80100) {
+      $normalize->setAccessible(true);
+    }
 
     $valids = array(
       '/a/b/c/../d/e//./f' => 'a/b/d/e/f',
@@ -269,7 +271,9 @@ final class FilesystemTestCase extends PhutilTestCase {
 
     $cls = new ReflectionClass(Filesystem::class);
     $parser = $cls->getMethod('parsePharUri');
-    $parser->setAccessible(true);
+    if (PHP_VERSION_ID < 80100) {
+      $parser->setAccessible(true);
+    }
 
     $p = 'phar://';
 
