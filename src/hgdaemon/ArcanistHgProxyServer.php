@@ -151,7 +151,7 @@ final class ArcanistHgProxyServer extends Phobject {
    * limit are exceeded. If neither limit is configured, this method does not
    * exit.
    *
-   * @return null
+   * @return void
    *
    * @task server
    */
@@ -324,6 +324,7 @@ final class ArcanistHgProxyServer extends Phobject {
 
 
   /**
+   * @return string
    * @task client
    */
   public static function getPathToSocket($working_copy) {

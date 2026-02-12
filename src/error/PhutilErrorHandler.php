@@ -458,6 +458,12 @@ final class PhutilErrorHandler extends Phobject {
     }
   }
 
+  /**
+   * Replace absolute file path prefix with Phorge library name
+   *
+   * @param string $path File path, e.g. "/var/www/html/phorge/foo/Bar.php:1"
+   * @return string File path, e.g. "<phorge>/foo/Bar.php:1"
+   */
   public static function adjustFilePath($path) {
     // Compute known library locations so we can emit relative paths if the
     // file resides inside a known library. This is a little cleaner to read,
@@ -486,6 +492,12 @@ final class PhutilErrorHandler extends Phobject {
     return $path;
   }
 
+  /**
+   * Get version / revision information for all installed Phorge libraries
+   *
+   * @return array A nested array with entries in a format like
+   * {"phorge":{"head":"master","ref.master":"abcdef012345"}}
+   */
   public static function getLibraryVersions() {
     $libinfo = array();
 

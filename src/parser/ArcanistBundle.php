@@ -310,6 +310,9 @@ final class ArcanistBundle extends Phobject {
     return $this->convertNonUTF8Diff($diff);
   }
 
+  /**
+   * @return string
+   */
   public function toGitPatch() {
     $this->reservedBytes = 0;
 

@@ -61,7 +61,7 @@ final class ArcanistUselessOverridingMethodPHPASTLinterRule
          return;
       }
 
-      /** @var $expression PhpParser\Node\Expr\StaticCall */
+      /** @var PhpParser\Node\Expr\StaticCall $expression */
       if (
         $expression->class->name !== 'parent' ||
         $expression->name->toString() !== $node->name->name) {

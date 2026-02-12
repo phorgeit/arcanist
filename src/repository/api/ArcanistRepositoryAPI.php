@@ -644,15 +644,24 @@ abstract class ArcanistRepositoryAPI extends Phobject {
     return null;
   }
 
+  /**
+   * @param string $base_commit_argument_rules
+   */
   public function setBaseCommitArgumentRules($base_commit_argument_rules) {
     $this->baseCommitArgumentRules = $base_commit_argument_rules;
     return $this;
   }
 
+  /**
+   * @return string
+   */
   public function getBaseCommitArgumentRules() {
     return $this->baseCommitArgumentRules;
   }
 
+  /**
+   * @return string e.g. 'HEAD^' for a git repository
+   */
   public function resolveBaseCommit() {
     $base_commit_rules = array(
       'runtime' => $this->getBaseCommitArgumentRules(),
@@ -700,6 +709,9 @@ abstract class ArcanistRepositoryAPI extends Phobject {
     return $this;
   }
 
+  /**
+   * @return ArcanistRuntime
+   */
   final public function getRuntime() {
     return $this->runtime;
   }

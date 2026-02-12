@@ -607,7 +607,7 @@ abstract class PhutilTestCase extends Phobject {
    * Execute the tests in this test case. You should not call this directly;
    * use @{class:PhutilUnitTestEngine} to orchestrate test execution.
    *
-   * @return void
+   * @return array<ArcanistUnitTestResult>
    * @task internal
    */
   final public function run() {
