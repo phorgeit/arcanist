@@ -1123,4 +1123,94 @@ final class PhutilUtilsTestCase extends PhutilTestCase {
       $this->assertCaught($expect_exceptions, $caught, $test_name);
     }
   }
+
+  /**
+   * Test mpull() against an array of objects with public methods.
+   */
+  public function testMpull() {
+    // Use a random minimal class with public methods.
+    $test0 = new CaseInsensitiveArray(array(0, 1, 2));
+    $test1 = new CaseInsensitiveArray(array(null, 3, 4, 5));
+    $cases = array(
+      'test0' => $test0,
+      'test1' => $test1,
+    );
+
+    // Test mpull() to get an array with:
+    //   key:   the original array key
+    //   value: the call 'value->current()'
+    $result = mpull($cases, 'current');
+    $this->assertTrue(array_key_exists('test0', $result));
+    $this->assertTrue(array_key_exists('test1', $result));
+    $this->assertEqual($result['test0'], 0);
+    $this->assertEqual($result['test1'], null);
+
+    // Test mpull() to get an array with:
+    //   key:   the call 'value->current()'
+    //   value: the original array value
+    // For a PHP limitation, the array key NULL becomes ''.
+    $result = mpull($cases, null, 'current');
+    $this->assertTrue(array_key_exists(0, $result));
+    $this->assertTrue(array_key_exists('', $result));
+    $this->assertEqual($result[0], $test0);
+    $this->assertEqual($result[''], $test1);
+
+    // Test mpull() to get an array with:
+    //   key:   the call 'value->count()'
+    //   value: the call 'value->current()'
+    // For a PHP limitation, the array key NULL becomes ''.
+    $result = mpull($cases, 'count', 'current');
+    $this->assertTrue(array_key_exists(0, $result));
+    $this->assertTrue(array_key_exists('', $result));
+    $this->assertEqual($result[0], 3);
+    $this->assertEqual($result[''], 4);
+  }
+
+  /**
+   * Test ppull() against an array of objects with public properties.
+   */
+  public function testPpull() {
+    $test0 = new stdClass();
+    $test0->foo = 'test0 foo';
+    $test0->bar = null;
+
+    $test1 = new stdClass();
+    $test1->foo = null;
+    $test1->bar = 'test1 bar';
+
+    $cases = array(
+      'test0' => $test0,
+      'test1' => $test1,
+    );
+
+    // Test ppull() to get an array with:
+    //   key:   the original array key
+    //   value: the call 'value->foo'
+    $result = ppull($cases, 'foo');
+    $this->assertTrue(array_key_exists('test0', $result));
+    $this->assertTrue(array_key_exists('test1', $result));
+    $this->assertEqual($result['test0'], 'test0 foo');
+    $this->assertEqual($result['test1'], null);
+
+    // Test ppull() to get an array with:
+    //   key:   the call 'value->bar' (where NULL becomes '')
+    //   value: the original array value
+    // For a PHP limitation, the key NULL becomes ''.
+    $result = ppull($cases, null, 'bar');
+    $this->assertTrue(array_key_exists('', $result));
+    $this->assertTrue(array_key_exists('test1 bar', $result));
+    $this->assertEqual($result[''], $test0);
+    $this->assertEqual($result['test1 bar'], $test1);
+
+    // Test ppull() to get an array with:
+    //   key:   the call 'value->bar' (where NULL becomes '')
+    //   value: the call 'value->foo'
+    // For a PHP limitation, the key NULL becomes ''.
+    $result = ppull($cases, 'foo', 'bar');
+    $this->assertTrue(array_key_exists('', $result));
+    $this->assertTrue(array_key_exists('test1 bar', $result));
+    $this->assertEqual($result[''], 'test0 foo');
+    $this->assertEqual($result['test1 bar'], null);
+  }
+
 }
