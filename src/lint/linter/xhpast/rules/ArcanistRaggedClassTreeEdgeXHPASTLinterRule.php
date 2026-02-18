@@ -22,14 +22,12 @@ final class ArcanistRaggedClassTreeEdgeXHPASTLinterRule
       $is_abstract = false;
       $is_concrete_extensible = false;
 
-      $attributes = $class->getChildOfType(0, 'n_CLASS_ATTRIBUTES');
-      foreach ($attributes->getChildren() as $child) {
-        if ($child->getConcreteString() == 'final') {
-          $is_final = true;
-        }
-        if ($child->getConcreteString() == 'abstract') {
-          $is_abstract = true;
-        }
+      $class_modifiers = $this->getModifiers($class);
+      if (idx($class_modifiers, 'final')) {
+        $is_final = true;
+      }
+      if (idx($class_modifiers, 'abstract') || idx($class_modifiers, 'trait')) {
+        $is_abstract = true;
       }
 
       $docblock = $class->getDocblockToken();
