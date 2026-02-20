@@ -26,9 +26,9 @@ warning:15:2:PHPAST36:Slow Construct
 ~~~~~~~~~~
 <?php
 
-(!strncmp('a', 'b', 1));
-(strncmp('a', 'b', 1));
-(!strncmp('a', 'b', 1));
+(str_starts_with('a', 'b'));
+(!str_starts_with('a', 'b'));
+(str_starts_with('a', 'b'));
 (1 + 0 === strpos('a', 'b'));
 
 (!strncasecmp('a', 'b', 1));
@@ -36,13 +36,13 @@ warning:15:2:PHPAST36:Slow Construct
 (!strncasecmp('a', 'b', 1));
 (1 + 0 === stripos('a', 'b'));
 
-(strpos('a', 'b') === false);
+(!str_contains('a', 'b'));
 (strstr('a', 'b') === 'b');
-(strpos('a', 'b') === false);
+(!str_contains('a', 'b'));
 (strchr('a', 'b') === 'b');
 ~~~~~~~~~~
 {
   "config": {
-    "phpast.php-version": "7.4.0"
+    "phpast.php-version": "8.0.0"
   }
 }
