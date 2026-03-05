@@ -106,6 +106,7 @@ final class PhutilExecChannel extends PhutilChannel {
 
   public function write($bytes) {
     $this->future->write($bytes, $keep_pipe = true);
+    return $this;
   }
 
   public function closeWriteChannel() {
