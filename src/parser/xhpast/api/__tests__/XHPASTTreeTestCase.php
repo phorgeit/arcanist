@@ -47,8 +47,6 @@ final class XHPASTTreeTestCase extends PhutilTestCase {
 
     // Octal
     $this->assertEval(010, '010');
-    // TODO: this passes on < PHP 7 for some reason but fails on PHP 7 correctly
-    //$this->assertEval(080, '080');  // Invalid!
 
     // Leading 0, but float, not octal.
     $this->assertEval(0.11e1, '0.11e1');
