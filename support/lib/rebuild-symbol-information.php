@@ -183,6 +183,34 @@ foreach (new RecursiveIteratorIterator($iterator) as $path => $fileinfo) {
           continue;
         }
 
+        if (isset($symbol_information['functions'][$name])) {
+          $version_min = $symbol_information['functions'][$name]['php.min'];
+
+          // Skip function definitions that are already registered
+          // for older versions of PHP. Duplicate definitions exist for
+          // functions moved between extensions.
+          if (version_compare($version_min, $function['php_min'], '<=')) {
+            // However, if there is an entry for php.max,
+            // then make sure to use the value for the newer entry.
+            $symbol_information['functions'][$name]['php.max'] = idx(
+              $function,
+              'php_max');
+
+            $version_max = $symbol_information['functions'][$name]['php.max'];
+
+            // But only if the new php_min isn't newer than the php.max,
+            // or moved functions will show up as having a maximum version older
+            // than the minimum version.
+            if (
+              $version_max &&
+              version_compare($version_max, $function['php_min'], '<=')) {
+              $symbol_information['functions'][$name]['php.max'] = null;
+            }
+
+            continue;
+          }
+        }
+
         $symbol_information['functions'][$name] = map_entry(
           $extension_name,
           $function);

@@ -4687,10 +4687,10 @@
       "php.max": null
     },
     "getrandmax": {
-      "ext.name": "random",
-      "ext.min": "8.2.0beta1",
+      "ext.name": "standard",
+      "ext.min": "4.0.0",
       "ext.max": null,
-      "php.min": "8.2.0beta1",
+      "php.min": "4.0.0",
       "php.max": null
     },
     "getrusage": {
@@ -8558,10 +8558,10 @@
       "php.max": null
     },
     "lcg_value": {
-      "ext.name": "random",
-      "ext.min": "8.2.0beta1",
+      "ext.name": "standard",
+      "ext.min": "4.0.0",
       "ext.max": null,
-      "php.min": "8.2.0beta1",
+      "php.min": "4.0.0",
       "php.max": null
     },
     "lchgrp": {
@@ -10001,16 +10001,16 @@
     },
     "mcrypt_create_iv": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.0",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.0",
       "php.max": null
     },
     "mcrypt_decrypt": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_ecb": {
@@ -10022,93 +10022,93 @@
     },
     "mcrypt_enc_get_algorithms_name": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_enc_get_block_size": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_enc_get_iv_size": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_enc_get_key_size": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_enc_get_modes_name": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_enc_get_supported_key_sizes": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_enc_is_block_algorithm": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_enc_is_block_algorithm_mode": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_enc_is_block_mode": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_enc_self_test": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_encrypt": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_generic": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_generic_deinit": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.7",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.7",
       "php.max": null
     },
     "mcrypt_generic_end": {
@@ -10120,114 +10120,114 @@
     },
     "mcrypt_generic_init": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_get_block_size": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.0",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.0",
       "php.max": null
     },
     "mcrypt_get_cipher_name": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.0",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.0",
       "php.max": null
     },
     "mcrypt_get_iv_size": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_get_key_size": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.0",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.0",
       "php.max": null
     },
     "mcrypt_list_algorithms": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_list_modes": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_module_close": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_module_get_algo_block_size": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_module_get_algo_key_size": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_module_get_supported_key_sizes": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_module_is_block_algorithm": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_module_is_block_algorithm_mode": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_module_is_block_mode": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_module_open": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_module_self_test": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "mcrypt_ofb": {
@@ -10253,9 +10253,9 @@
     },
     "mdecrypt_generic": {
       "ext.name": "mcrypt",
-      "ext.min": "1.0.0",
-      "ext.max": null,
-      "php.min": "7.2.0",
+      "ext.min": "4.0.2",
+      "ext.max": "7.1.33",
+      "php.min": "4.0.2",
       "php.max": null
     },
     "memcache_add": {
@@ -10469,38 +10469,38 @@
       "php.max": null
     },
     "mhash": {
-      "ext.name": "hash",
-      "ext.min": "5.3.0",
+      "ext.name": "mhash",
+      "ext.min": "4.0.0",
       "ext.max": null,
-      "php.min": "5.3.0",
+      "php.min": "4.0.0",
       "php.max": null
     },
     "mhash_count": {
-      "ext.name": "hash",
-      "ext.min": "5.3.0",
+      "ext.name": "mhash",
+      "ext.min": "4.0.0",
       "ext.max": null,
-      "php.min": "5.3.0",
+      "php.min": "4.0.0",
       "php.max": null
     },
     "mhash_get_block_size": {
-      "ext.name": "hash",
-      "ext.min": "5.3.0",
+      "ext.name": "mhash",
+      "ext.min": "4.0.0",
       "ext.max": null,
-      "php.min": "5.3.0",
+      "php.min": "4.0.0",
       "php.max": null
     },
     "mhash_get_hash_name": {
-      "ext.name": "hash",
-      "ext.min": "5.3.0",
+      "ext.name": "mhash",
+      "ext.min": "4.0.0",
       "ext.max": null,
-      "php.min": "5.3.0",
+      "php.min": "4.0.0",
       "php.max": null
     },
     "mhash_keygen_s2k": {
-      "ext.name": "hash",
-      "ext.min": "5.3.0",
+      "ext.name": "mhash",
+      "ext.min": "4.0.4",
       "ext.max": null,
-      "php.min": "5.3.0",
+      "php.min": "4.0.4",
       "php.max": null
     },
     "microtime": {
@@ -10910,24 +10910,24 @@
       "php.max": null
     },
     "mt_getrandmax": {
-      "ext.name": "random",
-      "ext.min": "8.2.0beta1",
+      "ext.name": "standard",
+      "ext.min": "4.0.0",
       "ext.max": null,
-      "php.min": "8.2.0beta1",
+      "php.min": "4.0.0",
       "php.max": null
     },
     "mt_rand": {
-      "ext.name": "random",
-      "ext.min": "8.2.0beta1",
+      "ext.name": "standard",
+      "ext.min": "4.0.0",
       "ext.max": null,
-      "php.min": "8.2.0beta1",
+      "php.min": "4.0.0",
       "php.max": null
     },
     "mt_srand": {
-      "ext.name": "random",
-      "ext.min": "8.2.0beta1",
+      "ext.name": "standard",
+      "ext.min": "4.0.0",
       "ext.max": null,
-      "php.min": "8.2.0beta1",
+      "php.min": "4.0.0",
       "php.max": null
     },
     "mysql": {
@@ -17651,24 +17651,24 @@
       "php.max": null
     },
     "rand": {
-      "ext.name": "random",
-      "ext.min": "8.2.0beta1",
+      "ext.name": "standard",
+      "ext.min": "4.0.0",
       "ext.max": null,
-      "php.min": "8.2.0beta1",
+      "php.min": "4.0.0",
       "php.max": null
     },
     "random_bytes": {
-      "ext.name": "random",
-      "ext.min": "8.2.0beta1",
+      "ext.name": "standard",
+      "ext.min": "7.0.2",
       "ext.max": null,
-      "php.min": "8.2.0beta1",
+      "php.min": "7.0.2",
       "php.max": null
     },
     "random_int": {
-      "ext.name": "random",
-      "ext.min": "8.2.0beta1",
+      "ext.name": "standard",
+      "ext.min": "7.0.2",
       "ext.max": null,
-      "php.min": "8.2.0beta1",
+      "php.min": "7.0.2",
       "php.max": null
     },
     "range": {
@@ -19464,10 +19464,10 @@
       "php.max": null
     },
     "srand": {
-      "ext.name": "random",
-      "ext.min": "8.2.0beta1",
+      "ext.name": "standard",
+      "ext.min": "4.0.0",
       "ext.max": null,
-      "php.min": "8.2.0beta1",
+      "php.min": "4.0.0",
       "php.max": null
     },
     "sscanf": {
@@ -22741,100 +22741,100 @@
     },
     "xmlrpc_decode": {
       "ext.name": "xmlrpc",
-      "ext.min": "1.0.0RC1",
+      "ext.min": "4.1.0",
       "ext.max": null,
-      "php.min": "8.0.0",
+      "php.min": "4.1.0",
       "php.max": null
     },
     "xmlrpc_decode_request": {
       "ext.name": "xmlrpc",
-      "ext.min": "1.0.0RC1",
+      "ext.min": "4.1.0",
       "ext.max": null,
-      "php.min": "8.0.0",
+      "php.min": "4.1.0",
       "php.max": null
     },
     "xmlrpc_encode": {
       "ext.name": "xmlrpc",
-      "ext.min": "1.0.0RC1",
+      "ext.min": "4.1.0",
       "ext.max": null,
-      "php.min": "8.0.0",
+      "php.min": "4.1.0",
       "php.max": null
     },
     "xmlrpc_encode_request": {
       "ext.name": "xmlrpc",
-      "ext.min": "1.0.0RC1",
+      "ext.min": "4.1.0",
       "ext.max": null,
-      "php.min": "8.0.0",
+      "php.min": "4.1.0",
       "php.max": null
     },
     "xmlrpc_get_type": {
       "ext.name": "xmlrpc",
-      "ext.min": "1.0.0RC1",
+      "ext.min": "4.1.0",
       "ext.max": null,
-      "php.min": "8.0.0",
+      "php.min": "4.1.0",
       "php.max": null
     },
     "xmlrpc_is_fault": {
       "ext.name": "xmlrpc",
-      "ext.min": "1.0.0RC1",
+      "ext.min": "4.3.0",
       "ext.max": null,
-      "php.min": "8.0.0",
+      "php.min": "4.3.0",
       "php.max": null
     },
     "xmlrpc_parse_method_descriptions": {
       "ext.name": "xmlrpc",
-      "ext.min": "1.0.0RC1",
+      "ext.min": "4.1.0",
       "ext.max": null,
-      "php.min": "8.0.0",
+      "php.min": "4.1.0",
       "php.max": null
     },
     "xmlrpc_server_add_introspection_data": {
       "ext.name": "xmlrpc",
-      "ext.min": "1.0.0RC1",
+      "ext.min": "4.1.0",
       "ext.max": null,
-      "php.min": "8.0.0",
+      "php.min": "4.1.0",
       "php.max": null
     },
     "xmlrpc_server_call_method": {
       "ext.name": "xmlrpc",
-      "ext.min": "1.0.0RC1",
+      "ext.min": "4.1.0",
       "ext.max": null,
-      "php.min": "8.0.0",
+      "php.min": "4.1.0",
       "php.max": null
     },
     "xmlrpc_server_create": {
       "ext.name": "xmlrpc",
-      "ext.min": "1.0.0RC1",
+      "ext.min": "4.1.0",
       "ext.max": null,
-      "php.min": "8.0.0",
+      "php.min": "4.1.0",
       "php.max": null
     },
     "xmlrpc_server_destroy": {
       "ext.name": "xmlrpc",
-      "ext.min": "1.0.0RC1",
+      "ext.min": "4.1.0",
       "ext.max": null,
-      "php.min": "8.0.0",
+      "php.min": "4.1.0",
       "php.max": null
     },
     "xmlrpc_server_register_introspection_callback": {
       "ext.name": "xmlrpc",
-      "ext.min": "1.0.0RC1",
+      "ext.min": "4.1.0",
       "ext.max": null,
-      "php.min": "8.0.0",
+      "php.min": "4.1.0",
       "php.max": null
     },
     "xmlrpc_server_register_method": {
       "ext.name": "xmlrpc",
-      "ext.min": "1.0.0RC1",
+      "ext.min": "4.1.0",
       "ext.max": null,
-      "php.min": "8.0.0",
+      "php.min": "4.1.0",
       "php.max": null
     },
     "xmlrpc_set_type": {
       "ext.name": "xmlrpc",
-      "ext.min": "1.0.0RC1",
+      "ext.min": "4.1.0",
       "ext.max": null,
-      "php.min": "8.0.0",
+      "php.min": "4.1.0",
       "php.max": null
     },
     "xmlwriter_end_attribute": {
