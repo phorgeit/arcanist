@@ -1219,7 +1219,6 @@ phutil_register_library_map(array(
     'phutil_hashes_are_identical' => 'utils/utils.php',
     'phutil_http_parameter_pair' => 'utils/utils.php',
     'phutil_ini_decode' => 'utils/utils.php',
-    'phutil_is_hiphop_runtime' => 'utils/utils.php',
     'phutil_is_interactive' => 'utils/utils.php',
     'phutil_is_natural_list' => 'utils/utils.php',
     'phutil_is_noninteractive' => 'utils/utils.php',

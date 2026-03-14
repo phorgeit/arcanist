@@ -1039,10 +1039,6 @@ function phutil_is_windows() {
   return (DIRECTORY_SEPARATOR != '/');
 }
 
-function phutil_is_hiphop_runtime() {
-  return (array_key_exists('HPHP', $_ENV) && $_ENV['HPHP'] === 1);
-}
-
 /**
  * Converts a string to a loggable one, with unprintables and newlines escaped.
  *
