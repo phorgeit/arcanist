@@ -154,9 +154,8 @@ final class PhutilConsole extends Phobject {
   }
 
   public function beginRedirectOut() {
-    // We need as small buffer as possible. 0 means infinite, 1 means 4096 in
-    // PHP < 5.4.0.
-    ob_start(array($this, 'redirectOutCallback'), 2);
+    // We need as small buffer as possible, so set 1.
+    ob_start(array($this, 'redirectOutCallback'), 1);
     $this->flushing = true;
   }
 
