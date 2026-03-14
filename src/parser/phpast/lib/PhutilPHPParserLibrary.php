@@ -140,7 +140,7 @@ final class PhutilPHPParserLibrary extends Phobject {
   private static function phpParserAutoloader($classname) {
     $lib = self::getPath();
 
-    if (strpos($classname, 'PhpParser') !== 0) {
+    if (strncmp($classname, 'PhpParser', 9)) {
       return false;
     }
 
