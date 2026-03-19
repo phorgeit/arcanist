@@ -204,12 +204,11 @@ abstract class ArcanistWorkEngine
           'No task "%s" exists, or you do not have permission to view it.',
           $symbol));
     }
+    $branch_name = $this->handleWorkOnTaskBranch($task_ref);
 
-    throw new Exception(pht('TODO: Implement this workflow.'));
-
-    $this->loadHardpoints(
-      $task_ref,
-      ArcanistWorkingCopyStateRef::HARDPOINT_REVISIONREFS);
+    return id(new ArcanistMarkerRef())
+      ->setName($branch_name)
+      ->setMarkerType(ArcanistMarkerRef::TYPE_BRANCH);
   }
 
 }
