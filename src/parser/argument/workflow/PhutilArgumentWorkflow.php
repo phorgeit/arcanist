@@ -98,7 +98,14 @@ class PhutilArgumentWorkflow extends Phobject {
   /**
    * Provide brief usage examples of common calling conventions, like:
    *
-   *   $workflow->setExamples("**delete** __file__ [__options__]");
+   *   $workflow->setExamples('**delete** __file__ [__options__]');
+   *
+   * or
+   *
+   *   $workflow->setExamples(array(
+   *      '**delete** __file__ [__options__]',
+   *      '**delete** __directory__',
+   *   ));
    *
    * This text is shown in both brief and detailed help, and should give the
    * user a quick reference for common uses. You can separate several common
@@ -112,6 +119,9 @@ class PhutilArgumentWorkflow extends Phobject {
   final public function getExamples() {
     if (!$this->examples) {
       return '**'.$this->name.'**';
+    }
+    if (is_array($this->examples)) {
+      return implode("\n", $this->examples);
     }
     return $this->examples;
   }
