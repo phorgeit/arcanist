@@ -84,8 +84,8 @@ final class PhutilSocketChannel extends PhutilChannel {
       throw new Exception(pht('%s failed!', 'stream_socket_pair()'));
     }
 
-    $x = new PhutilSocketChannel($pair[0]);
-    $y = new PhutilSocketChannel($pair[1]);
+    $x = new self($pair[0]);
+    $y = new self($pair[1]);
 
     return array($x, $y);
   }

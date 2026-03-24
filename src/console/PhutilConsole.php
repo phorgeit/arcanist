@@ -81,7 +81,7 @@ final class PhutilConsole extends Phobject {
 
 
   public static function newConsoleForServer(PhutilConsoleServer $server) {
-    $console = new PhutilConsole();
+    $console = new self();
     $console->server = $server;
     return $console;
   }
@@ -93,7 +93,7 @@ final class PhutilConsole extends Phobject {
       fopen('php://stdout', 'w'));
     $protocol_channel = new PhutilPHPObjectProtocolChannel($io_channel);
 
-    $console = new PhutilConsole();
+    $console = new self();
     $console->channel = $protocol_channel;
 
     return $console;

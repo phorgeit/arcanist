@@ -12,7 +12,7 @@ final class PhutilEventEngine extends Phobject {
 
   public static function getInstance() {
     if (!self::$instance) {
-      self::$instance = new PhutilEventEngine();
+      self::$instance = new self();
     }
     return self::$instance;
   }

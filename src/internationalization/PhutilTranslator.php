@@ -12,7 +12,7 @@ final class PhutilTranslator extends Phobject {
 
   public static function getInstance() {
     if (self::$instance === null) {
-      self::$instance = new PhutilTranslator();
+      self::$instance = new self();
     }
     return self::$instance;
   }

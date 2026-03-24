@@ -63,7 +63,7 @@ final class PhutilArgumentSpecification extends Phobject {
           implode(', ', $recognized_keys)));
     }
 
-    $obj = new PhutilArgumentSpecification();
+    $obj = new self();
 
     foreach ($spec as $key => $value) {
       switch ($key) {

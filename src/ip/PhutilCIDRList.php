@@ -22,7 +22,7 @@ final class PhutilCIDRList extends Phobject {
       $blocks[$key] = PhutilCIDRBlock::newBlock($block);
     }
 
-    $obj = new PhutilCIDRList();
+    $obj = new self();
     $obj->blocks = $blocks;
     return $obj;
   }

@@ -69,7 +69,7 @@ final class ArcanistDiffChange extends Phobject {
       $hunks[] = ArcanistDiffHunk::newFromDictionary($hunk);
     }
 
-    $obj = new ArcanistDiffChange();
+    $obj = new self();
     $obj->metadata = $dict['metadata'];
     $obj->oldPath = $dict['oldPath'];
     $obj->currentPath = $dict['currentPath'];

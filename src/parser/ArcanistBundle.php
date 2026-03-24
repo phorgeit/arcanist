@@ -101,7 +101,7 @@ final class ArcanistBundle extends Phobject {
   }
 
   public static function newFromChanges(array $changes) {
-    $obj = new ArcanistBundle();
+    $obj = new self();
     $obj->changes = $changes;
     return $obj;
   }
@@ -174,7 +174,7 @@ final class ArcanistBundle extends Phobject {
       $changes[$change_key] = ArcanistDiffChange::newFromDictionary($change);
     }
 
-    $obj = new ArcanistBundle();
+    $obj = new self();
     $obj->changes = $changes;
     $obj->diskPath = $path;
     $obj->setBaseRevision($base_revision);
@@ -185,7 +185,7 @@ final class ArcanistBundle extends Phobject {
   }
 
   public static function newFromDiff($data) {
-    $obj = new ArcanistBundle();
+    $obj = new self();
 
     $parser = new ArcanistDiffParser();
     $obj->changes = $parser->parseDiff($data);

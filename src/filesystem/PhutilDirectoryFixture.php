@@ -18,7 +18,7 @@ final class PhutilDirectoryFixture extends Phobject {
   }
 
   public static function newEmptyFixture() {
-    $obj = new PhutilDirectoryFixture();
+    $obj = new self();
     $obj->path = Filesystem::createTemporaryDirectory();
     return $obj;
   }
