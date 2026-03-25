@@ -175,14 +175,12 @@ final class PhutilSocketChannel extends PhutilChannel {
     $this->closeWriteSocket();
   }
 
-  private function closeOneSocket($socket) {
+  private function closeOneSocket($socket): void {
     if (!$socket) {
       return;
     }
-    // We should also stream_socket_shutdown() here but HHVM throws errors
-    // with it (for example 'Unexpected object type PlainFile'). We depend
-    // just on fclose() until it is fixed.
-    @fclose($socket);
+    stream_socket_shutdown($socket, STREAM_SHUT_RDWR);
+    fclose($socket);
   }
 
   private function closeSockets() {
