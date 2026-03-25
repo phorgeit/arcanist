@@ -70,6 +70,7 @@ final class ArcanistPHPASTLinter extends ArcanistFutureLinter {
     $code,
     $desc,
     $replace = null) {
+
     return $this->raiseLintAtOffset(
       $token->pos,
       $code,

@@ -141,6 +141,7 @@ abstract class ArcanistLandEngine
 
   final public function setRevisionSymbolRef(
     ArcanistRevisionSymbolRef $revision_ref) {
+
     $this->revisionSymbolRef = $revision_ref;
     return $this;
   }
@@ -1000,6 +1001,7 @@ abstract class ArcanistLandEngine
     $into_commit,
     array $symbols,
     array $commit_map) {
+
     $api = $this->getRepositoryAPI();
 
     $commit_count = count($commit_map);

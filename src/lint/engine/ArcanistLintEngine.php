@@ -64,6 +64,7 @@ abstract class ArcanistLintEngine extends Phobject {
 
   final public function setConfigurationManager(
     ArcanistConfigurationManager $configuration_manager) {
+
     $this->configurationManager = $configuration_manager;
     return $this;
   }
@@ -74,6 +75,7 @@ abstract class ArcanistLintEngine extends Phobject {
 
   final public function setWorkingCopy(
     ArcanistWorkingCopyIdentity $working_copy) {
+
     $this->workingCopy = $working_copy;
     return $this;
   }

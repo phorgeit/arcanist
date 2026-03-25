@@ -10,6 +10,7 @@ final class ArcanistFilesystemWorkingCopy
   protected function newWorkingCopyFromDirectories(
     $working_directory,
     $ancestor_directory) {
+
     return null;
   }
 

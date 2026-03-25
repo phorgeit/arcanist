@@ -136,6 +136,7 @@ abstract class PhutilLocale extends Phobject {
     $translated_pattern,
     array $args,
     $result_text) {
+
     return $result_text;
   }
 

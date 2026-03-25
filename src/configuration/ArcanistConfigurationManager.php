@@ -12,6 +12,7 @@ final class ArcanistConfigurationManager extends Phobject {
 
   public function setWorkingCopyIdentity(
     ArcanistWorkingCopyIdentity $working_copy) {
+
     $this->workingCopy = $working_copy;
     return $this;
   }

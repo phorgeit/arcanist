@@ -357,6 +357,7 @@ final class ArcanistPhutilLibraryLinter extends ArcanistLinter {
     $desc,
     $original = null,
     $replacement = null) {
+
     $root = phutil_get_library_root($library);
 
     $this->activePath = $root.'/'.$path;

@@ -97,6 +97,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
   final public function setConfigurationEngine(
     ArcanistConfigurationEngine $engine) {
+
     $this->configurationEngine = $engine;
     return $this;
   }
@@ -107,6 +108,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
   final public function setConfigurationSourceList(
     ArcanistConfigurationSourceList $list) {
+
     $this->configurationSourceList = $list;
     return $this;
   }
@@ -2296,6 +2298,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
   final public function setConduitEngine(
     ArcanistConduitEngine $conduit_engine) {
+
     $this->conduitEngine = $conduit_engine;
     return $this;
   }
@@ -2351,9 +2354,7 @@ abstract class ArcanistWorkflow extends Phobject {
       ->setExecutableFuture($future);
   }
 
-  final public function loadHardpoints(
-    $objects,
-    $requests) {
+  final public function loadHardpoints($objects, $requests) {
     return $this->getRuntime()->loadHardpoints($objects, $requests);
   }
 

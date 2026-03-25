@@ -1606,6 +1606,7 @@ EOTEXT
    */
   private function validateCommitMessage(
     ArcanistDifferentialCommitMessage $message) {
+
     $futures = array();
 
     $revision_id = $message->getRevisionID();

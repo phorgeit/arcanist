@@ -693,6 +693,7 @@ final class Filesystem extends Phobject {
     $prefix = '',
     $umask = 0700,
     $root_directory = null) {
+
     $prefix = preg_replace('/[^A-Z0-9._-]+/i', '', $prefix);
 
     if ($root_directory !== null) {

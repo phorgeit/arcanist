@@ -131,6 +131,7 @@ function xsprintf_callback_example(
   &$pos,
   &$value,
   &$length) {
+
   throw new RuntimeException(
     pht(
       'This function exists only to document the call signature '.

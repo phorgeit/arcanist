@@ -88,6 +88,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
   public function process(
     PhpParserAst $ast,
     array $token_stream) {
+
     static $compat_info;
 
     if (!$this->version) {
@@ -620,6 +621,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
   private function lintPHP54Incompatibilities(
     PhpParserAst $ast,
     array $token_stream) {
+
     $breaks = $ast->findNodesOfKinds(
       array(
         PhpParser\Node\Stmt\Break_::class,
@@ -919,6 +921,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
   private function lintPHP70Incompatibilities(
     PhpParserAst $ast,
     array $token_stream) {
+
     $lists = $ast->findNodesOfKind(PhpParser\Node\Expr\List_::class);
 
     foreach ($lists as $list) {
@@ -1206,6 +1209,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
   private function lintPHP73Incompatibilities(
     PhpParserAst $ast,
     array $token_stream) {
+
     // continue in switch is handled by the "Continue Inside Switch"
     // linter rule (PHPAST128)
   }
@@ -1455,6 +1459,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
   private function lintPHP80Incompatibilities(
     PhpParserAst $ast,
     array $token_stream) {
+
     $function_calls = $ast->findNodesOfKind(
       PhpParser\Node\Expr\FuncCall::class);
 

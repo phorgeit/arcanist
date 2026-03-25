@@ -1522,6 +1522,7 @@ final class ArcanistGitLandEngine
   private function fetchLandTarget(
     ArcanistLandTarget $target,
     $ignore_failure = false) {
+
     $api = $this->getRepositoryAPI();
 
     $err = $this->newPassthru(

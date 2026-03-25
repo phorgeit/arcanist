@@ -41,6 +41,7 @@ final class ArcanistAliasEngine
 
   public function setConfigurationSourceList(
     ArcanistConfigurationSourceList $config) {
+
     $this->configurationSourceList = $config;
     return $this;
   }

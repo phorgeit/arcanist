@@ -132,6 +132,7 @@ EOTEXT
     ArcanistRef $ref,
     ArcanistHardpoint $hardpoint,
     $depth) {
+
     $indent = str_repeat(' ', $depth);
 
     $children = array();
