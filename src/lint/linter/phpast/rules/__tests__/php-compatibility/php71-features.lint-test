@@ -24,6 +24,7 @@ error:5:19:PHPAST45:PHP Compatibility
 error:8:3:PHPAST45:PHP Compatibility
 error:10:27:PHPAST45:PHP Compatibility
 error:10:41:PHPAST45:PHP Compatibility
+error:14:13:PHPAST45:PHP Compatibility
 error:15:10:PHPAST45:PHP Compatibility
 error:19:6:PHPAST45:PHP Compatibility
 ~~~~~~~~~~

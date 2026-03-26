@@ -144,8 +144,37 @@ foreach (new RecursiveIteratorIterator($iterator) as $path => $fileinfo) {
   $entries = phutil_json_decode(Filesystem::readFile($path));
 
   switch ($fileinfo->getFilename()) {
-    case 'classes.json:':
-      $symbol_information['classes'] = map_entries($extension_name, $entries);
+    case 'classes.json':
+      foreach ($entries as $class) {
+        $name = $class['name'];
+        $symbol_information['classes'][$name] = map_entry(
+          $extension_name,
+          $class);
+      }
+      break;
+    case 'interfaces.json':
+      foreach ($entries as $interface) {
+        $name = $interface['name'];
+        $symbol_information['interfaces'][$name] = map_entry(
+          $extension_name,
+          $interface);
+      }
+      break;
+    case 'traits.json':
+      foreach ($entries as $trait) {
+        $name = $trait['name'];
+        $symbol_information['traits'][$name] = map_entry(
+          $extension_name,
+          $trait);
+      }
+      break;
+    case 'constants.json':
+      foreach ($entries as $constant) {
+        $name = $constant['name'];
+        $symbol_information['constants'][$name] = map_entry(
+          $extension_name,
+          $constant);
+      }
       break;
     case 'const.json':
       foreach ($entries as $constant) {
@@ -156,9 +185,6 @@ foreach (new RecursiveIteratorIterator($iterator) as $path => $fileinfo) {
           $extension_name,
           $constant);
       }
-      break;
-    case 'constants.json':
-      $symbol_information['constants'] = map_entries($extension_name, $entries);
       break;
     case 'functions.json':
       foreach ($entries as $function) {
@@ -232,14 +258,6 @@ foreach (new RecursiveIteratorIterator($iterator) as $path => $fileinfo) {
         }
       }
       break;
-    case 'interfaces.json':
-      $symbol_information['interfaces'] = map_entries(
-        $extension_name,
-        $entries);
-      break;
-    case 'traits.json':
-      $symbol_information['traits'] = map_entries($extension_name, $entries);
-      break;
   }
 }
 
@@ -264,17 +282,6 @@ if ($args->getArg('show')) {
 }
 
 Filesystem::remove($target);
-
-function map_entries(string $extension_name, array $entries) {
-  $information = array();
-
-  foreach ($entries as $entry) {
-    $name = $entry['name'];
-    $information[$name] = map_entry($extension_name, $entry);
-  }
-
-  return $information;
-}
 
 function map_entry(string $extension_name, array $entry) {
   return array(
