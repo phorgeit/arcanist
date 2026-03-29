@@ -486,10 +486,9 @@ final class Filesystem extends Phobject {
   /**
    * Generate a random integer value in a given range.
    *
-   * This method uses less-entropic random sources under older versions of PHP.
-   *
    * @param int $min Minimum value, inclusive.
    * @param int $max Maximum value, inclusive.
+   * @deprecated Call PHP's random_int() directly.
    */
   public static function readRandomInteger($min, $max) {
     if (!is_int($min)) {
@@ -508,28 +507,7 @@ final class Filesystem extends Phobject {
           $max));
     }
 
-    // Under PHP 7.2.0 and newer, we can just use "random_int()". This function
-    // is intended to generate cryptographically usable entropy.
-    if (function_exists('random_int')) {
-      return random_int($min, $max);
-    }
-
-    // We could find a stronger source for this, but correctly converting raw
-    // bytes to an integer range without biases is fairly hard and it seems
-    // like we're more likely to get that wrong than suffer a PRNG prediction
-    // issue by falling back to "mt_rand()".
-
-    if (($max - $min) > mt_getrandmax()) {
-      throw new Exception(
-        pht('mt_rand() range is smaller than the requested range.'));
-    }
-
-    $result = mt_rand($min, $max);
-    if (!is_int($result)) {
-      throw new Exception(pht('Bad return value from mt_rand().'));
-    }
-
-    return $result;
+    return random_int($min, $max);
   }
 
 
