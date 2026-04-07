@@ -154,6 +154,8 @@ abstract class ArcanistMarkersWorkflow
     }
 
     echo tsprintf('%s', $grid->drawGrid());
+
+    return 0;
   }
 
   final protected function hasMarkerTypeSupport($marker_type) {
