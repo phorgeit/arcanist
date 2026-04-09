@@ -819,7 +819,7 @@ abstract class PhutilTestCase extends Phobject {
   /**
    * Returns info about the caller function.
    *
-   * @return map
+   * @return array Map
    */
   private static function getCallerInfo() {
     $callee = array();
