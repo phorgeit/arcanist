@@ -208,11 +208,6 @@ EOTEXT
           $this->parseBaseCommitArgument($this->getArgument('paths'));
           $diff = $repository_api->getFullMercurialDiff();
           $changes = $parser->parseDiff($diff);
-          $authors = $this->getConduit()->callMethodSynchronous(
-            'user.query',
-            array(
-              'phids' => array($this->getUserPHID()),
-            ));
 
           list($author) = $repository_api->execxLocal('showconfig ui.username');
         } else {
