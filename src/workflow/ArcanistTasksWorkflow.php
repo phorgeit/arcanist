@@ -175,18 +175,19 @@ EOTEXT
 
   private function findOwnerPHID($owner) {
     $conduit = $this->getConduit();
-
     $users = $conduit->callMethodSynchronous(
-      'user.query',
+      'user.search',
       array(
-        'usernames' => array($owner),
+        'constraints' => array(
+          'usernames' => array($owner),
+        ),
       ));
 
     if (!$users) {
       return null;
     }
 
-    $user = head($users);
+    $user = head($users['data']);
     return idx($user, 'phid');
   }
 
