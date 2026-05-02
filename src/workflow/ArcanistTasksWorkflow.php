@@ -106,7 +106,7 @@ EOTEXT
       ->addColumn('priority', array('title' => pht('Priority')))
       ->addColumn('status', array('title' => pht('Status')));
 
-    foreach ($this->tasks as $task) {
+    foreach ($this->tasks['data'] as $task) {
       $output = array();
 
       // Render the "T123" column.
@@ -115,7 +115,7 @@ EOTEXT
       $output['id'] = $formatted_task_id;
 
       // Render the "Title" column.
-      $formatted_title = rtrim($task['title']);
+      $formatted_title = rtrim($task['fields']['name']);
       $output['title'] = $formatted_title;
 
       // Render the "Priority" column.
@@ -140,32 +140,31 @@ EOTEXT
         'lightviolet' => 'magenta',
       );
 
-      if (isset($task['priorityColor'])) {
-        $color = idx($web_to_terminal_colors, $task['priorityColor'], 'white');
+      if (isset($task['fields']['priority']['color'])) {
+        $color = idx(
+          $web_to_terminal_colors,
+          $task['fields']['priority']['color'],
+          'white');
       } else {
         $color = 'white';
       }
       $formatted_priority = tsprintf(
         "<bg:{$color}> </bg> %s",
-        $task['priority']);
+        $task['fields']['priority']['name']);
       $output['priority'] = $formatted_priority;
 
       // Render the "Status" column.
-      if (isset($task['isClosed'])) {
-        if ($task['isClosed']) {
-          $status_text = $task['statusName'];
-          $status_color = 'red';
-        } else {
-          $status_text = $task['statusName'];
-          $status_color = 'green';
-        }
-        $formatted_status = tsprintf(
-          "<bg:{$status_color}> </bg> %s",
-          $status_text);
-        $output['status'] = $formatted_status;
+      if (isset($task['fields']['closerPHID'])) {
+        $status_text = $task['fields']['status']['name'];
+        $status_color = 'red';
       } else {
-        $output['status'] = '';
+        $status_text = $task['fields']['status']['name'];
+        $status_color = 'green';
       }
+      $formatted_status = tsprintf(
+        "<bg:{$status_color}> </bg> %s",
+        $status_text);
+      $output['status'] = $formatted_status;
 
       $table->addRow($output);
     }
@@ -195,8 +194,11 @@ EOTEXT
     $conduit = $this->getConduit();
 
     $find_params = array();
+    $find_params['constraints']['statuses'] =
+      array(($status ? $status : 'open'));
+
     if ($owner_phid !== null) {
-      $find_params['ownerPHIDs'] = array($owner_phid);
+      $find_params['constraints']['assigned'] = array($owner_phid);
     }
 
     if ($limit !== false) {
@@ -204,9 +206,8 @@ EOTEXT
     }
 
     $find_params['order'] = ($order ? 'order-'.$order : 'order-priority');
-    $find_params['status'] = ($status ? 'status-'.$status : 'status-open');
 
-    return $conduit->callMethodSynchronous('maniphest.query', $find_params);
+    return $conduit->callMethodSynchronous('maniphest.search', $find_params);
   }
 
 }
