@@ -49,6 +49,8 @@ function j() {
   Other::$y = 0;
   $mIxEdCaSe = 1;
 }
+
+function k(...$vararg) {}
 ~~~~~~~~~~
 warning:3:13:XHP9:Naming Conventions
 warning:4:9:XHP9:Naming Conventions

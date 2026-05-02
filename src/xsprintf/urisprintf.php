@@ -13,10 +13,12 @@
  *
  *   %R (Raw String)
  *     Inserts raw, unescaped text. DANGEROUS!
+ *
+ * @param string $pattern sprintf()-style format string.
+ * @param string ...$args Zero or more arguments.
  */
-function urisprintf($pattern /* , ... */) {
-  $args = func_get_args();
-  return xsprintf('xsprintf_uri', null, $args);
+function urisprintf($pattern, ...$args) {
+  return xsprintf('xsprintf_uri', null, func_get_args());
 }
 
 function vurisprintf($pattern, array $argv) {

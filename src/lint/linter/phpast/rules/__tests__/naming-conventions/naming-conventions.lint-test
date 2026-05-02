@@ -55,6 +55,8 @@ final class Foo {
     return new class() {};
   }
 }
+
+function k(...$vararg) {}
 ~~~~~~~~~~
 warning:3:13:PHPAST9:Naming Conventions
 warning:4:9:PHPAST9:Naming Conventions

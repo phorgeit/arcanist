@@ -138,19 +138,25 @@ final class PhutilConsole extends Phobject {
     return $this->writeMessage($message);
   }
 
-  public function writeOut($pattern /* , ... */) {
-    $args = func_get_args();
-    return $this->writeTextMessage(PhutilConsoleMessage::TYPE_OUT, $args);
+  public function writeOut($pattern, ...$args) {
+    return $this->writeTextMessage(
+      PhutilConsoleMessage::TYPE_OUT,
+      $pattern,
+      ...$args);
   }
 
-  public function writeErr($pattern /* , ... */) {
-    $args = func_get_args();
-    return $this->writeTextMessage(PhutilConsoleMessage::TYPE_ERR, $args);
+  public function writeErr($pattern, ...$args) {
+    return $this->writeTextMessage(
+      PhutilConsoleMessage::TYPE_ERR,
+      $pattern,
+      ...$args);
   }
 
-  public function writeLog($pattern /* , ... */) {
-    $args = func_get_args();
-    return $this->writeTextMessage(PhutilConsoleMessage::TYPE_LOG, $args);
+  public function writeLog($pattern, ...$args) {
+    return $this->writeTextMessage(
+      PhutilConsoleMessage::TYPE_LOG,
+      $pattern,
+      ...$args);
   }
 
   public function beginRedirectOut() {
@@ -177,7 +183,7 @@ final class PhutilConsole extends Phobject {
     return '';
   }
 
-  private function writeTextMessage($type, array $argv) {
+  private function writeTextMessage($type, ...$argv) {
 
     $message = id(new PhutilConsoleMessage())
       ->setType($type)

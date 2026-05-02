@@ -394,19 +394,16 @@ abstract class ArcanistRepositoryAPI extends Phobject {
     throw new ArcanistCapabilityNotSupportedException($this);
   }
 
-  public function execxLocal($pattern /* , ... */) {
-    $args = func_get_args();
-    return $this->buildLocalFuture($args)->resolvex();
+  public function execxLocal($pattern, ...$args) {
+    return $this->buildLocalFuture(func_get_args())->resolvex();
   }
 
-  public function execManualLocal($pattern /* , ... */) {
-    $args = func_get_args();
-    return $this->buildLocalFuture($args)->resolve();
+  public function execManualLocal($pattern, ...$args) {
+    return $this->buildLocalFuture(func_get_args())->resolve();
   }
 
-  public function execFutureLocal($pattern /* , ... */) {
-    $args = func_get_args();
-    return $this->buildLocalFuture($args);
+  public function execFutureLocal($pattern, ...$args) {
+    return $this->buildLocalFuture(func_get_args());
   }
 
   abstract protected function buildLocalFuture(array $argv);
@@ -684,24 +681,17 @@ abstract class ArcanistRepositoryAPI extends Phobject {
     return null;
   }
 
-  final public function newFuture($pattern /* , ... */) {
-    $args = func_get_args();
-    return $this->buildLocalFuture($args)
+  final public function newFuture($pattern, ...$args) {
+    return $this->buildLocalFuture(func_get_args())
       ->setResolveOnError(false);
   }
 
-  public function newPassthru($pattern /* , ... */) {
+  public function newPassthru($pattern, ...$args) {
     throw new PhutilMethodNotImplementedException();
   }
 
-  final public function execPassthru($pattern /* , ... */) {
-    $args = func_get_args();
-
-    $future = call_user_func_array(
-      array($this, 'newPassthru'),
-      $args);
-
-    return $future->resolve();
+  final public function execPassthru($pattern, ...$args) {
+    return $this->newPassthru($pattern, ...$args)->resolve();
   }
 
   final public function setRuntime(ArcanistRuntime $runtime) {

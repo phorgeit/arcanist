@@ -123,7 +123,9 @@ final class ArcanistNamingConventionsXHPASTLinterRule
     foreach ($params as $param_list) {
       foreach ($param_list->getChildren() as $param) {
         $name_token = $param->getChildByIndex(1);
-        if ($name_token->getTypeName() === 'n_VARIABLE_REFERENCE') {
+        if (
+          $name_token->getTypeName() === 'n_VARIABLE_REFERENCE' ||
+          $name_token->getTypeName() === 'n_UNPACK') {
           $name_token = $name_token->getChildOfType(0, 'n_VARIABLE');
         }
         $param_tokens[$name_token->getID()] = true;

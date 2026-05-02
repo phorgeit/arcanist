@@ -1605,15 +1605,11 @@ abstract class ArcanistLandEngine
     return $sets;
   }
 
-  final protected function newPassthruCommand($pattern /* , ... */) {
+  final protected function newPassthruCommand($pattern, ...$args) {
     $workflow = $this->getWorkflow();
-    $argv = func_get_args();
 
     $api = $this->getRepositoryAPI();
-
-    $passthru = call_user_func_array(
-      array($api, 'newPassthru'),
-      $argv);
+    $passthru = $api->newPassthru($pattern, ...$args);
 
     $command = $workflow->newCommand($passthru)
       ->setResolveOnError(true);
@@ -1621,12 +1617,8 @@ abstract class ArcanistLandEngine
     return $command;
   }
 
-  final protected function newPassthru($pattern /* , ... */) {
-    $argv = func_get_args();
-
-    $command = call_user_func_array(
-      array($this, 'newPassthruCommand'),
-      $argv);
+  final protected function newPassthru($pattern, ...$args) {
+    $command = $this->newPassthruCommand($pattern, ...$args);
 
     return $command->execute();
   }

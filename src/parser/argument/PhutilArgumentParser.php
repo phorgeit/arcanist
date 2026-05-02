@@ -993,17 +993,12 @@ final class PhutilArgumentParser extends Phobject {
     return implode("\n", $out);
   }
 
-  private function format($str /* , ... */) {
-    $args = func_get_args();
-    return call_user_func_array(
-      'phutil_console_format',
-      $args);
+  private function format($str, ...$args) {
+    return phutil_console_format($str, ...$args);
   }
 
-  private function indent($level, $str /* , ... */) {
-    $args = func_get_args();
-    $args = array_slice($args, 1);
-    $text = call_user_func_array(array($this, 'format'), $args);
+  private function indent($level, $str, ...$args) {
+    $text = $this->format($str, ...$args);
     return phutil_console_wrap($text, $level);
   }
 

@@ -25,11 +25,11 @@ final class ArcanistMercurialAPI extends ArcanistRepositoryAPI {
     return $this->newConfiguredFuture(newv(ExecFuture::class, $argv));
   }
 
-  public function newPassthru($pattern /* , ... */) {
-    $args = func_get_args();
-    $args[0] = self::ROOT_HG_COMMAND.$args[0];
+  public function newPassthru($pattern, ...$args) {
+    $pattern = self::ROOT_HG_COMMAND.$pattern;
 
-    return $this->newConfiguredFuture(newv(PhutilExecPassthru::class, $args));
+    return $this->newConfiguredFuture(
+      new PhutilExecPassthru($pattern, ...$args));
   }
 
   private function newConfiguredFuture(PhutilExecutableFuture $future) {
@@ -1091,7 +1091,7 @@ final class ArcanistMercurialAPI extends ArcanistRepositoryAPI {
    * @param string  $extension The name of the extension to enable.
    * @param string  $pattern The command pattern that will be run with the
    *                extension enabled.
-   * @param array   $params,... Parameters for the command pattern argument.
+   * @param array   ...$params Parameters for the command pattern argument.
    * @return array  An array where the first item is a Mercurial command
    *                pattern that includes the necessary flag for enabling the
    *                desired extension, and all remaining items are parameters
@@ -1099,11 +1099,8 @@ final class ArcanistMercurialAPI extends ArcanistRepositoryAPI {
    */
   private function buildMercurialExtensionCommand(
     $extension,
-    $pattern /* , ... */) {
-
-    $args = func_get_args();
-
-    $pattern_args = array_slice($args, 2);
+    $pattern,
+    ...$params) {
 
     $ext_flag = $this->getMercurialExtensionFlag($extension);
 
@@ -1111,65 +1108,62 @@ final class ArcanistMercurialAPI extends ArcanistRepositoryAPI {
 
     $args = array_merge(
       array($full_cmd),
-      $pattern_args);
+      $params);
 
     return $args;
   }
 
   public function execxLocalWithExtension(
     $extension,
-    $pattern /* , ... */) {
+    $pattern,
+    ...$params) {
 
-    $args = func_get_args();
-    $extended_args = call_user_func_array(
-      array($this, 'buildMercurialExtensionCommand'),
-      $args);
+    $extended_args = $this->buildMercurialExtensionCommand(
+      $extension,
+      $pattern,
+      ...$params);
 
-    return call_user_func_array(
-      array($this, 'execxLocal'),
-      $extended_args);
+    return $this->execxLocal(...$extended_args);
   }
 
   public function execFutureLocalWithExtension(
     $extension,
-    $pattern /* , ... */) {
+    $pattern,
+    ...$params) {
 
-    $args = func_get_args();
-    $extended_args = call_user_func_array(
-      array($this, 'buildMercurialExtensionCommand'),
-      $args);
+    $extended_args = $this->buildMercurialExtensionCommand(
+      $extension,
+      $pattern,
+      ...$params);
 
-    return call_user_func_array(
-      array($this, 'execFutureLocal'),
-      $extended_args);
+    return $this->execFutureLocal(...$extended_args);
   }
 
   public function execPassthruWithExtension(
     $extension,
-    $pattern /* , ... */) {
+    $pattern,
+    ...$params) {
 
-    $args = func_get_args();
-    $extended_args = call_user_func_array(
-      array($this, 'buildMercurialExtensionCommand'),
-      $args);
+    $extended_args = $this->buildMercurialExtensionCommand(
+      $extension,
+      $pattern,
+      ...$params);
 
-    return call_user_func_array(
-      array($this, 'execPassthru'),
-      $extended_args);
+    return $this->execPassthru(...$extended_args);
   }
 
   public function execManualLocalWithExtension(
     $extension,
-    $pattern /* , ... */) {
+    $pattern,
+    ...$params) {
 
-    $args = func_get_args();
-    $extended_args = call_user_func_array(
-      array($this, 'buildMercurialExtensionCommand'),
-      $args);
+    $extended_args = $this->buildMercurialExtensionCommand(
+      $extension,
+      $pattern,
+      ...$params);
 
-    return call_user_func_array(
-      array($this, 'execManualLocal'),
-      $extended_args);
+
+    return $this->execManualLocal(...$extended_args);
   }
 
   private function executeMercurialFeatureTest($feature, $resolve) {

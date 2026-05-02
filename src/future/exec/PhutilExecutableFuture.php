@@ -10,9 +10,7 @@ abstract class PhutilExecutableFuture extends Future {
   private $cwd;
   private $resolveOnError = true;
 
-  final public function __construct($pattern /* , ... */) {
-    $args = func_get_args();
-
+  final public function __construct($pattern, ...$args) {
     if ($pattern instanceof PhutilCommandString) {
       if (count($args) !== 1) {
         throw new Exception(
@@ -25,7 +23,7 @@ abstract class PhutilExecutableFuture extends Future {
       }
       $this->command = $pattern;
     } else {
-      $this->command = call_user_func_array('csprintf', $args);
+      $this->command = csprintf($pattern, ...$args);
     }
 
     $this->didConstruct();

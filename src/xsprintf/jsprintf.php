@@ -22,10 +22,12 @@
  *   %J (Javascript)
  *     Inserts raw, unescaped Javascript. This is DANGEROUS because it WILL
  *     NOT BE ESCAPED.
+ *
+ * @param string $pattern sprintf()-style format string.
+ * @param string ...$args Zero or more arguments.
  */
-function jsprintf($pattern /* , ... */) {
-  $args = func_get_args();
-  return xsprintf('xsprintf_javascript', null, $args);
+function jsprintf($pattern, ...$args) {
+  return xsprintf('xsprintf_javascript', null, func_get_args());
 }
 
 function vjsprintf($pattern, array $argv) {

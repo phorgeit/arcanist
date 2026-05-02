@@ -8,10 +8,12 @@
  *
  *  %R Rrraw Rreferrrence / Rrrrevset
  *    Passes text through unescaped (e.g., an already-escaped revset).
+ *
+ * @param string $pattern sprintf()-style format string.
+ * @param string ...$args Zero or more arguments.
  */
-function hgsprintf($pattern /* , ... */) {
-  $args = func_get_args();
-  return xsprintf('xsprintf_mercurial', null, $args);
+function hgsprintf($pattern, ...$args) {
+  return xsprintf('xsprintf_mercurial', null, func_get_args());
 }
 
 /**

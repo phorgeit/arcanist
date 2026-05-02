@@ -35,9 +35,8 @@ final class ArcanistCommand
     return $this->resolveOnError;
   }
 
-  public function setDisplayCommand($pattern /* , ... */) {
-    $argv = func_get_args();
-    $command = call_user_func_array('csprintf', $argv);
+  public function setDisplayCommand($pattern, ...$args) {
+    $command = csprintf($pattern, ...$args);
     $this->displayCommand = $command;
     return $this;
   }

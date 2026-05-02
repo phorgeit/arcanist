@@ -28,13 +28,12 @@
  * than by calling @{function:csprintf} directly.
  *
  * @param  string  $pattern sprintf()-style format string.
- * @param  string  $args,... Zero or more arguments.
+ * @param  string  ...$args Zero or more arguments.
  * @return PhutilCommandString  Formatted string, escaped appropriately for
  *   shell contexts.
  */
-function csprintf($pattern /* , ... */) {
-  $args = func_get_args();
-  return new PhutilCommandString($args);
+function csprintf($pattern, ...$args) {
+  return new PhutilCommandString(func_get_args());
 }
 
 /**

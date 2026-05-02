@@ -5,12 +5,11 @@
  * forwards it to registered listeners. This is essentially a more powerful
  * version of `error_log()`.
  *
- * @param  mixed  $value Any value you want printed to the error log or other
- *                registered logs/consoles.
- * @param  mixed  $value,... Other values to be logged.
+ * @param  mixed  ...$values Any value you want printed to the error log or
+ *                other registered logs/consoles.
  * @return mixed  Passed $value.
  */
-function phlog($value/* , ... */) {
+function phlog(...$values) {
   // Get the caller information.
   $trace = debug_backtrace();
   $metadata = array(
@@ -19,7 +18,7 @@ function phlog($value/* , ... */) {
     'trace' => $trace,
   );
 
-  foreach (func_get_args() as $event) {
+  foreach ($values as $event) {
     $data = $metadata;
     if (($event instanceof Exception) || ($event instanceof Throwable)) {
       $type = PhutilErrorHandler::EXCEPTION;
@@ -36,7 +35,7 @@ function phlog($value/* , ... */) {
     PhutilErrorHandler::dispatchErrorMessage($type, $event, $data);
   }
 
-  return $value;
+  return head($values);
 }
 
 /**

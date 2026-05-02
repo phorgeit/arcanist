@@ -24,9 +24,7 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
       ->setCWD($this->getPath());
   }
 
-  public function newPassthru($pattern /* , ... */) {
-    $args = func_get_args();
-
+  public function newPassthru($pattern, ...$args) {
     static $git = null;
     if ($git === null) {
       if (phutil_is_windows()) {
@@ -40,9 +38,9 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
       }
     }
 
-    $args[0] = $git.' '.$args[0];
+    $pattern = $git.' '.$pattern;
 
-    return newv(PhutilExecPassthru::class, $args)
+    return id(new PhutilExecPassthru($pattern, ...$args))
       ->setCWD($this->getPath());
   }
 
