@@ -356,7 +356,7 @@ abstract class ArcanistExternalLinter extends ArcanistFutureLinter {
    * but without flags or paths. This can be used to execute `--version`
    * commands.
    *
-   * @return string Command to execute the raw linter.
+   * @return PhutilCommandString Command to execute the raw linter.
    * @task exec
    */
   final protected function getExecutableCommand() {
@@ -416,7 +416,7 @@ abstract class ArcanistExternalLinter extends ArcanistFutureLinter {
    * This method is expected to return an already escaped string.
    *
    * @param string $path Path to the file being linted
-   * @return string The command-ready file argument
+   * @return PhutilCommandString The command-ready file argument
    */
   protected function getPathArgumentForLinterFuture($path) {
     return csprintf('%s', $path);

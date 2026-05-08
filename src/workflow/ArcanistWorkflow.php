@@ -1975,6 +1975,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
 
   /**
+   * @return array<PhabricatorRepository|null,array<string>>
    * @task phabrep
    */
   private function loadRepositoryInformation() {
@@ -1993,7 +1994,7 @@ abstract class ArcanistWorkflow extends Phobject {
         $reasons[] = pht(
           'This software version on the server you are connecting to is out '.
           'of date and does not have support for identifying repositories '.
-          'by callsign or URI. Update the server sofwware to enable these '.
+          'by callsign or URI. Update the server software to enable these '.
           'features.');
         return array(null, $reasons);
       }
@@ -2008,7 +2009,7 @@ abstract class ArcanistWorkflow extends Phobject {
         'repository.callsign');
     } else if (count($results) > 1) {
       $reasons[] = pht(
-        'Multiple repostories (%s) matched the query. You can use the '.
+        'Multiple repositories (%s) matched the query. You can use the '.
         '"%s" configuration to select the one you want.',
         implode(', ', ipull($results, 'callsign')),
         'repository.callsign');
