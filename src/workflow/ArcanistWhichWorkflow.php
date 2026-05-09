@@ -212,12 +212,17 @@ EOTEXT
 
       $other_authors = array();
       if ($other_author_phids) {
-        $other_authors = $this->getConduit()->callMethodSynchronous(
-          'user.query',
+        $other_authors_data = $this->getConduit()->callMethodSynchronous(
+          'user.search',
           array(
-            'phids' => $other_author_phids,
+            'constraints' => array(
+              'phids' => $other_author_phids,
+            ),
           ));
-        $other_authors = ipull($other_authors, 'userName', 'phid');
+        foreach ($other_authors_data['data'] as $author) {
+          $phid = $author['phid'];
+          $other_authors[$phid] = $author['fields']['username'];
+        }
       }
 
       foreach ($revisions as $revision) {
