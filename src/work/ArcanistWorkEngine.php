@@ -95,6 +95,7 @@ abstract class ArcanistWorkEngine
   abstract protected function newMarker($symbol, $start);
   abstract protected function moveToMarker(ArcanistMarkerRef $marker);
   abstract protected function getDefaultStartSymbol();
+  abstract protected function handleWorkOnTaskBranch(ArcanistTaskRef $task_ref);
 
   private function workOnRevision($symbol) {
     $workflow = $this->getWorkflow();
