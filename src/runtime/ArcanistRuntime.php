@@ -216,7 +216,7 @@ final class ArcanistRuntime {
         tsprintf(
           '%s <__%s__>',
           pht('Learn More:'),
-          'https://secure.phabricator.com/T13491'));
+          'https://we.phorge.it/u/noninteractivearc'));
 
       throw new PhutilArgumentUsageException(
         pht('Missing required "--" in argument list.'));
