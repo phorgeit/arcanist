@@ -14,8 +14,6 @@ final class ArcanistRevisionCommitMessageHardpointQuery
   }
 
   public function loadHardpoint(array $refs, $hardpoint) {
-    $api = $this->getRepositoryAPI();
-
     // NOTE: This is not efficient, but no bulk API exists at time of
     // writing and no callers bulk-load this data.
 

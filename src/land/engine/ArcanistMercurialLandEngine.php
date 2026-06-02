@@ -183,7 +183,6 @@ final class ArcanistMercurialLandEngine
    */
   private function newOntoRemote(array $symbols) {
     assert_instances_of($symbols, ArcanistLandSymbol::class);
-    $api = $this->getRepositoryAPI();
     $log = $this->getLogEngine();
 
     $remote = $this->getOntoRemoteArgument();
@@ -211,8 +210,6 @@ final class ArcanistMercurialLandEngine
 
       return $remote;
     }
-
-    $api = $this->getRepositoryAPI();
 
     $default_remote = 'default';
 
@@ -257,8 +254,6 @@ final class ArcanistMercurialLandEngine
 
       return $onto;
     }
-
-    $api = $this->getRepositoryAPI();
 
     $default_onto = 'default';
 

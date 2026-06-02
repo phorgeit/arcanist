@@ -52,8 +52,6 @@ final class ArcanistDiffParser extends Phobject {
   public function parseSubversionDiff(ArcanistSubversionAPI $api, $paths) {
     $this->setRepositoryAPI($api);
 
-    $diffs = array();
-
     foreach ($paths as $path => $status) {
       if ($status & ArcanistRepositoryAPI::FLAG_UNTRACKED ||
           $status & ArcanistRepositoryAPI::FLAG_CONFLICT ||
@@ -900,7 +898,6 @@ final class ArcanistDiffParser extends Phobject {
     // twice.
     $change->dropHunks();
 
-    $all_changes = array();
     do {
       $hunk = new ArcanistDiffHunk();
       $line = $this->getLineTrimmed();

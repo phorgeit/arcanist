@@ -67,8 +67,6 @@ final class ArcanistRefView
   }
 
   private function newLines($indent) {
-    $ref = $this->getRef();
-
     $object_name = $this->getObjectName();
     $title = $this->getTitle();
 

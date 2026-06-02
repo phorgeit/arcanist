@@ -628,7 +628,6 @@ abstract class ArcanistLandEngine
     }
 
     $build_map = array();
-    $failure_map = array();
     $buildable_map = mpull($buildable_refs, null, 'getPHID');
     $revision_map = mpull($revision_refs, null, 'getDiffPHID');
     foreach ($problem_builds as $build_ref) {
@@ -649,8 +648,6 @@ abstract class ArcanistLandEngine
 
       $build_map[$revision_phid]['buildRefs'][] = $build_ref;
     }
-
-    $log = $this->getLogEngine();
 
     if ($has_failures) {
       if ($has_ongoing) {
@@ -1246,7 +1243,6 @@ abstract class ArcanistLandEngine
 
     $this->setLocalState($local_state);
 
-    $seen_into = array();
     try {
       $last_key = last_key($sets);
 
@@ -1348,8 +1344,6 @@ abstract class ArcanistLandEngine
   }
 
   protected function validateArguments() {
-    $log = $this->getLogEngine();
-
     $into_local = $this->getIntoLocalArgument();
     $into_empty = $this->getIntoEmptyArgument();
     $into_remote = $this->getIntoRemoteArgument();
@@ -1546,7 +1540,6 @@ abstract class ArcanistLandEngine
    */
   private function filterCommitSets(array $sets) {
     assert_instances_of($sets, ArcanistLandCommitSet::class);
-    $log = $this->getLogEngine();
 
     // If some of the ancestor revisions are already closed, and the user did
     // not specifically indicate that we should land them, and we are using

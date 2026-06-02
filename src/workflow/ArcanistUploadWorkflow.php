@@ -50,7 +50,6 @@ EOTEXT
     $paths = $this->getArgument('paths');
 
     $conduit = $this->getConduitEngine();
-    $results = array();
 
     $uploader = id(new ArcanistFileUploader())
       ->setConduitEngine($conduit);

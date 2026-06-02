@@ -698,8 +698,6 @@ final class HTTPSFuture extends BaseHTTPFuture {
     // string unless there are files attached to this request.
 
     $data = $this->getData();
-    $files = $this->files;
-
     $any_data = ($data || (is_string($data) && strlen($data)));
     $any_files = (bool)$this->files;
 

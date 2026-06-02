@@ -1315,7 +1315,6 @@ EOTEXT
       }
     }
 
-    $message = null;
     if ($is_create) {
       $message_file = $this->getArgument('message-file');
       if ($message_file) {

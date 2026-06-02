@@ -76,8 +76,6 @@ final class PhutilSocketChannel extends PhutilChannel {
    * @task construct
    */
   public static function newChannelPair() {
-    $sockets = null;
-
     $domain = phutil_is_windows() ? STREAM_PF_INET : STREAM_PF_UNIX;
     $pair = stream_socket_pair($domain, STREAM_SOCK_STREAM, STREAM_IPPROTO_IP);
     if (!$pair) {

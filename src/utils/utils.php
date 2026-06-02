@@ -1985,7 +1985,6 @@ function phutil_glue(array $list, $glue) {
   $last_key = last_key($list);
 
   $keys = array();
-  $values = array();
 
   $tmp = $list;
 

@@ -59,8 +59,6 @@ EOTEXT
           'Specify only one paste to retrieve.'));
     }
 
-    $is_read = (count($argv) === 1);
-
     $symbols = $this->getSymbolEngine();
 
     if (count($argv) === 1) {

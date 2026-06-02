@@ -611,7 +611,6 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
   }
 
   private function executeSVNFindRev($input, $vcs) {
-    $match = array();
     list($stdout) = $this->execxLocal(
       'svn find-rev %s',
       $input);

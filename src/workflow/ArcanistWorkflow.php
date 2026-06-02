@@ -1039,8 +1039,6 @@ abstract class ArcanistWorkflow extends Phobject {
   final public function requireCleanWorkingCopy() {
     $api = $this->getRepositoryAPI();
 
-    $must_commit = array();
-
     $working_copy_desc = phutil_console_format(
       "  %s: __%s__\n\n",
       pht('Working copy'),

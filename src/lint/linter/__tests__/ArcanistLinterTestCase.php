@@ -87,7 +87,6 @@ abstract class ArcanistLinterTestCase extends PhutilTestCase {
 
     $exception = null;
     $after_lint = null;
-    $messages = null;
     $exception_message = false;
     $caught_exception = false;
 

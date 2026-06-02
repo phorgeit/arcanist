@@ -119,9 +119,6 @@ final class ArcanistCommitGraphSetView
   }
 
   public function newCellViews() {
-    $set = $this->getSet();
-    $api = $this->getRepositoryAPI();
-
     $commit_refs = $this->getCommitRefs();
     $revision_refs = $this->getRevisionRefs();
     $marker_refs = $this->getMarkerRefs();
@@ -255,9 +252,6 @@ final class ArcanistCommitGraphSetView
   }
 
   private function drawMarkerCell(array $items) {
-    $api = $this->getRepositoryAPI();
-
-    $marker_refs = $this->getMarkerRefs();
     $commit_refs = $this->getCommitRefs();
 
     if (count($commit_refs) === 1) {
@@ -426,8 +420,6 @@ final class ArcanistCommitGraphSetView
   }
 
   private function drawCommitLabel(ArcanistCommitRef $commit_ref) {
-    $api = $this->getRepositoryAPI();
-
     $hash = $commit_ref->getCommitHash();
     $hash = substr($hash, 0, 7);
 
@@ -451,8 +443,6 @@ final class ArcanistCommitGraphSetView
   }
 
   private function drawRevisionLabel(ArcanistRevisionRef $revision_ref) {
-    $api = $this->getRepositoryAPI();
-
     $monogram = $revision_ref->getMonogram();
 
     return tsprintf('%s', $monogram);

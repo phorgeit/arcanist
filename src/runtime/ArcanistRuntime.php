@@ -475,7 +475,6 @@ final class ArcanistRuntime {
       pht('LOAD'),
       pht('Loading library from "%s"...', $location));
 
-    $error = null;
     try {
       phutil_load_library($location);
     } catch (PhutilLibraryConflictException $ex) {

@@ -181,7 +181,6 @@ final class ArcanistGitLandEngine
   }
 
   private function fetchTarget(ArcanistLandTarget $target) {
-    $api = $this->getRepositoryAPI();
     $log = $this->getLogEngine();
 
     // NOTE: Although this output isn't hugely useful, we need to passthru
@@ -534,7 +533,6 @@ final class ArcanistGitLandEngine
   }
 
   protected function pushChange($into_commit) {
-    $api = $this->getRepositoryAPI();
     $log = $this->getLogEngine();
 
     if ($this->getIsGitPerforce()) {
@@ -886,7 +884,6 @@ final class ArcanistGitLandEngine
   }
 
   protected function didHoldChanges($into_commit) {
-    $log = $this->getLogEngine();
     $local_state = $this->getLocalState();
 
     if ($this->getIsGitPerforce()) {
@@ -1250,7 +1247,6 @@ final class ArcanistGitLandEngine
       return $upstream_remote;
     }
 
-    $perforce_remote = 'p4';
     if ($api->isPerforceRemote($remote)) {
 
       $log->writeStatus(
@@ -1522,8 +1518,6 @@ final class ArcanistGitLandEngine
   private function fetchLandTarget(
     ArcanistLandTarget $target,
     $ignore_failure = false) {
-
-    $api = $this->getRepositoryAPI();
 
     $err = $this->newPassthru(
       'fetch --no-tags --quiet -- %s %s',

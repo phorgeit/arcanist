@@ -472,7 +472,6 @@ final class PhutilErrorHandler extends Phobject {
 
     $bootloader = PhutilBootloader::getInstance();
     $libraries = $bootloader->getAllLibraries();
-    $roots = array();
     foreach ($libraries as $library) {
       $root = $bootloader->getLibraryRoot($library);
       // For these libraries, the effective root is one level up.

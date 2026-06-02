@@ -54,7 +54,6 @@ final class PhutilEventEngine extends Phobject {
         'count' => count($listeners),
       ));
 
-    $caught = null;
     try {
       foreach ($listeners as $listener) {
         if ($event->isStopped()) {
