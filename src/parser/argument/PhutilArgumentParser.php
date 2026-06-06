@@ -417,7 +417,7 @@ final class PhutilArgumentParser extends Phobject {
 
       if (isset($this->workflows[$name])) {
         throw new PhutilArgumentSpecificationException(
-          pht("Two workflows with name '%s!", $name));
+          pht("Two workflows with name '%s!'", $name));
       }
 
       $this->workflows[$name] = $workflow;
