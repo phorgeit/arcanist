@@ -804,9 +804,9 @@ abstract class PhutilTestCase extends Phobject {
 
     $uri = id(new PhutilURI($base_uri))
       ->setPath("/diffusion/symbol/{$method}/")
-      ->setQueryParam('context', get_class($this))
-      ->setQueryParam('jump', 'true')
-      ->setQueryParam('lang', 'php');
+      ->replaceQueryParam('context', get_class($this))
+      ->replaceQueryParam('jump', 'true')
+      ->replaceQueryParam('lang', 'php');
 
     return (string)$uri;
   }
