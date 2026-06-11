@@ -982,7 +982,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
           $list,
           pht(
             'Using short array syntax for `%s` was not introduced until '.
-            'PHP 7.1, but this codebase targets an earlier version of PHP.'.
+            'PHP 7.1, but this codebase targets an earlier version of PHP. '.
             'You can rewrite this expression using the `list(...)` instead.',
             'list'));
       }

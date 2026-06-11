@@ -148,7 +148,7 @@ final class ArcanistUSEnglishTranslation extends PhutilTranslation {
       'You are landing %s revision(s) which are already in the state "%s", '.
       'indicating that they have previously landed:' =>
       array(
-        'You are landing a revision which is already in the state "%s", '.
+        'You are landing a revision which is already in the state "%2$s", '.
         'indicating that it has previously landed:',
         'You are landing %s revisions which are already in the state "%s", '.
         'indicating that they have previously landed:',
@@ -296,7 +296,7 @@ final class ArcanistUSEnglishTranslation extends PhutilTranslation {
       ),
       '%s OPEN PARENT REVISION(S)' => array(
         '%s OPEN PARENT REVISION',
-        '%s OPEN PARENT REVISION(S)',
+        '%s OPEN PARENT REVISIONS',
       ),
       '< ... %s more commits ... >' => array(
         '< ... %s more commit ... >',
