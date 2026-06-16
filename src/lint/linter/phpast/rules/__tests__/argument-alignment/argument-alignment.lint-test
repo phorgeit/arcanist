@@ -64,6 +64,14 @@ $bar = id(new Foo())
   ->setBaz($baz)
   ->setFooBar($foo, $bar);
 
+$bar = id(new Foo())
+  ->setFooBar($foo, $bar);
+
+$bar = id(new Foo())->setFooBar($foo, $bar);
+
+$bar = id(new Foo())->setFooBar($foo,
+  $bar);
+
 $baz = pht(<<<EOHELP
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Nunc risus purus, varius nec aliquet pretium, aliquam in est.
@@ -88,6 +96,7 @@ warning:49:6:PHPAST140:Argument Alignment
 warning:50:9:PHPAST140:Argument Alignment
 warning:59:6:PHPAST140:Argument Alignment
 warning:60:11:PHPAST140:Argument Alignment
+warning:72:33:PHPAST140:Argument Alignment
 ~~~~~~~~~~
 <?php
 
@@ -166,6 +175,15 @@ new class(
 $bar = id(new Foo())
   ->setBaz($baz)
   ->setFooBar($foo, $bar);
+
+$bar = id(new Foo())
+  ->setFooBar($foo, $bar);
+
+$bar = id(new Foo())->setFooBar($foo, $bar);
+
+$bar = id(new Foo())->setFooBar(
+  $foo,
+  $bar);
 
 $baz = pht(<<<EOHELP
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.

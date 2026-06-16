@@ -36,8 +36,10 @@ final class ArcanistArgumentAlignmentPHPASTLinterRule
     $last = last($arguments);
 
     if (
-      $node instanceof PhpParser\Node\Expr\MethodCall &&
-      $node->var instanceof PhpParser\Node\Expr\MethodCall) {
+      $node instanceof PhpParser\Node\Expr\MethodCall && (
+        $node->var instanceof PhpParser\Node\Expr\MethodCall ||
+        $node->var->getStartLine() !== $node->name->getStartLine())) {
+
       $start_line = $node->name->getStartLine();
     } else {
       $start_line = $node->getStartLine();
@@ -57,8 +59,8 @@ final class ArcanistArgumentAlignmentPHPASTLinterRule
       if (
         $argument === $first &&
         $first->value instanceof PhpParser\Node\Scalar\String_ &&
-        ($kind === PhpParser\Node\Scalar\String_::KIND_HEREDOC) ||
-         $kind === PhpParser\Node\Scalar\String_::KIND_NOWDOC) {
+        ($kind === PhpParser\Node\Scalar\String_::KIND_HEREDOC ||
+         $kind === PhpParser\Node\Scalar\String_::KIND_NOWDOC)) {
         continue;
       }
 
