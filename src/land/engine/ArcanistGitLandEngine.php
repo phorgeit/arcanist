@@ -16,6 +16,43 @@ final class ArcanistGitLandEngine
     return $this->isGitPerforce;
   }
 
+  /**
+   * Warn that a local branch could not be updated after a successful land.
+   *
+   * @param CommandException $ex The exception from the failed Git command.
+   * @param string $branch The branch we were trying to update or check out.
+   * @return void
+   */
+  private function warnLocalBranchUpdateFailed(
+    CommandException $ex,
+    $branch) {
+
+    $api = $this->getRepositoryAPI();
+    $log = $this->getLogEngine();
+
+    $worktree_path = $api->getWorktreeForBranch($branch);
+    if ($worktree_path !== null) {
+      $log->writeWarning(
+        pht('WORKTREE'),
+        pht(
+          'Landed successfully, but could not update local branch "%s" '.
+          'because it is checked out in the worktree at "%s". Update it '.
+          'there manually, for example with "git -C %s pull --ff-only".',
+          $branch,
+          $worktree_path,
+          $worktree_path));
+      return;
+    }
+
+    $log->writeWarning(
+      pht('LOCAL BRANCH'),
+      pht(
+        'Landed successfully, but could not update local branch "%s". Update '.
+        'it manually. Git reported: %s',
+        $branch,
+        trim($ex->getStderr())));
+  }
+
   protected function pruneBranches(array $sets) {
     $api = $this->getRepositoryAPI();
     $log = $this->getLogEngine();
@@ -717,10 +754,14 @@ final class ArcanistGitLandEngine
         $do_reset = true;
       }
 
-      $api->execxLocal('checkout %s --', $dst_branch);
+      try {
+        $api->execxLocal('checkout %s --', $dst_branch);
 
-      if ($do_reset) {
-        $api->execxLocal('reset --hard %s --', $into_commit);
+        if ($do_reset) {
+          $api->execxLocal('reset --hard %s --', $into_commit);
+        }
+      } catch (CommandException $ex) {
+        $this->warnLocalBranchUpdateFailed($ex, $dst_branch);
       }
 
       $state->discardLocalState();
@@ -821,10 +862,15 @@ final class ArcanistGitLandEngine
             'Updating local branch "%s"...',
             $pull_branch));
 
-        $api->execxLocal(
-          'branch -f %s %s --',
-          $pull_branch,
-          $into_commit);
+        try {
+          $api->execxLocal(
+            'branch -f %s %s --',
+            $pull_branch,
+            $into_commit);
+        } catch (CommandException $ex) {
+          $this->warnLocalBranchUpdateFailed($ex, $pull_branch);
+          break;
+        }
 
         $dst_branch = $pull_branch;
       }
@@ -837,7 +883,11 @@ final class ArcanistGitLandEngine
           'Checking out "%s".',
           $dst_branch));
 
-      $api->execxLocal('checkout %s --', $dst_branch);
+      try {
+        $api->execxLocal('checkout %s --', $dst_branch);
+      } catch (CommandException $ex) {
+        $this->warnLocalBranchUpdateFailed($ex, $dst_branch);
+      }
     } else {
       $log->writeStatus(
         pht('DETACHED HEAD'),

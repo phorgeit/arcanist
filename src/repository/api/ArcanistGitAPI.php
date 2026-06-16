@@ -78,6 +78,33 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
   }
 
   /**
+   * Return a list of this repository's working trees, as reported by
+   * "git worktree list".
+   *
+   * @return list<ArcanistGitWorktree>
+   */
+  public function getWorktrees() {
+    list($stdout) = $this->execxLocal('worktree list --porcelain');
+    return ArcanistGitWorktree::newFromWorktreeList($stdout);
+  }
+
+  /**
+   * Return the path to the working tree which currently has the given branch
+   * checked out, or null if no working tree holds it.
+   *
+   * @param string $branch Short branch name.
+   * @return string|null Path to the working tree holding the branch, or null.
+   */
+  public function getWorktreeForBranch($branch) {
+    foreach ($this->getWorktrees() as $worktree) {
+      if ($worktree->getBranch() === $branch) {
+        return $worktree->getPath();
+      }
+    }
+    return null;
+  }
+
+  /**
    * Tests if a child commit is descendant of a parent commit.
    * If child and parent are the same, it returns false.
    * @param $child Child commit SHA.
