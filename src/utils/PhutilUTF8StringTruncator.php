@@ -78,7 +78,7 @@ final class PhutilUTF8StringTruncator extends Phobject {
   public function setTerminator($terminator) {
     $this->terminator = $terminator;
     $this->terminatorBytes = strlen($terminator);
-    $this->terminatorCodepoints = count(phutil_utf8v($terminator));
+    $this->terminatorCodepoints = phutil_utf8_strlen($terminator);
     $this->terminatorGlyphs = count(phutil_utf8v_combined($terminator));
     return $this;
   }
