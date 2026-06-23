@@ -380,6 +380,9 @@ final class PhutilArgumentParser extends Phobject {
     } catch (PhutilArgumentUsageException $ex) {
       $this->printUsageException($ex);
       exit(self::PARSE_ERROR_CODE);
+    } catch (ArcanistUsageException $ex) {
+      $this->printUsageException($ex);
+      exit(self::PARSE_ERROR_CODE);
     }
   }
 
@@ -845,7 +848,7 @@ final class PhutilArgumentParser extends Phobject {
     return implode("\n", $out);
   }
 
-  public function printUsageException(PhutilArgumentUsageException $ex) {
+  public function printUsageException(Exception $ex) {
     $message = tsprintf(
       "**%s** %B\n",
       pht('Usage Exception:'),

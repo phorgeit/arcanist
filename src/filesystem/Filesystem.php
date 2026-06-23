@@ -861,6 +861,23 @@ final class Filesystem extends Phobject {
   }
 
   /**
+   * Given a PHAR path (path to a file inside a PHAR archive), return a path of
+   * the containing PHAR archive file.
+   * Return null if not a PHAR path.
+   *
+   * @return string|null
+   * @task phar
+   */
+  public static function getPharArchivePath($path) {
+    if (!self::isPharPath($path)) {
+      return null;
+    }
+
+    list($archive) = self::parsePharUri($path);
+    return $archive;
+  }
+
+  /**
    *
    * @task phar
    */
@@ -932,8 +949,8 @@ final class Filesystem extends Phobject {
    */
   private static function guardPharFiles($path) {
     static $php_version_good = null;
+    $min_version = '8.0';
     if ($php_version_good === null) {
-      $min_version = '8.0';
       $cur_version = phpversion();
       if (version_compare($cur_version, $min_version, '<')) {
         $php_version_good = false;
