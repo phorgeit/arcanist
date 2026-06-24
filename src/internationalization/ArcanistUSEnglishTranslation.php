@@ -55,7 +55,7 @@ final class ArcanistUSEnglishTranslation extends PhutilTranslation {
         '(To ignore these changes, add them to "%2$s".)',
       ),
 
-      '%s line(s)' => array('line', 'lines'),
+      '%s line(s)' => array('%s line', '%s lines'),
 
       '%s assertion(s) passed.' => array(
         '%s assertion passed.',
