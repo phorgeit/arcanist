@@ -1051,8 +1051,8 @@ abstract class ArcanistWorkflow extends Phobject {
         sprintf(
           "%s\n\n%s  %s\n    %s\n\n%s",
           pht(
-            "You have incompletely checked out directories in this working ".
-            "copy. Fix them before proceeding.'"),
+            'You have incompletely checked out directories in this working '.
+            'copy. Fix them before proceeding.'),
           $working_copy_desc,
           pht('Incomplete directories in working copy:'),
           implode("\n    ", $incomplete),
