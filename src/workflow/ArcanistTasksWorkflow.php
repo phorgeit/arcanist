@@ -50,8 +50,8 @@ EOTEXT
           'Only show tasks assigned to the given username, '.
           'also accepts %s to show all, default is you.',
           '@all'),
-        'conflict' => array(
-          'unassigned' => pht('%s suppresses unassigned', '--owner'),
+        'conflicts' => array(
+          'unassigned' => true,
         ),
       ),
       'order' => array(

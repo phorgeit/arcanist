@@ -921,7 +921,7 @@ abstract class ArcanistWorkflow extends Phobject {
       }
       foreach ($spec[$key]['conflicts'] as $conflict => $more) {
         if (isset($dict[$conflict])) {
-          if ($more) {
+          if ($more && is_string($more)) {
             $more = ': '.$more;
           } else {
             $more = '.';
