@@ -1213,4 +1213,67 @@ final class PhutilUtilsTestCase extends PhutilTestCase {
     $this->assertEqual($result['test1 bar'], null);
   }
 
+  private function getDate($when) {
+    return id(new DateTime($when, new DateTimeZone('utc')))->getTimestamp();
+  }
+
+  public function testFormatYears() {
+    $this->assertEqual(
+      '1 d',
+      phutil_format_years(
+        $this->getDate('January 1, 1970'),
+        $this->getDate('January 2, 1970')));
+    $this->assertEqual(
+      '1 w',
+      phutil_format_years(
+        $this->getDate('January 1, 1970'),
+        $this->getDate('January 8, 1970')));
+    $this->assertEqual(
+      '1 w',
+      phutil_format_years(
+        $this->getDate('January 1, 1970'),
+        $this->getDate('January 8, 1970')));
+    $this->assertEqual(
+      '1 y',
+      phutil_format_years(
+        $this->getDate('January 1, 1970'),
+        $this->getDate('January 1, 1971')));
+    $this->assertEqual(
+      '1 y, 1 d',
+      phutil_format_years(
+        $this->getDate('January 1, 1970'),
+        $this->getDate('January 2, 1971')));
+    $this->assertEqual(
+      '1 y, 1 m',
+      phutil_format_years(
+        $this->getDate('January 1, 1970'),
+        $this->getDate('February 1, 1971')));
+    $this->assertEqual(
+      '1 y, 1 m, 1 d',
+      phutil_format_years(
+        $this->getDate('January 1, 1970'),
+        $this->getDate('February 2, 1971')));
+    // Some tricky edge cases with uneven-length months
+    $this->assertEqual(
+      '1 y, 2 d',
+      phutil_format_years(
+        $this->getDate('February 28, 2024'),
+        $this->getDate('March 1, 2025')));
+    $this->assertEqual(
+      '1 y, 1 d',
+      phutil_format_years(
+        $this->getDate('February 29, 2024'),
+        $this->getDate('March 1, 2025')));
+    $this->assertEqual(
+      '1 y, 1 d',
+      phutil_format_years(
+        $this->getDate('January 31, 2024'),
+        $this->getDate('February 1, 2025')));
+    $this->assertEqual(
+      '1 y, 1 m, 1 d',
+      phutil_format_years(
+        $this->getDate('January 31, 2024'),
+        $this->getDate('March 1, 2025')));
+  }
+
 }

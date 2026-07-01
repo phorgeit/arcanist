@@ -1212,6 +1212,7 @@ phutil_register_library_map(array(
     'phutil_format_relative_time' => 'utils/viewutils.php',
     'phutil_format_relative_time_detailed' => 'utils/viewutils.php',
     'phutil_format_units_generic' => 'utils/viewutils.php',
+    'phutil_format_years' => 'utils/viewutils.php',
     'phutil_fwrite_nonblocking_stream' => 'utils/utils.php',
     'phutil_get_current_library_name' => 'init/lib/moduleutils.php',
     'phutil_get_library_name_for_root' => 'init/lib/moduleutils.php',

@@ -20,13 +20,47 @@ function phutil_format_relative_time($duration) {
 }
 
 /**
+ * Format a relative time (duration) into years and days.
+ * If it's less than a year, then fall back to
+ * phutil_format_relative_time_detailed.
+ * This function takes the start and end time to handle leap years, etc.
+ * @param int $start Start time as a unix timestamp
+ * @param int $end End time as a unix timestamp
+ * @return string Human-readable description
+ */
+function phutil_format_years($start, $end) {
+  $date_diff = date_diff(new DateTime('@'.$end), new DateTime('@'.$start));
+  // Write this out in full for easier internationalization
+  if ($date_diff->y > 0) {
+    if ($date_diff->m > 0) {
+      if ($date_diff->d > 0) {
+         return pht(
+           '%s y, %s m, %s d',
+           $date_diff->y,
+           $date_diff->m,
+           $date_diff->d);
+      }
+      return pht('%s y, %s m', $date_diff->y, $date_diff->m);
+    }
+    if ($date_diff->d > 0) {
+      return pht('%s y, %s d', $date_diff->y, $date_diff->d);
+    }
+    // Intentionally ignore any sub-day times - "1 year, one hour ago" sounds
+    // odd and if it's been a year you don't care how many hours it was ...
+    return pht('%s y', $date_diff->y);
+  }
+  // Not at least a year, fall back to weeks/days/hours/minutes
+  return phutil_format_relative_time_detailed($end - $start);
+}
+
+/**
  * Format a relative time (duration) into weeks, days, hours, minutes,
  * seconds, but unlike phabricator_format_relative_time, does so for more than
  * just the largest unit.
  *
  * @param int $duration Duration in seconds.
  * @param int $levels (optional) Levels to render. By default, renders the
- *            three highest levels, ie: 5 h, 37 m, 1 s
+ *            two highest levels, ie: 5 h, 37 m
  * @return string Human-readable description.
  */
 function phutil_format_relative_time_detailed($duration, $levels = 2) {
