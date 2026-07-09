@@ -15,10 +15,11 @@ abstract class PhutilTestCase extends Phobject {
   private $testStartTime;
   private $results = array();
   private $enableCoverage;
-  private $coverage = array();
   private $workingCopy;
   private $paths;
-  private $renderer;
+  protected $reporter;
+  /** @deprecated - use $reporter */
+  protected $renderer;
 
   private static $executables = array();
 
@@ -377,7 +378,7 @@ abstract class PhutilTestCase extends Phobject {
       $caught = null;
       try {
         call_user_func($callable, $input);
-      } catch (Exception $ex) {
+      } catch (Throwable $ex) {
         if ($ex instanceof PhutilTestTerminatedException) {
           throw $ex;
         }
@@ -597,8 +598,8 @@ abstract class PhutilTestCase extends Phobject {
     $result->setUserData($reason);
     $this->results[] = $result;
 
-    if ($this->renderer) {
-      echo $this->renderer->renderUnitResult($result);
+    if ($this->reporter) {
+      $this->reporter->reportUnitResult($result);
     }
   }
 
@@ -641,13 +642,13 @@ abstract class PhutilTestCase extends Phobject {
               pht(
                 '%s assertion(s) passed.',
                 new PhutilNumber($this->assertions)));
-          } catch (Exception $ex) {
+          } catch (Throwable $ex) {
             $exceptions['Execution'] = $ex;
           }
 
           try {
             $this->didRunOneTest($name);
-          } catch (Exception $ex) {
+          } catch (Throwable $ex) {
             $exceptions['Shutdown'] = $ex;
           }
 
@@ -672,7 +673,7 @@ abstract class PhutilTestCase extends Phobject {
           // Continue with the next test.
         } catch (PhutilTestSkippedException $ex) {
           // Continue with the next test.
-        } catch (Exception $ex) {
+        } catch (Throwable $ex) {
           $ex_class = get_class($ex);
           $ex_message = $ex->getMessage();
           $ex_trace = $ex->getTraceAsString();
@@ -813,6 +814,11 @@ abstract class PhutilTestCase extends Phobject {
 
   final public function setRenderer(ArcanistUnitRenderer $renderer) {
     $this->renderer = $renderer;
+    return $this;
+  }
+
+  final public function setReporter(ArcanistUnitReporter $reporter) {
+    $this->reporter = $reporter;
     return $this;
   }
 

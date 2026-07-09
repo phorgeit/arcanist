@@ -120,6 +120,7 @@ final class ArcanistConfigurationDrivenUnitTestEngine
   public function run() {
     $renderer = $this->renderer;
     $this->setRenderer(null);
+    $reporter = $this->reporter;
 
     $paths = $this->getPaths();
 
@@ -137,7 +138,8 @@ final class ArcanistConfigurationDrivenUnitTestEngine
         ->setWorkingCopy($this->getWorkingCopy())
         ->setEnableCoverage($this->getEnableCoverage())
         ->setConfigurationManager($this->getConfigurationManager())
-        ->setRenderer($renderer);
+        ->setRenderer($renderer)
+        ->setReporter($reporter);
 
       // TODO: At some point, maybe we should emit a warning here if an engine
       // doesn't support `--everything`, to reduce surprise when `--everything`
@@ -155,7 +157,7 @@ final class ArcanistConfigurationDrivenUnitTestEngine
           // If the proxied engine renders its own test results then there
           // is no need to render them again here.
           if (!$engine->shouldEchoTestResults()) {
-            echo $renderer->renderUnitResult($result);
+            $reporter->reportUnitResult($result);
           }
         }
       } catch (ArcanistNoEffectException $ex) {

@@ -78,6 +78,7 @@ EOTEXT
           "With 'full', show full pretty report (Default). ".
           "With 'json', report results in JSON format. ".
           "With 'ugly', use uglier (but more efficient) JSON formatting. ".
+          "with 'fail', only print results of failed tests. ".
           "With 'none', don't print results."),
         'conflicts' => array(
           'json' => pht('Only one output format allowed'),
@@ -156,7 +157,15 @@ EOTEXT
     }
 
     $renderer = new ArcanistUnitConsoleRenderer();
-    $this->engine->setRenderer($renderer);
+    $console = PhutilConsole::getConsole();
+
+    $reporter = id(new ArcanistUnitConsoleReporter())
+      ->setRenderer($renderer)
+      ->setConsole($console);
+
+    $this->engine
+      ->setRenderer($renderer)
+      ->setReporter($reporter);
 
     $enable_coverage = null; // Means "default".
     if ($this->getArgument('coverage') ||
@@ -167,26 +176,32 @@ EOTEXT
     }
     $this->engine->setEnableCoverage($enable_coverage);
 
+    $output_format = $this->getOutputFormat();
+    $disabled_out = false;
+    switch ($output_format) {
+      case 'fail':
+        $reporter->reportFailedOnly();
+        break;
+      case 'full':
+        break;
+      default:
+        $disabled_out = true;
+        $console->disableOut();
+        break;
+    }
+
     $results = $this->engine->run();
 
     $this->validateUnitEngineResults($this->engine, $results);
 
     $this->testResults = $results;
 
-    $console = PhutilConsole::getConsole();
-
-    $output_format = $this->getOutputFormat();
-
-    if ($output_format !== 'full') {
-      $console->disableOut();
-    }
-
     $unresolved = array();
     $coverage = array();
     foreach ($results as $result) {
       $result_code = $result->getResult();
       if ($this->engine->shouldEchoTestResults()) {
-        $console->writeOut('%s', $renderer->renderUnitResult($result));
+        $reporter->reportUnitResult($result);
       }
       if ($result_code != ArcanistUnitTestResult::RESULT_PASS) {
         $unresolved[] = $result;
@@ -252,7 +267,7 @@ EOTEXT
       }
     }
 
-    if ($output_format !== 'full') {
+    if ($disabled_out) {
       $console->enableOut();
     }
     $data = array_values(mpull($results, 'toDictionary'));
@@ -343,6 +358,7 @@ EOTEXT
       'json' => 'json',
       'ugly' => 'ugly',
       'full' => 'full',
+      'fail' => 'fail',
     );
     return idx($known_formats, $format, 'full');
   }

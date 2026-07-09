@@ -57,6 +57,10 @@ final class PhutilUnitTestEngine extends ArcanistUnitTestEngine {
         $test_case->setRenderer($this->renderer);
       }
 
+      if ($this->reporter) {
+        $test_case->setReporter($this->reporter);
+      }
+
       $test_cases[] = $test_case;
     }
 

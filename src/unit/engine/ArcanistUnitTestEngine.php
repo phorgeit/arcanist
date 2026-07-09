@@ -10,6 +10,8 @@ abstract class ArcanistUnitTestEngine extends Phobject {
   private $enableCoverage;
   private $runAllTests;
   private $configurationManager;
+  protected $reporter;
+  /** @deprecated - use $reporter */
   protected $renderer;
 
   final public function __construct() {}
@@ -79,8 +81,16 @@ abstract class ArcanistUnitTestEngine extends Phobject {
     return $this->enableCoverage;
   }
 
+  /**
+   * @deprecated - use setReporter
+   */
   final public function setRenderer(?ArcanistUnitRenderer $renderer = null) {
     $this->renderer = $renderer;
+    return $this;
+  }
+
+  public function setReporter(ArcanistUnitReporter $reporter) {
+    $this->reporter = $reporter;
     return $this;
   }
 
