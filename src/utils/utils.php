@@ -1968,8 +1968,12 @@ function phutil_is_interactive() {
   return false;
 }
 
+/**
+ * @param mixed $message
+ * @return string
+ */
 function phutil_encode_log($message) {
-  return addcslashes($message, "\0..\37\\\177..\377");
+  return addcslashes((string)$message, "\0..\37\\\177..\377");
 }
 
 /**
