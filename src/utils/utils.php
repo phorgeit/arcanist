@@ -946,9 +946,9 @@ function phutil_split_lines($corpus, $retain_endings = true) {
 
   // Split on "\r\n" or "\n".
   if ($retain_endings) {
-    $lines = preg_split('/(?<=\n)/', $corpus);
+    $lines = preg_split('/(?<=\n)/', (string)$corpus);
   } else {
-    $lines = preg_split('/\r?\n/', $corpus);
+    $lines = preg_split('/\r?\n/', (string)$corpus);
   }
 
   // If the text ends with "\n" or similar, we'll end up with an empty string
