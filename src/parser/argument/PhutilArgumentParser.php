@@ -291,7 +291,26 @@ final class PhutilArgumentParser extends Phobject {
 
     foreach ($specs as $spec) {
       if ($spec->getWildcard()) {
-        $this->results[$spec->getName()] = $this->filterWildcardArgv($argv);
+        $wildcard_values = $this->filterWildcardArgv($argv);
+
+        if ($spec->getRepeatable() === false) {
+          switch (count($wildcard_values)) {
+            case 0:
+              $wildcard_values = null;
+              break;
+            case 1:
+              $wildcard_values = head($wildcard_values);
+              break;
+            default:
+              throw new PhutilArgumentUsageException(
+                pht(
+                  'Wildcard argument %s cannot be specified more then once!',
+                  $spec->getName()));
+          }
+
+        }
+
+        $this->results[$spec->getName()] = $wildcard_values;
         $argv = array();
         break;
       }
@@ -884,6 +903,7 @@ final class PhutilArgumentParser extends Phobject {
             '--'));
       }
     }
+
     return array_values($argv);
   }
 
