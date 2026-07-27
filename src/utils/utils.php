@@ -2040,7 +2040,7 @@ function phutil_preg_match(
 
   $matches = null;
   $result = @preg_match($pattern, $subject, $matches, $flags, $offset);
-  if ($result === false || $result === null) {
+  if ($result === false) {
     phutil_raise_preg_exception(
       'preg_match',
       array(
