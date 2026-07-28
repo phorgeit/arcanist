@@ -158,6 +158,8 @@ EOTEXT
     }
 
     $this->runAutocomplete();
+
+    return 0;
   }
 
   protected function newPrompts() {

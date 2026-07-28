@@ -76,16 +76,14 @@ final class PhutilSocketChannel extends PhutilChannel {
    * @task construct
    */
   public static function newChannelPair() {
-    $sockets = null;
-
     $domain = phutil_is_windows() ? STREAM_PF_INET : STREAM_PF_UNIX;
     $pair = stream_socket_pair($domain, STREAM_SOCK_STREAM, STREAM_IPPROTO_IP);
     if (!$pair) {
       throw new Exception(pht('%s failed!', 'stream_socket_pair()'));
     }
 
-    $x = new PhutilSocketChannel($pair[0]);
-    $y = new PhutilSocketChannel($pair[1]);
+    $x = new self($pair[0]);
+    $y = new self($pair[1]);
 
     return array($x, $y);
   }
@@ -175,14 +173,12 @@ final class PhutilSocketChannel extends PhutilChannel {
     $this->closeWriteSocket();
   }
 
-  private function closeOneSocket($socket) {
+  private function closeOneSocket($socket): void {
     if (!$socket) {
       return;
     }
-    // We should also stream_socket_shutdown() here but HHVM throws errors
-    // with it (for example 'Unexpected object type PlainFile'). We depend
-    // just on fclose() until it is fixed.
-    @fclose($socket);
+    stream_socket_shutdown($socket, STREAM_SHUT_RDWR);
+    fclose($socket);
   }
 
   private function closeSockets() {

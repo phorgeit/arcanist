@@ -145,7 +145,7 @@ abstract class ArcanistXHPASTLinterRule extends Phobject {
    * TODO: Improve this and move it to XHPAST proper?
    *
    * @param  string  $string The "semantic string" of a single value.
-   * @return mixed   `true` or `false` if the value could be evaluated
+   * @return bool|null `true` or `false` if the value could be evaluated
    *                 statically; `null` if static evaluation was not possible.
    */
   protected function evaluateStaticBoolean($string) {

@@ -48,16 +48,19 @@ class ArcanistConfiguration extends Phobject {
     return (bool)$this->buildWorkflow($workflow);
   }
 
-  public function willRunWorkflow($command, ArcanistWorkflow $workflow) {
+  public function willRunWorkflow($command, ArcanistWorkflow $workflow): void {
     // This is a hook.
   }
 
-  public function didRunWorkflow($command, ArcanistWorkflow $workflow, $err) {
+  public function didRunWorkflow(
+    $command,
+    ArcanistWorkflow $workflow,
+    $err): void {
 
     // This is a hook.
   }
 
-  public function didAbortWorkflow($command, $workflow, Exception $ex) {
+  public function didAbortWorkflow($command, $workflow, Exception $ex): void {
     // This is a hook.
   }
 

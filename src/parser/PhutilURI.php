@@ -103,10 +103,14 @@ final class PhutilURI extends Phobject {
     // the host looks like garbage. In particular, we do not allow hosts which
     // begin with "." or "-". See T12961 for a specific attack which relied on
     // hosts beginning with "-".
+    // Regex notes:
+    // The sequence '\p{L}' means any Unicode letter (Greek, Chinese, etc.)
+    // The sequence '\p{N}' means any Unicode number.
+    // The last letter 'u' is the modifier to support Unicode.
     if ($parts) {
       $host = idx($parts, 'host', '');
       if (strlen($host)) {
-        if (!preg_match('/^[a-zA-Z0-9]+[a-zA-Z0-9\\.\\-]*\z/', $host)) {
+        if (!preg_match('/^[\p{L}\p{N}]+[\p{L}\p{N}\\.\\-]*\z/u', $host)) {
           $parts = false;
         }
       }

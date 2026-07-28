@@ -59,7 +59,7 @@ final class PhutilCIDRBlock extends Phobject {
           new PhutilNumber($max_bits)));
     }
 
-    $obj = new PhutilCIDRBlock();
+    $obj = new self();
     $obj->ip = $ip;
     $obj->bits = $bits;
 

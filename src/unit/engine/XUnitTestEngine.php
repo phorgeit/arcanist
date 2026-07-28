@@ -88,7 +88,7 @@ class XUnitTestEngine extends ArcanistUnitTestEngine {
       throw new Exception(
         pht(
           "Unable to locate xUnit console runner. Configure ".
-          "it with the `%s' option in %s.",
+          "it with the '%s' option in %s.",
           'unit.csharp.xunit.binary',
           '.arcconfig'));
     }

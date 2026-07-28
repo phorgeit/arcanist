@@ -76,7 +76,8 @@ abstract class Phobject implements Iterator {
    * @param string $key Name of the constant.
    * @param int|null $byte_limit (optional) Maximum number of bytes permitted
    *   in the value.
-   * @return string Value of the constant.
+   * @return string|int Value of the constant. Usually a string, in case of
+   *   an edge constant a positive integer.
    */
   public function getPhobjectClassConstant($key, $byte_limit = null) {
     $class = new ReflectionClass($this);

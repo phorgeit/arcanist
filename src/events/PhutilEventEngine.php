@@ -12,7 +12,7 @@ final class PhutilEventEngine extends Phobject {
 
   public static function getInstance() {
     if (!self::$instance) {
-      self::$instance = new PhutilEventEngine();
+      self::$instance = new self();
     }
     return self::$instance;
   }
@@ -54,7 +54,6 @@ final class PhutilEventEngine extends Phobject {
         'count' => count($listeners),
       ));
 
-    $caught = null;
     try {
       foreach ($listeners as $listener) {
         if ($event->isStopped()) {

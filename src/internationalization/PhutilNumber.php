@@ -14,11 +14,17 @@ final class PhutilNumber extends Phobject {
     return $this->value;
   }
 
-  public function setDecimals($decimals) {
+  /**
+   * @param int $decimals
+   */
+  public function setDecimals(int $decimals) {
     $this->decimals = $decimals;
     return $this;
   }
 
+  /**
+   * @return int
+   */
   public function getDecimals() {
     return $this->decimals;
   }

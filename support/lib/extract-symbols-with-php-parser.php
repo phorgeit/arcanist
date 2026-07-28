@@ -10,7 +10,7 @@ require_once $root.'/support/init/init-script.php';
 
 $args = new PhutilArgumentParser($argv);
 $args->setTagline(pht('identify symbols in PHP source files'));
-$args->setSynopsis(<<<EOHELP
+$args->setSynopsis(pht(<<<EOHELP
     **extract-symbols-with-php-parser.php** [__options__] __path.php__
         Identify the symbols (classes, interfaces, traits, enums and functions)
         in PHP source files. Symbols are divided into "have" symbols
@@ -23,11 +23,11 @@ $args->setSynopsis(<<<EOHELP
 
         Symbols are reported in JSON on stdout.
 
-        This script is used internally by Arcanist to build maps of library
+        This script is used internally to build maps of library
         symbols.
 
 EOHELP
-);
+));
 
 $args->parseStandardArguments();
 $args->parse(
@@ -105,7 +105,7 @@ $parser = PhutilPHPParserLibrary::getParser();
 // Load these classes now, as getParser will have downloaded PHP-Parser and
 // registered its autoloader, or thrown an exception. The base class these
 // visitors extends isn't available otherwise.
-require_once $root.'/support/php-parser/api/PHPASTDocBlockVisitor.php';
+require_once $root.'/support/php-parser/api/PHPASTExternalSymbolVisitor.php';
 require_once $root.'/support/php-parser/api/PHPASTCallVisitor.php';
 require_once $root.'/support/php-parser/api/PHPASTDeclarationVisitor.php';
 require_once $root.'/support/php-parser/api/PHPASTTypesVisitor.php';
@@ -151,36 +151,22 @@ function phutil_parse_file(
   array $builtins,
   bool $show_all): array {
 
-  $doc_block_visitor = new PHPASTDocBlockVisitor();
+  $namespace_resolver = new PhpParser\NodeVisitor\NameResolver();
+  $external_symbol_visitor = new PHPASTExternalSymbolVisitor(
+    $namespace_resolver->getNameContext());
   $call_visitor = new PHPASTCallVisitor();
   $declaration_visitor = new PHPASTDeclarationVisitor();
   $types_visitor = new PHPASTTypesVisitor();
 
   $traverser = new PhpParser\NodeTraverser();
-  $traverser->addVisitor(new PhpParser\NodeVisitor\NameResolver());
-  $traverser->addVisitor($doc_block_visitor);
+  $traverser->addVisitor($namespace_resolver);
+  $traverser->addVisitor($external_symbol_visitor);
   $traverser->addVisitor($call_visitor);
   $traverser->addVisitor($declaration_visitor);
   $traverser->addVisitor($types_visitor);
   $traverser->traverse($ast);
 
-  $externals = array();
-  $doc_parser = new PhutilDocblockParser();
-
-  foreach ($doc_block_visitor->getDocBlocks() as $doc_block) {
-    list($block, $special) = $doc_parser->parse($doc_block->getText());
-
-    $ext_list = idx($special, 'phutil-external-symbol');
-    $ext_list = (array)$ext_list;
-    $ext_list = array_filter($ext_list);
-
-    foreach ($ext_list as $ext_ref) {
-      $matches = null;
-      if (preg_match('/^\s*(\S+)\s+(\S+)/', $ext_ref, $matches)) {
-        $externals[$matches[1]][$matches[2]] = true;
-      }
-    }
-  }
+  $externals = $external_symbol_visitor->getExternalSymbols();
 
   $declared_symbols = array();
   foreach ($declaration_visitor->getDeclarations() as $spec) {

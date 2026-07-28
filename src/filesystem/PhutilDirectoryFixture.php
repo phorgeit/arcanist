@@ -4,6 +4,10 @@ final class PhutilDirectoryFixture extends Phobject {
 
   protected $path;
 
+  /**
+   * @param string $archive A full file path including file name
+   * @return PhutilDirectoryFixture
+   */
   public static function newFromArchive($archive) {
     $obj = self::newEmptyFixture();
     execx(
@@ -14,7 +18,7 @@ final class PhutilDirectoryFixture extends Phobject {
   }
 
   public static function newEmptyFixture() {
-    $obj = new PhutilDirectoryFixture();
+    $obj = new self();
     $obj->path = Filesystem::createTemporaryDirectory();
     return $obj;
   }

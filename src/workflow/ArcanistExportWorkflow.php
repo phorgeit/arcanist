@@ -193,26 +193,23 @@ EOTEXT
             $repository_api->getHeadCommit());
           $changes = $parser->parseDiff($diff);
           $authors = $this->getConduit()->callMethodSynchronous(
-            'user.query',
+            'user.search',
             array(
-              'phids' => array($this->getUserPHID()),
+              'constraints' => array(
+                'phids' => array($this->getUserPHID()),
+              ),
             ));
-          $author_dict = reset($authors);
+          $author_dict = reset($authors['data']);
 
           list($email) = $repository_api->execxLocal('config user.email');
 
           $author = sprintf('%s <%s>',
-            $author_dict['realName'],
+            $author_dict['fields']['realName'],
             $email);
         } else if ($repository_api instanceof ArcanistMercurialAPI) {
           $this->parseBaseCommitArgument($this->getArgument('paths'));
           $diff = $repository_api->getFullMercurialDiff();
           $changes = $parser->parseDiff($diff);
-          $authors = $this->getConduit()->callMethodSynchronous(
-            'user.query',
-            array(
-              'phids' => array($this->getUserPHID()),
-            ));
 
           list($author) = $repository_api->execxLocal('showconfig ui.username');
         } else {

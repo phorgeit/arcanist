@@ -73,11 +73,11 @@ final class XHPASTNodeTestCase extends PhutilTestCase {
    * }
    * ```
    *
-   * @param  string                 $file The path to the test file.
-   * @return array<XHPASTTree, map> The first element of the pair is the
-   *                                `XHPASTTree` contained within the test file.
-   *                                The second element of the pair is the
-   *                                "expect" data.
+   * @param  string                   $file The path to the test file.
+   * @return array<XHPASTTree, array> The first element of the pair is the
+   *                                  `XHPASTTree` contained within the test
+   *                                  file. The second element of the pair is
+   *                                  the "expect" data map.
    */
   private function readTestData($file) {
     $contents = Filesystem::readFile($file);

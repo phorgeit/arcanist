@@ -134,6 +134,7 @@ final class ArcanistAlias extends Phobject {
 
   public function setConfigurationSource(
     ArcanistConfigurationSource $configuration_source) {
+
     $this->configurationSource = $configuration_source;
     return $this;
   }

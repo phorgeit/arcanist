@@ -7,15 +7,12 @@
  * by `PhutilTranslator::getInstance()->setLocale()`.
  *
  * @param string $text Translation identifier with `sprintf()` placeholders.
- * @param mixed $variant (optional) Value to select the variant from (e.g.
- *    singular or plural). Defaults to null.
- * @param mixed $variant,... Next values referenced from $text.
+ * @param mixed ...$variants Values to select the variant from (e.g.
+ *    singular or plural).
  * @return string Translated string with substituted values.
  */
-function pht($text, $variant = null /* , ... */) {
-  $args = func_get_args();
-  $translator = PhutilTranslator::getInstance();
-  return call_user_func_array(array($translator, 'translate'), $args);
+function pht($text, ...$variants) {
+  return PhutilTranslator::getInstance()->translate($text, ...$variants);
 }
 
 /**

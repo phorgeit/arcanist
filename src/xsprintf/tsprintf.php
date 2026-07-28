@@ -12,10 +12,13 @@
  *     Inserts raw, unescaped text. DANGEROUS!
  *
  * Particularly, this will escape terminal control characters.
+ *
+ * @param string $pattern sprintf()-style format string.
+ * @param string ...$args Zero or more arguments.
  */
-function tsprintf($pattern /* , ... */) {
-  $args = func_get_args();
-  $args[0] = PhutilConsoleFormatter::interpretFormat($args[0]);
+function tsprintf($pattern, ...$args) {
+  $pattern = PhutilConsoleFormatter::interpretFormat($pattern);
+  array_unshift($args, $pattern);
   $string = xsprintf('xsprintf_terminal', null, $args);
   return new PhutilTerminalString($string);
 }

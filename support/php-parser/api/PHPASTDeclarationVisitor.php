@@ -85,17 +85,6 @@ final class PHPASTDeclarationVisitor extends PhpParser\NodeVisitorAbstract {
           'symbol' => $interface_name,
         );
       }
-
-      $node_finder = new PhpParser\NodeFinder();
-      $trait_use = $node_finder->findInstanceOf(
-        $node->stmts,
-        PhpParser\Node\Stmt\TraitUse::class);
-
-      foreach ($trait_use as $traits) {
-        foreach ($traits->traits as $trait_name) {
-          $this->traits[$fqn][] = $trait_name->toCodeString();
-        }
-      }
     } else if ($node instanceof PhpParser\Node\Stmt\Interface_) {
       $type = 'interface';
       $fqn = $node->namespacedName->toCodeString();
@@ -126,6 +115,16 @@ final class PHPASTDeclarationVisitor extends PhpParser\NodeVisitorAbstract {
       $type = 'function';
     } else {
       return null;
+    }
+
+    if ($node instanceof PhpParser\Node\Stmt\ClassLike) {
+      $fqn = $node->namespacedName->toCodeString();
+
+      foreach ($node->getTraitUses() as $traits) {
+        foreach ($traits->traits as $trait_name) {
+          $this->traits[$fqn][] = $trait_name->toCodeString();
+        }
+      }
     }
 
     $this->declarations[] = array(

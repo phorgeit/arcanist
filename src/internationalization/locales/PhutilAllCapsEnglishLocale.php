@@ -32,6 +32,7 @@ final class PhutilAllCapsEnglishLocale extends PhutilLocale {
     $translated_pattern,
     array $args,
     $result_text) {
+
     return phutil_utf8_strtoupper($result_text);
   }
 

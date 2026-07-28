@@ -607,7 +607,7 @@ abstract class PhutilTestCase extends Phobject {
    * Execute the tests in this test case. You should not call this directly;
    * use @{class:PhutilUnitTestEngine} to orchestrate test execution.
    *
-   * @return void
+   * @return array<ArcanistUnitTestResult>
    * @task internal
    */
   final public function run() {
@@ -804,9 +804,9 @@ abstract class PhutilTestCase extends Phobject {
 
     $uri = id(new PhutilURI($base_uri))
       ->setPath("/diffusion/symbol/{$method}/")
-      ->setQueryParam('context', get_class($this))
-      ->setQueryParam('jump', 'true')
-      ->setQueryParam('lang', 'php');
+      ->replaceQueryParam('context', get_class($this))
+      ->replaceQueryParam('jump', 'true')
+      ->replaceQueryParam('lang', 'php');
 
     return (string)$uri;
   }
@@ -819,7 +819,7 @@ abstract class PhutilTestCase extends Phobject {
   /**
    * Returns info about the caller function.
    *
-   * @return map
+   * @return array Map
    */
   private static function getCallerInfo() {
     $callee = array();

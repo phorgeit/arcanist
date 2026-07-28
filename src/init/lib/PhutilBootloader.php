@@ -23,7 +23,7 @@ final class PhutilBootloader {
 
   public static function getInstance() {
     if (!self::$instance) {
-      self::$instance = new PhutilBootloader();
+      self::$instance = new self();
     }
     return self::$instance;
   }

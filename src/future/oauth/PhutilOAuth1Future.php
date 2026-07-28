@@ -269,6 +269,22 @@ final class PhutilOAuth1Future extends FutureProxy {
         $signature = null;
         $ok = openssl_sign($string, $signature, $pkey, OPENSSL_ALGO_SHA1);
         if (!$ok) {
+          $ex = openssl_error_string();
+          if (substr($ex, 0, 15) === 'error:03000098:') {
+            $explain = pht(
+              '%s requires the %s algorithm but %s disables %s by default. '.
+              'Consider setting %s or export %s.',
+              'OAuth1',
+              'SHA1',
+              'OpenSSL 3',
+              'SHA1',
+              '"update-crypto-policies --set LEGACY"',
+              '"OPENSSL_ENABLE_SHA1_SIGNATURES=1"');
+            throw new Exception(pht(
+              '%s failed: %s',
+              'openssl_sign()',
+              $explain));
+          }
           throw new Exception(pht('%s failed!', 'openssl_sign()'));
         }
 

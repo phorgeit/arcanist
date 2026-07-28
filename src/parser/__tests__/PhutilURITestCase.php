@@ -414,4 +414,22 @@ final class PhutilURITestCase extends PhutilTestCase {
       (string)$uri);
   }
 
+  public function testUnicodeDomains() {
+    // These domains are non-ascii, so, encoded with 'base64_encode()',
+    // just to make our linter happy.
+    $test_domains_in_base64 = [
+      '7ZuE7J207KaI6rKA7IOJLu2VnOq1rQ==', // Chinese, just letters
+      'zr/Phc+Ezr/PgM6vzrEuzrTPgM64Lmdy', // Greek
+    ];
+
+    foreach ($test_domains_in_base64 as $test_domain_in_base64) {
+      $test_domain = base64_decode($test_domain_in_base64);
+      $uri = new PhutilURI("http://$test_domain/path");
+      $this->assertEqual(
+        $test_domain,
+        $uri->getDomain(),
+        pht("Test non-ASCII domain '%s' (base64: %s)",
+        $test_domain, $test_domain_in_base64));
+    }
+  }
 }

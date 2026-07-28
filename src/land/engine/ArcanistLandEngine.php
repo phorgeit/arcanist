@@ -141,6 +141,7 @@ abstract class ArcanistLandEngine
 
   final public function setRevisionSymbolRef(
     ArcanistRevisionSymbolRef $revision_ref) {
+
     $this->revisionSymbolRef = $revision_ref;
     return $this;
   }
@@ -425,10 +426,10 @@ abstract class ArcanistLandEngine
         "\n%!\n%W\n\n",
         pht('%s REVISION(S) ARE NOT ACCEPTED', phutil_count($not_accepted)),
         pht(
-          'You are landing %s revision(s) which are not in state "Accepted", '.
-          'indicating that they have not been accepted by reviewers. '.
-          'Normally, you should land changes only once they have been '.
-          'accepted. These revisions are in the wrong state:',
+          'You are landing %s revision(s) which are not in the state '.
+          '"Accepted", indicating that they have not been accepted by '.
+          'reviewers. Normally, you should land changes only once they have '.
+          'been accepted. These revisions are in the wrong state:',
           phutil_count($not_accepted)));
 
       foreach ($not_accepted as $revision_ref) {
@@ -486,7 +487,7 @@ abstract class ArcanistLandEngine
     if ($open_parents) {
       echo tsprintf(
         "\n%!\n%W\n\n",
-        pht('%s OPEN PARENT REVISION(S) ', phutil_count($open_parents)),
+        pht('%s OPEN PARENT REVISION(S)', phutil_count($open_parents)),
         pht(
           'The changes you are landing depend on %s open parent revision(s). '.
           'Usually, you should land parent revisions before landing the '.
@@ -627,7 +628,6 @@ abstract class ArcanistLandEngine
     }
 
     $build_map = array();
-    $failure_map = array();
     $buildable_map = mpull($buildable_refs, null, 'getPHID');
     $revision_map = mpull($revision_refs, null, 'getDiffPHID');
     foreach ($problem_builds as $build_ref) {
@@ -648,8 +648,6 @@ abstract class ArcanistLandEngine
 
       $build_map[$revision_phid]['buildRefs'][] = $build_ref;
     }
-
-    $log = $this->getLogEngine();
 
     if ($has_failures) {
       if ($has_ongoing) {
@@ -970,7 +968,7 @@ abstract class ArcanistLandEngine
           pht('AMBIGUOUS REVISION'),
           pht(
             'The revision associated with commit "%s" (an ancestor of: %s) '.
-            'is ambiguous. These %s revision(s) are associated with the '.
+            'is ambiguous. These %s revisions are associated with the '.
             'commit:',
             $display_hash,
             implode(', ', $raw_symbols),
@@ -1000,6 +998,7 @@ abstract class ArcanistLandEngine
     $into_commit,
     array $symbols,
     array $commit_map) {
+
     $api = $this->getRepositoryAPI();
 
     $commit_count = count($commit_map);
@@ -1030,14 +1029,14 @@ abstract class ArcanistLandEngine
     if ($commit_count > $warn_limit) {
       if ($into_commit === null) {
         $message = pht(
-          'There are %s commit(s) reachable from the specified sources (%s). '.
+          'There are %s commits reachable from the specified sources (%s). '.
           'You are landing into the empty state, so all of these commits '.
           'will land:',
           new PhutilNumber($commit_count),
           $this->getDisplaySymbols($symbols));
       } else {
         $message = pht(
-          'There are %s commit(s) reachable from the specified sources (%s) '.
+          'There are %s commits reachable from the specified sources (%s) '.
           'that are not present in the repository state you are merging '.
           'into ("%s"). All of these commits will land:',
           new PhutilNumber($commit_count),
@@ -1244,7 +1243,6 @@ abstract class ArcanistLandEngine
 
     $this->setLocalState($local_state);
 
-    $seen_into = array();
     try {
       $last_key = last_key($sets);
 
@@ -1346,8 +1344,6 @@ abstract class ArcanistLandEngine
   }
 
   protected function validateArguments() {
-    $log = $this->getLogEngine();
-
     $into_local = $this->getIntoLocalArgument();
     $into_empty = $this->getIntoEmptyArgument();
     $into_remote = $this->getIntoRemoteArgument();
@@ -1544,7 +1540,6 @@ abstract class ArcanistLandEngine
    */
   private function filterCommitSets(array $sets) {
     assert_instances_of($sets, ArcanistLandCommitSet::class);
-    $log = $this->getLogEngine();
 
     // If some of the ancestor revisions are already closed, and the user did
     // not specifically indicate that we should land them, and we are using
@@ -1603,15 +1598,11 @@ abstract class ArcanistLandEngine
     return $sets;
   }
 
-  final protected function newPassthruCommand($pattern /* , ... */) {
+  final protected function newPassthruCommand($pattern, ...$args) {
     $workflow = $this->getWorkflow();
-    $argv = func_get_args();
 
     $api = $this->getRepositoryAPI();
-
-    $passthru = call_user_func_array(
-      array($api, 'newPassthru'),
-      $argv);
+    $passthru = $api->newPassthru($pattern, ...$args);
 
     $command = $workflow->newCommand($passthru)
       ->setResolveOnError(true);
@@ -1619,12 +1610,8 @@ abstract class ArcanistLandEngine
     return $command;
   }
 
-  final protected function newPassthru($pattern /* , ... */) {
-    $argv = func_get_args();
-
-    $command = call_user_func_array(
-      array($this, 'newPassthruCommand'),
-      $argv);
+  final protected function newPassthru($pattern, ...$args) {
+    $command = $this->newPassthruCommand($pattern, ...$args);
 
     return $command->execute();
   }

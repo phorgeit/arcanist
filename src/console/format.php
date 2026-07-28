@@ -1,10 +1,7 @@
 <?php
 
-function phutil_console_format($format /* ... */) {
-  $args = func_get_args();
-  return call_user_func_array(
-    array(PhutilConsoleFormatter::class, 'formatString'),
-    $args);
+function phutil_console_format($format, ...$args) {
+  return PhutilConsoleFormatter::formatString($format, ...$args);
 }
 
 

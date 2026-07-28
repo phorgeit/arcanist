@@ -80,14 +80,7 @@ final class PhutilDeferredLogTestCase extends PhutilTestCase {
   public function testLogWriteFailure() {
     $caught = null;
     try {
-      if (phutil_is_hiphop_runtime()) {
-        // In HipHop exceptions thrown in destructors are not normally
-        // catchable, so call __destruct() explicitly.
-        $log = new PhutilDeferredLog('/derp/derp/derp/derp/derp', 'derp');
-        $log->__destruct();
-      } else {
-        new PhutilDeferredLog('/derp/derp/derp/derp/derp', 'derp');
-      }
+      new PhutilDeferredLog('/derp/derp/derp/derp/derp', 'derp');
     } catch (Exception $ex) {
       $caught = $ex;
     }

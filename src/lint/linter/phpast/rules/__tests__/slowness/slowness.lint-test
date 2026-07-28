@@ -5,10 +5,44 @@
 (0 === strpos('a', 'b'));
 (1 + 0 === strpos('a', 'b'));
 
+(stripos('a', 'b') === 0);
+(stripos('a', 'b') !== 0);
+(0 === stripos('a', 'b'));
+(1 + 0 === stripos('a', 'b'));
+
 (strstr('a', 'b') === false);
 (strstr('a', 'b') === 'b');
+(strchr('a', 'b') === false);
+(strchr('a', 'b') === 'b');
 ~~~~~~~~~~
 warning:3:2:PHPAST36:Slow Construct
 warning:4:2:PHPAST36:Slow Construct
-warning:5:8:PHPAST36:Slow Construct
+warning:5:2:PHPAST36:Slow Construct
 warning:8:2:PHPAST36:Slow Construct
+warning:9:2:PHPAST36:Slow Construct
+warning:10:2:PHPAST36:Slow Construct
+warning:13:2:PHPAST36:Slow Construct
+warning:15:2:PHPAST36:Slow Construct
+~~~~~~~~~~
+<?php
+
+(!strncmp('a', 'b', 1));
+(strncmp('a', 'b', 1));
+(!strncmp('a', 'b', 1));
+(1 + 0 === strpos('a', 'b'));
+
+(!strncasecmp('a', 'b', 1));
+(strncasecmp('a', 'b', 1));
+(!strncasecmp('a', 'b', 1));
+(1 + 0 === stripos('a', 'b'));
+
+(strpos('a', 'b') === false);
+(strstr('a', 'b') === 'b');
+(strpos('a', 'b') === false);
+(strchr('a', 'b') === 'b');
+~~~~~~~~~~
+{
+  "config": {
+    "phpast.php-version": "7.4.0"
+  }
+}

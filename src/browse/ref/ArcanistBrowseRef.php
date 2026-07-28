@@ -6,6 +6,9 @@ final class ArcanistBrowseRef
   const HARDPOINT_URIS = 'uris';
   const HARDPOINT_COMMITREFS = 'commitRefs';
 
+  /**
+   * @var string
+   */
   private $token;
   private $types = array();
 
@@ -36,11 +39,18 @@ final class ArcanistBrowseRef
     );
   }
 
+  /**
+   * @param string $token
+   * @return $this
+   */
   public function setToken($token) {
     $this->token = $token;
     return $this;
   }
 
+  /**
+   * @return string
+   */
   public function getToken() {
     return $this->token;
   }
@@ -104,7 +114,26 @@ final class ArcanistBrowseRef
     return $this->branchSupported;
   }
 
+  /**
+   * Get URI references, removing duplicate destinations.
+   * For example, when among the references there is one about
+   * a local git commit, and one about a remote git commit object,
+   * it just returns one of these.
+   * @return array<string, ArcanistBrowseURIRef> Array of references
+   *                                             indexed by URI.
+   */
   public function getURIs() {
+    return mpull($this->getAllURIs(), null, 'getURI');
+  }
+
+  /**
+   * Get all URI references.
+   * This may return refs about the same destination URI.
+   * To avoid duplicated destinations, see @{method:getURIs}
+   * instead.
+   * @return array<ArcanistBrowseURIRef>
+   */
+  private function getAllURIs() {
     return $this->getHardpoint(self::HARDPOINT_URIS);
   }
 

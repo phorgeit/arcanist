@@ -59,10 +59,9 @@ final class PhutilConsoleFormatter extends Phobject {
     return false;
   }
 
-  public static function formatString($format /* ... */) {
-    $args = func_get_args();
-    $args[0] = self::interpretFormat($args[0]);
-    return call_user_func_array('sprintf', $args);
+  public static function formatString($format, ...$args) {
+    $format = self::interpretFormat($format);
+    return sprintf($format, ...$args);
   }
 
   public static function replaceColorCode($matches) {

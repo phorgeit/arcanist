@@ -159,6 +159,15 @@ final class ArcanistArcConfigurationEngineExtension
           pht(
             'Specifies the default behavior when "arc land" is run with '.
             'no "--strategy" flag.')),
+      id(new ArcanistStringConfigOption())
+        ->setKey('locale')
+        ->setDefaultValue('en_US')
+        ->setSummary(pht('Configure a locale to print messages in.'))
+        ->setExamples(
+          array(
+            'en_US',
+            'fr_FR',
+          )),
     );
   }
 

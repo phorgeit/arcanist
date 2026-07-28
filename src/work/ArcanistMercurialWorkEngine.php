@@ -53,4 +53,21 @@ final class ArcanistMercurialWorkEngine
     $future->resolve();
   }
 
+  protected function handleWorkOnTaskBranch(ArcanistTaskRef $task_ref) {
+    throw new PhutilMethodNotImplementedException(
+      pht(
+        'Automatic branch naming from tasks is not supported yet for %s.',
+        $this->getRepositoryAPI()->getSourceControlSystemName())
+    );
+  }
+
+  public function sanitizeBranchName($monogram, $task_name) {
+    // TODO: implement mercurial branch-name sanitization
+    throw new PhutilMethodNotImplementedException(
+      pht(
+        'Automatic branch naming from tasks is not supported yet for %s.',
+        $this->getRepositoryAPI()->getSourceControlSystemName())
+    );
+  }
+
 }

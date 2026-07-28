@@ -88,6 +88,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
   public function process(
     PhpParserAst $ast,
     array $token_stream) {
+
     static $compat_info;
 
     if (!$this->version) {
@@ -129,7 +130,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
         case 'trait_exists':
         case 'enum_exists':
         case 'defined':
-          $type = null;
+          $type = '';
           switch ($function_name) {
             case 'enum_exists':
             case 'class_exists':
@@ -620,6 +621,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
   private function lintPHP54Incompatibilities(
     PhpParserAst $ast,
     array $token_stream) {
+
     $breaks = $ast->findNodesOfKinds(
       array(
         PhpParser\Node\Stmt\Break_::class,
@@ -919,6 +921,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
   private function lintPHP70Incompatibilities(
     PhpParserAst $ast,
     array $token_stream) {
+
     $lists = $ast->findNodesOfKind(PhpParser\Node\Expr\List_::class);
 
     foreach ($lists as $list) {
@@ -979,7 +982,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
           $list,
           pht(
             'Using short array syntax for `%s` was not introduced until '.
-            'PHP 7.1, but this codebase targets an earlier version of PHP.'.
+            'PHP 7.1, but this codebase targets an earlier version of PHP. '.
             'You can rewrite this expression using the `list(...)` instead.',
             'list'));
       }
@@ -1206,6 +1209,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
   private function lintPHP73Incompatibilities(
     PhpParserAst $ast,
     array $token_stream) {
+
     // continue in switch is handled by the "Continue Inside Switch"
     // linter rule (PHPAST128)
   }
@@ -1325,9 +1329,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
     foreach ($parameters as $parameter) {
       // Parameters marked final are promoted properties,
       // but that functionality is only available starting PHP 8.5.
-      if (
-        $parameter->isPromoted() &&
-        !($parameter->flags & PhpParser\Modifiers::FINAL)) {
+      if ($parameter->isPromoted() && !$parameter->isFinal()) {
         $this->raiseLintAtNode(
           $parameter,
           pht('Promoted properties are not available before PHP 8.0.'));
@@ -1457,6 +1459,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
   private function lintPHP80Incompatibilities(
     PhpParserAst $ast,
     array $token_stream) {
+
     $function_calls = $ast->findNodesOfKind(
       PhpParser\Node\Expr\FuncCall::class);
 
@@ -1941,7 +1944,7 @@ final class ArcanistPHPCompatibilityPHPASTLinterRule
     $parameters = $ast->findNodesOfKind(PhpParser\Node\Param::class);
 
     foreach ($parameters as $parameter) {
-      if ($parameter->flags & PhpParser\Modifiers::FINAL) {
+      if ($parameter->isFinal()) {
         $this->raiseLintAtNode(
           $parameter,
           pht('Final property promotion is not available before PHP 8.5.'));

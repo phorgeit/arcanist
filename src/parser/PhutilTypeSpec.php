@@ -310,7 +310,7 @@ final class PhutilTypeSpec extends Phobject {
         }
         return $tokens[0];
       case 'basic_type':
-        $obj = new PhutilTypeSpec();
+        $obj = new self();
         $obj->type = $tokens[0][1];
         return $obj;
       case 'or_type':
@@ -330,20 +330,20 @@ final class PhutilTypeSpec extends Phobject {
           $r->subtypes[] = $l;
           return $r;
         } else {
-          $obj = new PhutilTypeSpec();
+          $obj = new self();
           $obj->type = 'or';
           $obj->subtypes[] = $l;
           $obj->subtypes[] = $r;
           return $obj;
         }
       case 'map_type':
-        $obj = new PhutilTypeSpec();
+        $obj = new self();
         $obj->type = 'map';
         $obj->subtypes[] = $tokens[2];
         $obj->subtypes[] = $tokens[4];
         return $obj;
       case 'list_type':
-        $obj = new PhutilTypeSpec();
+        $obj = new self();
         $obj->type = 'list';
         $obj->subtypes[] = $tokens[2];
         return $obj;

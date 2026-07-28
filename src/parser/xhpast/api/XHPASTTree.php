@@ -73,7 +73,7 @@ final class XHPASTTree extends AASTTree {
         $ex);
     }
 
-    return new XHPASTTree($data['tree'], $data['stream'], $php_source);
+    return new self($data['tree'], $data['stream'], $php_source);
   }
 
 }

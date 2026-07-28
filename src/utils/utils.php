@@ -39,7 +39,11 @@ function id($x) {
  *                  $default is returned without raising a warning.
  */
 function idx(array $array, $key, $default = null) {
-  // isset() is a micro-optimization - it is fast but fails for null values.
+  // PHP 8.5 complains about null set as array offset; previous PHP versions
+  // cast null array keys to an empty string anyway.
+  $key = $key ?? '';
+
+  // isset() is a micro-optimization - it is fast but fails for empty values.
   if (isset($array[$key])) {
     return $array[$key];
   }
@@ -154,6 +158,9 @@ function mpull(array $list, $method, $key_method = null) {
     } else {
       $value = $object;
     }
+    // PHP 8.5 complains about null set as array offset; previous PHP versions
+    // cast null array keys to an empty string anyway.
+    $key = $key ?? '';
     $result[$key] = $value;
   }
   return $result;
@@ -229,6 +236,9 @@ function ppull(array $list, $property, $key_property = null) {
     } else {
       $value = $object;
     }
+    // PHP 8.5 complains about null set as array offset; previous PHP versions
+    // cast null array keys to an empty string anyway.
+    $key = $key ?? '';
     $result[$key] = $value;
   }
   return $result;
@@ -278,6 +288,9 @@ function ipull(array $list, $index, $key_index = null) {
     } else {
       $value = $array;
     }
+    // PHP 8.5 complains about null set as array offset; previous PHP versions
+    // cast null array keys to an empty string anyway.
+    $key = $key ?? '';
     $result[$key] = $value;
   }
   return $result;
@@ -311,31 +324,29 @@ function ipull(array $list, $index, $key_index = null) {
  * @param   string  $by Name of a method, like 'getType', to call on each
  *                  object in order to determine which group it should be
  *                  placed into.
- * @param   string  $methods,... Zero or more additional method names, to
+ * @param   string  ...$methods Zero or more additional method names, to
  *                  subgroup the groups.
  * @return  array   Dictionary mapping distinct method returns to lists of
  *                  all objects which returned that value.
  */
-function mgroup(array $list, $by /* , ... */) {
+function mgroup(array $list, $by, ...$methods) {
   $map = mpull($list, $by);
 
   $groups = array();
   foreach ($map as $group) {
     // Can't array_fill_keys() here because 'false' gets encoded wrong.
+    $group = $group ?? '';
     $groups[$group] = array();
   }
 
   foreach ($map as $key => $group) {
+    $group = $group ?? '';
     $groups[$group][$key] = $list[$key];
   }
 
-  $args = func_get_args();
-  $args = array_slice($args, 2);
-  if ($args) {
-    array_unshift($args, null);
+  if ($methods) {
     foreach ($groups as $group_key => $grouped) {
-      $args[0] = $grouped;
-      $groups[$group_key] = call_user_func_array('mgroup', $args);
+      $groups[$group_key] = mgroup($grouped, ...$methods);
     }
   }
 
@@ -351,12 +362,12 @@ function mgroup(array $list, $by /* , ... */) {
  * @param   array   $list List of arrays to group by some index value.
  * @param   string  $by Name of an index to select from each array in order to
  *                  determine which group it should be placed into.
- * @param   string  $methods,... Zero or more additional indexes names, to
+ * @param   string  ...$indices Zero or more additional indexes names, to
  *                  subgroup the groups.
  * @return  array   Dictionary mapping distinct index values to lists of
  *                  all objects which had that value at the index.
  */
-function igroup(array $list, $by /* , ... */) {
+function igroup(array $list, $by, ...$indices) {
   $map = ipull($list, $by);
 
   $groups = array();
@@ -368,13 +379,9 @@ function igroup(array $list, $by /* , ... */) {
     $groups[$group][$key] = $list[$key];
   }
 
-  $args = func_get_args();
-  $args = array_slice($args, 2);
-  if ($args) {
-    array_unshift($args, null);
+  if ($indices) {
     foreach ($groups as $group_key => $grouped) {
-      $args[0] = $grouped;
-      $groups[$group_key] = call_user_func_array('igroup', $args);
+      $groups[$group_key] = igroup($grouped, ...$indices);
     }
   }
 
@@ -748,11 +755,10 @@ function assert_stringlike($parameter) {
  * Returns the first argument which is not strictly null, or `null` if there
  * are no such arguments. Identical to the MySQL function of the same name.
  *
- * @param  mixed       $args,... Zero or more arguments of any type.
+ * @param  mixed       ...$args Zero or more arguments of any type.
  * @return mixed       First non-`null` arg, or null if no such arg exists.
  */
-function coalesce(/* ... */) {
-  $args = func_get_args();
+function coalesce(...$args) {
   foreach ($args as $arg) {
     if ($arg !== null) {
       return $arg;
@@ -770,12 +776,11 @@ function coalesce(/* ... */) {
  *
  *   $display_name = nonempty($user_name, $full_name, "Anonymous");
  *
- * @param  mixed       $args,... Zero or more arguments of any type.
+ * @param  mixed       ...$args Zero or more arguments of any type.
  * @return mixed       First non-`empty()` arg, or last arg if no such arg
  *                     exists, or null if you passed in zero args.
  */
-function nonempty(/* ... */) {
-  $args = func_get_args();
+function nonempty(...$args) {
   $result = null;
   foreach ($args as $arg) {
     $result = $arg;
@@ -1022,10 +1027,6 @@ function phutil_is_windows() {
   // "WINNT" for Windows 7 and "Darwin" for Mac OS X. Practically, testing for
   // DIRECTORY_SEPARATOR is more straightforward.
   return (DIRECTORY_SEPARATOR != '/');
-}
-
-function phutil_is_hiphop_runtime() {
-  return (array_key_exists('HPHP', $_ENV) && $_ENV['HPHP'] === 1);
 }
 
 /**
@@ -1984,7 +1985,6 @@ function phutil_glue(array $list, $glue) {
   $last_key = last_key($list);
 
   $keys = array();
-  $values = array();
 
   $tmp = $list;
 

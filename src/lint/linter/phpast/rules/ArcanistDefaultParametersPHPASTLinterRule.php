@@ -24,7 +24,7 @@ final class ArcanistDefaultParametersPHPASTLinterRule
       foreach ($node->getParams() as $parameter) {
         if ($parameter->default) {
           $default_found = $parameter;
-        } else if ($default_found) {
+        } else if ($default_found && !$parameter->variadic) {
           $this->raiseLintAtNode(
             $default_found,
             pht(

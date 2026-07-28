@@ -41,6 +41,7 @@ abstract class ArcanistUnitTestEngine extends Phobject {
 
   final public function setConfigurationManager(
     ArcanistConfigurationManager $configuration_manager) {
+
     $this->configurationManager = $configuration_manager;
     return $this;
   }

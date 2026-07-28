@@ -19,6 +19,10 @@ final class ArcanistClassMustBeDeclaredAbstractXHPASTLinterRule
     foreach ($classes as $class) {
       $class_modifiers = $this->getModifiers($class);
 
+      if (idx($class_modifiers, 'abstract') || idx($class_modifiers, 'trait')) {
+        continue;
+      }
+
       $abstract_methods = array();
       $methods = $class->selectDescendantsOfType('n_METHOD_DECLARATION');
 
@@ -30,7 +34,7 @@ final class ArcanistClassMustBeDeclaredAbstractXHPASTLinterRule
         }
       }
 
-      if (!idx($class_modifiers, 'abstract') && $abstract_methods) {
+      if ($abstract_methods) {
         $this->raiseLintAtNode(
           $class,
           pht(

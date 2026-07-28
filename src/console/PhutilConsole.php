@@ -81,7 +81,7 @@ final class PhutilConsole extends Phobject {
 
 
   public static function newConsoleForServer(PhutilConsoleServer $server) {
-    $console = new PhutilConsole();
+    $console = new self();
     $console->server = $server;
     return $console;
   }
@@ -93,7 +93,7 @@ final class PhutilConsole extends Phobject {
       fopen('php://stdout', 'w'));
     $protocol_channel = new PhutilPHPObjectProtocolChannel($io_channel);
 
-    $console = new PhutilConsole();
+    $console = new self();
     $console->channel = $protocol_channel;
 
     return $console;
@@ -138,25 +138,30 @@ final class PhutilConsole extends Phobject {
     return $this->writeMessage($message);
   }
 
-  public function writeOut($pattern /* , ... */) {
-    $args = func_get_args();
-    return $this->writeTextMessage(PhutilConsoleMessage::TYPE_OUT, $args);
+  public function writeOut($pattern, ...$args) {
+    return $this->writeTextMessage(
+      PhutilConsoleMessage::TYPE_OUT,
+      $pattern,
+      ...$args);
   }
 
-  public function writeErr($pattern /* , ... */) {
-    $args = func_get_args();
-    return $this->writeTextMessage(PhutilConsoleMessage::TYPE_ERR, $args);
+  public function writeErr($pattern, ...$args) {
+    return $this->writeTextMessage(
+      PhutilConsoleMessage::TYPE_ERR,
+      $pattern,
+      ...$args);
   }
 
-  public function writeLog($pattern /* , ... */) {
-    $args = func_get_args();
-    return $this->writeTextMessage(PhutilConsoleMessage::TYPE_LOG, $args);
+  public function writeLog($pattern, ...$args) {
+    return $this->writeTextMessage(
+      PhutilConsoleMessage::TYPE_LOG,
+      $pattern,
+      ...$args);
   }
 
   public function beginRedirectOut() {
-    // We need as small buffer as possible. 0 means infinite, 1 means 4096 in
-    // PHP < 5.4.0.
-    ob_start(array($this, 'redirectOutCallback'), 2);
+    // We need as small buffer as possible, so set 1.
+    ob_start(array($this, 'redirectOutCallback'), 1);
     $this->flushing = true;
   }
 
@@ -178,7 +183,7 @@ final class PhutilConsole extends Phobject {
     return '';
   }
 
-  private function writeTextMessage($type, array $argv) {
+  private function writeTextMessage($type, ...$argv) {
 
     $message = id(new PhutilConsoleMessage())
       ->setType($type)

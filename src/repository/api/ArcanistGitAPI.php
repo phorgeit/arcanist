@@ -24,9 +24,7 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
       ->setCWD($this->getPath());
   }
 
-  public function newPassthru($pattern /* , ... */) {
-    $args = func_get_args();
-
+  public function newPassthru($pattern, ...$args) {
     static $git = null;
     if ($git === null) {
       if (phutil_is_windows()) {
@@ -40,9 +38,9 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
       }
     }
 
-    $args[0] = $git.' '.$args[0];
+    $pattern = $git.' '.$pattern;
 
-    return newv(PhutilExecPassthru::class, $args)
+    return id(new PhutilExecPassthru($pattern, ...$args))
       ->setCWD($this->getPath());
   }
 
@@ -77,6 +75,33 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
 
   public function getHasCommits() {
     return !$this->repositoryHasNoCommits;
+  }
+
+  /**
+   * Return a list of this repository's working trees, as reported by
+   * "git worktree list".
+   *
+   * @return list<ArcanistGitWorktree>
+   */
+  public function getWorktrees() {
+    list($stdout) = $this->execxLocal('worktree list --porcelain');
+    return ArcanistGitWorktree::newFromWorktreeList($stdout);
+  }
+
+  /**
+   * Return the path to the working tree which currently has the given branch
+   * checked out, or null if no working tree holds it.
+   *
+   * @param string $branch Short branch name.
+   * @return string|null Path to the working tree holding the branch, or null.
+   */
+  public function getWorktreeForBranch($branch) {
+    foreach ($this->getWorktrees() as $worktree) {
+      if ($worktree->getBranch() === $branch) {
+        return $worktree->getPath();
+      }
+    }
+    return null;
   }
 
   /**
@@ -613,7 +638,6 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
   }
 
   private function executeSVNFindRev($input, $vcs) {
-    $match = array();
     list($stdout) = $this->execxLocal(
       'svn find-rev %s',
       $input);

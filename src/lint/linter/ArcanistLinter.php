@@ -479,7 +479,7 @@ abstract class ArcanistLinter extends Phobject {
   /**
    * If this linter is selectable via `.arclint` configuration files, return
    * a short, human-readable name to identify it. For example, `"jshint"` or
-   * `"pep8"`.
+   * `"flake8"`.
    *
    * If you do not implement this method, the linter will not be selectable
    * through `.arclint` files.

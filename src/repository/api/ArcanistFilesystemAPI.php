@@ -78,6 +78,7 @@ final class ArcanistFilesystemAPI
   public function loadWorkingCopyDifferentialRevisions(
     ConduitClient $conduit,
     array $query) {
+
     throw new PhutilMethodNotImplementedException();
   }
 

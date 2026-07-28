@@ -100,7 +100,6 @@ EOTEXT
       $try_unique = false;
     }
 
-    $file_handle = null;
     if (!$is_stdout) {
       if ($try_unique) {
         $path = Filesystem::writeUniqueFile($path, '');

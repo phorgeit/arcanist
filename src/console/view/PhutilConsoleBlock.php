@@ -35,7 +35,6 @@ final class PhutilConsoleBlock extends PhutilConsoleView {
           );
           break;
         case 'list':
-          $item = $item;
           break;
       }
 

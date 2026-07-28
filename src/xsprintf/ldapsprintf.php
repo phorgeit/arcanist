@@ -11,10 +11,11 @@
  *   %Q (Raw Query)
  *     Inserts raw, unescaped text. DANGEROUS!
  *
+ * @param string $pattern sprintf()-style format string.
+ * @param string ...$args Zero or more arguments.
  */
-function ldap_sprintf($pattern /* , ... */) {
-  $args = func_get_args();
-  return xsprintf('xsprintf_ldap', null, $args);
+function ldap_sprintf($pattern, ...$args) {
+  return xsprintf('xsprintf_ldap', null, func_get_args());
 }
 
 /**

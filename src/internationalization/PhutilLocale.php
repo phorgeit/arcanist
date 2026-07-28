@@ -33,8 +33,12 @@ abstract class PhutilLocale extends Phobject {
    * Languages with no other fallback use en_US because that's better
    * than proto-English for untranslated strings.
    *
-   * @return string|null Locale code of fallback locale, or null if there is
-   *                     no fallback locale.
+   * If a string is returned, then that locale and its fallbacks will be
+   * processed recursively. If an array is returned, then only the locales
+   * in the array will be processed, without recursion.
+   *
+   * @return array|string|null Locale code of fallback locale(s), or null
+   *                           if there are no fallback locales.
    */
   public function getFallbackLocaleCode() {
     return 'en_US';
@@ -132,6 +136,7 @@ abstract class PhutilLocale extends Phobject {
     $translated_pattern,
     array $args,
     $result_text) {
+
     return $result_text;
   }
 
@@ -147,6 +152,9 @@ abstract class PhutilLocale extends Phobject {
     if ($locales === null) {
       $objects = id(new PhutilClassMapQuery())
         ->setAncestorClass(__CLASS__)
+         // Continue on failure so that `arc liberate` can still run
+         // if you delete a locale file
+        ->setContinueOnFailure(true)
         ->execute();
 
       $locale_map = array();
@@ -168,15 +176,20 @@ abstract class PhutilLocale extends Phobject {
       }
 
       foreach ($locale_map as $locale_code => $locale) {
-        $fallback_code = $locale->getFallbackLocaleCode();
-        if ($fallback_code !== null) {
-          if (empty($locale_map[$fallback_code])) {
-            throw new Exception(
-              pht(
-                'The locale "%s" has an invalid fallback locale code ("%s"). '.
-                'No locale class exists which defines this locale.',
-                get_class($locale),
-                $fallback_code));
+        $fallback_codes = $locale->getFallbackLocaleCode();
+        if (is_string($fallback_codes)) {
+          $fallback_codes = array($fallback_codes);
+        }
+        if ($fallback_codes !== null) {
+          foreach ($fallback_codes as $fallback_code) {
+            if (empty($locale_map[$fallback_code])) {
+              throw new Exception(
+                pht(
+                  'The locale "%s" has an invalid fallback locale code '.
+                  '("%s"). No locale class exists which defines this locale.',
+                  get_class($locale),
+                  $fallback_code));
+            }
           }
         }
       }
@@ -228,6 +241,11 @@ abstract class PhutilLocale extends Phobject {
 
     $fallback_code = $locale->getFallbackLocaleCode();
     if ($fallback_code === null) {
+      return;
+    }
+    if (is_array($fallback_code)) {
+      // The locale overrode the standard recursive fallback machinery and took
+      // matters into its own hands. If this results in loops, so be it.
       return;
     }
 

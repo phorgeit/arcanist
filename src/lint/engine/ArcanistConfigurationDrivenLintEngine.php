@@ -153,8 +153,6 @@ final class ArcanistConfigurationDrivenLintEngine extends ArcanistLintEngine {
     array $exclude,
     array $global_exclude) {
 
-    $console = PhutilConsole::getConsole();
-
     $match = array();
     foreach ($paths as $path) {
       $keep = false;

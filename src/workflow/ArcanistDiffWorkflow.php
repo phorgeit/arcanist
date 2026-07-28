@@ -1315,7 +1315,6 @@ EOTEXT
       }
     }
 
-    $message = null;
     if ($is_create) {
       $message_file = $this->getArgument('message-file');
       if ($message_file) {
@@ -1606,6 +1605,7 @@ EOTEXT
    */
   private function validateCommitMessage(
     ArcanistDifferentialCommitMessage $message) {
+
     $futures = array();
 
     $revision_id = $message->getRevisionID();
@@ -1675,7 +1675,7 @@ EOTEXT
               "%s\n\n",
               $message);
 
-            $list = id(new PhutilConsoleList());
+            $list = new PhutilConsoleList();
             foreach ($away as $spec) {
               $list->addItem(
                 pht(
@@ -2412,16 +2412,6 @@ EOTEXT
     id(new FutureIterator($this->diffPropertyFutures))
       ->resolveAll();
     $this->diffPropertyFutures = array();
-  }
-
-  private function dispatchWillCreateRevisionEvent(array $fields) {
-    $event = $this->dispatchEvent(
-      ArcanistEventType::TYPE_REVISION_WILLCREATEREVISION,
-      array(
-        'specification' => $fields,
-      ));
-
-    return $event->getValue('specification');
   }
 
   private function dispatchWillBuildEvent(array $fields) {

@@ -52,8 +52,6 @@ final class ArcanistDiffParser extends Phobject {
   public function parseSubversionDiff(ArcanistSubversionAPI $api, $paths) {
     $this->setRepositoryAPI($api);
 
-    $diffs = array();
-
     foreach ($paths as $path => $status) {
       if ($status & ArcanistRepositoryAPI::FLAG_UNTRACKED ||
           $status & ArcanistRepositoryAPI::FLAG_CONFLICT ||
@@ -190,6 +188,10 @@ final class ArcanistDiffParser extends Phobject {
   }
 
   public function parseDiff($diff) {
+    if (!phutil_nonempty_string($diff)) {
+      throw new Exception(pht("Can't parse an empty diff!"));
+    }
+
     // Remove leading UTF-8 Byte Order Mark (BOM)
     if (substr($diff, 0, 3) == pack('CCC', 0xEF, 0xBB, 0xBF)) {
       $diff = substr($diff, 3);
@@ -800,7 +802,7 @@ final class ArcanistDiffParser extends Phobject {
       // "git diff -b" ignores whitespace, but has an empty hunk target
       if (preg_match('@^diff --git .*$@', $line)) {
         $this->nextLine();
-        return null;
+        return;
       }
     }
 
@@ -896,7 +898,6 @@ final class ArcanistDiffParser extends Phobject {
     // twice.
     $change->dropHunks();
 
-    $all_changes = array();
     do {
       $hunk = new ArcanistDiffHunk();
       $line = $this->getLineTrimmed();

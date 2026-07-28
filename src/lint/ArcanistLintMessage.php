@@ -22,7 +22,7 @@ final class ArcanistLintMessage extends Phobject {
   protected $bypassChangedLineFiltering;
 
   public static function newFromDictionary(array $dict) {
-    $message = new ArcanistLintMessage();
+    $message = new self();
 
     $message->setPath($dict['path']);
 

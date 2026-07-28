@@ -28,6 +28,7 @@ abstract class ArcanistBaseXHPASTLinter extends ArcanistFutureLinter {
     $code,
     $desc,
     $replace = null) {
+
     return $this->raiseLintAtOffset(
       $token->getOffset(),
       $code,
@@ -41,6 +42,7 @@ abstract class ArcanistBaseXHPASTLinter extends ArcanistFutureLinter {
     $code,
     $desc,
     $replace = null) {
+
     return $this->raiseLintAtOffset(
       $node->getOffset(),
       $code,

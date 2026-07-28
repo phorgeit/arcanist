@@ -342,6 +342,8 @@ EOTEXT
       ->setRevisionSymbol($revision);
 
     $land_engine->execute();
+
+    return 0;
   }
 
 }

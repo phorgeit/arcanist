@@ -196,7 +196,6 @@ final class PhpunitTestEngine extends ArcanistUnitTestEngine {
    * @return  array<string> List of directories to search for tests in.
    */
   public static function getSearchLocationsForTests($path) {
-    $file = basename($path);
     $dir  = dirname($path);
 
     $test_dir_names = array('tests', 'Tests');

@@ -13,10 +13,12 @@
  *
  *  %R Raw String
  *    Passes text through unescaped.
+ *
+ * @param string $pattern sprintf()-style format string.
+ * @param string ...$args Zero or more arguments.
  */
-function gitsprintf($pattern /* , ... */) {
-  $args = func_get_args();
-  return xsprintf('xsprintf_git', null, $args);
+function gitsprintf($pattern, ...$args) {
+  return xsprintf('xsprintf_git', null, func_get_args());
 }
 
 /**

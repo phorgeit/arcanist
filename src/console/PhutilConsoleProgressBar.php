@@ -134,7 +134,7 @@ final class PhutilConsoleProgressBar extends Phobject {
       '-',
       '~',
     );
-    $frac_char = $frac_map[floor($bar_frac * count($frac_map))];
+    $frac_char = $frac_map[(int)floor($bar_frac * count($frac_map))];
 
     $pattern = "[%-{$max_width}.{$max_width}s] % 5s%%";
     $out = sprintf(

@@ -33,7 +33,7 @@ final class PhutilServiceProfiler extends Phobject {
 
   public static function getInstance() {
     if (empty(self::$instance)) {
-      self::$instance = new PhutilServiceProfiler();
+      self::$instance = new self();
     }
     return self::$instance;
   }

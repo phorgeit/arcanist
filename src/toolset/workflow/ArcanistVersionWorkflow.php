@@ -75,6 +75,8 @@ EOTEXT
         $commit,
         date('j M Y', (int)$timestamp));
     }
+
+    return 0;
   }
 
 }

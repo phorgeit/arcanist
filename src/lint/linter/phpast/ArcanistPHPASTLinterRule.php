@@ -201,6 +201,7 @@ abstract class ArcanistPHPASTLinterRule extends Phobject {
   protected function getIndentation(
     PhpParser\Node $node,
     array $token_stream) {
+
     $offset = $node->getStartTokenPos() - 1;
     $token = $token_stream[$offset];
 

@@ -40,7 +40,7 @@ final class PhutilFileLock extends PhutilLock {
     $name = 'file:'.$lockfile;
     $lock = self::getLock($name);
     if (!$lock) {
-      $lock = new PhutilFileLock($name);
+      $lock = new self($name);
       $lock->lockfile = $lockfile;
       self::registerLock($lock);
     }

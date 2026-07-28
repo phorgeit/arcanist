@@ -27,7 +27,9 @@ final class ArcanistDefaultParametersXHPASTLinterRule
 
         if ($default_value->getTypeName() != 'n_EMPTY') {
           $default_found = true;
-        } else if ($default_found) {
+        } else if (
+          $default_found &&
+          $parameter->getChildByIndex(1)->getTypeName() !== 'n_UNPACK') {
           $this->raiseLintAtNode(
             $parameter_list,
             pht(

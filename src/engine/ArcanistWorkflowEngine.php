@@ -28,6 +28,7 @@ abstract class ArcanistWorkflowEngine
 
   final public function setRepositoryAPI(
     ArcanistRepositoryAPI $repository_api) {
+
     $this->repositoryAPI = $repository_api;
     return $this;
   }

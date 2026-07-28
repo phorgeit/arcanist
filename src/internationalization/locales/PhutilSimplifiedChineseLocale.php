@@ -14,12 +14,12 @@ final class PhutilSimplifiedChineseLocale extends PhutilLocale {
   }
 
   public function getFallbackLocaleCode() {
-    // Ideally this would be zh_Hant but Phabricator does not support
-    //  bidirectional fallbacks
-    // (zh_Hant -> zh_Hans and zh_Hans -> zh_Hant simultaneously)
-    // arbitrarily choose to fall back in the other direction instead
-    // In the mean time return `en_US` so users don't see Proto-English
-    return 'en_US';
+    // This has to return an array so as to disable
+    // recursive fallback processing and allow zh_Hant and
+    // zh_Hans to go both ways.
+    // Include en_US so if a string isn't translated into either variant
+    // it will display English plurals rather than proto-English
+    return array('zh_Hant', 'en_US');
   }
 
 }

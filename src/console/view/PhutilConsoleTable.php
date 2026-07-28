@@ -266,7 +266,7 @@ final class PhutilConsoleTable extends PhutilConsoleView {
    * Format cells into an entire row.
    *
    * @param  array<string> $columns List of columns.
-   * @return string
+   * @return array
    */
   protected function formatRow(array $columns) {
     $padding = str_repeat(' ', $this->padding);

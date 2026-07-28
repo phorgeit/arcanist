@@ -8,7 +8,7 @@ final class PhutilPHPParserLibrary extends Phobject {
    * This is the version that would be obtained by downloading and including an
    * up-to-date PHP-parser. The //actual// PHP-parser version may vary.
    */
-  const EXPECTED_VERSION_LEGACY = '4.19.4';
+  const EXPECTED_VERSION_LEGACY = '4.19.5';
 
   /**
    * The expected PHP-Parser version for PHP >= 7.4.
@@ -16,7 +16,7 @@ final class PhutilPHPParserLibrary extends Phobject {
    * This is the version that would be obtained by downloading and including an
    * up-to-date PHP-parser. The //actual// PHP-parser version may vary.
    */
-  const EXPECTED_VERSION = '5.6.1';
+  const EXPECTED_VERSION = '5.7.0';
 
   const REPO = 'https://github.com/nikic/PHP-Parser';
 
@@ -24,54 +24,17 @@ final class PhutilPHPParserLibrary extends Phobject {
    * The expected md5 hash of the PHP-parser packages listed above.
    */
   private static $hashes = array(
-    // v4.19.4.tar.gz
-    '4ad9df92641d07d21f5d912766b9ca7d',
-    // v4.19.4.zip
-    '97cc11eac5860d3fcf1f40ac89c925d7',
-    // v5.6.1.tar.gz
-    '5ad529d168cb0f57e4fb396d22772d99',
-    // v5.6.1.zip
-    '6733ece8defe73738a9b140ffb148d85',
+    // v4.19.5.tar.gz
+    '12debc62a3f7588c182f0d02ba07996e',
+    // v4.19.5.zip
+    '06a986aeff2a08b615624421de64c4c4',
+    // v5.7.0.tar.gz
+    'f997f0fb2168894b99f1b959ade13eae',
+    // v5.7.0.zip
+    '1ab96406751d61afa922a112895c9f24',
   );
 
   private static $version;
-
-  private static function downloadPHPParser(
-    string $path,
-    string $version,
-    string $extension) {
-
-    $path .= '/php-parser-'.$version.$extension;
-
-    // Skip downloading if the file already exists and matches the hash.
-    if (
-      Filesystem::pathExists($path) &&
-      in_array(md5_file($path), self::$hashes, true)) {
-
-      return $path;
-    }
-
-    // HTTPSFuture::setDownloadPath refuses to overwrite.
-    Filesystem::remove($path);
-
-    $future = new HTTPSFuture(
-      self::REPO.'/archive/refs/tags/v'.$version.$extension);
-    $future
-      ->setDownloadPath($path)
-      ->resolvex();
-
-    $actual_md5 = md5_file($path);
-
-    if (!in_array($actual_md5, self::$hashes, true)) {
-      $expected = implode(', ', self::$hashes);
-
-      throw new Exception(
-        "PHP-parser hash does not match: expected any of {$expected}".
-        ", got {$actual_md5}.");
-    }
-
-    return $path;
-  }
 
   public static function build() {
     $root = phutil_get_library_root('arcanist');
@@ -85,15 +48,21 @@ final class PhutilPHPParserLibrary extends Phobject {
     }
 
     if (extension_loaded('zip')) {
-      $download_path = self::downloadPHPParser($path, $version, '.zip');
+      $target_path = $path.'/php-parser-'.$version.'.zip';
+
+      id(new PhutilGitHubReleaseDownloader(self::REPO, $target_path))
+        ->setDownloadFormat('zip')
+        ->setVersion($version)
+        ->validateDownload(self::$hashes)
+        ->download();
 
       $zip = new ZipArchive();
-      $result = $zip->open($download_path);
+      $result = $zip->open($target_path);
       if (!$result) {
         throw new Exception(
           pht(
             'Opening %s failed! %s.',
-            $download_path,
+            $target_path,
             $result === false ? 'Unknown Error' : (string)$result));
       }
 
@@ -111,9 +80,15 @@ final class PhutilPHPParserLibrary extends Phobject {
       extension_loaded('phar') &&
       extension_loaded('zlib')) {
 
-      $download_path = self::downloadPHPParser($path, $version, '.tar.gz');
+      $target_path = $path.'/php-parser-'.$version.'.tar.gz';
 
-      id(new PharData($download_path))->extractTo($target, null, true);
+      id(new PhutilGitHubReleaseDownloader(self::REPO, $target_path))
+        ->setDownloadFormat('tar.gz')
+        ->setVersion($version)
+        ->validateDownload(self::$hashes)
+        ->download();
+
+      id(new PharData($target_path))->extractTo($target, null, true);
 
       // Renames fail if the target directory exists.
       Filesystem::remove("{$target}/PhpParser");
@@ -165,7 +140,7 @@ final class PhutilPHPParserLibrary extends Phobject {
   private static function phpParserAutoloader($classname) {
     $lib = self::getPath();
 
-    if (strpos($classname, 'PhpParser') !== 0) {
+    if (strncmp($classname, 'PhpParser', 9)) {
       return false;
     }
 

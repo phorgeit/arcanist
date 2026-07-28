@@ -13,7 +13,7 @@ final class ArcanistLintPatcher extends Phobject {
   private $applyMessages  = array();
 
   public static function newFromArcanistLintResult(ArcanistLintResult $result) {
-    $obj = new ArcanistLintPatcher();
+    $obj = new self();
     $obj->lintResult = $result;
     return $obj;
   }

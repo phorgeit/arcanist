@@ -246,7 +246,6 @@ final class PhutilHTMLParser extends Phobject {
 
     $map = array();
     $len = strlen($attributes);
-    $key_pos = null;
     for ($ii = 0; $ii < $len; $ii++) {
       $c = $attributes[$ii];
       $is_space = isset($whitespace[$c]);

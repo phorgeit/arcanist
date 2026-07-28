@@ -6,12 +6,12 @@ require_once $arcanist_root.'/support/init/init-script.php';
 
 $args = new PhutilArgumentParser($argv);
 $args->setTagline(pht('acquire and hold a lockfile'));
-$args->setSynopsis(<<<EOHELP
+$args->setSynopsis(pht(<<<EOHELP
 **lock.php** __file__ [__options__]
     Acquire a lockfile and hold it until told to unlock it.
 
 EOHELP
-);
+));
 
 $args->parseStandardArguments();
 $args->parse(array(

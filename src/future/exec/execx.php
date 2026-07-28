@@ -8,12 +8,11 @@
  *   list ($stdout, $stderr) = execx('ls %s', $file);
  *
  * @param  string $cmd sprintf()-style command pattern to execute.
- * @param  string $args,... Arguments to sprintf pattern.
+ * @param  string ...$args Arguments to sprintf pattern.
  * @return array  List of stdout and stderr.
  */
-function execx($cmd /* , ... */) {
-  $args = func_get_args();
-  $future = newv(ExecFuture::class, $args);
+function execx($cmd, ...$args) {
+  $future = new ExecFuture($cmd, ...$args);
   return $future->resolvex();
 }
 
@@ -28,12 +27,11 @@ function execx($cmd /* , ... */) {
  * which throws an exception when it encounters an error.
  *
  * @param  string $cmd sprintf()-style command pattern to execute.
- * @param  string $args,... Arguments to sprintf pattern.
+ * @param  string ...$args Arguments to sprintf pattern.
  * @return array  List of return code, stdout, and stderr.
  */
-function exec_manual($cmd /* , ... */) {
-  $args = func_get_args();
-  $ef = newv(ExecFuture::class, $args);
+function exec_manual($cmd, ...$args) {
+  $ef = new ExecFuture($cmd, ...$args);
   return $ef->resolve();
 }
 
@@ -42,12 +40,11 @@ function exec_manual($cmd /* , ... */) {
  * Wrapper for @{class:PhutilExecPassthru}.
  *
  * @param  string $cmd sprintf()-style command pattern to execute.
- * @param  string $args,... Arguments to sprintf pattern.
+ * @param  string ...$args Arguments to sprintf pattern.
  * @return int    Return code.
  */
-function phutil_passthru($cmd /* , ... */) {
-  $args = func_get_args();
-  return newv(PhutilExecPassthru::class, $args)->resolve();
+function phutil_passthru($cmd, ...$args) {
+  return id(new PhutilExecPassthru($cmd, ...$args))->resolve();
 }
 
 

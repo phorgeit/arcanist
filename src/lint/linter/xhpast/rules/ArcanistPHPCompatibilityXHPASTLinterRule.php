@@ -53,7 +53,7 @@ final class ArcanistPHPCompatibilityXHPASTLinterRule
         case 'function_exists':
         case 'interface_exists':
         case 'defined':
-          $type = null;
+          $type = '';
           switch ($function_name) {
             case 'class_exists':
               $type = 'class';

@@ -1,4 +1,6 @@
 <?php
 
-final class PhutilArgumentUsageException
+
+/** @concrete-extensible */
+class PhutilArgumentUsageException
   extends PhutilArgumentParserException {}

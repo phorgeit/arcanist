@@ -162,7 +162,7 @@ final class ArcanistWorkingCopyIdentity extends Phobject {
       $console->writeLog(
         "%s\n",
         pht('Working Copy: Path "%s" is not in any working copy.', $path));
-      return new ArcanistWorkingCopyIdentity($path, $config);
+      return new self($path, $config);
     }
 
     $console->writeLog(
@@ -179,7 +179,7 @@ final class ArcanistWorkingCopyIdentity extends Phobject {
         'Working Copy: Project root is at "%s".',
         $project_root));
 
-    $identity = new ArcanistWorkingCopyIdentity($project_root, $config);
+    $identity = new self($project_root, $config);
     $identity->localMetaDir = $vcs_root.'/.'.$vcs_type;
     $identity->localConfig = $identity->readLocalArcConfig();
     $identity->vcsType = $vcs_type;

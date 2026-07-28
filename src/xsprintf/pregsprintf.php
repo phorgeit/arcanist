@@ -9,18 +9,16 @@
  *  %R Raw
  *    Inserts a raw regular expression.
  *
- * @param  string  $pattern sprintf()-style format string.
- * @param  string  $args,... (optional) Flags to use with the regular
- *                 expression.
- * @return string  Formatted string.
+ * @param  string       $pattern sprintf()-style format string.
+ * @param  string|null  $flags
+ * @param  string       ...$args Zero or more arguments.
+ * @return string       Formatted string.
  */
-function pregsprintf($pattern /* , ... */) {
-  $args  = func_get_args();
-  $flags = head(array_splice($args, 1, 1));
-
+function pregsprintf($pattern, $flags = null, ...$args) {
   $delim    = chr(7);
   $userdata = array('delimiter' => $delim);
 
+  array_unshift($args, $pattern);
   $pattern = xsprintf('xsprintf_regex', $userdata, $args);
   return $delim.$pattern.$delim.$flags;
 }

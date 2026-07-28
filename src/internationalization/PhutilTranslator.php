@@ -12,7 +12,7 @@ final class PhutilTranslator extends Phobject {
 
   public static function getInstance() {
     if (self::$instance === null) {
-      self::$instance = new PhutilTranslator();
+      self::$instance = new self();
     }
     return self::$instance;
   }
@@ -78,11 +78,9 @@ final class PhutilTranslator extends Phobject {
    * @phutil-external-symbol function phutil_escape_html
    * @phutil-external-symbol function phutil_safe_html
    */
-  public function translate($text /* , ... */) {
-    $args = func_get_args();
-
+  public function translate($text, ...$args) {
     if ($this->willTranslateCallback) {
-      call_user_func_array($this->willTranslateCallback, $args);
+      call_user_func($this->willTranslateCallback, $text, ...$args);
     }
 
     if (isset($this->translations[$text])) {
@@ -92,7 +90,7 @@ final class PhutilTranslator extends Phobject {
     }
 
     while (is_array($translation)) {
-      $arg = next($args);
+      $arg = current($args);
       $translation = $this->chooseVariant($translation, $arg);
       if ($translation === null) {
         $pos = key($args);
@@ -113,8 +111,8 @@ final class PhutilTranslator extends Phobject {
           $kind,
           $text);
       }
+      next($args);
     }
-    array_shift($args);
 
     foreach ($args as $k => $arg) {
       if ($arg instanceof PhutilNumber) {
@@ -139,7 +137,12 @@ final class PhutilTranslator extends Phobject {
       }
     }
 
-    $result = vsprintf($translation, $args);
+    try {
+      $result = vsprintf($translation, $args);
+    } catch (ValueError $ex) {
+      // In PHP 8 vsprintf throws an exception; in PHP 7 it returns false
+      $result = false;
+    }
     if ($result === false) {
       // If vsprintf() fails (often because the translated string references
       // too many parameters), show the bad template with a note instead of

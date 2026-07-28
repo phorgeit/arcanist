@@ -15,14 +15,18 @@ final class PhutilHelpArgumentWorkflow extends PhutilArgumentWorkflow {
 
   protected function didConstruct() {
     $this->setName('help');
-    $this->setExamples(<<<EOHELP
-**help** [__command__]
+    // 'help' is the name of a command that you have to type to the console
+    // as-is and can't be translated. "command" is an arbitrary metasyntactic
+    // variable and could be.
+    $this->setExamples(sprintf(
+      <<<EOHELP
+**help** [__%s__]
 EOHELP
-);
-    $this->setSynopsis(<<<EOHELP
+, pht('command')));
+    $this->setSynopsis(pht(<<<EOHELP
 Show this help, or workflow help for __command__.
 EOHELP
-      );
+      ));
     $this->setArguments(
       array(
         array(

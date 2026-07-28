@@ -15,7 +15,7 @@ final class ArcanistDifferentialCommitMessage extends Phobject {
   private $gitSVNUUID;
 
   public static function newFromRawCorpus($corpus) {
-    $obj = new ArcanistDifferentialCommitMessage();
+    $obj = new self();
     $obj->rawCorpus = $corpus;
     $obj->revisionID = $obj->parseRevisionIDFromRawCorpus($corpus);
 

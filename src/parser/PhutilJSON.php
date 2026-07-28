@@ -115,7 +115,7 @@ final class PhutilJSON extends Phobject {
   /**
    * Pretty-print a JSON value.
    *
-   * @param   array   $value Value to format.
+   * @param   mixed   $value Value to format.
    * @param   int     $depth Current depth, for indentation.
    * @return  string  Pretty-printed value.
    * @task internal

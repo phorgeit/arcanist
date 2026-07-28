@@ -97,6 +97,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
   final public function setConfigurationEngine(
     ArcanistConfigurationEngine $engine) {
+
     $this->configurationEngine = $engine;
     return $this;
   }
@@ -107,6 +108,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
   final public function setConfigurationSourceList(
     ArcanistConfigurationSourceList $list) {
+
     $this->configurationSourceList = $list;
     return $this;
   }
@@ -919,7 +921,7 @@ abstract class ArcanistWorkflow extends Phobject {
       }
       foreach ($spec[$key]['conflicts'] as $conflict => $more) {
         if (isset($dict[$conflict])) {
-          if ($more) {
+          if ($more && is_string($more)) {
             $more = ': '.$more;
           } else {
             $more = '.';
@@ -1037,8 +1039,6 @@ abstract class ArcanistWorkflow extends Phobject {
   final public function requireCleanWorkingCopy() {
     $api = $this->getRepositoryAPI();
 
-    $must_commit = array();
-
     $working_copy_desc = phutil_console_format(
       "  %s: __%s__\n\n",
       pht('Working copy'),
@@ -1051,8 +1051,8 @@ abstract class ArcanistWorkflow extends Phobject {
         sprintf(
           "%s\n\n%s  %s\n    %s\n\n%s",
           pht(
-            "You have incompletely checked out directories in this working ".
-            "copy. Fix them before proceeding.'"),
+            'You have incompletely checked out directories in this working '.
+            'copy. Fix them before proceeding.'),
           $working_copy_desc,
           pht('Incomplete directories in working copy:'),
           implode("\n    ", $incomplete),
@@ -1973,6 +1973,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
 
   /**
+   * @return array<PhabricatorRepository|null,array<string>>
    * @task phabrep
    */
   private function loadRepositoryInformation() {
@@ -1991,7 +1992,7 @@ abstract class ArcanistWorkflow extends Phobject {
         $reasons[] = pht(
           'This software version on the server you are connecting to is out '.
           'of date and does not have support for identifying repositories '.
-          'by callsign or URI. Update the server sofwware to enable these '.
+          'by callsign or URI. Update the server software to enable these '.
           'features.');
         return array(null, $reasons);
       }
@@ -2006,7 +2007,7 @@ abstract class ArcanistWorkflow extends Phobject {
         'repository.callsign');
     } else if (count($results) > 1) {
       $reasons[] = pht(
-        'Multiple repostories (%s) matched the query. You can use the '.
+        'Multiple repositories (%s) matched the query. You can use the '.
         '"%s" configuration to select the one you want.',
         implode(', ', ipull($results, 'callsign')),
         'repository.callsign');
@@ -2296,6 +2297,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
   final public function setConduitEngine(
     ArcanistConduitEngine $conduit_engine) {
+
     $this->conduitEngine = $conduit_engine;
     return $this;
   }
@@ -2351,9 +2353,7 @@ abstract class ArcanistWorkflow extends Phobject {
       ->setExecutableFuture($future);
   }
 
-  final public function loadHardpoints(
-    $objects,
-    $requests) {
+  final public function loadHardpoints($objects, $requests) {
     return $this->getRuntime()->loadHardpoints($objects, $requests);
   }
 

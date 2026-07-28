@@ -85,7 +85,7 @@ abstract class PhutilConsoleView extends Phobject {
 
   /**
    * @param array<mixed> $parts List of views, one per line.
-   * @return mixed Each view rendered on a separate line.
+   * @return array Each view rendered on a separate line.
    */
   final protected function drawLines(array $parts) {
     $result = array();

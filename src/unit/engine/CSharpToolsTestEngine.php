@@ -222,7 +222,6 @@ final class CSharpToolsTestEngine extends XUnitTestEngine {
     $coverage_dom = new DOMDocument();
     $coverage_dom->loadXML(Filesystem::readFile($cover_file));
 
-    $modified = $this->getPaths();
     $files = array();
     $reports = array();
     $instrumented = array();

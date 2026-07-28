@@ -30,7 +30,7 @@ final class ArcanistDiffHunk extends Phobject {
   }
 
   public static function newFromDictionary(array $dict) {
-    $obj = new ArcanistDiffHunk();
+    $obj = new self();
 
     $obj->oldOffset = $dict['oldOffset'];
     $obj->newOffset = $dict['newOffset'];
