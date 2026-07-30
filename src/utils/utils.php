@@ -1700,7 +1700,7 @@ function phutil_hashes_are_identical($u, $v) {
 /**
  * Build a query string from a dictionary.
  *
- * @param array<string, string> $parameters Dictionary of parameters.
+ * @param array<string, string|bool> $parameters Dictionary of parameters.
  * @return string HTTP query string.
  */
 function phutil_build_http_querystring(array $parameters) {
@@ -1715,7 +1715,7 @@ function phutil_build_http_querystring(array $parameters) {
 /**
  * Build a query string from a list of parameter pairs.
  *
- * @param array<array<string, string>> $pairs List of pairs.
+ * @param array<array<string|int, string|bool>> $pairs List of pairs.
  * @return string HTTP query string.
  */
 function phutil_build_http_querystring_from_pairs(array $pairs) {
