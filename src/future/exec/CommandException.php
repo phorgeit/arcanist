@@ -10,6 +10,12 @@ final class CommandException extends Exception {
   protected $stderr;
   protected $error;
 
+  /**
+   * @param PhutilCommandString $command
+   * @param int $error
+   * @param string|null $stdout
+   * @param string|null $stderr
+   */
   public function __construct($message, $command, $error, $stdout, $stderr) {
     $this->command = $command;
     $this->error = $error;
@@ -20,7 +26,7 @@ final class CommandException extends Exception {
     $summary[] = $this->summarize($message);
 
     $summary[] = 'COMMAND';
-    $summary[] = $this->summarize($command);
+    $summary[] = $this->summarize((string)$command);
 
     $summary[] = null;
     $summary[] = 'STDOUT';
@@ -51,8 +57,12 @@ final class CommandException extends Exception {
     return $this->stderr;
   }
 
+  /**
+   * @param string|null $string
+   * @return string
+   */
   private function summarize($string) {
-    if (!strlen($string)) {
+    if (!phutil_nonempty_string($string)) {
       return '(empty)';
     }
 
