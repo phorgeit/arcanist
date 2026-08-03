@@ -45,7 +45,6 @@ abstract class ArcanistWorkflow extends Phobject {
   private $conduitURI;
   private $conduitCredentials;
   private $conduitAuthenticated;
-  private $conduitTimeout;
 
   private $userPHID;
   private $userName;
@@ -380,10 +379,6 @@ abstract class ArcanistWorkflow extends Phobject {
     }
 
     $this->conduit = new ConduitClient($this->conduitURI);
-
-    if ($this->conduitTimeout) {
-      $this->conduit->setTimeout($this->conduitTimeout);
-    }
 
     return $this;
   }
