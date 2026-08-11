@@ -2132,7 +2132,7 @@ function phutil_raise_preg_exception($function, array $argv) {
  * This method raises an exception if passed a value which is neither null
  * nor a string.
  *
- * @param $value Value to test.
+ * @param mixed $value Value to test.
  * @return bool True if the parameter is a nonempty string.
  */
 function phutil_nonempty_string($value) {
@@ -2166,7 +2166,7 @@ function phutil_nonempty_string($value) {
  *
  * This method raises an exception if passed any other value.
  *
- * @param $value Value to test.
+ * @param mixed $value Value to test.
  * @return bool True if the parameter is a nonempty, stringlike value.
  */
 function phutil_nonempty_stringlike($value) {
@@ -2216,7 +2216,7 @@ function phutil_nonempty_stringlike($value) {
  *
  * This method raises an exception if passed any other value.
  *
- * @param $value Value to test.
+ * @param mixed $value Value to test.
  * @return bool True if the parameter is a nonempty, scalar value.
  */
 function phutil_nonempty_scalar($value) {
