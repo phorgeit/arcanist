@@ -52,6 +52,8 @@ final class Filesystem extends Phobject {
   /**
    * Make assertions about the state of path in preparation for
    * writeFile() and writeFileIfChanged().
+   *
+   * @param string $path File path to write.
    */
   public static function assertWritableFile($path) {
     $path = self::resolvePath($path);
@@ -80,13 +82,14 @@ final class Filesystem extends Phobject {
    * detailed exceptions on failure. If the file already exists, it will be
    * overwritten.
    *
-   * @param  string  $path File path to write. This file must be writable and
-   *                 its parent directory must exist.
-   * @param  string  $data Data to write.
+   * @param  string|TempFile  $path File path to write. This file must be
+   *                          writable and its parent directory must exist.
+   * @param  string           $data Data to write.
    *
    * @task   file
    */
   public static function writeFile($path, $data) {
+    $path = (string)$path;
     self::assertWritableFile($path);
 
     if (@file_put_contents($path, $data) === false) {
