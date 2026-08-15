@@ -30,6 +30,9 @@ final class PhutilSortVector
   }
 
   public function addString($value) {
+    if ($value === null) {
+      $value = '';
+    }
     if (strlen($value) && (strpos($value, "\0") !== false)) {
       throw new Exception(
         pht(
