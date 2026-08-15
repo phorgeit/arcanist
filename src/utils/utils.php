@@ -372,10 +372,12 @@ function igroup(array $list, $by, ...$indices) {
 
   $groups = array();
   foreach ($map as $group) {
+    $group = $group ?? '';
     $groups[$group] = array();
   }
 
   foreach ($map as $key => $group) {
+    $group = $group ?? '';
     $groups[$group][$key] = $list[$key];
   }
 
