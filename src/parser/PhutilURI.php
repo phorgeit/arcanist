@@ -66,7 +66,9 @@ final class PhutilURI extends Phobject {
       // in between them, parse that, then remove the path. See T6106.
 
       $parts = parse_url($matches[1].'/'.$matches[2]);
-      unset($parts['path']);
+      if ($parts !== false) {
+        unset($parts['path']);
+      }
     } else if ($this->isGitURIPattern($uri)) {
       // Handle Git/SCP URIs in the form "user@domain:relative/path".
 
