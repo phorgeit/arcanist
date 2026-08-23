@@ -6,7 +6,6 @@ final class ArcanistGitCommitGraphQuery
   private $seen = array();
   private $futures = array();
   private $iterators = array();
-  private $cursors = array();
   private $iteratorKey = 0;
 
   public function execute() {

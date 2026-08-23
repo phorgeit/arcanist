@@ -7,7 +7,6 @@ final class ArcanistBundle extends Phobject {
 
   private $changes;
   private $conduit;
-  private $blobs = array();
   private $diskPath;
   private $baseRevision;
   private $revisionID;

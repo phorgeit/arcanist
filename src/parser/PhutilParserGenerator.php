@@ -58,7 +58,6 @@ final class PhutilParserGenerator extends Phobject {
   private $rules;
   private $startRule = 'start';
   private $states = array();
-  private $sets = array();
   private $successor = array();
   private $setHashes = array();
   private $actionTable;

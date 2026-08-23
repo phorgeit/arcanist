@@ -4,7 +4,6 @@ final class PhagePHPAgentBootloader extends PhageAgentBootloader {
 
   private $bootSequence;
   private $bootLength;
-  private $mainLength;
 
   public function getName() {
     return 'php';
@@ -95,7 +94,6 @@ final class PhagePHPAgentBootloader extends PhageAgentBootloader {
 
       $this->bootSequence = $boot_sequence;
       $this->bootLength = $boot_length;
-      $this->mainLength = $main_length;
     }
 
     return $this->bootSequence;

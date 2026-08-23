@@ -16,7 +16,6 @@ final class ArcanistLintWorkflow extends ArcanistWorkflow {
   private $shouldAmendChanges = false;
   private $shouldAmendWithoutPrompt = false;
   private $shouldAmendAutofixesWithoutPrompt = false;
-  private $engine;
 
   public function getWorkflowName() {
     return 'lint';
@@ -191,8 +190,6 @@ EOTEXT
     } else {
       $paths = $this->selectPathsForWorkflow($paths, $rev);
     }
-
-    $this->engine = $engine;
 
     $engine->setMinimumSeverity(
       $this->getArgument('severity', self::DEFAULT_SEVERITY));

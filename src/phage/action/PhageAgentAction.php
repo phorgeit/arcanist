@@ -3,7 +3,6 @@
 abstract class PhageAgentAction
   extends PhageAction {
 
-  private $future;
   private $channel;
   private $commands = array();
   private $commandKey = 0;
@@ -94,7 +93,6 @@ abstract class PhageAgentAction
 
     $channel = new PhutilJSONProtocolChannel($channel);
 
-    $this->future = $future;
     $this->channel = $channel;
     $this->isActive = true;
   }
