@@ -58,7 +58,8 @@ abstract class PhutilExecutableFuture extends Future {
    *   // Env will have ONLY "X".
    *   $exec->setEnv(array('X' => 'y'), $wipe_process_env = true);
    *
-   * @param array<string, string> $env Dictionary of environmental variables.
+   * @param array<string, string|int> $env Dictionary of environmental
+   *   variables.
    * @param bool $wipe_process_env (optional) Pass `true` to replace the
    *   existing environment.
    * @return $this

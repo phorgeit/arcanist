@@ -25,7 +25,7 @@ abstract class ArcanistConfigurationSource
 
   public function didReadUnknownOption(ArcanistRuntime $runtime, $key) {
 
-    // TOOLSETS: Restore this warning once the new "arc" flow is in better
+    // TODO: TOOLSETS: Restore this warning once the new "arc" flow is in better
     // shape.
     return;
 

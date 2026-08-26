@@ -95,7 +95,7 @@ abstract class PhutilChannel extends Phobject {
    *
    * @param   array<PhutilChannel>  $channels A list of channels to wait for.
    * @param   array                 $options (optional) Options, see above.
-   * @return  void
+   * @return  void|false
    *
    * @task wait
    */
@@ -126,7 +126,7 @@ abstract class PhutilChannel extends Phobject {
    * @param array<PhutilChannel> $writes List of channels to wait for writes
    *                             on.
    * @param array               $options (optional) Options, see above.
-   * @return void
+   * @return void|false
    *
    * @task wait
    */
