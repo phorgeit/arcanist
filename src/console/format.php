@@ -164,9 +164,7 @@ function phutil_console_wrap($text, $indent = 0, $with_prefix = true) {
   }
 
   if ($line) {
-    if ($line) {
-      $lines[] = $line;
-    }
+    $lines[] = $line;
   }
 
   $pre = null;

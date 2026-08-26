@@ -291,7 +291,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * @return string  6-space indented list of available command synopses.
    */
   public function getCommandSynopses() {
-    return array();
+    return '';
   }
 
   /**

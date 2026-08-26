@@ -853,6 +853,8 @@ final class ExecFuture extends PhutilExecutableFuture {
       return true;
     }
 
+    // This should not be reached.
+    return false;
   }
 
 

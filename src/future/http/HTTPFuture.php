@@ -123,33 +123,29 @@ final class HTTPFuture extends BaseHTTPFuture {
       $read   = array();
       $write  = array($this->socket);
       $except = array();
-      $select = stream_select($read, $write, $except, $tv_sec = 0);
-      if ($write) {
-        $this->stateConnected = true;
+      stream_select($read, $write, $except, $tv_sec = 0);
+      $this->stateConnected = true;
+    }
+
+    if (strlen($this->writeBuffer)) {
+      $bytes = @fwrite($this->socket, $this->writeBuffer);
+      if ($bytes === false) {
+        throw new Exception(pht('Failed to write to buffer.'));
+      } else if ($bytes) {
+        $this->writeBuffer = substr($this->writeBuffer, $bytes);
       }
     }
 
-    if ($this->stateConnected) {
-      if (strlen($this->writeBuffer)) {
-        $bytes = @fwrite($this->socket, $this->writeBuffer);
-        if ($bytes === false) {
-          throw new Exception(pht('Failed to write to buffer.'));
-        } else if ($bytes) {
-          $this->writeBuffer = substr($this->writeBuffer, $bytes);
-        }
-      }
+    if (!strlen($this->writeBuffer)) {
+      $this->stateWriteComplete = true;
+    }
 
-      if (!strlen($this->writeBuffer)) {
-        $this->stateWriteComplete = true;
-      }
+    while (($data = fread($this->socket, 32768)) || strlen($data)) {
+      $this->response .= $data;
+    }
 
-      while (($data = fread($this->socket, 32768)) || strlen($data)) {
-        $this->response .= $data;
-      }
-
-      if ($data === false) {
-        throw new Exception(pht('Failed to read socket.'));
-      }
+    if ($data === false) {
+      throw new Exception(pht('Failed to read socket.'));
     }
 
     return $this->checkSocket();
