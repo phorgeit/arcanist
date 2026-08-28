@@ -406,13 +406,13 @@ final class HTTPSFuture extends BaseHTTPFuture {
         curl_setopt($curl, CURLOPT_CAINFO, $this->getCABundle());
       }
 
-      $verify_peer = 1;
+      $verify_peer = true;
       $verify_host = 2;
 
       $extensions = PhutilHTTPEngineExtension::getAllExtensions();
       foreach ($extensions as $extension) {
         if ($extension->shouldTrustAnySSLAuthorityForURI($uri_object)) {
-          $verify_peer = 0;
+          $verify_peer = false;
         }
         if ($extension->shouldTrustAnySSLHostnameForURI($uri_object)) {
           $verify_host = 0;

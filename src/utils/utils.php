@@ -632,7 +632,7 @@ function ifilter(array $list, $index, $negate = false) {
  * key order on an existing dictionary.
  *
  * @param  array   $dict Dictionary of key-value pairs to select from.
- * @param  array<string> $keys List of keys to select.
+ * @param  array<string|int> $keys List of keys to select.
  * @return array         Dictionary of only those key-value pairs where the key
  *                       was present in the list of keys to select. Ordering is
  *                       determined by the list order.

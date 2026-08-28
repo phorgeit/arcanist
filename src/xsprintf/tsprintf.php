@@ -14,7 +14,7 @@
  * Particularly, this will escape terminal control characters.
  *
  * @param string $pattern sprintf()-style format string.
- * @param string ...$args Zero or more arguments.
+ * @param string|array ...$args Zero or more arguments.
  */
 function tsprintf($pattern, ...$args) {
   $pattern = PhutilConsoleFormatter::interpretFormat($pattern);

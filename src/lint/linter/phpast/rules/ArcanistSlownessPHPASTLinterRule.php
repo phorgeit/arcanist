@@ -63,7 +63,7 @@ final class ArcanistSlownessPHPASTLinterRule
     if ($name === 'strstr' || $name === 'strchr') {
       // strstr, strpos, and str_contains share the same call order.
       $replacement = $this->getString($strstr, $token_stream);
-      $replacement = substr($replacement, '6');
+      $replacement = substr($replacement, 6);
 
       if (version_compare($this->version, '8.0.0', '>=')) {
         $replacement = 'str_contains'.$replacement;
@@ -92,7 +92,7 @@ final class ArcanistSlownessPHPASTLinterRule
     } else if ($name === 'stristr') {
       // stristr and stripos share the same call order.
       $replacement = $this->getString($strstr, $token_stream);
-      $replacement = 'stripos'.substr($replacement, '7');
+      $replacement = 'stripos'.substr($replacement, 7);
 
       $this->raiseLintAtNode(
         $strstr,
@@ -150,7 +150,7 @@ final class ArcanistSlownessPHPASTLinterRule
       if (version_compare($this->version, '8.0.0', '>=')) {
         // strpos and str_starts_with share the same call order.
         $replacement = $this->getString($strpos, $token_stream);
-        $replacement = 'str_starts_with'.substr($replacement, '6');
+        $replacement = 'str_starts_with'.substr($replacement, 6);
 
         if ($is_negated) {
           $replacement = '!'.$replacement;
