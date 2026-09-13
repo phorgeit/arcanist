@@ -25,16 +25,17 @@ abstract class ArcanistConfigurationSource
 
   public function didReadUnknownOption(ArcanistRuntime $runtime, $key) {
 
-    // TODO: TOOLSETS: Restore this warning once the new "arc" flow is in better
-    // shape.
+    // TODO: TOOLSETS: Restore the warning below once the new "arc" flow is in
+    // better shape.
     return;
-
+/*
     $runtime->getLogEngine()->writeWarning(
       pht('UNKNOWN CONFIGURATION'),
       pht(
         'Ignoring unrecognized configuration option ("%s") from source: %s.',
         $key,
         $this->getSourceDisplayName()));
+*/
   }
 
 }
