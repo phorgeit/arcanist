@@ -218,13 +218,13 @@ EOTEXT
       $children = $this->inspectHardpoints($ref_map);
 
       foreach ($children as $child) {
-        $hash = spl_object_hash($child);
+        $id = spl_object_id($child);
 
-        if (isset($seen[$hash])) {
+        if (isset($seen[$id])) {
           continue;
         }
 
-        $seen[$hash] = true;
+        $seen[$id] = true;
         $look[] = $child;
       }
     }

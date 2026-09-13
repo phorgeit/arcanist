@@ -68,7 +68,7 @@ final class PhutilErrorTrap extends Phobject {
   }
 
   public function getTrapKey() {
-    return spl_object_hash($this);
+    return spl_object_id($this);
   }
 
   public function __construct() {
