@@ -1968,7 +1968,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
 
   /**
-   * @return array<PhabricatorRepository|null,array<string>>
+   * @return array{0:PhabricatorRepository|null,1:array<string>}
    * @task phabrep
    */
   private function loadRepositoryInformation() {
@@ -2017,6 +2017,7 @@ abstract class ArcanistWorkflow extends Phobject {
 
   /**
    * @task phabrep
+   * @return array{0: array<array<string>>|null, 1: array<string>}
    */
   private function getRepositoryQuery() {
     $reasons = array();

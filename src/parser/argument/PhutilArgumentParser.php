@@ -390,7 +390,7 @@ final class PhutilArgumentParser extends Phobject {
    *
    * @param   array $workflows List of argument specs, see
    *                @{class:PhutilArgumentSpecification}.
-   * @return  $this
+   * @return  PhutilArgumentWorkflow|never
    * @task parse
    */
   public function parseWorkflows(array $workflows) {
@@ -417,9 +417,9 @@ final class PhutilArgumentParser extends Phobject {
    *
    * @param array<PhutilArgumentWorkflow> $workflows List of
    *                                      @{class:PhutilArgumentWorkflow}s.
-   * @return PhutilArgumentWorkflow|int Returns the chosen workflow if it is
-   *                                    not executable, or executes it and
-   *                                    exits with a return code if it is.
+   * @return PhutilArgumentWorkflow|never Returns the chosen workflow if it is
+   *                                      not executable, or executes it and
+   *                                      exits with a return code if it is.
    * @task parse
    */
   public function parseWorkflowsFull(array $workflows) {

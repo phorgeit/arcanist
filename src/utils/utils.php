@@ -1398,23 +1398,23 @@ function phutil_json_encode($value) {
  */
 function phutil_validate_json($value, $path = '') {
   if ($value === null) {
-    return;
+    return null;
   }
 
   if ($value === true) {
-    return;
+    return null;
   }
 
   if ($value === false) {
-    return;
+    return null;
   }
 
   if (is_int($value)) {
-    return;
+    return null;
   }
 
   if (is_float($value)) {
-    return;
+    return null;
   }
 
   if (is_array($value)) {
@@ -1458,7 +1458,7 @@ function phutil_validate_json($value, $path = '') {
     }
   }
 
-  return;
+  return null;
 }
 
 
@@ -1751,7 +1751,7 @@ function phutil_build_http_querystring_from_pairs(array $pairs) {
  *
  * @param scalar $key HTTP parameter key.
  * @param scalar $value HTTP parameter value.
- * @return array<string, string> Key and value as strings.
+ * @return array{0:string, 1:string} Key and value as strings.
  */
 function phutil_http_parameter_pair($key, $value) {
   try {

@@ -1080,7 +1080,7 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
   /**
    * Returns names of all the branches in the current repository.
    *
-   * @return array<array<string, string>> Dictionary of branch information.
+   * @return list<array<mixed>> Dictionary of branch information.
    */
   private function getAllBranches() {
     $field_list = array(
