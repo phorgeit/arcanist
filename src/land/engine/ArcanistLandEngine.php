@@ -1277,22 +1277,6 @@ abstract class ArcanistLandEngine
               // TODO: If the push fails, fetch and retry if the remote ref
               // has moved ahead of us.
 
-              if ($this->getIntoLocal()) {
-                $can_retry = false;
-              } else if ($this->getIntoEmpty()) {
-                $can_retry = false;
-              } else if ($this->getIntoRemote() !== $this->getOntoRemote()) {
-                $can_retry = false;
-              } else {
-                $can_retry = false;
-              }
-
-              if ($can_retry) {
-                // New commit state here
-                $into_commit = '..';
-                continue;
-              }
-
               throw new PhutilArgumentUsageException(
                 $ex->getMessage());
             }

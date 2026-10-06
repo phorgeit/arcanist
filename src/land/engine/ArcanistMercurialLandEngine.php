@@ -1040,9 +1040,7 @@ final class ArcanistMercurialLandEngine
         );
       }
 
-      if ($tail) {
-        $tail_pass_commands[] = $tail;
-      }
+      $tail_pass_commands[] = $tail;
     }
 
     return array(

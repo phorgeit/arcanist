@@ -3,7 +3,6 @@
 final class PhutilPostmarkFuture extends FutureProxy {
 
   private $future;
-  private $clientID;
   private $accessToken;
   private $method;
   private $parameters;
@@ -15,11 +14,6 @@ final class PhutilPostmarkFuture extends FutureProxy {
 
   public function setAccessToken($token) {
     $this->accessToken = $token;
-    return $this;
-  }
-
-  public function setClientID($client_id) {
-    $this->clientID = $client_id;
     return $this;
   }
 

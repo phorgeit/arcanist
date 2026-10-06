@@ -117,7 +117,7 @@ final class ArcanistHgServerChannel extends PhutilProtocolChannel {
    *   array('o', '<data...>');
    *
    * @param string $data Bytes from the server.
-   * @return array<array<string,string>> List of zero or more complete
+   * @return array<array{0:string,1:string}> List of zero or more complete
    *   messages.
    *
    * @task protocol
