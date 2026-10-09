@@ -65,7 +65,7 @@ EOTEXT
     $conduit = $this->establishConduit()->getConduit();
     try {
       $conduit->callMethodSynchronous('conduit.ping', array());
-    } catch (Exception $ex) {
+    } catch (Throwable $ex) {
       throw new ArcanistUsageException(
         pht(
           'Failed to connect to server (%s): %s',
@@ -76,7 +76,6 @@ EOTEXT
     $token_uri = new PhutilURI($uri);
     $token_uri->setPath('/conduit/token/');
 
-    // Check if this server supports the more modern token-based login.
     $is_token_auth = false;
     try {
       $capabilities = $conduit->callMethodSynchronous(
@@ -87,12 +86,21 @@ EOTEXT
         $token_uri->setPath('/conduit/login/');
         $is_token_auth = true;
       }
-    } catch (Exception $ex) {
+    } catch (Throwable $ex) {
       // Ignore.
     }
 
-    echo phutil_console_format("**%s**\n", pht('LOG IN'));
-    echo phutil_console_format(
+    if (!$is_token_auth) {
+      throw new ArcanistUsageException(
+        pht(
+          'This %s server does not support modern login methods. '.
+          'Seek out an %s client from the 2010s, or try updating the server.',
+          PlatformSymbols::getPlatformServerName(),
+          PlatformSymbols::getPlatformClientName()));
+    }
+
+    $console->writeOut("**%s**\n", pht('LOG IN'));
+    $console->writeOut(
       "%s\n\n%s\n\n%s",
       pht(
         'Open this page in your browser and log in if necessary:'),
@@ -107,80 +115,56 @@ EOTEXT
       }
     } while (true);
 
-    if ($is_token_auth) {
-      if (strlen($token) != 32) {
-        throw new ArcanistUsageException(
-          pht(
-            'The token "%s" is not formatted correctly. API tokens should '.
-            'be 32 characters long. Make sure you visited the correct URI '.
-            'and copy/pasted the token correctly.',
-            $token));
-      }
+    if (strlen($token) != 32) {
+      throw new ArcanistUsageException(
+        pht(
+          'The token "%s" is not formatted correctly. API tokens should '.
+          'be 32 characters long. Make sure you visited the correct URI '.
+          'and copy/pasted the token correctly.',
+          $token));
+    }
 
-      if (strncmp($token, 'api-', 4) == 0) {
-        echo pht(
+    if (strncmp($token, 'api-', 4) == 0) {
+      $console->writeOut(
+        pht(
           'You are installing a standard API token, but a CLI API token '.
           'was expected. If you\'re writing a script, consider passing the '.
-          'token at runtime with --conduit-token instead of installing it.');
-        if (!phutil_console_confirm(pht('Install this token anyway?'))) {
-          throw new ArcanistUsageException(pht('Not installing API token.'));
-        }
-      } else if (strncmp($token, 'cli-', 4) !== 0) {
-        throw new ArcanistUsageException(
-          pht(
-            'The token "%s" is not formatted correctly. Valid API tokens '.
-            'should begin "cli-" and be 32 characters long. Make sure you '.
-            'visited the correct URI and copy/pasted the token correctly.',
-            $token));
+          'token at runtime with --conduit-token instead of installing it.'));
+      if (!phutil_console_confirm(pht('Install this token anyway?'))) {
+        throw new ArcanistUsageException(pht('Not installing API token.'));
       }
-
-      $conduit->setConduitToken($token);
-      try {
-        $conduit->callMethodSynchronous('user.whoami', array());
-      } catch (Exception $ex) {
-        throw new ArcanistUsageException(
-          pht(
-            'The token "%s" is not a valid API Token. The server returned '.
-            'this response when trying to use it as a token: %s',
-            $token,
-            $ex->getMessage()));
-      }
-
-      $config['hosts'][$uri] = array(
-        'token' => $token,
-      );
-    } else {
-      echo "\n";
-      echo pht('Downloading authentication certificate...')."\n";
-      $info = $conduit->callMethodSynchronous(
-        'conduit.getcertificate',
-        array(
-          'token' => $token,
-          'host'  => $uri,
-        ));
-
-      $user = $info['username'];
-      echo pht("Installing certificate for '%s'...", $user)."\n";
-      $config['hosts'][$uri] = array(
-        'user' => $user,
-        'cert' => $info['certificate'],
-      );
+    } else if (strncmp($token, 'cli-', 4) !== 0) {
+      throw new ArcanistUsageException(
+        pht(
+          'The token "%s" is not formatted correctly. Valid API tokens '.
+          'should begin "cli-" and be 32 characters long. Make sure you '.
+          'visited the correct URI and copy/pasted the token correctly.',
+          $token));
     }
+
+    $conduit->setConduitToken($token);
+    try {
+      $conduit->callMethodSynchronous('user.whoami', array());
+    } catch (Throwable $ex) {
+      throw new ArcanistUsageException(
+        pht(
+          'The token "%s" is not a valid API Token. The server returned '.
+          'this response when trying to use it as a token: %s',
+          $token,
+          $ex->getMessage()));
+    }
+
+    $config['hosts'][$uri] = array(
+      'token' => $token,
+    );
 
     echo pht('Writing %s...', '~/.arcrc')."\n";
     $configuration_manager->writeUserConfigurationFile($config);
 
-    if ($is_token_auth) {
-      echo phutil_console_format(
-        "<bg:green>** %s **</bg> %s\n",
-        pht('SUCCESS!'),
-        pht('API Token installed.'));
-    } else {
-      echo phutil_console_format(
-        "<bg:green>** %s **</bg> %s\n",
-        pht('SUCCESS!'),
-        pht('Certificate installed.'));
-    }
+    $console->writeOut(
+      "<bg:green>** %s **</bg> %s\n",
+      pht('SUCCESS!'),
+      pht('API Token installed.'));
 
     return 0;
   }

@@ -76,10 +76,12 @@ final class ArcanistConduitCallFuture
     if ($exception instanceof ConduitClientException) {
       switch ($exception->getErrorCode()) {
         case 'ERR-INVALID-SESSION':
-          if (!$this->getEngine()->getConduitToken()) {
-            $this->raiseLoginRequired();
-          }
+          // This is how the server responds to having no auth data.
+          // Will be replaced with `ERR-MISSING-AUTH` in T16487.
+        case 'ERR-MISSING-AUTH':
+          $this->raiseLoginRequired();
           break;
+
         case 'ERR-INVALID-AUTH':
           $this->raiseInvalidAuth();
           break;

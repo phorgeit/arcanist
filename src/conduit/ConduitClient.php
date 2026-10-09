@@ -4,8 +4,6 @@ final class ConduitClient extends Phobject {
 
   private $uri;
   private $host;
-  private $connectionID;
-  private $sessionKey;
   private $timeout = 300.0;
   private $username;
   private $password;
@@ -18,10 +16,6 @@ final class ConduitClient extends Phobject {
   const AUTH_ASYMMETRIC = 'asymmetric';
 
   const SIGNATURE_CONSIGN_1 = 'Consign1.0/';
-
-  public function getConnectionID() {
-    return $this->connectionID;
-  }
 
   public function __construct($uri) {
     $this->uri = new PhutilURI($uri);
@@ -66,10 +60,6 @@ final class ConduitClient extends Phobject {
   }
 
   public function didReceiveResponse($method, $data) {
-    if ($method == 'conduit.connect') {
-      $this->sessionKey = idx($data, 'sessionKey');
-      $this->connectionID = idx($data, 'connectionID');
-    }
     return $data;
   }
 
@@ -95,24 +85,6 @@ final class ConduitClient extends Phobject {
   public function callMethod($method, array $params) {
 
     $meta = array();
-
-    if ($this->sessionKey) {
-      $meta['sessionKey'] = $this->sessionKey;
-    }
-
-    if ($this->connectionID) {
-      $meta['connectionID'] = $this->connectionID;
-    }
-
-    if ($method == 'conduit.connect') {
-      $certificate = idx($params, 'certificate');
-      if ($certificate) {
-        $token = time();
-        $params['authToken'] = $token;
-        $params['authSignature'] = sha1($token.$certificate);
-      }
-      unset($params['certificate']);
-    }
 
     if ($this->privateKey && $this->publicKey) {
       $meta['auth.type'] = self::AUTH_ASYMMETRIC;

@@ -32,6 +32,7 @@
  * @task  conduit   Conduit
  * @task  scratch   Scratch Files
  * @task  phabrep   Phabricator Repositories
+ * @task  nontoolset Methods that only apply to legacy non-toolset flows.
  */
 abstract class ArcanistWorkflow extends Phobject {
 
@@ -90,7 +91,7 @@ abstract class ArcanistWorkflow extends Phobject {
     return $this;
   }
 
-  final public function getRuntime() {
+  final public function getRuntime(): ArcanistRuntime {
     return $this->runtime;
   }
 
@@ -417,6 +418,7 @@ abstract class ArcanistWorkflow extends Phobject {
    *   @{method:authenticateConduit}.
    * @return $this
    * @task conduit
+   * @task nontoolset
    */
   final public function setConduitCredentials(array $credentials) {
     if ($this->isConduitAuthenticated()) {
@@ -441,6 +443,9 @@ abstract class ArcanistWorkflow extends Phobject {
 
 
   /**
+   * This method only applies to legacy (non-toolset) flows. Modern flows should
+   * use @{method:getConduitEngine}.
+   *
    * Open and authenticate a conduit connection to a Phabricator server using
    * provided credentials. Normally, Arcanist does this for you automatically
    * when you return true from @{method:requiresAuthentication}, but you can
@@ -466,6 +471,7 @@ abstract class ArcanistWorkflow extends Phobject {
    *
    * @return $this
    * @task conduit
+   * @task nontoolset
    */
   final public function authenticateConduit() {
     if ($this->isConduitAuthenticated()) {
@@ -475,17 +481,17 @@ abstract class ArcanistWorkflow extends Phobject {
     $this->establishConduit();
     $credentials = $this->conduitCredentials;
 
-    try {
-      if (!$credentials) {
-        throw new Exception(
-          pht(
-            'Set conduit credentials with %s before authenticating conduit!',
-            'setConduitCredentials()'));
-      }
+    if (!$credentials) {
+      throw new Exception(
+        pht(
+          'Set conduit credentials with %s before authenticating conduit!',
+          'setConduitCredentials()'));
+    }
 
-      // If we have `token`, this server supports the simpler, new-style
-      // token-based authentication. Use that instead of all the certificate
-      // stuff.
+    try {
+
+      // There used to be more ways to authenticate, but now `token` is the only
+      // one around.
       $token = idx($credentials, 'token');
       if (phutil_nonempty_string($token)) {
         $conduit = $this->getConduit();
@@ -503,41 +509,17 @@ abstract class ArcanistWorkflow extends Phobject {
           $this->conduitAuthenticated = true;
 
           return $this;
-        } catch (Exception $ex) {
+        } catch (Throwable $ex) {
           $conduit->setConduitToken(null);
           throw $ex;
         }
-      }
-
-      if (empty($credentials['user'])) {
+      } else {
         throw new ConduitClientException(
-          'ERR-INVALID-USER',
-          pht('Empty user in credentials.'));
+          'ERR-INVALID-AUTH',
+          pht('Missing token in credentials.'));
       }
-      if (empty($credentials['certificate'])) {
-        throw new ConduitClientException(
-          'ERR-NO-CERTIFICATE',
-          pht('Empty certificate in credentials.'));
-      }
-
-      $description = idx($credentials, 'description', '');
-      $user        = $credentials['user'];
-      $certificate = $credentials['certificate'];
-
-      $connection = $this->getConduit()->callMethodSynchronous(
-        'conduit.connect',
-        array(
-          'client'              => 'arc',
-          'clientVersion'       => $this->getConduitVersion(),
-          'clientDescription'   => php_uname('n').':'.$description,
-          'user'                => $user,
-          'certificate'         => $certificate,
-          'host'                => $this->conduitURI,
-        ));
     } catch (ConduitClientException $ex) {
-      if ($ex->getErrorCode() == 'ERR-NO-CERTIFICATE' ||
-          $ex->getErrorCode() == 'ERR-INVALID-USER' ||
-          $ex->getErrorCode() == 'ERR-INVALID-AUTH') {
+      if ($ex->getErrorCode() == 'ERR-INVALID-AUTH') {
         $conduit_uri = $this->conduitURI;
         $message = phutil_console_format(
           "\n%s\n\n    %s\n\n%s\n%s",
@@ -546,6 +528,7 @@ abstract class ArcanistWorkflow extends Phobject {
           pht("The server '%s' rejected your request:", $conduit_uri),
           $ex->getMessage());
         throw new ArcanistUsageException($message);
+
       } else if ($ex->getErrorCode() == 'NEW-ARC-VERSION') {
 
         // Cleverly disguise this as being AWESOME!!!
@@ -574,13 +557,6 @@ abstract class ArcanistWorkflow extends Phobject {
         throw $ex;
       }
     }
-
-    $this->userName = $user;
-    $this->userPHID = $connection['userPHID'];
-
-    $this->conduitAuthenticated = true;
-
-    return $this;
   }
 
   /**
@@ -593,6 +569,8 @@ abstract class ArcanistWorkflow extends Phobject {
 
 
   /**
+   * Only applies to legacy (non-toolset) workflows.
+   *
    * Override this to return true if your workflow requires a conduit channel.
    * Arc will build the channel for you before your workflow executes. This
    * implies that you only need an unauthenticated channel; if you need
@@ -601,6 +579,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * @return bool True if arc should build a conduit channel before running
    *              the workflow.
    * @task conduit
+   * @task nontoolset
    */
   public function requiresConduit() {
     return false;
@@ -608,6 +587,8 @@ abstract class ArcanistWorkflow extends Phobject {
 
 
   /**
+   * Only applies to legacy (non-toolset) workflows.
+   *
    * Override this to return true if your workflow requires an authenticated
    * conduit channel. This implies that it requires a conduit. Arc will build
    * and authenticate the channel for you before the workflow executes.
@@ -615,6 +596,7 @@ abstract class ArcanistWorkflow extends Phobject {
    * @return bool True if arc should build an authenticated conduit channel
    *              before running the workflow.
    * @task conduit
+   * @tasks nontoolset
    */
   public function requiresAuthentication() {
     return false;
@@ -657,6 +639,8 @@ abstract class ArcanistWorkflow extends Phobject {
    * either implicitly by making @{method:requireConduit} or
    * @{method:requireAuthentication} return true, or explicitly by calling
    * @{method:establishConduit} or @{method:authenticateConduit}.
+   *
+   * Modern flows should use @{method:getConduitEngine}.
    *
    * @return ConduitClient Live conduit client.
    * @task conduit
@@ -2298,7 +2282,7 @@ abstract class ArcanistWorkflow extends Phobject {
     return $this;
   }
 
-  final public function getConduitEngine() {
+  final public function getConduitEngine(): ArcanistConduitEngine {
     return $this->conduitEngine;
   }
 
