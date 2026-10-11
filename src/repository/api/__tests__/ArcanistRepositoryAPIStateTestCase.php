@@ -22,6 +22,11 @@ final class ArcanistRepositoryAPIStateTestCase extends PhutilTestCase {
   }
 
   public function testSvnStateParsing() {
+    if (!class_exists('SimpleXMLElement')) {
+      $this->assertSkipped(
+        pht('Required "simplexml" extension is not installed.'));
+    }
+
     if (Filesystem::binaryExists('svn')) {
       $this->parseState('svn_basic.svn.tgz');
     } else {

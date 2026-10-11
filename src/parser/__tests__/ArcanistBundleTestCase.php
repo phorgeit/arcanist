@@ -76,23 +76,21 @@ EODIFF;
       $this->assertSkipped(pht('This test is not supported under Windows.'));
     }
 
+    if (!function_exists('gzcompress')) {
+      $this->assertSkipped(
+        pht('Required "zlib" extension is not installed.'));
+    }
+
     $archive = dirname(__FILE__).'/bundle.git.tgz';
     $fixture = PhutilDirectoryFixture::newFromArchive($archive);
 
     $old_dir = getcwd();
     chdir($fixture->getPath());
 
-    $caught = null;
     try {
       $this->runGitRepositoryTests($fixture);
-    } catch (Exception $ex) {
-      $caught = $ex;
-    }
-
-    chdir($old_dir);
-
-    if ($caught) {
-      throw $ex;
+    } finally {
+      chdir($old_dir);
     }
   }
 

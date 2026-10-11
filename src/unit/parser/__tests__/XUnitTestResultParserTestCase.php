@@ -5,6 +5,13 @@
  */
 final class XUnitTestResultParserTestCase extends PhutilTestCase {
 
+  protected function willRunOneTest($test_method_name) {
+    if (!class_exists('DOMDocument')) {
+      $this->assertSkipped(
+        pht('Required "dom" extension is not installed.'));
+    }
+  }
+
   public function testAcceptsNoTestsInput() {
     $stubbed_results = Filesystem::readFile(
       dirname(__FILE__).'/testresults/xunit.no-tests');
