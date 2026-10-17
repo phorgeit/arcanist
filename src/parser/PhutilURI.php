@@ -180,7 +180,7 @@ final class PhutilURI extends Phobject {
     $has_protocol = ($protocol !== null) && strlen($protocol);
     $has_auth = ($auth !== null);
     $has_domain = ($domain !== null) && strlen($domain);
-    $has_port = ($port !== null) && strlen($port);
+    $has_port = ($port !== null) && $port !== '';
 
     if ($has_protocol || $has_auth || $has_domain) {
       if ($this->isGitURI()) {
