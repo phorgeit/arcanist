@@ -107,8 +107,8 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
   /**
    * Tests if a child commit is descendant of a parent commit.
    * If child and parent are the same, it returns false.
-   * @param $child Child commit SHA.
-   * @param $parent Parent commit SHA.
+   * @param string $child Child commit SHA.
+   * @param string $parent Parent commit SHA.
    * @return bool True if the child is a descendant of the parent.
    */
   private function isDescendant($child, $parent) {
@@ -482,8 +482,8 @@ final class ArcanistGitAPI extends ArcanistRepositoryAPI {
   }
 
   /**
-   * @param $base the base revision
-   * @param $head (optional) head revision. If this is null, the generated diff
+   * @param string $base the base revision
+   * @param string|null $head head revision. If this is null, the generated diff
    * will include the working copy
    */
   public function getFullGitDiff($base, $head = null) {
