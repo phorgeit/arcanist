@@ -2084,6 +2084,35 @@ function phutil_preg_match_all(
   return $matches;
 }
 
+function phutil_preg_replace_callback(
+   $pattern,
+   $callback,
+   $subject,
+   $limit = -1,
+   &$count = null) {
+
+  $result = @preg_replace_callback(
+    $pattern,
+    $callback,
+    $subject,
+    $limit,
+    $count);
+
+  if ($result === false || $result === null) {
+    phutil_raise_preg_exception(
+      'preg_replace_callback',
+      array(
+        $pattern,
+        $callback,
+        $subject,
+        $limit,
+        $count,
+      ));
+  }
+
+  return $result;
+}
+
 function phutil_raise_preg_exception($function, array $argv) {
   $trap = new PhutilErrorTrap();
 

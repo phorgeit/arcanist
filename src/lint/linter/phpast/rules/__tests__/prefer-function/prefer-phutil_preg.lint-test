@@ -1,0 +1,11 @@
+<?php
+
+preg_replace_callback($a, $b, $c);
+preg_match_all($x);
+preg_match($y);
+~~~~~~~~~~
+disabled:3:1:PHPAST141:Prefer phutil_* methods
+disabled:4:1:PHPAST141:Prefer phutil_* methods
+disabled:5:1:PHPAST141:Prefer phutil_* methods
+~~~~~~~~~~
+~~~~~~~~~~

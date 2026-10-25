@@ -66,6 +66,7 @@ final class ArcanistPhutilPHPASTLinterStandard
       ArcanistTodoCommentPHPASTLinterRule::ID         => $advice,
       ArcanistCommentSpacingPHPASTLinterRule::ID      => $error,
       ArcanistRaggedClassTreeEdgePHPASTLinterRule::ID => $warning,
+      ArcanistPreferPhutilMethodsPHPASTLinterRule::ID => $advice,
     );
   }
 
