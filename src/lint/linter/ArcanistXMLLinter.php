@@ -38,7 +38,13 @@ final class ArcanistXMLLinter extends ArcanistLinter {
     libxml_use_internal_errors(true);
     libxml_clear_errors();
 
-    if (simplexml_load_string($this->getData($path))) {
+    $data = $this->getData($path);
+
+    if (!phutil_nonempty_string($data)) {
+      return;
+    }
+
+    if (simplexml_load_string($data)) {
       // XML appears to be valid.
       return;
     }
