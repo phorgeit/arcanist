@@ -78,7 +78,7 @@ final class PhutilTranslator extends Phobject {
    * @phutil-external-symbol function phutil_escape_html
    * @phutil-external-symbol function phutil_safe_html
    */
-  public function translate($text, ...$args) {
+  public function translate(string $text, ...$args) {
     if ($this->willTranslateCallback) {
       call_user_func($this->willTranslateCallback, $text, ...$args);
     }
@@ -135,6 +135,7 @@ final class PhutilTranslator extends Phobject {
       foreach ($args as $k => $arg) {
         $args[$k] = (string)phutil_escape_html($arg);
       }
+      $translation = phutil_escape_html($translation);
     }
 
     try {
