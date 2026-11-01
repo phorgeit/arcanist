@@ -1108,14 +1108,16 @@ final class PhutilUtilsTestCase extends PhutilTestCase {
     }
 
 
-    $expect_exceptions = array('Exception');
+    $expect_exceptions = array(
+      InvalidArgumentException::class,
+      TypeError::class,
+    );
+
     foreach ($exception_cases as $test_case) {
       list($input, $test_name) = $test_case;
 
       try {
         phutil_string_cast($input);
-      } catch (Exception $ex) {
-        $caught = $ex;
       } catch (Throwable $ex) {
         $caught = $ex;
       }

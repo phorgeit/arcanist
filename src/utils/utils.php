@@ -1827,7 +1827,7 @@ function phutil_decode_mime_header($header) {
  */
 function phutil_string_cast($value) {
   if (is_array($value)) {
-    throw new Exception(
+    throw new InvalidArgumentException(
       pht(
         'Value passed to "phutil_string_cast()" is an array; arrays can '.
         'not be sensibly cast to strings.'));
