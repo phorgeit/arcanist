@@ -550,7 +550,6 @@ final class PhutilParserGenerator extends Phobject {
 
     $end = $this->getEndSymbol();
     $epsilon = $this->getEpsilonSymbol();
-    $eof = $this->getEOFSymbol();
 
     $accept_epsilon = true;
     foreach ($production as $symbol) {

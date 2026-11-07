@@ -580,7 +580,6 @@ final class ArcanistMercurialLandEngine
 
   private function fetchTarget(ArcanistLandTarget $target) {
     $api = $this->getRepositoryAPI();
-    $log = $this->getLogEngine();
 
     $target_name = $target->getRef();
 
@@ -1053,7 +1052,6 @@ final class ArcanistMercurialLandEngine
 
   protected function cascadeState(ArcanistLandCommitSet $set, $into_commit) {
     $api = $this->getRepositoryAPI();
-    $log = $this->getLogEngine();
 
     // This has no effect when we're executing a merge strategy.
     if (!$this->isSquashStrategy()) {
@@ -1243,7 +1241,6 @@ final class ArcanistMercurialLandEngine
   }
 
   protected function didHoldChanges($into_commit) {
-    $log = $this->getLogEngine();
     $local_state = $this->getLocalState();
 
     $message = pht(

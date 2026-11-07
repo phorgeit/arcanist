@@ -553,7 +553,6 @@ final class ArcanistMercurialAPI extends ArcanistRepositoryAPI {
     array $query) {
 
     $messages = $this->getCommitMessageLog();
-    $parser = new ArcanistDiffParser();
 
     // First, try to find revisions by explicit revision IDs in commit messages.
     $reason_map = array();
