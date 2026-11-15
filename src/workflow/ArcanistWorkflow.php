@@ -547,8 +547,10 @@ abstract class ArcanistWorkflow extends Phobject {
 
         $root = dirname(phutil_get_library_root('arcanist'));
 
-        chdir($root);
-        $err = phutil_passthru('%s upgrade', $root.'/bin/arc');
+        $err = id(new PhutilExecPassthru('%s upgrade', $root.'/bin/arc'))
+          ->setCWD($root)
+          ->resolve();
+
         if (!$err) {
           echo "\n".pht('Try running your arc command again.')."\n";
         }

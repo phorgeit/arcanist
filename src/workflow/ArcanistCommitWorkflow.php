@@ -156,9 +156,10 @@ EOTEXT
       $command = csprintf('LANG=%C %C', $this->getSVNLangEnvVar(), $command);
     }
 
-    chdir($repository_api->getPath());
+    $err = id(new PhutilExecPassthru('%C', $command))
+      ->setCWD($repository_api->getPath())
+      ->resolve();
 
-    $err = phutil_passthru('%C', $command);
     if ($err) {
       throw new Exception(pht("Executing '%s' failed!", 'svn commit'));
     }

@@ -8,6 +8,10 @@ final class ArcanistGitWorktreeTestCase
       $this->assertSkipped(pht('This test is not supported under Windows.'));
     }
 
+    if (PHP_ZTS) {
+      $this->assertSkipped(pht('This test is not supported under ZTS builds.'));
+    }
+
     if (!Filesystem::binaryExists('git')) {
       $this->assertSkipped(pht('Git is not installed.'));
     }

@@ -26,6 +26,13 @@ final class ArcanistPhutilPHPASTLinterStandard
           'The `%s` function should be avoided. It is potentially unsafe '.
           'and makes debugging more difficult.',
           'eval'),
+        'chdir' => pht(
+          'The `%s` function should be avoided. In ZTS builds, it does '.
+          'not change the working directory outside PHP. Use a %s instead and '.
+          'call the method `%s`.',
+          'chdir',
+          PhutilExecutableFuture::class,
+          'setCWD'),
        ),
       'phpast.array-style' => 'long',
       'phpast.list-style' => 'list',

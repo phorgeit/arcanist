@@ -76,6 +76,10 @@ EODIFF;
       $this->assertSkipped(pht('This test is not supported under Windows.'));
     }
 
+    if (PHP_ZTS) {
+      $this->assertSkipped(pht('This test is not supported under ZTS builds.'));
+    }
+
     if (!function_exists('gzcompress')) {
       $this->assertSkipped(
         pht('Required "zlib" extension is not installed.'));
