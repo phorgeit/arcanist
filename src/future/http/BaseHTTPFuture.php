@@ -326,8 +326,8 @@ abstract class BaseHTTPFuture extends Future {
    * @return array Valid resolution tuple.
    * @task internal
    */
-  protected function parseRawHTTPResponse($raw_response) {
-    $rex_base = "@^(?P<head>.*?)\r?\n\r?\n(?P<body>.*)$@s";
+  public function parseRawHTTPResponse(string $raw_response) {
+    $rex_split_base = "@\r?\n\r?\n@";
     $rex_head = "@^HTTP/\S+ (?P<code>\d+) ?(?P<status>.*?)".
                 "(?:\r?\n(?P<headers>.*))?$@s";
 
@@ -336,15 +336,14 @@ abstract class BaseHTTPFuture extends Future {
     // happens with HTTPS requests, at the least.
     $response = $raw_response;
     while (true) {
-      $matches = null;
-      if (!preg_match($rex_base, $response, $matches)) {
+      $split = preg_split($rex_split_base, $response, 2);
+      if (count($split) !== 2) {
         return $this->buildMalformedResult($raw_response);
       }
 
-      $head = $matches['head'];
-      $body = $matches['body'];
-
-      if (!preg_match($rex_head, $head, $matches)) {
+      list($head, $body) = $split;
+      $matches = phutil_preg_match($rex_head, $head);
+      if (!$matches) {
         return $this->buildMalformedResult($raw_response);
       }
 
@@ -414,9 +413,9 @@ abstract class BaseHTTPFuture extends Future {
 
     $headers_raw = preg_split("/\r?\n/", $head_raw);
     foreach ($headers_raw as $header) {
-      $m = null;
-      if (preg_match($rex_header, $header, $m)) {
-        $headers[] = array($m['name'], $m['value']);
+      $matches = phutil_preg_match($rex_header, $header);
+      if ($matches) {
+        $headers[] = array($matches['name'], $matches['value']);
       } else {
         $headers[] = array($header, null);
       }

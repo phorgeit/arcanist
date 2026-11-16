@@ -854,6 +854,7 @@ phutil_register_library_map(array(
     'HTTPFutureParseResponseStatus' => 'future/http/status/HTTPFutureParseResponseStatus.php',
     'HTTPFutureResponseStatus' => 'future/http/status/HTTPFutureResponseStatus.php',
     'HTTPFutureTransportResponseStatus' => 'future/http/status/HTTPFutureTransportResponseStatus.php',
+    'HTTPParserTestCase' => 'future/http/__tests__/HTTPParserTestCase.php',
     'HTTPSFuture' => 'future/http/HTTPSFuture.php',
     'ImmediateFuture' => 'future/ImmediateFuture.php',
     'LinesOfALarge' => 'filesystem/linesofalarge/LinesOfALarge.php',
@@ -2150,6 +2151,7 @@ phutil_register_library_map(array(
     'HTTPFutureParseResponseStatus' => 'HTTPFutureResponseStatus',
     'HTTPFutureResponseStatus' => 'Exception',
     'HTTPFutureTransportResponseStatus' => 'HTTPFutureResponseStatus',
+    'HTTPParserTestCase' => 'PhutilTestCase',
     'HTTPSFuture' => 'BaseHTTPFuture',
     'ImmediateFuture' => 'Future',
     'LinesOfALarge' => array(

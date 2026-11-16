@@ -2127,6 +2127,8 @@ function phutil_raise_preg_exception($function, array $argv) {
       @preg_match_all($argv[0], $argv[1], $argv[2], $argv[3], $argv[4]);
       break;
   }
+  $preg_last_error = preg_last_error();
+
   $error_message = $trap->getErrorsAsString();
 
   $trap->destroy();
@@ -2148,7 +2150,28 @@ function phutil_raise_preg_exception($function, array $argv) {
       $error_message);
   }
 
-  $message = implode("\n\n", $message);
+  // TODO move to preg_last_error_msg in T16903.
+
+  if ($preg_last_error !== PREG_NO_ERROR) {
+    $last_error_messages = array(
+      PREG_INTERNAL_ERROR => 'PREG_INTERNAL_ERROR',
+      PREG_BACKTRACK_LIMIT_ERROR => 'PREG_BACKTRACK_LIMIT_ERROR',
+      PREG_RECURSION_LIMIT_ERROR => 'PREG_RECURSION_LIMIT_ERROR',
+      PREG_BAD_UTF8_ERROR => 'PREG_BAD_UTF8_ERROR',
+      PREG_BAD_UTF8_OFFSET_ERROR => 'PREG_BAD_UTF8_OFFSET_ERROR',
+      PREG_JIT_STACKLIMIT_ERROR => 'PREG_JIT_STACKLIMIT_ERROR',
+    );
+
+    $last_error_message =
+      idx($last_error_messages, $preg_last_error) ??
+      pht('Unknown error code %s', $preg_last_error);
+
+    $message[] = pht(
+      'Regular expression engine emitted message code: %s',
+      $last_error_message);
+  }
+
+  $message = implode('. ', $message);
 
   throw new PhutilRegexException($message);
 }
