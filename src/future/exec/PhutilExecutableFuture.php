@@ -11,8 +11,9 @@ abstract class PhutilExecutableFuture extends Future {
   private $resolveOnError = true;
 
   final public function __construct($pattern, ...$args) {
+
     if ($pattern instanceof PhutilCommandString) {
-      if (count($args) !== 1) {
+      if (count($args) !== 0) {
         throw new Exception(
           pht(
             'Command (of class "%s") was constructed with a '.
