@@ -63,6 +63,11 @@ final class ArcanistPhutilLibraryLinter extends ArcanistLinter {
       'class/interface' => 'class',
     );
 
+    // NOTE: For now, we completely ignore paths and just lint every library in
+    // its entirety. This is simpler and relatively fast because we don't do any
+    // detailed checks and all the data we need for this comes out of module
+    // caches.
+
     $bootloader = PhutilBootloader::getInstance();
     $libraries  = $bootloader->getAllLibraries();
 
@@ -96,29 +101,12 @@ final class ArcanistPhutilLibraryLinter extends ArcanistLinter {
       $root = phutil_get_library_root($library);
 
       try {
-        $symbol_map = id(new PhutilLibraryMapBuilder($root))
+        $symbols[$library] = id(new PhutilLibraryMapBuilder($root))
           ->buildFileSymbolMap();
       } catch (XHPASTSyntaxErrorException $ex) {
         // If the library contains a syntax error then there isn't much that we
         // can do.
         continue;
-      } catch (ParseError $ex) {
-        // If the library contains a syntax error then there isn't much that we
-        // can do.
-        continue;
-      }
-
-      $is_in_paths = false;
-
-      foreach ($paths as $path) {
-        if (Filesystem::isDescendant($path, $root)) {
-          $is_in_paths = true;
-          break;
-        }
-      }
-
-      if ($is_in_paths) {
-        $symbols[$library] = $symbol_map;
       }
     }
 
